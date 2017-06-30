@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="model.LendOrder" table="lendOrder">
+		<id name="lendID" type="int">
+			<column name="lendID" />
+			<generator class="assigned"/>
+		</id>
+		<property name="bookRecordID" type="int">
+			<column name="bookRecordID"/>
+		</property>
+		<property name="lenderID" type="int">
+			<column name="lenderID"/>
+		</property>
+		<property name="returnWay" type="java.lang.String">
+			<column name="returnWay"/>
+		</property>
+		<property name="lendAddress" type="java.lang.String">
+			<column name="lendAddress"/>
+		</property>
+		<property name="lendPhone" type="java.lang.String">
+			<column name="lendPhone"/>
+		</property>
+		<property name="receiver" type="java.lang.String">
+			<column name="receiver"/>
+		</property>
+		<property name="arrivalTime" type="java.sql.Timestamp">
+			<column name="arrivalTime"/>
+		</property>
+		<property name="returnTime" type="java.sql.Timestamp">
+			<column name="returnTime"/>
+		</property>
+		<property name="status" type="java.lang.String">
+			<column name="status"/>
+		</property>
+		<property name="ownerID" type="int">
+			<column name="ownerID"/>
+		</property>
+	</class>
+</hibernate-mapping>
