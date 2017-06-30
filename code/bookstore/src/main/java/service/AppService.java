@@ -1,5 +1,6 @@
 package service;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.Book;
 import model.User;
@@ -22,6 +23,7 @@ public interface AppService {
 	 */
 	public String addBook(Book book);
 	public Book readBookByISBN(String ISBN);
+	public ArrayList<Book> getAllBooks();
 	
 
 }

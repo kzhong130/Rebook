@@ -2,6 +2,7 @@ package service.impl;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import service.AppService;
@@ -170,17 +171,7 @@ public class AppServiceImpl implements AppService {
 			int raterNumber = Integer.parseInt(json.getJSONObject("rating").getString("numRaters"));
 			String summary = json.getString("summary");
 			String image = json.getString("image");
-			System.out.println(author);
-			System.out.println(bookName);
-			System.out.println(doubanRate);
-			System.out.println(image);
-			System.out.println(ISBN);
-			System.out.println(pageNumber);
-			System.out.println(price);
-			System.out.println(publisher);
-			System.out.println(raterNumber);
-			System.out.println(summary);
-			System.out.println(pubdate);
+
 			
 			book = new Book();
 			book.setAuthor(author);
@@ -197,6 +188,11 @@ public class AppServiceImpl implements AppService {
 			bookDao.save(book);
 		}
 		return book;
+	}
+
+	@Override
+	public ArrayList<Book> getAllBooks() {
+		return (ArrayList<Book>)bookDao.getAllBooks();
 	}
 
 	
