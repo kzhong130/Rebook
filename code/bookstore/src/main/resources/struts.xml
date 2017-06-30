@@ -19,6 +19,7 @@
 		<!-- Book -->
 		<action name="bookAction" class="action.BookAction">
 			<result name="success">bookinfo.jsp</result>
+			<result name="all">centerPage.jsp</result>
 		</action>
 
 		

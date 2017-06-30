@@ -18,6 +18,11 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    
+    
+<%@page import="model.Book"%>    
+<%@page import="java.util.ArrayList" %>    
+    
 </head>
 <body>
 <nav>
@@ -85,29 +90,34 @@
     
 </div>
 
+	<%
+		int pageNum=0;
+		if(session.getAttribute("page")!=null){
+			pageNum=(Integer)session.getAttribute("page");
+		}
+		ArrayList<Book> bookList = new ArrayList<Book>();
+			if (session.getAttribute("books") != null) {
+				bookList = (ArrayList<Book>) session.getAttribute("books");
+			}
+	%>
+
 
 <div class="container">
 <hr>
  <div class="center">
-  <div class="background">
-     <a href="<% %>"><img class="listbook" src="https://img3.doubanio.com/mpic/s1106934.jpg" />
-     <br> <br>bookname<br>author</a></div>
-  <div class="background">
-     <a href="<% %>"><img class="listbook" src="<% %>" />                                         <!-- 前一个是书籍详情页面，后一个是书籍图片 -->
-     <br> <br><% %><br><% %></a></div>                                                            <!-- 前一个是书籍名称，后一个是书籍作者 -->
-  <div class="background">
-     <a href="<% %>"><img class="listbook" src="<% %>" />
-     <br> <br><% %><br><% %></a></div>
-  <div class="background">
-     <a href="<% %>"><img class="listbook" src="<% %>" />
-     <br> <br><% %><br><% %></a></div>
-  <div class="background">
-     <a href="<% %>"><img class="listbook" src="<% %>" />
-     <br> <br><% %><br><% %></a></div>
+  <%
+  	int max=pageNum*20;
+  	for(int i=(pageNum-1)*20;i<bookList.size()&&i<max;i++){
+  		Book book = bookList.get(i);
+  %>	
+    <div class="background">
+     <a href="<% %>"><img class="listbook" src=<%=book.getImage() %> />
+     <br> <br><%=book.getBookName() %><br><%=book.getAuthor() %></a></div>
   
-  </div>
-
   
+  
+  <%
+  } %>
 </div>
 
 
@@ -115,11 +125,17 @@
     <!-- Add class .pagination-lg for larger blocks or .pagination-sm for smaller blocks-->
     <ul class="pagination">
       <li> <a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a> </li>
-      <li class="active"><a href="#">1</a></li>
-      <li><a href="#">2</a></li>
-      <li><a href="#">3</a></li>
-      <li><a href="#">4</a></li>
-      <li class="disabled"><a href="#">5</a></li>
+      <li class="active">
+      <%
+      	int pages=bookList.size()/20;
+    	if(pages==0) pages=1; 
+    	for(int i=1;i<=pages;i++){
+    	
+      %>
+      <li><a href="#"><%=i %></a></li>
+     <%
+    	}
+     %>
       <li> <a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a> </li>
     </ul>
   </nav>

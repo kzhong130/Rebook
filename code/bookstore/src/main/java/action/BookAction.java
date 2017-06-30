@@ -3,6 +3,7 @@ package action;
 import service.AppService;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 
 import model.Book;
 
@@ -131,4 +132,12 @@ public class BookAction extends BaseAction{
 		request().setAttribute("book",book);
 		return SUCCESS;
 	}
+	
+	public String getAllBooks() throws Exception{
+		request().getSession().setAttribute("books", appService.getAllBooks());
+		int temp=1;
+		request().getSession().setAttribute("page",temp);
+		return "all";
+	}
+	
 }
