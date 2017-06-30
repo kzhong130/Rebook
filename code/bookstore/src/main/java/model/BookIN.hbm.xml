@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="model.BookIN" table="bookIN">
+		<id name="bookRecordID" type="int">
+			<column name="bookRecordID" />
+			<generator class="assigned"/>
+		</id>
+		<property name="userID" type="int">
+			<column name="userID"/>
+		</property>
+		<property name="ISBN" type="java.lang.String">
+			<column name="ISBN"/>
+		</property>
+		<property name="recency" type="java.lang.String">
+			<column name="recency"/>
+		</property>
+		<property name="inTime" type="java.sql.Timestamp">
+			<column name="inTime"/>
+		</property>
+		<property name="coinNumber" type="int">
+			<column name="coinNumber"/>
+		</property>
+		<property name="ownerName" type="java.lang.String">
+			<column name="ownerName"/>
+		</property>
+		<property name="type" type="java.lang.String">
+			<column name="type"/>
+		</property>
+		<property name="sendWay" type="java.lang.String">
+			<column name="sendWay"/>
+		</property>
+		<property name="city" type="java.lang.String">
+			<column name="city"/>
+		</property>
+		<property name="latestReturnDate" type="java.sql.Timestamp">
+			<column name="lastestReturnDate"/>
+		</property>
+		<property name="ownerPhone" type="java.lang.String">
+			<column name="ownerPhone"/>
+		</property>
+		<property name="ownerAddress" type="java.lang.String">
+			<column name="ownerAddress"/>
+		</property>
+		<property name="inStatus" type="java.lang.String">
+			<column name="inStatus"/>
+		</property>
+		<property name="note" type="java.lang.String">
+			<column name="note"/>
+		</property>
+		<property name="province" type="java.lang.String">
+			<column name="province"/>
+		</property>
+	</class>
+</hibernate-mapping>

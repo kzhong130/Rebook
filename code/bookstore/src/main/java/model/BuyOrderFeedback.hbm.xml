@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="model.BuyOrderFeedback" table="buyOrderFeedback">
+		<id name="ID" type="int">
+			<column name="ID" />
+			<generator class="assigned"/>
+		</id>
+		<property name="buyID" type="int">
+			<column name="buyID"/>
+		</property>
+		<property name="topic" type="java.lang.String">
+			<column name="topic"/>
+		</property>
+		<property name="content" type="java.lang.String">
+			<column name="content"/>
+		</property>
+		<property name="time" type="java.sql.Timestamp">
+			<column name="time"/>
+		</property>
+		<property name="handleResult" type="java.lang.String">
+			<column name="handleResult"/>
+		</property>
+		<property name="adminID" type="int">
+			<column name="adminID"/>
+		</property>
+		<property name="userID" type="int">
+			<column name="userID"/>
+		</property>
+	</class>
+</hibernate-mapping>

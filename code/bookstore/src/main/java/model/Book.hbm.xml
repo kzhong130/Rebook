@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="model.Book" table="book">
+		<id name="ISBN" type="java.lang.String">
+			<column name="ISBN" />
+			<generator class="assigned"/>
+		</id>
+		<property name="bookName" type="java.lang.String">
+			<column name="bookName"/>
+		</property>
+		<property name="author" type="java.lang.String">
+			<column name="author"/>
+		</property>
+		<property name="publisher" type="java.lang.String">
+			<column name="publisher"/>
+		</property>
+		<property name="pageNumber" type="int">
+			<column name="pageNumber"/>
+		</property>
+		<property name="price" type="float">
+			<column name="price"/>
+		</property>
+		<property name="doubanRate" type="float">
+			<column name="doubanRate"/>
+		</property>
+		<property name="raterNumber" type="int">
+			<column name="raterNumber"/>
+		</property>
+		<property name="summary" type="java.lang.String">
+			<column name="summary"/>
+		</property>
+		<property name="image" type="java.lang.String">
+			<column name="image"/>
+		</property>
+		<property name="lastUpdateTime" type="java.sql.Timestamp">
+			<column name="lastUpdateTime"/>
+		</property>
+		<property name="pubdate" type="java.lang.String">
+			<column name="pubdate" />
+		</property>
+	</class>
+</hibernate-mapping>

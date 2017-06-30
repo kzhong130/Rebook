@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Struts2 DTD -->
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.1.7//EN"
+	"http://struts.apache.org/dtds/struts-2.1.7.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	<constant name="struts.devMode" value="true" />
+	<package name="process" extends="struts-default" >
+
+		<!-- User -->
+		<action name="userAction" class="action.UserAction">
+			<result name="success">user.jsp</result>
+			<result name="login success">index.jsp</result>
+			<result name="login fail">loginfail.jsp</result>
+			<result name="logout success">login.jsp</result>
+		</action>
+		
+
+		
+
+		
+		<action name="*">
+			<result>/{1}.jsp</result>
+		</action>
+	</package>
+</struts>

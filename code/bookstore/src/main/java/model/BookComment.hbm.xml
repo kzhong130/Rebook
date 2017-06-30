@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="model.BookComment" table="bookComment">
+		<id name="ID" type="int">
+			<column name="ID" />
+			<generator class="assigned"/>
+		</id>
+		<property name="ISBN" type="java.lang.String">
+			<column name="ISBN"/>
+		</property>
+		<property name="userID" type="int">
+			<column name="userID"/>
+		</property>
+		<property name="commentTime" type="java.sql.Timestamp">
+			<column name="commentTime"/>
+		</property>
+		<property name="content" type="java.lang.String">
+			<column name="content"/>
+		</property>
+		<property name="checkResult" type="java.lang.String">
+			<column name="checkResult"/>
+		</property>
+	</class>
+</hibernate-mapping>

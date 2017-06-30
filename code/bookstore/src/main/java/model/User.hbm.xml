@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="model.User" table="user">
+		<id name="userID" type="int">
+			<column name="userID"/>
+			<generator class="assigned"/>
+		</id>	
+		<property name="userName" type="java.lang.String">
+			<column name="userName"/>
+		</property>
+		<property name="password" type="java.lang.String">
+			<column name="password"/>
+		</property>
+		<property name="realName" type="java.lang.String">
+			<column name="realName"/>
+		</property>
+		<property name="sex" type="java.lang.String">
+			<column name="sex"/>
+		</property>
+		<property name="phone" type="java.lang.String">
+			<column name="phone"/>
+		</property>
+		<property name="email" type="java.lang.String">
+			<column name="email"/>
+		</property>
+		<property name="address" type="java.lang.String">
+			<column name="address"/>
+		</property>
+		<property name="registerDate" type="java.sql.Timestamp">
+			<column name="registerDate"/>
+		</property>
+		<property name="validationProblem" type="java.lang.String">
+			<column name="validationProblem"/>
+		</property>
+		<property name="validationAnswer" type="java.lang.String">
+			<column name="validationAnswer"/>
+		</property>
+		<property name="credit" type="int">
+			<column name="credit"/>
+		</property>
+		<property name="bookCoin" type="int">
+			<column name="bookCoin"/>
+		</property>
+    </class>
+</hibernate-mapping>

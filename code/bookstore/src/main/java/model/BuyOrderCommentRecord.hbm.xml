@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="model.BuyOrderCommentRecord" table="buyOrderCommentRecord">
+		<id name="ID" type="int">
+			<column name="ID"/>
+			<generator class="assigned"/>
+		</id>
+		<property name="buyID" type="int">
+			<column name="buyID"/>
+		</property>
+		<property name="commenterID" type="int">
+			<column name="commenterID"/>
+		</property>
+		<property name="commentType" type="java.lang.String">
+			<column name="commentType"/>
+		</property>
+		<property name="content" type="java.lang.String">
+			<column name="content"/>
+		</property>
+	</class>
+</hibernate-mapping>
