@@ -155,10 +155,9 @@
   <br>
 </div>
 </div>
-
+<!--
 <div class="container">
   <nav class="text-center">
-    <!-- Add class .pagination-lg for larger blocks or .pagination-sm for smaller blocks-->
     <ul class="pagination">
       <li> <a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a> </li>
       <li class="active">
@@ -174,10 +173,17 @@
       <li> <a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a> </li>
     </ul>
   </nav>
+</div>-->
+  <br>
+<div class="zzsc"> 
+<!--currentpage="1" numbercount="100"-->
+<ul class="page" maxshowpageitem="5" pagelistcount="10"  id="page"></ul>
+
+
 </div>
+
+
 <hr>
-
-
 
 <footer class="text-center">
   <div class="container">
@@ -199,6 +205,8 @@
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/page.js"></script>
 <script type="text/javascript">
 //窗口效果
 //点击登录class为tc 显示
@@ -223,10 +231,19 @@ function tc_center(){
 	var _left=($(window).width()-$(".popup").width())/2;
 	
 	$(".popup").css({top:_top,left:_left});
-}	
-</script>
+}
 
-<script type="text/javascript">
+function tt(dd){
+    //alert(dd);
+}
+var GG = {
+    "kk":function(mm){
+       // alert(mm);
+    }
+}
+
+$("#page").initPage(71,1,GG.kk);
+
 $(document).ready(function(){ 
 
 	$(".top_nav").mousedown(function(e){ 

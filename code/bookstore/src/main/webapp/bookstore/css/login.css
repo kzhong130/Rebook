@@ -126,3 +126,33 @@ a{text-decoration:none;}*/
 }
 
 .tc_login .right hr{height:1px;border:none;border-top:1px dashed #E4E4E4;clear:both;margin:240px 0 5px 0px;}
+
+.zzsc{ margin:0 auto; width:580px; height:80px; border:0px solid #efbb24} 
+.page{
+    list-style: none;
+}
+.page>li{
+    float: left;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.page .pageItem{
+    border: solid thin #DDDDDD;
+    margin: 5px;
+}
+.page .pageItemActive{
+    border: solid thin #efbb24;
+    margin: 5px;
+    background-color: #efbb24;
+    color:white;
+}
+.page .pageItem:hover{
+    border: solid thin #efbb24;
+    background-color: #efbb24;
+    color:white;
+}
+.page .pageItemDisable{
+    border: solid thin #DDDDDD;
+    margin: 5px;
+    background-color: #DDDDDD;
+}
