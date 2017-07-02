@@ -37,8 +37,8 @@
       </form>
       <ul class="nav navbar-nav navbar-right hidden-sm">
         <li><a href="#">我要卖书</a> </li>
-        <li><a href="javascript:showDialog();">注册</a> </li>
-        <li><a href="#">登陆</a> </li>
+        <li><a href="#">注册</a> </li>
+        <li><a href="#" class="tc">登录</a> </li>
       </ul>
     </div>
     <!-- /.navbar-collapse --> 
@@ -46,42 +46,48 @@
   <!-- /.container-fluid --> 
 </nav>
 
-<div class="ui-mask" id="mask" onselectstart="return false" style="display:none;"></div>
+<div id="gray"></div>
+<div class="popup" id="popup">
 
-<div class="ui-dialog" id="dialogMove" onselectstart='return false;' >
-	<div class="ui-dialog-title" id="dialogDrag"  onselectstart="return false;"  >
+	<div class="top_nav" id='top_nav'>
+		<div align="center">
+			<span>登录账号</span>
+			<a class="guanbi"></a>
+		</div>
+	</div>
+	
+	<div class="min">
+	
+		<div class="tc_login">
 		
-		登录通行证
-
-		<a class="ui-dialog-closebutton" href="javascript:hideDialog();"></a>
-
+			<div class="right">
+				<form method="POST" name="form_login" target="_top">
+					<div align="center">
+						<i class="icon-mobile-phone"></i>
+						<input type="text" name="name" id="name" required="required" placeholder="用户名" autocomplete="off" class="input_yh">
+						<p style="font-size:5px;color:#fff;"> </p>
+						<input type="password" name="pass" id="pass" required="required" placeholder="密码" autocomplete="off" class="input_mm">
+					</div>
+					<div align="right"><a href="">忘记密码</a></div>
+					<div align="center">
+						<input type="submit" class="button" title="Sign In" value="登录">
+					</div>
+				</form> 
+				<div align="right">
+					<a href="#" target="_blank">立即注册</a>                                     <!-- 注册的页面 -->
+				</div>  
+			</div>
+		
+		</div>
+	
 	</div>
-	<div class="ui-dialog-content">
-		<div class="ui-dialog-l40 ui-dialog-pt15">
-			<input class="ui-dialog-input ui-dialog-input-username" type="input" placeholder="用户名" value="" />
-		</div>
-		<p style="font-size:5px;color:#fff;"> </p>
-		<div class="ui-dialog-l40 ui-dialog-pt15">
-			<input class="ui-dialog-input ui-dialog-input-password" type="input" placeholder="密码" value="" />
-		</div>
-		<br> 
-		<div class="ui-dialog-l40">
-			<a class="ui-dialog-l40" href="#">忘记密码</a>                                    <!-- 忘记密码的页面 -->
-		</div>
-		<div>
-			<a class="ui-dialog-submit" href="#" >登录</a>              <!-- 须实现Ajax -->
-		</div>
-		<div class="ui-dialog-l40">
-			<a class="ui-dialog-l40" href="#">立即注册</a>                                     <!-- 注册的页面 -->
-		</div>
-	</div>
+
 </div>
-
 
 
 <div class="container">
     <div class="row">
-      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+      <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
         <div id="carousel1" class="carousel slide" weight=1920px>
           <ol class="carousel-indicators">
             <li data-target="#carousel1" data-slide-to="0" class="active"> </li>
@@ -97,7 +103,7 @@
             </div>
           </div>
           <a class="left carousel-control" href="#carousel1" data-slide="prev"><span class="icon-prev"></span></a> <a class="right carousel-control" href="#carousel1" data-slide="next"><span class="icon-next"></span></a></div>
-      </div>
+     
      </div>
     <hr>
   </div>
@@ -149,10 +155,9 @@
   <br>
 </div>
 </div>
-
+<!--
 <div class="container">
   <nav class="text-center">
-    <!-- Add class .pagination-lg for larger blocks or .pagination-sm for smaller blocks-->
     <ul class="pagination">
       <li> <a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a> </li>
       <li class="active">
@@ -168,10 +173,17 @@
       <li> <a href="#" aria-label="Next"> <span aria-hidden="true">&raquo;</span> </a> </li>
     </ul>
   </nav>
+</div>-->
+  <br>
+<div class="zzsc"> 
+<!--currentpage="1" numbercount="100"-->
+<ul class="page" maxshowpageitem="5" pagelistcount="10"  id="page"></ul>
+
+
 </div>
+
+
 <hr>
-
-
 
 <footer class="text-center">
   <div class="container">
@@ -192,122 +204,70 @@
 <script src="js/jquery-1.11.3.min.js"></script> 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/page.js"></script>
 <script type="text/javascript">
+//窗口效果
+//点击登录class为tc 显示
+$(".tc").click(function(){
+	$("#gray").show();
+	$("#popup").show();//查找ID为popup的DIV show()显示#gray
+	tc_center();
+});
+//点击关闭按钮
+$("a.guanbi").click(function(){
+	$("#gray").hide();
+	$("#popup").hide();//查找ID为popup的DIV hide()隐藏
+})
 
-	var dialogInstace , onMoveStartId , mousePos = {x:0,y:0};	//	用于记录当前可拖拽的对象
+//窗口水平居中
+$(window).resize(function(){
+	tc_center();
+});
+
+function tc_center(){
+	var _top=($(window).height()-$(".popup").height())/2;
+	var _left=($(window).width()-$(".popup").width())/2;
 	
-	// var zIndex = 9000;
+	$(".popup").css({top:_top,left:_left});
+}
 
-	//	获取元素对象	
-	function g(id){return document.getElementById(id);}
+function tt(dd){
+    //alert(dd);
+}
+var GG = {
+    "kk":function(mm){
+       // alert(mm);
+    }
+}
 
-	//	自动居中元素（el = Element）
-	function autoCenter( el ){
-		var bodyW = document.documentElement.clientWidth;
-		var bodyH = document.documentElement.clientHeight;
+$("#page").initPage(71,1,GG.kk);
 
-		var elW = el.offsetWidth;
-		var elH = el.offsetHeight;
+$(document).ready(function(){ 
 
-		el.style.left = (bodyW-elW)/2 + 'px';
-		el.style.top = (bodyH-elH)/2 + 'px';
+	$(".top_nav").mousedown(function(e){ 
+		$(this).css("cursor","move");//改变鼠标指针的形状 
+		var offset = $(this).offset();//DIV在页面的位置 
+		var x = e.pageX - offset.left;//获得鼠标指针离DIV元素左边界的距离 
+		var y = e.pageY - offset.top;//获得鼠标指针离DIV元素上边界的距离 
+		$(document).bind("mousemove",function(ev){ //绑定鼠标的移动事件，因为光标在DIV元素外面也要有效果，所以要用doucment的事件，而不用DIV元素的事件 
 		
-	}
-
-	//	自动扩展元素到全部显示区域
-	function fillToBody( el ){
-		el.style.width  = document.documentElement.clientWidth  +'px';
-		el.style.height = document.documentElement.clientHeight + 'px';
-	}
-
-	//	Dialog实例化的方法
-	function Dialog( dragId , moveId ){
-
-		var instace = {} ;
-
-		instace.dragElement  = g(dragId);	//	允许执行 拖拽操作 的元素
-		instace.moveElement  = g(moveId);	//	拖拽操作时，移动的元素
-
-		instace.mouseOffsetLeft = 0;			//	拖拽操作时，移动元素的起始 X 点
-		instace.mouseOffsetTop = 0;			//	拖拽操作时，移动元素的起始 Y 点
-
-		instace.dragElement.addEventListener('mousedown',function(e){
-
-			var e = e || window.event;
-
-			dialogInstace = instace;
-			instace.mouseOffsetLeft = e.pageX - instace.moveElement.offsetLeft ;
-			instace.mouseOffsetTop  = e.pageY - instace.moveElement.offsetTop ;
+			$(".popup").stop();//加上这个之后 
 			
-			onMoveStartId = setInterval(onMoveStart,10);
-			return false;
-			// instace.moveElement.style.zIndex = zIndex ++;
-		})
-
-		return instace;
-	}
-
-	//	在页面中侦听 鼠标弹起事件
-	document.onmouseup = function(e){
-		dialogInstace = false;
-		clearInterval(onMoveStartId);
-	}
-	document.onmousemove = function( e ){
-		var e = window.event || e;
-		mousePos.x = e.clientX;
-		mousePos.y = e.clientY;
+			var _x = ev.pageX - x;//获得X轴方向移动的值 
+			var _y = ev.pageY - y;//获得Y轴方向移动的值 
 		
+			$(".popup").animate({left:_x+"px",top:_y+"px"},10); 
+		}); 
 
-		e.stopPropagation && e.stopPropagation();
-		e.cancelBubble = true;
-		e = this.originalEvent;
-        e && ( e.preventDefault ? e.preventDefault() : e.returnValue = false );
+	}); 
 
-        document.body.style.MozUserSelect = 'none';
-	}	
-
-	function onMoveStart(){
-
-
-		var instace = dialogInstace;
-	    if (instace) {
-	    	
-	    	var maxX = document.documentElement.clientWidth -  instace.moveElement.offsetWidth;
-	    	var maxY = document.documentElement.clientHeight - instace.moveElement.offsetHeight ;
-
-			instace.moveElement.style.left = Math.min( Math.max( ( mousePos.x - instace.mouseOffsetLeft) , 0 ) , maxX) + "px";
-			instace.moveElement.style.top  = Math.min( Math.max( ( mousePos.y - instace.mouseOffsetTop ) , 0 ) , maxY) + "px";
-
-	    }
-
-	}
-
-
-	
-
-
-	//	重新调整对话框的位置和遮罩，并且展现
-	function showDialog(){
-		g('dialogMove').style.display = 'block';
-		g('mask').style.display = 'block';
-		autoCenter( g('dialogMove') );
-		fillToBody( g('mask') );
-	}
-
-	//	关闭对话框
-	function hideDialog(){
-		g('dialogMove').style.display = 'none';
-		g('mask').style.display = 'none';
-	}
-
-	//	侦听浏览器窗口大小变化
-	window.onresize = showDialog;
-
-	Dialog('dialogDrag','dialogMove');
-	
-	//默认设置弹出层启动
-	showDialog();
-
+	$(document).mouseup(function() { 
+		$(".popup").css("cursor","default"); 
+		$(this).unbind("mousemove"); 
+	});
+}) 
 </script>
 
 </body>
