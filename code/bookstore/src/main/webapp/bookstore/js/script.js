@@ -2,7 +2,7 @@
 var user_Boolean = false;
 var password_Boolean = false;
 var varconfirm_Boolean = false;
-var emaile_Boolean = false;
+var email_Boolean = false;
 var Mobile_Boolean = false;
 
 var realname_Boolean = false;
@@ -48,10 +48,10 @@ $('.reg_confirm').blur(function(){
 $('.reg_email').blur(function(){
   if ((/^[a-z\d]+(\.[a-z\d]+)*@([\da-z](-[\da-z])?)+(\.{1,2}[a-z]+)+$/).test($(".reg_email").val())){
     $('.email_hint').html("✔").css("color","green");
-    emaile_Boolean = true;
+    email_Boolean = true;
   }else {
     $('.email_hint').html("×").css("color","red");
-    emaile_Boolean = false;
+    email_Boolean = false;
   }
 });
 
@@ -93,10 +93,10 @@ $('.reg_validationProblem').blur(function(){
 $('.reg_validationAnswer').blur(function(){
   if ($(".reg_validationAnswer").val()!=""){
     $('.validationAnswer_hint').html("✔").css("color","green");
-    validationProblem_Boolean = true;
+    validationAnswer_Boolean = true;
   }else {
     $('.validationAnswer_hint').html("×").css("color","red");
-    validationProblem_Boolean = false;
+    validationAnswer_Boolean = false;
   }
 });
 
@@ -115,9 +115,48 @@ $('.reg_address').blur(function(){
 
 // click
 $('.red_button').click(function(){
-  if(user_Boolean && password_Boolean && varconfirm_Boolean && emaile_Boolean && Mobile_Boolean && validationAnswer_Boolean && validationProblem_Boolean &&  realname_Boolean &&  address_Boolean == true){
-    alert("注册成功");
+  if(user_Boolean && password_Boolean && varconfirm_Boolean && email_Boolean && Mobile_Boolean && validationAnswer_Boolean && validationProblem_Boolean &&  realname_Boolean &&  address_Boolean == true){
+	//alter(document.getElementsByName("province"));
+	  var select = document.getElementsByName("province")[0];
+	  var province=select.options[select.selectedIndex].text;
+	  //alert(document.getElementsByName("city")[0].value);
+	  if(document.getElementsByName("city")[0].value!=""){
+		  select=document.getElementsByName("city")[0];
+		  var city=select.options[select.selectedIndex].text;
+	  }
+	  else {
+		  var city="";
+		  //alert(2);
+	  }
+	  //alert(2333);
+	  //alert(city);
+	  if(document.getElementsByName("area")[0].value!=""){
+		  select=document.getElementsByName("area")[0];
+		  var area=select.options[select.selectedIndex].text;
+	  }
+	  else var area="";
+	  //alert(area);
+	  if(document.getElementsByName("town")[0].value!=""){
+		  select=document.getElementsByName("town")[0];
+		  var town=select.options[select.selectedIndex].text;
+	  }
+	  else var town="";
+	  //alert(town);
+	  var detail=$(".reg_address").val();
+	  //alert(detail);
+	  var maddress=province+city+area+town+detail;
+	  //alert(maddress);
+  	$.ajax({  
+        type:"POST",  
+        url:"AccountAction!register",  
+        async:false,
+        data:{userName:$(".reg_user").val(),password:$(".reg_password").val(),realName:$(".reg_realname").val(),sex:$(".reg_sex").val(),phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:maddress,validationProblem:$(".reg_validationProblem").val(),validationAnswer:$(".reg_validationAnswer").val()} ,
+        
+    });
+	window.location.replace("test.jsp");
+	  
   }else {
+	  
     alert("请完善信息");
   }
 });

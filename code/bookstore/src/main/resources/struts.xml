@@ -21,6 +21,11 @@
 			<result name="success">bookinfo.jsp</result>
 			<result name="all">centerPage.jsp</result>
 		</action>
+		
+		<action name="AccountAction" class="action.AccountAction">
+			<result name="registerSuccess">index.jsp</result>
+			<result name="all">loginfail.jsp</result>
+		</action>
 
 		
 
