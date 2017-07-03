@@ -105,6 +105,7 @@
                 <p>
                       <select name="province"></select>
                       <select name="city"></select>
+                      <br>
                       <select name="area"></select>
                       <select name="town"></select>
                 </p>

@@ -81,8 +81,13 @@ input[placeholder], [placeholder], *[placeholder] {
 }
 .citys p{
     line-height: 28px;
+    text-align:left;
+    margin:0 0 0 120px;
 }
-
+.citys p select{
+    text-align:left;
+    float:!left;
+}
 
 
 
