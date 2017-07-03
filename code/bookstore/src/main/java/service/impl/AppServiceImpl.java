@@ -29,6 +29,7 @@ public class AppServiceImpl implements AppService {
 	private UserDao userDao;
 	private BookDao bookDao;
 
+
 	
 	public void setUserDao(UserDao userDao){
 		this.userDao = userDao;
@@ -194,6 +195,7 @@ public class AppServiceImpl implements AppService {
 	public ArrayList<Book> getAllBooks() {
 		return (ArrayList<Book>)bookDao.getAllBooks();
 	}
+
 
 	
 }

@@ -112,7 +112,7 @@
              </div>
           
           <span>   </span>
-          <input type="text" name="" value="" placeholder="详细地址" class="reg_address">
+          <input type="text" name="detail" value="" placeholder="详细地址" class="reg_address">
           <span class="tip address_hint"></span>
       </li>
       <li>
@@ -126,10 +126,6 @@
           <span class="tip validationAnswer_hint"></span>
       </li>      
       
-
- <!--  sex                  enum("male","female")          not null, 
-   address              varchar(50)                    not null, 
-   registerDate         datetime                       not null,-->
 
       <li>
         <button type="button" name="button" class="red_button">注册</button>
@@ -167,6 +163,11 @@
         			townFormat(info);
         		});
             </script>
+
+<script type="text/javascript">
+
+</script>
+
 
 
   <script type="text/javascript" src="js/script.js"></script>
