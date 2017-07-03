@@ -31,7 +31,7 @@ input[placeholder], [placeholder], *[placeholder] {
   text-align:right;
   display:inline-block;
   margin: auto;
-  margin-left:30px;
+  margin-left:10px;
   margin-top: 10px;
 }
 .reg_ul li span.tip{margin:6px 0 0 10px;width:40px;text-align:left;}
@@ -81,13 +81,12 @@ input[placeholder], [placeholder], *[placeholder] {
 }
 .citys p{
     line-height: 28px;
+    text-align:left;
+    margin:0 0 0 120px;
 }
-.warning{
-    color: #c00;
-}
- .main a{
-    margin-right: 8px;
-    color: #369;
+.citys p select{
+    text-align:left;
+    float:!left;
 }
 
 
