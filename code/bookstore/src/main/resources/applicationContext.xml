@@ -30,6 +30,10 @@
 				<value>model/BuyOrder.hbm.xml</value>
 				<value>model/BuyOrderCommentRecord.hbm.xml</value>
 				<value>model/BuyOrderFeedback.hbm.xml</value>
+				<value>model/CreditChangeRecord.hbm.xml</value>
+				<value>model/LendOrder.hbm.xml</value>
+				<value>model/LendOrderCommentRecord.hbm.xml</value>
+				<value>model/LendOrderFeedback.hbm.xml</value>
 			</list>
 		</property>
 		<!-- Hibernate SessionFactory -->
@@ -66,6 +70,18 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="buyOrderFeedbackDao" class="dao.impl.BuyOrderFeedbackDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="creditChangeRecordDao" class="dao.impl.CreditChangeRecordDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="lendOrderDao" class="dao.impl.LendOrderDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="lendOrderCommentRecordDao" class="dao.impl.LendOrderCommentRecordDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="lendOrderFeedbackDao" class="dao.impl.LendOrderFeedbackDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	

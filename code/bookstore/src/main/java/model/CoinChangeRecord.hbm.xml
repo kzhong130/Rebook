@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="model.CoinChangeRecord" table="coinChangeRecord">
+		<id name="ID" type="int">
+			<column name="ID" />
+			<generator class="assigned"/>
+		</id>
+		<property name="userID" type="int">
+			<column name="userID"/>
+		</property>
+		<property name="number" type="int">
+			<column name="number"/>
+		</property>
+		<property name="time" type="java.sql.Timestamp">
+			<column name="time"/>
+		</property>
+		<property name="reason" type="java.lang.String">
+			<column name="reason"/>
+		</property>
+	</class>
+</hibernate-mapping>
