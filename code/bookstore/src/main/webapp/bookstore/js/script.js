@@ -93,10 +93,10 @@ $('.reg_validationProblem').blur(function(){
 $('.reg_validationAnswer').blur(function(){
   if ($(".reg_validationAnswer").val()!=""){
     $('.validationAnswer_hint').html("✔").css("color","green");
-    validationProblem_Boolean = true;
+    validationAnswer_Boolean = true;
   }else {
     $('.validationAnswer_hint').html("×").css("color","red");
-    validationProblem_Boolean = false;
+    validationAnswer_Boolean = false;
   }
 });
 
@@ -115,7 +115,7 @@ $('.reg_address').blur(function(){
 
 // click
 $('.red_button').click(function(){
-  if(user_Boolean && password_Boolean && varconfirm_Boolean && emaile_Boolean && Mobile_Boolean && validationAnswer_Boolean && validationProblem_Boolean &&  realname_Boolean &&  address_Boolean == true){
+  if(user_Boolean && password_Boolean && varconfirm_Boolean && emaile_Boolean && Mobile_Boolean && validationAnswer_Boolean && validationProblem_Boolean &&  realname_Boolean &&  address_Boolean){
     alert("注册成功");
   }else {
     alert("请完善信息");
