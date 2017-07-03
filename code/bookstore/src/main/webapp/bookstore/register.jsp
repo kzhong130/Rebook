@@ -170,7 +170,6 @@
 
 
   <script type="text/javascript" src="js/script.js"></script>
-  <script src="http://passer-by.com/data_location/version.js"></script>
 </body>
 </html>
     
