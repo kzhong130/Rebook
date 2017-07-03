@@ -1,107 +1,182 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>用table制作qq登录页面</title>
-<meta charset="utf-8">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <!-- 重置文件 -->
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/register.css">
+  <link rel="stylesheet" href="css/bootstrap.css">
+  <title>注册</title>
 </head>
-<body background="bg.jpg" topmargin="10" leftmargin="250">
+<body>
+<nav>
+  <div class="container"> 
+    
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      <a class="navbar-brand" href="test.jsp"><img src="images/index1_logo.png"/></a> 
+      </div>
+    
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse">
+      <ul class="nav navbar-nav navbar-right hidden-sm">
+        <li><a href="test.jsp">我已注册，回首页登录</a> </li>
+      </ul>
+    </div>
+    <!-- /.navbar-collapse --> 
+  </div>
+  <!-- /.container-fluid --> 
+</nav>
 
-<form>
-<table width="800" height="600" border="0" cellpadding="5" cellspacing="5">
+<div class="container">
+    <div class="row">
+      <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
+        <div id="carousel1" class="carousel slide">
+          <ol class="carousel-indicators">
+            <li data-target="#carousel1" data-slide-to="0" class="active"> </li>
+            <li data-target="#carousel1" data-slide-to="1" class=""> </li>
+            <li data-target="#carousel1" data-slide-to="2" class=""> </li>
+          </ol>
+          <div class="carousel-inner" >
+            <div class="item"> <img class="img-responsive" src="images/index1_banner.png" alt="thumb" >
+            </div>
+            <div class="item active"> <img class="img-responsive" src="images/index1_banner.png" alt="thumb">
+            </div>
+            <div class="item"> <img class="img-responsive" src="images/index1_banner.png" alt="thumb">
+            </div>
+          </div>
+          <a class="left carousel-control" href="#carousel1" data-slide="prev"><span class="icon-prev"></span></a> <a class="right carousel-control" href="#carousel1" data-slide="next"><span class="icon-next"></span></a></div>
+     
+     </div>
+    <hr>
+  </div>
+  
+<div class="reg_div">
+    <ul class="reg_ul">
+      <li>
+          <span>用户名：</span>
+          <input type="text" name="" value="" placeholder="6-12位用户名" class="reg_user">
+          <span class="tip user_hint"></span>
+      </li>
+      <li>
+          <span>密码：</span>
+          <input type="password" name="" value="" placeholder="6-16位密码" class="reg_password">
+          <span class="tip password_hint"></span>
+      </li>
+      <li>
+          <span>确认密码：</span>
+          <input type="password" name="" value="" placeholder="确认密码" class="reg_confirm">
+          <span class="tip confirm_hint"></span>
+      </li>
+      <li>
+          <span>真实姓名：</span>
+          <input type="text" name="" value="" placeholder="真实姓名" class="reg_realname">
+          <span class="tip realname_hint"></span>
+      </li>
+      <li>
+          <span>性别：</span>
+          
+          <input type="radio" name="sex" value="male" class="reg_sex" checked>男
+          <input type="radio" name="sex" value="female" class="reg_sex">女
+          
+      </li>
+      <li>
+          <span>手机号码：</span>
+          <input type="text" name="" value="" placeholder="手机号" class="reg_mobile">
+          <span class="tip mobile_hint"></span>
+      </li>
+      <li>
+          <span>邮箱：</span>
+          <input type="email" name="" value="" placeholder="邮箱" class="reg_email">
+          <span class="tip email_hint"></span>
+      </li>
+      <li>
+          <span>地址：</span>
+          <div class="main">
+            <div id="demo3" class="citys">
+                <p>
+                      <select name="province"></select>
+                      <select name="city"></select>
+                      <select name="area"></select>
+                      <select name="town"></select>
+                </p>
+             </div>
+          </div>
+          <span>   </span>
+          <input type="text" name="" value="" placeholder="详细地址" class="reg_address">
+          <span class="tip address_hint"></span>
+      </li>
+      <li>
+          <span>验证问题：</span>
+          <input type="text" name="" value="" placeholder="验证问题" class="reg_validationProblem">
+          <span class="tip validationProblem_hint"></span>
+      </li>
+      <li>
+          <span>答案：</span>
+          <input type="text" name="" value="" placeholder="验证问题答案" class="reg_validationAnswer">
+          <span class="tip validationAnswer_hint"></span>
+      </li>      
+      
 
-<tr align="left"><td colspan="3">|注册账号</td></tr>
+ <!--  sex                  enum("male","female")          not null, 
+   address              varchar(50)                    not null, 
+   registerDate         datetime                       not null,-->
 
-<tr height="10" bgcolor="black"><td colspan="3"></td></tr>
+      <li>
+        <button type="button" name="button" class="red_button">注册</button>
+      </li>
+    </ul>
+  </div>
+  
+ <div class="main">
+ <div id="demo3" class="citys">
+      <p>
+        <select name="province"></select>
+        <select name="city"></select>
+        <select name="area"></select>
+        <select name="town"></select>
+      </p>
+ </div>
+  </div>
+<script type="text/javascript">
+        		var $town = $('#demo3 select[name="town"]');
+        		var townFormat = function(info){
+        			$town.hide().empty();
+        			if(info['code']%1e4&&info['code']<7e5){	//是否为“区”且不是港澳台地区
+        				$.ajax({
+        					url:'http://passer-by.com/data_location/town/'+info['code']+'.json',
+        					dataType:'json',
+        					success:function(town){
+        						$town.show();
+        						for(i in town){
+        								$town.append('<option value="'+i+'">'+town[i]+'</option>');
+        						}
+        					}
+        				});
+        			}
+        		};
+                $('#demo3').citys({
+        			province:'福建',
+        			city:'厦门',
+        			area:'思明',
+        			onChange:function(info){
+        				townFormat(info);
+        			}
+        		},function(api){
+        			var info = api.getInfo();
+        			townFormat(info);
+        		});
+            </script>
 
-<tr>
-<td width="20%" align="right"><lable for="name">注册</lable></td>
-<td width="60%"><input id="name" type="text" placeholder="输入昵称" style="width:100%;"></td>
-<td><span>昵称不可以为空</span></td>
-</tr>
-
-<tr>
-<td align="right"><lable for="password">密码</lable></td>
-<td><input id="password" type="password" placeholder="输入密码" style="width:100%"></td>
-<td><span>必须包含特殊字符</span></td>
-</tr>
-
-<tr>
-<td align="right"><lable for="okps">确认密码</lable></td>
-<td><input id="okps" type="password" placeholder="再次输入密码" style="width:100%"></td>
-<td><span>密码要一致<span></td>
-</tr>
-
-<tr>
-<td align="right"><lable for="man">性别</lable></td>
-<td><input id="man" name="sex" type="radio">男<input type="radio" name="sex">女</td>
-<td></td>
-</tr>
-
-<tr>
-<td align="right">生日</td>
-<td>
-<select><option>1988年</option><option>1987年</option><option>1986年</option></select>
-<select><option>12月</option><option>11月</option><option>10月</option></select>
-<select><option>11d</option><option>12d</option><option>13d</option></select>
-</td>
-<td></td>
-</tr>
-
-<tr>
-<td align="right">所在地</td>
-<td>
-<select><option>山东</option><option>北京</option></select>
-<select><option>淄博</option><option>海淀</option></select>
-</td>
-<td></td>
-</tr>
-
-<tr>
-<td align="right">手机号</td>
-<td><input type="tel" placeholder="输入手机号码" style="width:100%;"></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td>
-<font size="1">
-<p>可通过手机号码快速找回密码<br>
-中国大陆地区以外手机点这里&nbsp&nbsp&nbsp<a href="https://www.baidu.com">点击这里</a></p>
-</font>
-</td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td>
-<input type="text" style="width:60%;"><input type="button" value="获取验证码" style="width:39%">
-</td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td><input type="submit" value="立即注册" style="width:100%;"></td>
-<td></td>
-</tr>
-
-<tr>
-<td></td>
-<td>
-<font size="1">
-<input type="checkbox" name="accept">同时开通qq空间<br>
-<input type="checkbox" name="accept">我已经阅读相关条款
-</font>
-</td>
-<td></td>
-</tr>
-
-</table>
-</form>
-
+  <script type="text/javascript" src="js/jquery.citys.js"></script>          
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/script.js"></script>
+  <script src="http://passer-by.com/data_location/version.js"></script>
 </body>
 </html>
+    

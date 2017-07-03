@@ -37,7 +37,7 @@
       </form>
       <ul class="nav navbar-nav navbar-right hidden-sm">
         <li><a href="#">我要卖书</a> </li>
-        <li><a href="#">注册</a> </li>
+        <li><a href="register.jsp">注册</a> </li>
         <li><a href="#" class="tc">登录</a> </li>
       </ul>
     </div>
