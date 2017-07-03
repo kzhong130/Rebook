@@ -162,7 +162,8 @@
       <li> <a href="#" aria-label="Previous"> <span aria-hidden="true">&laquo;</span> </a> </li>
       <li class="active">
       <%
-      	int pages=(bookList.size()+1)/20;
+      	int pages=bookList.size()/20+1;
+      	System.out.println(pages);
     	for(int i=1;i<=pages;i++){
     	
       %>
