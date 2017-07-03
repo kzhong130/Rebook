@@ -145,7 +145,7 @@
   		Book book = bookList.get(i);
   %>	
     <div class="background">
-     <a href="<% %>"><img class="listbook" src=<%=book.getImage() %> />
+     <a href="bookAction!getBookInfo?ISBN=<%=book.getISBN() %>"><img class="listbook" src=<%=book.getImage() %> />
      <br> <br><%=book.getBookName() %><br><%=book.getAuthor() %></a></div>
   
   

@@ -4,6 +4,7 @@ import service.AppService;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Book;
 
@@ -138,6 +139,13 @@ public class BookAction extends BaseAction{
 		int temp=1;
 		request().getSession().setAttribute("page",temp);
 		return "all";
+	}
+	
+	public String getBookInfo() throws Exception{
+		String ISBN = request().getParameter("ISBN");
+		Book book = appService.getBookByISBN(ISBN);
+		request().setAttribute("book", book);
+		return "test";
 	}
 	
 }
