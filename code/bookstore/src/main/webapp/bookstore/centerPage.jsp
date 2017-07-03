@@ -68,13 +68,13 @@
 						<p style="font-size:5px;color:#fff;"> </p>
 						<input type="password" name="pass" id="pass" required="required" placeholder="密码" autocomplete="off" class="input_mm">
 					</div>
-					<div align="right"><a href="">忘记密码</a></div>
+					<div align="right"><a href="forgetpassword/fp1.jsp">忘记密码</a></div>
 					<div align="center">
 						<input type="submit" class="button" title="Sign In" value="登录">
 					</div>
 				</form> 
 				<div align="right">
-					<a href="#" target="_blank">立即注册</a>                                     <!-- 注册的页面 -->
+					<a href="register.jsp" target="_blank">立即注册</a>                                     <!-- 注册的页面 -->
 				</div>  
 			</div>
 		
