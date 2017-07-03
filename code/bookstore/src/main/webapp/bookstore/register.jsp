@@ -12,6 +12,9 @@
   <link rel="stylesheet" href="css/bootstrap.css">
   <title>注册</title>
 </head>
+ <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript" src="js/jquery.citys.js"></script>          
+ 
 <body>
 <nav>
   <div class="container"> 
@@ -97,7 +100,7 @@
       </li>
       <li>
           <span>地址：</span>
-          <div class="main">
+          
             <div id="demo3" class="citys">
                 <p>
                       <select name="province"></select>
@@ -106,7 +109,7 @@
                       <select name="town"></select>
                 </p>
              </div>
-          </div>
+          
           <span>   </span>
           <input type="text" name="" value="" placeholder="详细地址" class="reg_address">
           <span class="tip address_hint"></span>
@@ -133,16 +136,7 @@
     </ul>
   </div>
   
- <div class="main">
- <div id="demo3" class="citys">
-      <p>
-        <select name="province"></select>
-        <select name="city"></select>
-        <select name="area"></select>
-        <select name="town"></select>
-      </p>
- </div>
-  </div>
+
 <script type="text/javascript">
         		var $town = $('#demo3 select[name="town"]');
         		var townFormat = function(info){
@@ -173,8 +167,7 @@
         		});
             </script>
 
-  <script type="text/javascript" src="js/jquery.citys.js"></script>          
-  <script type="text/javascript" src="js/jquery.min.js"></script>
+
   <script type="text/javascript" src="js/script.js"></script>
   <script src="http://passer-by.com/data_location/version.js"></script>
 </body>
