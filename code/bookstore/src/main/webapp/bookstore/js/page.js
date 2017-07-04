@@ -3,7 +3,7 @@
  */
 $.fn.extend({
     "initPage":function(listCount,currentPage,fun){
-        var maxshowpageitem = $(this).attr("maxshowpageitem");
+    	var maxshowpageitem = $(this).attr("maxshowpageitem");
         if(maxshowpageitem!=null&&maxshowpageitem>0&&maxshowpageitem!=""){
             page.maxshowpageitem = maxshowpageitem;
         }
@@ -33,12 +33,15 @@ var  page = {
      * @param listCount 列表总量
      */
     "initWithUl":function(listCount,currentPage){
-        var pageCount = 1;
+
+    	var pageCount = 1;
         if(listCount>=0){
             var pageCount = listCount%page.pagelistcount>0?parseInt(listCount/page.pagelistcount)+1:parseInt(listCount/page.pagelistcount);
         }
         var appendStr = page.getPageListModel(pageCount,currentPage);
+        
         $("#"+page.pageId).html(appendStr);
+
     },
     /**
      * 设置列表总量和当前页码
@@ -48,14 +51,17 @@ var  page = {
     "setPageListCount":function(listCount,currentPage,fun){
         listCount = parseInt(listCount);
         currentPage = parseInt(currentPage);
+        
         page.initWithUl(listCount,currentPage);
+
         page.initPageEvent(listCount,fun);
         fun(currentPage);
     },
     "initPageEvent":function(listCount,fun){
-        $("#"+page.pageId +">li[class='pageItem']").on("click",function(){
-            page.setPageListCount(listCount,$(this).attr("page-data"),fun);
-        });
+    	$("#"+page.pageId +">li[class='pageItem']").on("click",function(){		
+    		page.setPageListCount(listCount,$(this).attr("page-data"),fun);
+        	$('#futurePageNum').val($(this).attr("page-data")).change();  
+       });
     },
     "getPageListModel":function(pageCount,currentPage){
         var prePage = currentPage-1;
@@ -69,7 +75,7 @@ var  page = {
             nextPageClass="pageItemDisable";
         }
         var appendStr ="";
-        appendStr+="<li class='"+prePageClass+"' page-data='1' page-rel='firstpage'>首页</li>";
+        appendStr+="<li class='"+prePageClass+"' page-data='1' page-rel='firstpage' >首页</li>";
         appendStr+="<li class='"+prePageClass+"' page-data='"+prePage+"' page-rel='prepage'>&lt;上一页</li>";
         var miniPageNumber = 1;
         if(currentPage-parseInt(page.maxshowpageitem/2)>0&&currentPage+parseInt(page.maxshowpageitem/2)<=pageCount){
@@ -93,9 +99,10 @@ var  page = {
 
             appendStr+="<li class='"+itemPageClass+"' page-data='"+pageNumber+"' page-rel='itempage'>"+pageNumber+"</li>";
         }
-        appendStr+="<li class='"+nextPageClass+"' page-data='"+nextPage+"' page-rel='nextpage'>下一页&gt;</li>";
-        appendStr+="<li class='"+nextPageClass+"' page-data='"+pageCount+"' page-rel='lastpage'>尾页</li>";
+        appendStr+="<li class='"+nextPageClass+"' page-data='"+nextPage+"' page-rel='nextpage' >下一页&gt;</li>";
+        appendStr+="<li class='"+nextPageClass+"' page-data='"+pageCount+"' page-rel='lastpage' >尾页</li>";
        return appendStr;
 
     }
+    
 }

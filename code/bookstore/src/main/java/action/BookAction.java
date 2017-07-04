@@ -138,6 +138,29 @@ public class BookAction extends BaseAction{
 		request().getSession().setAttribute("books", appService.getAllBooks());
 		int temp=1;
 		request().getSession().setAttribute("page",temp);
+		List<Book> books = appService.getAllBooks();
+		String bookISBNs = new String();
+		String bookAuthors = new String();
+		String bookImages = new String();
+		String bookNames = new String();
+		for (int i = 0; i < books.size(); i++){
+			if (i == 0) {
+				bookISBNs += books.get(i).getISBN();
+				bookAuthors += books.get(i).getAuthor();
+				bookImages += books.get(i).getImage();
+				bookNames += books.get(i).getBookName();
+			}
+			else {
+				bookISBNs = bookISBNs + '$' + books.get(i).getISBN();
+				bookAuthors = bookAuthors + '$' + books.get(i).getAuthor();
+				bookImages = bookImages + '$' + books.get(i).getImage();
+				bookNames = bookNames +'$' + books.get(i).getBookName();
+			}
+		}
+		request().getSession().setAttribute("bookISBNs", bookISBNs);
+		request().getSession().setAttribute("bookAuthors", bookAuthors);
+		request().getSession().setAttribute("bookImages", bookImages);
+		request().getSession().setAttribute("bookNames", bookNames);
 		return "all";
 	}
 	
