@@ -67,10 +67,10 @@
        <div class="liutext"><em>4</em><br /><strong>完成</strong></div>
       </div>
      </div><!--for-liucheng/-->
-     <form action="fp4.jsp" method="get" class="forget-pwd">
+     <form action="fpAction!changePassword" method="post" class="forget-pwd">
        <dl>
         <dt>新密码：</dt>                                                
-        <dd><input type="password" id="newpassword"  class="reg_newpassword"/></dd>          <!-- 新密码所在的input -->
+        <dd><input type="password" id="newpassword"  name="password" class="reg_newpassword"/></dd>          <!-- 新密码所在的input -->
         <div class="clears"></div>
        </dl> 
        <dl>

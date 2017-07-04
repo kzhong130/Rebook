@@ -68,10 +68,10 @@
        <div class="liutext"><em>4</em><br /><strong>完成</strong></div>
       </div>
      </div><!--for-liucheng/-->
-     <form action="fp2.jsp" method="get" class="forget-pwd">
+     <form action="fpAction!checkName" method="post" class="forget-pwd">
        <dl>
         <dt>用户名：</dt>
-        <dd><input type="text" id="user"/></dd>                                <!-- 账户名所在的input -->
+        <dd><input type="text" id="user" name="userName"/></dd>                                <!-- 账户名所在的input -->
         <div class="clears"></div>
        </dl> 
        <dl>

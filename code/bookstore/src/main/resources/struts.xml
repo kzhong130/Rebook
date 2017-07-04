@@ -27,7 +27,13 @@
 			<result name="all">loginfail.jsp</result>
 		</action>
 
-		
+		<action name="fpAction" class="action.ForgetPasswordAction">
+			<result name="nameExist">fp2.jsp</result>
+			<result name="nameNotExist">fp1.jsp</result>
+			<result name="RA">fp3.jsp</result>
+			<result name="WA">fp2.jsp</result>
+			<result name="change">fp4.jsp</result>
+		</action>
 
 		
 		<action name="*">
