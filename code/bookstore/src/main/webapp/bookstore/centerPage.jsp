@@ -6,6 +6,8 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
 <title>Rebook</title>
 
 <!-- Bootstrap -->
@@ -25,17 +27,17 @@
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-      <a class="navbar-brand" href="#"><img src="images/index1_logo.png"/></a> </div>
+      <a class="navbar-brand" href="test.jsp"><img src="images/index1_logo.png"/></a> </div>
     
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse">
-      <form class="navbar-form navbar-right" role="search">
+      <form class="navbar-form navbar-right" role="search" action="bookAction!frontPageSearch" method="post">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" name="bookName" class="form-control" placeholder="Search">
         </div>
-        <button type="submit" class="btn btn-default">搜索</button>
+        <button type="submit" class="btn btn-default" >搜索</button>
       </form>
-      <ul class="nav navbar-nav navbar-right hidden-sm">
+      <ul class="nav navbar-nav navbar-right hidden-sm" id="personalInfo">
         <li><a href="#">我要卖书</a> </li>
         <li><a href="register.jsp">注册</a> </li>
         <li><a href="#" class="tc">登录</a> </li>
@@ -61,12 +63,12 @@
 		<div class="tc_login">
 		
 			<div class="right">
-				<form method="POST" name="form_login" target="_top">
+				<form method="POST" name="form_login" target="_top" action="AccountAction!login">
 					<div align="center">
 						<i class="icon-mobile-phone"></i>
-						<input type="text" name="name" id="name" required="required" placeholder="用户名" autocomplete="off" class="input_yh">
+						<input type="text" name="userName" id="userName" required="required" placeholder="用户名" autocomplete="off" class="input_yh">
 						<p style="font-size:5px;color:#fff;"> </p>
-						<input type="password" name="pass" id="pass" required="required" placeholder="密码" autocomplete="off" class="input_mm">
+						<input type="password" name="password" id="password" required="required" placeholder="密码" autocomplete="off" class="input_mm">
 					</div>
 					<div align="right"><a href="forgetpassword/fp1.jsp">忘记密码</a></div>
 					<div align="center">
@@ -316,10 +318,55 @@ $(document).ready(function(){
 
 	$(document).mouseup(function() { 
 		$(".popup").css("cursor","default"); 
-		$(this).unbind("mousemove"); 
-	});
-}) 
+		$(this).unbind("mousemove");
+	})
+})
 
+/*jQuery(document).ready(function($){  
+        $("form#login").submit(function(form)  
+            {  
+  
+                $.ajax({  
+                    url: "LoginAction",  
+                    method: 'POST',  
+                    dataType: 'text',  
+                    data: {   
+                        userName: $("form#login").find('#userName').val(),  
+                        password: $(form).find('#password').val()  
+                    },  
+                    success: function (json) {  
+                        var obj = $.parseJSON(json);  //使用这个方法解析json  
+                        var state_value = obj.result;  //result是和action中定义的result变量的get方法对应的   
+                        if(state_value=="true"){  
+                            alert("true");  
+                        }else{  
+                            alert("false");  
+                        }  
+                    },  
+                    error: function (json) { 
+                        alert("json=" + json);  
+                        return false;  
+                    }  
+                });  
+  
+            }) 
+        }) */
+
+var login_status='<%=request.getParameter("login")%>'
+if (login_status=='error'){
+	alert("登录失败");
+}
+
+var userName = '<%=session.getAttribute("userName")%>'
+
+if (userName != "null"){
+
+	var str = "<li><a href='#'>我要卖书</a>";
+	str += "<li><a href='#'>个人中心</a>"
+	str+="<li><a href='AccountAction!logout'>登出</a>"
+	$('#personalInfo').html(str);
+}
+	
 
 
 

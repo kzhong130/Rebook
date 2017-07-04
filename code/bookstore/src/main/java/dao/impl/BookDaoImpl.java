@@ -1,5 +1,6 @@
 package dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 import model.Book;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
@@ -30,6 +31,15 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 	public List<Book> getAllBooks(){
 		@SuppressWarnings("unchecked")
 		List<Book> books = getHibernateTemplate().find("from Book");
+		return books;
+	}
+	
+	
+	public List<Book> searchBookByName(String bookName){
+		@SuppressWarnings("unchecked")
+		List<Book> books = new ArrayList<Book>();
+		String hql = "from Book as b where b.bookName like '%"+bookName+"%'";
+		books = (List<Book>)getHibernateTemplate().find(hql);
 		return books;
 	}
 }
