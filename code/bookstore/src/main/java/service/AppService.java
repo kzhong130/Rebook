@@ -22,7 +22,8 @@ public interface AppService {
 	 * Book
 	 */
 	public String addBook(Book book);
-	public Book readBookByISBN(String ISBN);
+	public Book readBookByISBN(String ISBN);	//using douban api. May write in db.
+	public Book getBookByISBN(String ISBN);		//don't use douban api. Just get book in db
 	public ArrayList<Book> getAllBooks();
 	
 	

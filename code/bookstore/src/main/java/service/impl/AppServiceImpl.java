@@ -195,6 +195,10 @@ public class AppServiceImpl implements AppService {
 	public ArrayList<Book> getAllBooks() {
 		return (ArrayList<Book>)bookDao.getAllBooks();
 	}
+	
+	public Book getBookByISBN(String ISBN){
+		return bookDao.getBookByISBN(ISBN);
+	}
 
 
 	

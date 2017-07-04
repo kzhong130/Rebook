@@ -138,20 +138,26 @@
 
 <div class="container">
 <hr>
- <div class="center">
+<input style="display:none" value="1" id="futurePageNum" onchange="changePage(this.value)"/>
+<input style="display:none" value="<%=session.getAttribute("bookISBNs") %>" id="bookISBNs" />
+<input style="display:none" value="<%=session.getAttribute("bookAuthors") %>" id="bookAuthors" />
+<input style="display:none" value="<%=session.getAttribute("bookNames") %>" id="bookNames" />
+<input style="display:none" value="<%=session.getAttribute("bookImages") %>" id="bookImages" />
+ 
+ <div class="center" id="bookInfo">
   <%
-  	int max=pageNum*20;
+  	/*int max=pageNum*20;
   	for(int i=(pageNum-1)*20;i<bookList.size()&&i<max;i++){
-  		Book book = bookList.get(i);
+  		Book book = bookList.get(i);*/
   %>	
-    <div class="background">
-     <a href="<% %>"><img class="listbook" src=<%=book.getImage() %> />
-     <br> <br><%=book.getBookName() %><br><%=book.getAuthor() %></a></div>
+     <!--<div class="background" id="bookInfo">
+     <a href="bookAction!getBookInfo?ISBN="><img class="listbook" src= />
+     <br> <br><br></a></div>   --> 
   
   
   
   <%
-  } %>
+  /*}*/ %>
   <br>
 </div>
 </div>
@@ -178,7 +184,7 @@
   <br>
 <div class="zzsc"> 
 <!--currentpage="1" numbercount="100"-->
-<ul class="page" maxshowpageitem="5" pagelistcount="10"  id="page"></ul>
+<ul class="page" maxshowpageitem="100" pagelistcount="10" id="page"></ul>
 
 
 </div>
@@ -209,6 +215,48 @@
 <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript" src="js/page.js"></script>
 <script type="text/javascript">
+function changePage(futurePageNum){
+	var bookISBNs = $('#bookISBNs').val().split("$");
+	var bookAuthors = $('#bookAuthors').val().split("$");
+	var bookImages = $('#bookImages').val().split("$");	
+	var bookNames = $('#bookNames').val().split("$");
+	var bookNum = parseInt(bookISBNs.length);
+	var itemPerPage = parseInt(10);
+	var maxPageNum = bookNum%itemPerPage>0?parseInt(bookNum/itemPerPage)+1:parseInt(bookNum/itemPerPage);
+	var targetStr = "";
+	if (futurePageNum >= maxPageNum){
+		for (var i = itemPerPage*(maxPageNum-1);i<bookNum;i++){
+			//targetStr+="<div class='background'><a href='bookAction!getBookInfo?ISBN="+bookISBNs[i]"'><img class='listbook' src="+bookImages[i]+" />";
+			//targetStr+="<br> <br>"+bookNames[i]+"<br>"+bookAuthors[i]+"</a></div>";
+			targetStr+="<div class='background'><a href='bookAction!getBookInfo?ISBN="
+				targetStr+=bookISBNs[i]
+				targetStr+="'><img class='listbook' src="
+				targetStr+=bookImages[i]
+				targetStr+=" />";
+				targetStr+="<br> <br>"
+				targetStr+=bookNames[i]
+				targetStr+="<br>"
+				targetStr+=bookAuthors[i]
+				targetStr+="</a></div>";
+		}
+	}
+	else{
+		for(var i=(futurePageNum-1)*itemPerPage;i<futurePageNum*itemPerPage;i++){
+			targetStr+="<div class='background'><a href='bookAction!getBookInfo?ISBN="
+			targetStr+=bookISBNs[i]
+			targetStr+="'><img class='listbook' src="
+			targetStr+=bookImages[i]
+			targetStr+=" />";
+			targetStr+="<br> <br>"
+			targetStr+=bookNames[i]
+			targetStr+="<br>"
+			targetStr+=bookAuthors[i]
+			targetStr+="</a></div>";
+		}
+	}
+	$("#bookInfo").html(targetStr);
+}
+changePage(1);
 //窗口效果
 //点击登录class为tc 显示
 $(".tc").click(function(){
@@ -243,7 +291,9 @@ var GG = {
     }
 }
 
-$("#page").initPage(71,1,GG.kk);
+var books = $('#bookISBNs').val().split("$");
+var listCount = parseInt(books.length);
+$("#page").initPage(listCount,1,GG.kk);
 
 $(document).ready(function(){ 
 
@@ -269,6 +319,10 @@ $(document).ready(function(){
 		$(this).unbind("mousemove"); 
 	});
 }) 
+
+
+
+
 </script>
 
 </body>

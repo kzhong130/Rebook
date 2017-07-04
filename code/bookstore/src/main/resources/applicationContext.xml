@@ -13,8 +13,8 @@
 	<!-- Beans -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close" p:driverClass="com.mysql.jdbc.Driver"
-		p:jdbcUrl="jdbc:mysql://localhost:3306/exchange" p:user="root"
-		p:password="111111" p:maxPoolSize="40" p:minPoolSize="1"
+		p:jdbcUrl="jdbc:mysql://localhost:3307/bookstore" p:user="root"
+		p:password="zcx0605" p:maxPoolSize="40" p:minPoolSize="1"
 		p:initialPoolSize="1" p:maxIdleTime="20" />
 	
 	<bean id="sessionFactory"
@@ -30,6 +30,7 @@
 				<value>model/BuyOrder.hbm.xml</value>
 				<value>model/BuyOrderCommentRecord.hbm.xml</value>
 				<value>model/BuyOrderFeedback.hbm.xml</value>
+				<value>model/CoinChangeRecord.hbm.xml</value>
 				<value>model/CreditChangeRecord.hbm.xml</value>
 				<value>model/LendOrder.hbm.xml</value>
 				<value>model/LendOrderCommentRecord.hbm.xml</value>
@@ -70,6 +71,9 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="buyOrderFeedbackDao" class="dao.impl.BuyOrderFeedbackDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<bean id="coinChangeRecordDao" class="dao.impl.CoinChangeRecordDaoImpl" >
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	<bean id="creditChangeRecordDao" class="dao.impl.CreditChangeRecordDaoImpl">

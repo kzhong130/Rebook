@@ -20,6 +20,7 @@
 		<action name="bookAction" class="action.BookAction">
 			<result name="success">bookinfo.jsp</result>
 			<result name="all">centerPage.jsp</result>
+			<result name="test">bookinfo.jsp</result>
 		</action>
 		
 		<action name="AccountAction" class="action.AccountAction">
