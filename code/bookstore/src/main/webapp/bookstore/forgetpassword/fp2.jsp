@@ -87,15 +87,16 @@
        <div class="liutext"><em>4</em><br /><strong>完成</strong></div>
       </div>
      </div><!--for-liucheng/-->
-     <form action="fp3.jsp" method="get" class="forget-pwd">
+     <form action="fpAction!checkAnswer" method="post" class="forget-pwd">
        <dl>
         <dt>密保问题：</dt>
-        <dd><% %>aaa</dd>                                                        <!-- 该用户对应的密保问题 -->
+        <%String a=(String)session.getAttribute("validationProblem"); %>
+        <dd><%=a%></dd>                                                        <!-- 该用户对应的密保问题 -->
         <div class="clears"></div>
        </dl>
        <dl class="sel-yzsj">
         <dt>密保答案：</dt>
-        <dd><input type="text" id="validationAnswer"/></dd>                   <!-- 问题答案所在的input -->
+        <dd><input type="text" id="validationAnswer" name="validationAnswer"/></dd>                   <!-- 问题答案所在的input -->
          <div class="clears"></div>
        </dl>
        <div class="subtijiao"><input type="submit" value="提交" /></div>      <!-- 提交需判断（a）答案是否正确 -->
