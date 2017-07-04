@@ -1,4 +1,8 @@
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<%@ page import="model.Book" %>
+<%@ page import="java.util.ArrayList" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -76,31 +80,37 @@
 </div>
 <hr>
 -->
+<%
+	Book book = new Book();
+    if (request.getAttribute("book")!=null){
+    	book = (Book)request.getAttribute("book");
+    }
+%>
 
 <!-- 书籍封面&基本信息 -->
 <div class="container">
   <div class="row">
     <div class="col-sm-2">
-      <div class="thumbnail"> <img src="images/外婆的道歉信.jpg" alt="Thumbnail Image 1" class="img-responsive">
+      <div class="thumbnail"> <img src=<%=book.getImage() %> alt="Thumbnail Image 1" class="img-responsive">
         
       </div>
 	</div>
 	<div class="col-sm-4">
 	  <div class="caption">
-        <h3>外婆的道歉信</h3>
-        <p>作者：</p>
-        <p>出版社：</p>
-        <p>出版年：</p>
-        <p>页数：</p>
-        <p>定价：</p>
-        <p>ISBN：</p>
+        <h3><%=book.getBookName() %></h3>
+        <p>作者：<%=book.getAuthor() %></p>
+        <p>出版社：<%=book.getPublisher() %></p>
+        <p>出版年：<%=book.getPubdate() %></p>
+        <p>页数：<%=book.getPageNumber() %></p>
+        <p>定价：<%=book.getPrice() %></p>
+        <p>ISBN：<%=book.getISBN() %></p>
 
       </div>
 	</div> 
 	<div class="col-sm-3">
 	  <div class="caption">
-        <br><br><br><p>豆瓣评分：</p>
-        <p>参评人数：</p>
+        <br><br><br><p>豆瓣评分：<%=book.getDoubanRate() %></p>
+        <p>参评人数：<%=book.getRaterNumber() %></p>
         <hr>
         <p><a href="#" class="btn btn-success" role="button">查看发布信息</a></p>
       </div>
@@ -126,9 +136,7 @@
     <div class="tab-pane fade in active" id="bookGeneralContent">
     <hr>
 	<p></p>
-	<p>七岁的爱莎有个古怪又疯狂的外婆，会埋伏在雪堆里吓唬邻居，把重要的事情记在墙上因为墙不会丢，半夜从医院溜出来带着爱莎翻进动物园，在阳台上用彩弹枪射击推销员，基本上想干什么就干什么。这个四处惹麻烦的外婆却是爱莎唯一的朋友，也是她心中的超级英雄。不管什么情况下，外 婆都会站在爱莎这一边，为了她去跟全世界拼命。
-就算是超级英雄，也有失去超能力的一天。外婆不幸得了癌症去世，留给爱莎一项艰巨的任务——将外婆的道歉信送给她得罪过的九个邻居。收信人包括一只爱吃糖果的大狗，一个总在不停洗手的怪物，一个管东管西的烦人精和一个酗酒的心理医生。这一趟送信之旅让爱莎渐渐发现：外婆和邻居们的故事，比她听过的所有童话都更加精彩。
-这是一个关于爱、原谅和守护的故事，在合上书之后很久都难以忘记。</p>
+	<p><%=book.getSummary() %></p>
     </div>
   
     <!-- 书籍评论 -->
@@ -160,7 +168,7 @@
     		</tr>
     	</thead>
     	<tbody>
-    		<tr class="text-center">
+    		<tr class="text-center"> 
     			<td>zcx</td>
 				<td>♥</td>
    				<td>90%</td>

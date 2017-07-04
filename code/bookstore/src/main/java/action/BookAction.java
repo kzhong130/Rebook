@@ -166,9 +166,10 @@ public class BookAction extends BaseAction{
 	
 	public String getBookInfo() throws Exception{
 		String ISBN = request().getParameter("ISBN");
+		System.out.println(ISBN);
 		Book book = appService.getBookByISBN(ISBN);
 		request().setAttribute("book", book);
-		return "test";
+		return "bookInfo";
 	}
 	
 }
