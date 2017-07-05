@@ -9,7 +9,7 @@ public class Book {
 	private String author;
 	private String publisher;
 	private int pageNumber;
-	private float price;
+	private String price;
 	private float doubanRate;
 	private int raterNumber;
 	private String summary;
@@ -21,7 +21,7 @@ public class Book {
 		
 	}
 	
-	public Book(String ISBN, String bookName,String author,String publisher, int pageNumber, float price, float doubanRate, int raterNumber, String summary, String image, Timestamp lastUpdateTime,String pubdate){
+	public Book(String ISBN, String bookName,String author,String publisher, int pageNumber, String price, float doubanRate, int raterNumber, String summary, String image, Timestamp lastUpdateTime,String pubdate){
 		this.ISBN = ISBN;
 		this.bookName = bookName;
 		this.author = author;
@@ -76,11 +76,11 @@ public class Book {
 		this.pageNumber = pageNumber;
 	}
 	
-	public float getPrice(){
+	public String getPrice(){
 		return price;
 	}
 	
-	public void setPrice(float price){
+	public void setPrice(String price){
 		this.price = price;
 	}
 	

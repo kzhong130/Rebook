@@ -20,7 +20,7 @@
 		<property name="pageNumber" type="int">
 			<column name="pageNumber"/>
 		</property>
-		<property name="price" type="float">
+		<property name="price" type="java.lang.String">
 			<column name="price"/>
 		</property>
 		<property name="doubanRate" type="float">

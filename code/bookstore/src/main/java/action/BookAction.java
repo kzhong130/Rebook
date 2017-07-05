@@ -16,7 +16,7 @@ public class BookAction extends BaseAction{
 	private String author;
 	private String publisher;
 	private int pageNumber;
-	private float price;
+	private String price;
 	private float doubanRate;
 	private int raterNumber;
 	private String summary;
@@ -66,11 +66,11 @@ public class BookAction extends BaseAction{
 		this.pageNumber = pageNumber;
 	}
 	
-	public float getPrice(){
+	public String getPrice(){
 		return price;
 	}
 	
-	public void setPrice(float price){
+	public void setPrice(String price){
 		this.price = price;
 	}
 	
@@ -170,6 +170,34 @@ public class BookAction extends BaseAction{
 		Book book = appService.getBookByISBN(ISBN);
 		request().setAttribute("book", book);
 		return "bookInfo";
+	}
+	
+	public String frontPageSearch(){
+		List<Book> books = appService.searchBookByName(bookName);
+		request().getSession().setAttribute("books", books);
+		String bookISBNs = new String();
+		String bookAuthors = new String();
+		String bookImages = new String();
+		String bookNames = new String();
+		for (int i = 0; i < books.size(); i++){
+			if (i == 0) {
+				bookISBNs += books.get(i).getISBN();
+				bookAuthors += books.get(i).getAuthor();
+				bookImages += books.get(i).getImage();
+				bookNames += books.get(i).getBookName();
+			}
+			else {
+				bookISBNs = bookISBNs + '$' + books.get(i).getISBN();
+				bookAuthors = bookAuthors + '$' + books.get(i).getAuthor();
+				bookImages = bookImages + '$' + books.get(i).getImage();
+				bookNames = bookNames +'$' + books.get(i).getBookName();
+			}
+		}
+		request().getSession().setAttribute("bookISBNs", bookISBNs);
+		request().getSession().setAttribute("bookAuthors", bookAuthors);
+		request().getSession().setAttribute("bookImages", bookImages);
+		request().getSession().setAttribute("bookNames", bookNames);
+		return "bookSearch";
 	}
 	
 }

@@ -6,7 +6,7 @@
 <title>BookStore</title>
 
 <%
-	response.sendRedirect("bookAction!getAllBooks");
+	response.sendRedirect("bookAction%21getAllBooks");
 %>
 
 </head>

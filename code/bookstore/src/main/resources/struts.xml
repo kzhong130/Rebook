@@ -13,7 +13,6 @@
 			<result name="success">user.jsp</result>
 			<result name="login success">index.jsp</result>
 			<result name="login fail">loginfail.jsp</result>
-			<result name="logout success">login.jsp</result>
 		</action>
 		
 		<!-- Book -->
@@ -21,11 +20,14 @@
 			<result name="success">bookinfo.jsp</result>
 			<result name="all">centerPage.jsp</result>
 			<result name="bookInfo">book.jsp</result>
+			<result name="bookSearch">centerPage.jsp</result>
 		</action>
 		
 		<action name="AccountAction" class="action.AccountAction">
 			<result name="registerSuccess">index.jsp</result>
-			<result name="all">loginfail.jsp</result>
+			<result name="login success">test.jsp</result>
+			<result name="login fail">loginfail.jsp</result>
+			<result name="logout success">test.jsp</result>
 		</action>
 
 		<action name="fpAction" class="action.ForgetPasswordAction">
@@ -41,4 +43,5 @@
 			<result>/{1}.jsp</result>
 		</action>
 	</package>
+	
 </struts>

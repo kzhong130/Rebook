@@ -23,12 +23,14 @@ public class AccountAction extends BaseAction{
 	private int credit;
 	private int bookCoin;
 	
+	
 
 	private AppService appService;
 	
 	public void setAppService(AppService appService){
 		this.appService=appService;
 	}
+	
 	
 	
 	public int getUserID(){
@@ -149,8 +151,21 @@ public class AccountAction extends BaseAction{
 	
 	
 	public String login() throws Exception{
+		User user = appService.getUserByUserName(userName);
+		if (user == null){
+			return "login fail";
+		}
+		if (user.getPassword().equals(password)){
+			request().getSession().setAttribute("userName", userName);
+			return "login success";
+		}
+		return "login fail";
+	}
+	
+	public String logout() throws Exception{
+		request().getSession().removeAttribute("userName");
+		return "logout success";
 		
-		return "login";
 	}
 	
 	

@@ -10,6 +10,7 @@
 <body>
 	<%
 		Book book = (Book)request.getAttribute("book");
+		//System.out.println(book.getPrice());
 	%>
 	<table border="1">
 		<tr>

@@ -137,7 +137,7 @@ public class AppServiceImpl implements AppService {
 			 }
 			
 			/* price */
-			String pricestr = json.getString("price");
+			/*String pricestr = json.getString("price");
 			float price = 0;
 			if (pricestr == null || pricestr.length()<=0){
 				price = 0;
@@ -145,7 +145,7 @@ public class AppServiceImpl implements AppService {
 			else{
 				int length = pricestr.length();
 				if (pricestr.charAt(0) < '0' || pricestr.charAt(0) > '9'){	/* Format like USD 30*/
-					int startindex = 0;
+					/*int startindex = 0;
 					for (int i = 0; i < length; i++){
 						if (pricestr.charAt(i) < '0' || pricestr.charAt(i) > '9'){
 							continue;
@@ -158,9 +158,11 @@ public class AppServiceImpl implements AppService {
 					price = Float.parseFloat(pricestr.substring(startindex, length));
 				}
 				else{	/* Format like 30元 */
-					price = Float.parseFloat(pricestr.substring(0, length-1));
+					/*price = Float.parseFloat(pricestr.substring(0, length-1));
 				}
-			}
+			}*/
+			
+			String price = json.getString("price");
 			
 			/* pubdate */
 			String pubdate = json.getString("pubdate");
@@ -200,6 +202,9 @@ public class AppServiceImpl implements AppService {
 		return bookDao.getBookByISBN(ISBN);
 	}
 
+	public List<Book> searchBookByName(String bookName){
+		return bookDao.searchBookByName(bookName);
+	}
 
 	
 }

@@ -21,24 +21,26 @@
     <![endif]-->
 </head>
 <body>
-<nav class="navbar navbar-default navbar-inverse">
-  <div class="container-fluid"> 
+<nav>
+  <div class="container"> 
+    
     <!-- Brand and toggle get grouped for better mobile display -->
     <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-      <a class="navbar-brand" href="#">Brand</a> </div>
+      <a class="navbar-brand" href="centerPage.jsp"><img src="images/index1_logo.png"/></a> </div>
     
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a> </li>
-        <li><a href="#">Link</a> </li>
-        <li><a href="#">Link</a> </li>
-        <li><a href="#">Link</a> </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="#">Link</a> </li>
-        <li><a href="#">Link</a> </li>
+    <div class="collapse navbar-collapse">
+      <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Search">
+        </div>
+        <button type="submit" class="btn btn-default">搜索</button>
+      </form>
+      <ul class="nav navbar-nav navbar-right hidden-sm">
+        <li><a href="#">我要卖书</a> </li>
+        <li><a href="register.jsp">注册</a> </li>
+        <li><a href="#" class="tc">登录</a> </li>
       </ul>
     </div>
     <!-- /.navbar-collapse --> 
@@ -100,9 +102,9 @@
         <h3><%=book.getBookName() %></h3>
         <p>作者：<%=book.getAuthor() %></p>
         <p>出版社：<%=book.getPublisher() %></p>
-        <p>出版年：<%=book.getPubdate() %></p>
+        <p>出版日期：<%=book.getPubdate() %></p>
         <p>页数：<%=book.getPageNumber() %></p>
-        <p>定价：<%=book.getPrice() %></p>
+        <p>定价：<%=book.getPrice()%></p>
         <p>ISBN：<%=book.getISBN() %></p>
 
       </div>
