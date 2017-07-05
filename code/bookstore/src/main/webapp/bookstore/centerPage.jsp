@@ -21,6 +21,17 @@
     
 </head>
 <body>
+<%
+String url;
+if (request.getQueryString()!=null){
+	url = request.getScheme()+"://"+ request.getServerName()+":8080"+request.getRequestURI()+"?"+request.getQueryString();  
+}
+else{
+	url = request.getScheme()+"://"+ request.getServerName()+":8080"+request.getRequestURI();  
+}
+session.setAttribute("prePage",url);
+
+%>
 <nav>
   <div class="container"> 
     
@@ -63,12 +74,13 @@
 		<div class="tc_login">
 		
 			<div class="right">
-				<form method="POST" name="form_login" target="_top" action="AccountAction!login">
+				<form method="POST" name="form_login" target="_top" action=<%="AccountAction!login" %>>
 					<div align="center">
 						<i class="icon-mobile-phone"></i>
 						<input type="text" name="userName" id="userName" required="required" placeholder="用户名" autocomplete="off" class="input_yh">
 						<p style="font-size:5px;color:#fff;"> </p>
 						<input type="password" name="password" id="password" required="required" placeholder="密码" autocomplete="off" class="input_mm">
+						<!--  <input type="hidden" name="prePage" value="" > -->
 					</div>
 					<div align="right"><a href="forgetpassword/fp1.jsp">忘记密码</a></div>
 					<div align="center">
@@ -358,12 +370,12 @@ $(document).ready(function(){
             }) 
         }) */
 
-var login_status='<%=request.getParameter("login")%>'
+var login_status='<%=session.getAttribute("login")%>'
 if (login_status=='error'){
 	alert("登录失败");
 }
 
-var userName = '<%=session.getAttribute("userName")%>'
+var userName = '<%=session.getAttribute("loginUserName")%>'
 
 if (userName != "null"){
 
