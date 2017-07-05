@@ -1,0 +1,165 @@
+body{
+	margin:0px;
+	padding:0px;
+	font-size:14px;
+	}
+hr{
+	width:100%;
+	border:0;
+	background-color:#ccc;
+	height:1px;
+}
+.my_info_title{
+	color: #555;
+	font-size: 26px;
+	line-height: 26px;
+	margin-top:30px;
+	width:100%;
+	height:36px;
+	}
+.my_info_title span{
+	width: 148px;
+	height: 45px;
+	position: relative;
+	padding: 4px 0px;
+	text-align: center;
+	border: 1px solid #D3D3D3;
+	border-radius: 3px;
+	margin: 0px 0px 0px 0px;
+	display: block;
+	float:right;
+	}
+.my_info_title p{
+	font-size:12px;
+	font-weight:100;
+	line-height:24px;
+	float:left;
+	display:block;
+	margin-top:0px;
+	margin-left:10px;
+	margin-right:0px;
+	margin-bottom:0px;
+	}	
+.but{
+	margin-top:0px;
+	margin-left:4px;
+	margin-right:0px;
+	margin-bottom:0px;
+	background-color: #F8526A;
+	color: #FFF;
+	float:left;
+	display:block;
+	padding: 6px 12px;
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 1.42857;
+	text-align: center;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-moz-user-select: none;
+	background-image: none;
+	border: 0px solid transparent;
+	border-radius: 4px;
+	width:75px;
+	height:45px;
+	}
+.but:hover{
+	color: #FFF;
+	background-color: #F80000;
+	border-color: #204D74;
+	}
+	
+.my_info_title_3{
+	border-top:1px solid #CCC;
+	border-bottom:1px solid #CCC;
+	width:100%;
+	height:50px;
+	}
+.my_info_title_3 a{
+	text-decoration:none;
+	color:#666;
+	}
+.my_info_title_3 ul{
+	margin:0px;
+	padding:0px;
+	list-style-type:none;
+	}
+.my_info_title_3 ul li{
+	width:185px;
+	height:50px;
+	line-height:50px;
+	text-align:center;
+	display:block;
+	float:left;
+	font-size: 18px;
+	color: #666;
+	border-right:1px solid #CCC;
+	cursor:pointer;
+	}
+.my_info_title_3 ul li:hover{
+	border-bottom: 1px solid #d19826;
+	color: #d19826;
+	}
+.my_info_content_care{
+	font-size:14px;
+	color:#d19826;
+	margin-top:15px;
+	margin-bottom:15px;
+	margin-left:5px;
+	margin-right:5px;
+	}
+.integration_record{
+	height:66px;
+	line-height:66px;
+	background-color:#fbf4d8;
+	margin-top:10px;
+	margin-bottom:10px;
+	padding-left:10px;
+	padding-right:10px;
+	}	
+
+.integration_record_float{
+	float:left;
+	}
+.integration_record_float input{
+	line-height:18px !important;
+	}
+
+.integration_record_jfjl_title{
+	height:50px;
+	line-height:50px;
+	color:#d19826;
+	font-size:16px;
+	}	
+
+.integration_record_jfjl_page{
+	height:40px;
+	line-height:40px;
+	float:right;
+	}
+
+.color555{
+	color:#555;
+	}
+.color888{
+	color:#888;
+	}
+.colorCA1E37{
+	color:#CA1E37;
+	}
+.color959595{
+	color:#959595;
+	}
+.colord19826{
+	color:#d19826;
+	}
+.margin_left10{
+	margin-left:10px;
+	}
+.font_size12{
+	font-size:12px;
+	}
+.font_size14{
+	font-size:14px;
+	}

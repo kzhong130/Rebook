@@ -127,9 +127,10 @@ a{text-decoration:none;}*/
 
 .tc_login .right hr{height:1px;border:none;border-top:1px dashed #E4E4E4;clear:both;margin:240px 0 5px 0px;}
 
-.zzsc{ margin:0 auto; width:580px; height:80px; border:0px solid #efbb24} 
+.zzsc{ margin:0 auto; width:580px; height:80px; border:0px solid #efbb24;} 
 .page{
     list-style: none;
+    margin:0 auto;
 }
 .page>li{
     float: left;

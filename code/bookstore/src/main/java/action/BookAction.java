@@ -195,10 +195,10 @@ public class BookAction extends BaseAction{
 				bookNames = bookNames +'$' + books.get(i).getBookName();
 			}
 		}
-		request().getSession().setAttribute("bookISBNs", bookISBNs);
-		request().getSession().setAttribute("bookAuthors", bookAuthors);
-		request().getSession().setAttribute("bookImages", bookImages);
-		request().getSession().setAttribute("bookNames", bookNames);
+		request().getSession().setAttribute("searchBookISBNs", bookISBNs);
+		request().getSession().setAttribute("searchBookAuthors", bookAuthors);
+		request().getSession().setAttribute("searchBookImages", bookImages);
+		request().getSession().setAttribute("searchBookNames", bookNames);
 		return "bookSearch";
 	}
 	

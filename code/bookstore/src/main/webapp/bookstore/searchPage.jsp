@@ -30,7 +30,6 @@ else{
 	url = request.getScheme()+"://"+ request.getServerName()+":8080"+request.getRequestURI();  
 }
 session.setAttribute("prePage",url);
-
 %>
 <nav>
   <div class="container"> 
@@ -137,6 +136,7 @@ session.setAttribute("prePage",url);
     </div>
     
 </div>
+<br><p10>搜索结果</p10></br>   <!-- 字号需要调整 -->
 
 	<%
 		int pageNum=0;
@@ -153,10 +153,10 @@ session.setAttribute("prePage",url);
 <div class="container">
 <hr>
 <input style="display:none" value="1" id="futurePageNum" onchange="changePage(this.value)"/>
-<input style="display:none" value="<%=session.getAttribute("bookISBNs") %>" id="bookISBNs" />
-<input style="display:none" value="<%=session.getAttribute("bookAuthors") %>" id="bookAuthors" />
-<input style="display:none" value="<%=session.getAttribute("bookNames") %>" id="bookNames" />
-<input style="display:none" value="<%=session.getAttribute("bookImages") %>" id="bookImages" />
+<input style="display:none" value="<%=session.getAttribute("searchBookISBNs") %>" id="bookISBNs" />
+<input style="display:none" value="<%=session.getAttribute("searchBookAuthors") %>" id="bookAuthors" />
+<input style="display:none" value="<%=session.getAttribute("searchBookNames") %>" id="bookNames" />
+<input style="display:none" value="<%=session.getAttribute("searchBookImages") %>" id="bookImages" />
  
  <div class="center" id="bookInfo">
   <%
@@ -196,7 +196,6 @@ session.setAttribute("prePage",url);
   </nav>
 </div>-->
   <br>
- 
 <div class="zzsc"> 
 <!--currentpage="1" numbercount="100"-->
 <ul class="page" maxshowpageitem="100" pagelistcount="10" id="page"></ul>
@@ -290,19 +289,16 @@ $("a.guanbi").click(function(){
 	$("#gray").hide();
 	$("#popup").hide();//查找ID为popup的DIV hide()隐藏
 })
-
 //窗口水平居中
 $(window).resize(function(){
 	tc_center();
 });
-
 function tc_center(){
 	var _top=($(window).height()-$(".popup").height())/2;
 	var _left=($(window).width()-$(".popup").width())/2;
 	
 	$(".popup").css({top:_top,left:_left});
 }
-
 function tt(dd){
     //alert(dd);
 }
@@ -311,13 +307,10 @@ var GG = {
        // alert(mm);
     }
 }
-
 var books = $('#bookISBNs').val().split("$");
 var listCount = parseInt(books.length);
 $("#page").initPage(listCount,1,GG.kk);
-
 $(document).ready(function(){ 
-
 	$(".top_nav").mousedown(function(e){ 
 		$(this).css("cursor","move");//改变鼠标指针的形状 
 		var offset = $(this).offset();//DIV在页面的位置 
@@ -332,15 +325,12 @@ $(document).ready(function(){
 		
 			$(".popup").animate({left:_x+"px",top:_y+"px"},10); 
 		}); 
-
 	}); 
-
 	$(document).mouseup(function() { 
 		$(".popup").css("cursor","default"); 
 		$(this).unbind("mousemove");
 	})
 })
-
 /*jQuery(document).ready(function($){  
         $("form#login").submit(function(form)  
             {  
@@ -370,30 +360,18 @@ $(document).ready(function(){
   
             }) 
         }) */
-
-
-
-</script>
-<script>
-var login_status='<%=session.getAttribute("login")%>';
-if (login_status=="error"){
+var login_status='<%=session.getAttribute("login")%>'
+if (login_status=='error'){
 	alert("登录失败");
-	<% session.removeAttribute("login"); %>
 }
-
 var userName = '<%=session.getAttribute("loginUserName")%>'
-
 if (userName != "null"){
-
 	var str = "<li><a href='#'>我要卖书</a>";
-	str += "<li><a href='member_center.jsp'>个人中心</a>"
+	str += "<li><a href='#'>个人中心</a>"
 	str+="<li><a href='AccountAction!logout'>登出</a>"
 	$('#personalInfo').html(str);
 }
 	
-
-
-
 </script>
 
 </body>
