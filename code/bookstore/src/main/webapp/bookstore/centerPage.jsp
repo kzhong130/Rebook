@@ -196,6 +196,7 @@ session.setAttribute("prePage",url);
   </nav>
 </div>-->
   <br>
+ 
 <div class="zzsc"> 
 <!--currentpage="1" numbercount="100"-->
 <ul class="page" maxshowpageitem="100" pagelistcount="10" id="page"></ul>
@@ -380,7 +381,7 @@ var userName = '<%=session.getAttribute("loginUserName")%>'
 if (userName != "null"){
 
 	var str = "<li><a href='#'>我要卖书</a>";
-	str += "<li><a href='#'>个人中心</a>"
+	str += "<li><a href='member_center.jsp'>个人中心</a>"
 	str+="<li><a href='AccountAction!logout'>登出</a>"
 	$('#personalInfo').html(str);
 }

@@ -1,0 +1,99 @@
+@CHARSET "UTF-8";
+body{
+	margin:0px;
+	padding:0px;
+	font-size:14px;
+	}
+hr{
+	width:100%;
+	border:0;
+	background-color:#ccc;
+	height:1px;
+}
+.my_info_title{
+	color: #555;
+	font-size: 26px;
+	line-height: 26px;
+	margin-top:30px;
+	width:100%;
+	height:36px;
+	}
+.my_info_title span{
+	width: 148px;
+	height: 45px;
+	position: relative;
+	padding: 4px 0px;
+	text-align: center;
+	border: 1px solid #D3D3D3;
+	border-radius: 3px;
+	margin: 0px 0px 0px 0px;
+	display: block;
+	float:right;
+	}
+.my_info_title p{
+	font-size:12px;
+	font-weight:100;
+	line-height:24px;
+	float:left;
+	display:block;
+	margin-top:0px;
+	margin-left:10px;
+	margin-right:0px;
+	margin-bottom:0px;
+	}	
+
+div.commentbox
+{
+font-size:20px;
+box-sizing:!border-box;
+-moz-box-sizing:!border-box; /* Firefox */
+-webkit-box-sizing:!border-box; /* Safari */
+width:100%;
+/*float:left;*/
+text-align:center;
+padding:15px 8px 3px 8px;
+ border:1px solid #D3D3D3;
+}
+
+.bookimage{
+	width:15%;
+}
+
+div.commentbox img
+{
+width:90%;
+height:auto;
+margin:0 5px 0 5px;
+}
+
+.bookname{
+	font-size:20px;
+	text-align:left;
+}	
+p.comment{
+	font-size:16px;
+	text-align:right;
+}
+.delete{
+	width:60px;
+	float:!right;
+	text-align:!right;
+	font-size:16px;
+	display: inline-block;
+	padding: 6px 12px;
+	margin-bottom: 0px;
+	font-weight: 400;
+	line-height: 1.42857;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-moz-user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #FFF;
+	background-color: #efbb24;
+	}
+.delete:hover{
+	background-color: #d19826;
+	}
