@@ -226,11 +226,29 @@ function changePage(futurePageNum){
 	var itemPerPage = parseInt(10);
 	var maxPageNum = bookNum%itemPerPage>0?parseInt(bookNum/itemPerPage)+1:parseInt(bookNum/itemPerPage);
 	var targetStr = "";
-	if (futurePageNum >= maxPageNum){
-		for (var i = itemPerPage*(maxPageNum-1);i<bookNum;i++){
-			//targetStr+="<div class='background'><a href='bookAction!getBookInfo?ISBN="+bookISBNs[i]"'><img class='listbook' src="+bookImages[i]+" />";
-			//targetStr+="<br> <br>"+bookNames[i]+"<br>"+bookAuthors[i]+"</a></div>";
-			targetStr+="<div class='background'><a href='bookAction!getBookInfo?ISBN="
+	if ($('#bookISBNs').val() == ""){
+		targetStr+="<div>无结果</div>";
+	}
+	else{
+		if (futurePageNum >= maxPageNum){
+			for (var i = itemPerPage*(maxPageNum-1);i<bookNum;i++){
+				//targetStr+="<div class='background'><a href='bookAction!getBookInfo?ISBN="+bookISBNs[i]"'><img class='listbook' src="+bookImages[i]+" />";
+				//targetStr+="<br> <br>"+bookNames[i]+"<br>"+bookAuthors[i]+"</a></div>";
+				targetStr+="<div class='background'><a href='bookAction!getBookInfo?ISBN="
+					targetStr+=bookISBNs[i]
+					targetStr+="'><img class='listbook' src="
+					targetStr+=bookImages[i]
+					targetStr+=" />";
+					targetStr+="<br> <br>"
+					targetStr+=bookNames[i]
+					targetStr+="<br>"
+					targetStr+=bookAuthors[i]
+					targetStr+="</a></div>";
+			}
+		}
+		else{
+			for(var i=(futurePageNum-1)*itemPerPage;i<futurePageNum*itemPerPage;i++){
+				targetStr+="<div class='background'><a href='bookAction!getBookInfo?ISBN="
 				targetStr+=bookISBNs[i]
 				targetStr+="'><img class='listbook' src="
 				targetStr+=bookImages[i]
@@ -240,22 +258,10 @@ function changePage(futurePageNum){
 				targetStr+="<br>"
 				targetStr+=bookAuthors[i]
 				targetStr+="</a></div>";
+			}
 		}
 	}
-	else{
-		for(var i=(futurePageNum-1)*itemPerPage;i<futurePageNum*itemPerPage;i++){
-			targetStr+="<div class='background'><a href='bookAction!getBookInfo?ISBN="
-			targetStr+=bookISBNs[i]
-			targetStr+="'><img class='listbook' src="
-			targetStr+=bookImages[i]
-			targetStr+=" />";
-			targetStr+="<br> <br>"
-			targetStr+=bookNames[i]
-			targetStr+="<br>"
-			targetStr+=bookAuthors[i]
-			targetStr+="</a></div>";
-		}
-	}
+	
 	$("#bookInfo").html(targetStr);
 }
 changePage(1);
