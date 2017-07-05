@@ -1,9 +1,13 @@
 package action;
 
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import org.apache.struts2.ServletActionContext;
+
 import model.User;
+import net.sf.json.JSONObject;
 import service.AppService;
 
 
@@ -140,13 +144,26 @@ public class AccountAction extends BaseAction{
 	public String register() throws Exception{
 		Date date = new Date();       
 		Timestamp nousedate = new Timestamp(date.getTime());
-		System.out.println(2);
 		User user=new User(userName,password,realName,sex,phone,email,address,nousedate,validationProblem,validationAnswer,50,50);
 		int result=appService.addUser(user);
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject(); 
+			
+		System.out.println(result);
 		if(result>=0){
-			return "registerSuccess";
+			obj.put("success",true);
 		}
-		return "registerFail";
+		else {
+			obj.put("success",false);	
+		}
+		String str = obj.toString();  
+        System.out.println(str);
+		out.write(str);
+		out.close();
+		System.out.println("reach");
+		return "success";
+		
+		
 	}
 	
 	

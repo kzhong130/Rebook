@@ -9,8 +9,8 @@
 <link type="text/css" href="../css/forgetpassword.css" rel="stylesheet" />
 <link href="../css/bootstrap.css" rel="stylesheet" />
 </head>
-
 <body>
+
  <nav>
   <div class="container"> 
     
@@ -88,6 +88,11 @@
       </form><!--forget-pwd/-->
    </div><!--web-width/-->
   </div><!--content/-->
-  
+  <script type="text/javascript">
+var userExist=<%=request.getAttribute("userExist")%>
+if (userExist==0){
+	alert("不存在该用户");
+}
+</script>
 </body>
 </html>
