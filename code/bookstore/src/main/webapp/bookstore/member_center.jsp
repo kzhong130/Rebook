@@ -54,7 +54,7 @@
 <div class="container border1 nopadding margin10">
   <div id="vertical_navigation" class="col-lg-3 background831312 nopadding">
     <div class="dead_pic"><span class="username">你好，</span><br>
-      <span class="username"><% %></span></div>
+      <span class="username"><%=session.getAttribute("loginUserName") %></span></div>
     <div class="usertype">书币余额：<% %><br>
         信用：<img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> </div>
     <div class="menu">
