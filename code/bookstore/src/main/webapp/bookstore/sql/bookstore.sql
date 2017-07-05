@@ -64,7 +64,7 @@ create table book
    author               varchar(200)                    not null,
    publisher            varchar(200)                    not null,
    pageNumber           int                            not null,
-   price                decimal(10,2)                  not null,
+   price                varchar(50)                 not null,
    doubanRate           float                          default null,	/*豆瓣评分*/
    raterNumber          int                            default null,	/*豆瓣上参与评分人数*/
    summary              text,						   

@@ -37,7 +37,7 @@
         </div>
         <button type="submit" class="btn btn-default">搜索</button>
       </form>
-      <ul class="nav navbar-nav navbar-right hidden-sm">
+      <ul class="nav navbar-nav navbar-right hidden-sm" id="personalInfo">
         <li><a href="#">我要卖书</a> </li>
         <li><a href="register.jsp">注册</a> </li>
         <li><a href="#" class="tc">登录</a> </li>
@@ -371,5 +371,16 @@
 <script src="js/jquery-1.11.3.min.js"></script> 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/bootstrap.js"></script>
+<script type="text/javascript">
+var userName = '<%=session.getAttribute("userName")%>'
+
+	if (userName != "null"){
+
+		var str = "<li><a href='#'>我要卖书</a>";
+		str += "<li><a href='#'>个人中心</a>"
+		str+="<li><a href='AccountAction!logout'>登出</a>"
+		$('#personalInfo').html(str);
+	}
+</script>
 </body>
 </html>
