@@ -103,6 +103,11 @@
       </form><!--forget-pwd/-->
    </div><!--web-width/-->
   </div><!--content/-->
-  
+   <script type="text/javascript">
+var RightAnswer=<%=request.getAttribute("RightAnswer")%>
+if (RightAnswer==0){
+	alert("验证答案错误");
+}
+</script>
 </body>
 </html>

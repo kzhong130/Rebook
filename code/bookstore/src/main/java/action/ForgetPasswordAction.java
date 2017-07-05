@@ -56,10 +56,13 @@ public class ForgetPasswordAction extends BaseAction{
 			System.out.println(user.getValidationProblem());
 			request().getSession().setAttribute("userName", userName);
 			request().getSession().setAttribute("validationProblem", user.getValidationProblem());
+			request().setAttribute("userExist",1);
 			return "nameExist";
 		}
-		
-		return "nameNotExist";
+		else{
+			request().setAttribute("userExist",0);
+			return "nameNotExist";
+		}
 	}
 	
 	public String checkAnswer() throws Exception{
@@ -67,8 +70,10 @@ public class ForgetPasswordAction extends BaseAction{
 		User user=appService.getUserByUserName(userName);
 		String answer=user.getValidationAnswer();
 		if(answer.equals(validationAnswer)){
+			request().setAttribute("RightAnswer",1);
 			return "RA";
 		}
+		request().setAttribute("RightAnswer",0);
 		return "WA";
 	}
 	
