@@ -83,7 +83,7 @@ create table bookComment
 (
    ID                   int                            not null auto_increment,
    ISBN                 varchar(20)                    not null,
-   userID               int                            not null,
+   userName               varchar(20)                            not null,
    commentTime          datetime                       not null,
    content              text                           not null,
    checkResult          enum("pass","reject")          default null,
@@ -93,8 +93,8 @@ create table bookComment
 alter table bookComment add constraint FK_Reference_1 foreign key (ISBN)
       references book (ISBN) on update cascade on delete cascade;
 
-alter table bookComment add constraint FK_Referance_2 foreign key (userID)
-      references user (userID) on update cascade on delete cascade;
+alter table bookComment add constraint FK_Referance_2 foreign key (userName)
+      references user (userName) on update cascade on delete cascade;
 
 
 
