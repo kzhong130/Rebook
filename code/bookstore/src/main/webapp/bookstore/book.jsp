@@ -2,6 +2,7 @@
     pageEncoding="utf-8"%>
 <%@ page import="model.Book" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="model.BookComment" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -12,6 +13,7 @@
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="css/bootstrap_book.css">
+<link rel="stylesheet" href="css/login.css">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,6 +23,17 @@
     <![endif]-->
 </head>
 <body>
+<%
+String url;
+if (request.getQueryString()!=null){
+	url = request.getScheme()+"://"+ request.getServerName()+":8080"+request.getRequestURI()+"?"+request.getQueryString();  
+}
+else{
+	url = request.getScheme()+"://"+ request.getServerName()+":8080"+request.getRequestURI();  
+}
+session.setAttribute("prePage", url);
+
+%>
 <nav>
   <div class="container"> 
     
@@ -31,22 +44,62 @@
     
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse">
-      <form class="navbar-form navbar-right" role="search">
+      
+      <!--<form class="navbar-form navbar-right" role="search">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default">搜索</button>
-      </form>
+      </form>  -->
+      
       <ul class="nav navbar-nav navbar-right hidden-sm" id="personalInfo">
         <li><a href="#">我要卖书</a> </li>
         <li><a href="register.jsp">注册</a> </li>
-        <li><a href="#" class="tc">登录</a> </li>
+        <li><a href="#" class="tc" >登录</a> </li>
       </ul>
     </div>
     <!-- /.navbar-collapse --> 
   </div>
   <!-- /.container-fluid --> 
 </nav>
+
+<div class="popup" id="popup">
+
+	<div class="top_nav" id='top_nav'>
+		<div align="center">
+			<span>登录账号</span>
+			<a class="guanbi"></a>
+		</div>
+	</div>
+	
+	<div class="min">
+	
+		<div class="tc_login">
+		
+			<div class="right">
+				<form method="POST" name="form_login" target="_top" action="AccountAction!login">
+					<div align="center">
+						<i class="icon-mobile-phone"></i>
+						<input type="text" name="userName" id="userName" required="required" placeholder="用户名" autocomplete="off" class="input_yh">
+						<p style="font-size:5px;color:#fff;"> </p>
+						<input type="password" name="password" id="password" required="required" placeholder="密码" autocomplete="off" class="input_mm">
+						<!--  <input type="hidden" name="prePage" value="" > -->
+					</div>
+					<div align="right"><a href="forgetpassword/fp1.jsp">忘记密码</a></div>
+					<div align="center" >
+						<input type="submit" class="button" title="Sign In" value="登录">
+					</div>
+				</form> 
+				<div align="right">
+					<a href="register.jsp" target="_blank">立即注册</a>                                     <!-- 注册的页面 -->
+				</div>  
+			</div>
+		
+		</div>
+	
+	</div>
+
+</div>
 <!--
 <div class="container">
   <div class="row">
@@ -84,9 +137,11 @@
 -->
 <%
 	Book book = new Book();
-    if (request.getAttribute("book")!=null){
-    	book = (Book)request.getAttribute("book");
+    if (session.getAttribute("book")!=null){
+    	book = (Book)session.getAttribute("book");
     }
+    ArrayList<BookComment> bookComments = new ArrayList<BookComment>();
+    bookComments = (ArrayList<BookComment>)session.getAttribute("bookComment");
 %>
 
 <!-- 书籍封面&基本信息 -->
@@ -140,15 +195,57 @@
 	<p></p>
 	<p><%=book.getSummary() %></p>
     </div>
+    
   
     <!-- 书籍评论 -->
     <div class="tab-pane fade" id="bookComment">
+    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addBookComment" style="margin: 5px 0 0 0;float:right;" id="commentButton">添加评论</button>
+    	<br><br>
+		<hr style="margin-top: 5px">
+    	<%if(bookComments.size() <= 0){ %>
+    	<p>无评论</p>
+    	<%} %>
+    	<%
+    	if(bookComments.size() > 0){ 
+    		for (int i=0;i<bookComments.size();i++){
+    			
+    	%>
     	<hr>
-    	<p>zcx 2017-07-03</p>
-    	<p>令人意外的文本，好看得出人意料，可以打六星</p>
-    	<hr>
-    	<p>zk 2017-05-02</p>
-    	<p>每个孩子的生命最初都需要一个超级英雄，为他们保驾护航，告诉他们可以特立独行，谁说女孩TMD不能穿蜘蛛侠的衣服？谁说谁滚边儿去！而每个孩子的超级英雄终将离开，因为在说＂回见＂而非＂再见＂的那天，曾经的孩子自己已成为了别人的超级英雄。</p>
+    	<p><%=bookComments.get(i).getUserName() %>    <%=bookComments.get(i).getCommentTime() %></p>
+    	<p><%=bookComments.get(i).getContent() %>
+    	<%} %>
+    	<%} %>
+    	
+    	<!-- 模态框（Modal） -->
+		<div class="modal fade" id="addBookComment" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel" >
+					添加评论
+					</h4>
+				</div>
+				<form id="commentForm" class="STYLE-NAME" method="POST" action="BookCommentAction!addBookComment">
+				<label>
+				<textarea id="content" name="content" placeholder="请输入评论" style="height: 120px; width:580px;resize:none;margin: 10px"></textarea>
+				</label>
+				<input type="hidden" name="ISBN" value="<%=book.getISBN() %>" >
+				<input type="hidden" name="userName" value="<%=session.getAttribute("loginUserName") %>">
+				</form>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+					</button>
+					<button type="button" class="btn btn-success" onClick="submitComment();" data-dismiss="modal">
+					提交评论
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>
 	</div>
 	<!-- 卖家信息 -->
     <div class="tab-pane fade" id="bookOwnerInfo">
@@ -371,16 +468,134 @@
 <script src="js/jquery-1.11.3.min.js"></script> 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/bootstrap.js"></script>
+<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
 <script type="text/javascript">
-var userName = '<%=session.getAttribute("userName")%>'
 
-	if (userName != "null"){
+//窗口效果
+//点击登录class为tc 显示
+$(".tc").click(function(){
+	$("#gray").show();
+	$("#popup").show();//查找ID为popup的DIV show()显示#gray
+	tc_center();
+});
+//点击关闭按钮
+$("a.guanbi").click(function(){
+	$("#gray").hide();
+	$("#popup").hide();//查找ID为popup的DIV hide()隐藏
+})
 
-		var str = "<li><a href='#'>我要卖书</a>";
-		str += "<li><a href='#'>个人中心</a>"
-		str+="<li><a href='AccountAction!logout'>登出</a>"
-		$('#personalInfo').html(str);
+//窗口水平居中
+$(window).resize(function(){
+	tc_center();
+});
+
+function tc_center(){
+	var _top=($(window).height()-$(".popup").height())/2;
+	var _left=($(window).width()-$(".popup").width())/2;
+	
+	$(".popup").css({top:_top,left:_left});
+}
+
+function tt(dd){
+    //alert(dd);
+}
+var GG = {
+    "kk":function(mm){
+       // alert(mm);
+    }
+}
+
+
+$(document).ready(function(){ 
+
+	$(".top_nav").mousedown(function(e){ 
+		$(this).css("cursor","move");//改变鼠标指针的形状 
+		var offset = $(this).offset();//DIV在页面的位置 
+		var x = e.pageX - offset.left;//获得鼠标指针离DIV元素左边界的距离 
+		var y = e.pageY - offset.top;//获得鼠标指针离DIV元素上边界的距离 
+		$(document).bind("mousemove",function(ev){ //绑定鼠标的移动事件，因为光标在DIV元素外面也要有效果，所以要用doucment的事件，而不用DIV元素的事件 
+		
+			$(".popup").stop();//加上这个之后 
+			
+			var _x = ev.pageX - x;//获得X轴方向移动的值 
+			var _y = ev.pageY - y;//获得Y轴方向移动的值 
+		
+			$(".popup").animate({left:_x+"px",top:_y+"px"},10); 
+		}); 
+
+	}); 
+
+	$(document).mouseup(function() { 
+		$(".popup").css("cursor","default"); 
+		$(this).unbind("mousemove");
+	})
+})
+
+/*jQuery(document).ready(function($){  
+        $("form#login").submit(function(form)  
+            {  
+  
+                $.ajax({  
+                    url: "LoginAction",  
+                    method: 'POST',  
+                    dataType: 'text',  
+                    data: {   
+                        userName: $("form#login").find('#userName').val(),  
+                        password: $(form).find('#password').val()  
+                    },  
+                    success: function (json) {  
+                        var obj = $.parseJSON(json);  //使用这个方法解析json  
+                        var state_value = obj.result;  //result是和action中定义的result变量的get方法对应的   
+                        if(state_value=="true"){  
+                            alert("true");  
+                        }else{  
+                            alert("false");  
+                        }  
+                    },  
+                    error: function (json) { 
+                        alert("json=" + json);  
+                        return false;  
+                    }  
+                });  
+  
+            }) 
+        }) */
+
+var login_status='<%=session.getAttribute("login")%>';
+if (login_status=='error'){
+	alert("登录失败");
+	<% session.removeAttribute("login"); %>
+}
+
+var userName = '<%=session.getAttribute("loginUserName")%>'
+
+if (userName != "null"){
+
+	var str = "<li><a href='#'>我要卖书</a>";
+	str += "<li><a href='#'>个人中心</a>"
+	str+="<li><a href='AccountAction!logout'>登出</a>"
+	$('#personalInfo').html(str);
+}
+
+$("#commentButton").click(function(){
+	if (userName=="null"){
+		alert("请先登录！");
+		$(this).attr("data-target","");
 	}
+})
+
+function submitComment(){
+	var comment=document.getElementById("content").value;
+	if (comment==""){
+		alert("评论不能为空");
+	}
+	else{
+		document.getElementById("commentForm").submit();
+		location='#bookComment';
+	}
+	
+}
 </script>
 </body>
 </html>

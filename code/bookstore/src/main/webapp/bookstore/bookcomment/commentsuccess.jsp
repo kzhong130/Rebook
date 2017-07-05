@@ -6,7 +6,12 @@
 <title>BookStore</title>
 
 <%
-	response.sendRedirect("bookAction!getAllBooks?login=error");
+	String url=(String)session.getAttribute("prePage");
+%>
+
+<%
+	response.sendRedirect(url);
+	
 %>
 
 </head>

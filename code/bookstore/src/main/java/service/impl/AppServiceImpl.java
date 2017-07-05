@@ -8,7 +8,9 @@ import java.util.List;
 import service.AppService;
 import model.User;
 import model.Book;
+import model.BookComment;
 import dao.UserDao;
+import dao.BookCommentDao;
 import dao.BookDao;
 
 import org.apache.http.HttpEntity;  
@@ -28,6 +30,7 @@ import net.sf.json.util.JSONTokener;
 public class AppServiceImpl implements AppService {
 	private UserDao userDao;
 	private BookDao bookDao;
+	private BookCommentDao bookCommentDao;
 
 
 	
@@ -39,6 +42,9 @@ public class AppServiceImpl implements AppService {
 		this.bookDao = bookDao;
 	}
 	
+	public void setBookCommentDao(BookCommentDao bookCommentDao){
+		this.bookCommentDao = bookCommentDao;
+	}
 	
 	/*
 	 * User
@@ -206,5 +212,14 @@ public class AppServiceImpl implements AppService {
 		return bookDao.searchBookByName(bookName);
 	}
 
+	/*
+	 * BookComment
+	 */
+	public Integer addBookComment(BookComment bookComment){
+		return bookCommentDao.save(bookComment);
+	}
 	
+	public List<BookComment> getBookCommentsByISBN(String ISBN){
+		return bookCommentDao.getBookCommentsByISBN(ISBN);
+	}
 }

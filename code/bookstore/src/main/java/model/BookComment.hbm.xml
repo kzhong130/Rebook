@@ -11,8 +11,8 @@
 		<property name="ISBN" type="java.lang.String">
 			<column name="ISBN"/>
 		</property>
-		<property name="userID" type="int">
-			<column name="userID"/>
+		<property name="userName" type="java.lang.String">
+			<column name="userName"/>
 		</property>
 		<property name="commentTime" type="java.sql.Timestamp">
 			<column name="commentTime"/>

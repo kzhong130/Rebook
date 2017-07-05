@@ -371,9 +371,14 @@ $(document).ready(function(){
             }) 
         }) */
 
-var login_status='<%=session.getAttribute("login")%>'
-if (login_status=='error'){
+
+
+</script>
+<script>
+var login_status='<%=session.getAttribute("login")%>';
+if (login_status=="error"){
 	alert("登录失败");
+	<% session.removeAttribute("login"); %>
 }
 
 var userName = '<%=session.getAttribute("loginUserName")%>'

@@ -3,6 +3,7 @@ package service;
 import java.util.ArrayList;
 import java.util.List;
 import model.Book;
+import model.BookComment;
 import model.User;
 
 public interface AppService {
@@ -27,6 +28,10 @@ public interface AppService {
 	public ArrayList<Book> getAllBooks();
 	public List<Book> searchBookByName(String bookName);
 	
-	
+	/*
+	 * BookComment
+	 */
+	public Integer addBookComment(BookComment bookComment);
+	public List<BookComment> getBookCommentsByISBN(String ISBN);
 
 }

@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
 
+import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 
 import model.User;
@@ -26,6 +27,7 @@ public class AccountAction extends BaseAction{
 	private String validationAnswer;
 	private int credit;
 	private int bookCoin;
+	private String prePage;
 	
 	
 
@@ -141,6 +143,14 @@ public class AccountAction extends BaseAction{
 		this.bookCoin = bookCoin;
 	}
 	
+	public String getPrePage(){
+		return prePage;
+	}
+	
+	public void setPrePage(String prePage){
+		this.prePage = prePage;
+	}
+	
 	public String register() throws Exception{
 		Date date = new Date();       
 		Timestamp nousedate = new Timestamp(date.getTime());
@@ -170,17 +180,20 @@ public class AccountAction extends BaseAction{
 	public String login() throws Exception{
 		User user = appService.getUserByUserName(userName);
 		if (user == null){
+			request().getSession().setAttribute("login","error");
 			return "login fail";
 		}
 		if (user.getPassword().equals(password)){
-			request().getSession().setAttribute("userName", userName);
+			request().getSession().setAttribute("loginUserName", userName);
+			request().getSession().removeAttribute("login");
 			return "login success";
 		}
+		request().getSession().setAttribute("login", "error");
 		return "login fail";
 	}
 	
 	public String logout() throws Exception{
-		request().getSession().removeAttribute("userName");
+		request().getSession().removeAttribute("loginUserName");
 		return "logout success";
 		
 	}
