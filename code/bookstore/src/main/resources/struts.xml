@@ -20,7 +20,7 @@
 			<result name="success">bookinfo.jsp</result>
 			<result name="all">centerPage.jsp</result>
 			<result name="bookInfo">book.jsp</result>
-			<result name="bookSearch">centerPage.jsp</result>
+			<result name="bookSearch">searchPage.jsp</result>
 		</action>
 		
 		<action name="AccountAction" class="action.AccountAction">
