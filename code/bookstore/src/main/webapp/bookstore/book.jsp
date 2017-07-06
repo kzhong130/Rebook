@@ -143,7 +143,7 @@ session.setAttribute("prePage", url);
     ArrayList<BookComment> bookComments = new ArrayList<BookComment>();
     bookComments = (ArrayList<BookComment>)session.getAttribute("bookComment");
 %>
-
+<br>
 <!-- 书籍封面&基本信息 -->
 <div class="container">
   <div class="row">
