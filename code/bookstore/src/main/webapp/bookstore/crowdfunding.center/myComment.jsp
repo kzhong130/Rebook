@@ -37,12 +37,19 @@
      <table>
         <tr>
           <td class="bookimage"><a href=<% %>><img class="listbook" src=<% %>"https://img1.doubanio.com/mpic/s29465919.jpg"/></a></td>
-          <td><p class="bookname"><span class="bookname"><% %>如何读懂经典</span>
-              <button class="delete" name="" type="onclick" >删 除</button></p>
-              <p class="comment"><% %> 那些改变了世界的书，真的有那么难读？ 《荷马史诗》到底写了什么？ 但丁的《神曲》魅力何在？
- 莎翁陛下的经典段落有哪些？ 为什么大家这么喜爱《傲慢与偏见》？ 《尤利西斯》在讲什么？
-</p>
-              <p class="comment"><% %>2017-7-5 11:30:00</p></td>
+          <td class="bookcontent">
+          <table>
+              <tr>
+              <td class="bookname"><% %>如何读懂经典</td>
+              <td class="deletebutton"><button class="delete" name="" type="onclick" >删 除</button></td>
+              </tr>
+              <tr>
+              <td colspan="2" >
+              <p class="comment"><%   %>那些改变了世界的书，真的有那么难读？ 《荷马史诗》到底写了什么？ 但丁的《神曲》魅力何在？莎翁陛下的经典段落有哪些？ 为什么大家这么喜爱《傲慢与偏见》？ 《尤利西斯》在讲什么？</p>
+              <p class="time"><% %>2017-7-5 11:30:00</p></td>
+              </tr>
+          </table>
+          </td>
         </tr>
         
      </table>
