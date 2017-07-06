@@ -150,7 +150,7 @@ $('.red_button').click(function(){
         type:"POST",  
         url:"AccountAction!register",  
         async:false,
-        data:{userName:$(".reg_user").val(),password:$(".reg_password").val(),realName:$(".reg_realname").val(),sex:$(".reg_sex").val(),phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:maddress,validationProblem:$(".reg_validationProblem").val(),validationAnswer:$(".reg_validationAnswer").val()} ,
+        data:{province:province,city:city,area:area,town:town,userName:$(".reg_user").val(),password:$(".reg_password").val(),realName:$(".reg_realname").val(),sex:$(".reg_sex").val(),phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:maddress,validationProblem:$(".reg_validationProblem").val(),validationAnswer:$(".reg_validationAnswer").val()} ,
         success:function(result){
         	try{
         		result=eval('('+result+')');
