@@ -27,6 +27,10 @@ public class AccountAction extends BaseAction{
 	private String validationAnswer;
 	private int credit;
 	private int bookCoin;
+	private String province;
+	private String city;
+	private String area;
+	private String town;
 	private String prePage;
 	
 	
@@ -143,6 +147,38 @@ public class AccountAction extends BaseAction{
 		this.bookCoin = bookCoin;
 	}
 	
+	public String getProvince(){
+		return province;
+	}
+	
+	public void setProvince(String province){
+		this.province = province;
+	}
+	
+	public String getCity(){
+		return city;
+	}
+	
+	public void setCity(String city){
+		this.city = city;
+	}
+	
+	public String getArea(){
+		return area;
+	}
+	
+	public void setArea(String area){
+		this.area = area;
+	}
+	
+	public String getTown(){
+		return town;
+	}
+	
+	public void setTown(String town){
+		this.town = town;
+	}
+	
 	public String getPrePage(){
 		return prePage;
 	}
@@ -154,7 +190,7 @@ public class AccountAction extends BaseAction{
 	public String register() throws Exception{
 		Date date = new Date();       
 		Timestamp nousedate = new Timestamp(date.getTime());
-		User user=new User(userName,password,realName,sex,phone,email,address,nousedate,validationProblem,validationAnswer,50,50);
+		User user=new User(userName,password,realName,sex,phone,email,address,nousedate,validationProblem,validationAnswer,50,50,province,city,area,town);
 		int result=appService.addUser(user);
 		PrintWriter out = ServletActionContext.getResponse().getWriter();
 		JSONObject obj = new JSONObject(); 

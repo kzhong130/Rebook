@@ -29,6 +29,10 @@ public class UserAction extends BaseAction{
 	private String validationAnswer;
 	private int credit;
 	private int bookCoin;
+	private String province;
+	private String city;
+	private String area;
+	private String town;
 	
 	private AppService appService;
 	
@@ -136,6 +140,38 @@ public class UserAction extends BaseAction{
 		this.bookCoin = bookCoin;
 	}
 	
+	public String getProvince(){
+		return province;
+	}
+	
+	public void setProvince(String province){
+		this.province = province;
+	}
+	
+	public String getCity(){
+		return city;
+	}
+	
+	public void setCity(String city){
+		this.city = city;
+	}
+	
+	public String getArea(){
+		return area;
+	}
+	
+	public void setArea(String area){
+		this.area = area;
+	}
+	
+	public String getTown(){
+		return town;
+	}
+	
+	public void setTown(String town){
+		this.town = town;
+	}
+	
 	public void setAppService(AppService appService){
 		this.appService = appService;
 	}
@@ -161,7 +197,7 @@ public class UserAction extends BaseAction{
 	}
 	
 	public String addUser() throws Exception{
-		User user = new User(userName,password,realName,sex,phone,email,address,registerDate,validationProblem,validationAnswer,credit,bookCoin);
+		User user = new User(userName,password,realName,sex,phone,email,address,registerDate,validationProblem,validationAnswer,credit,bookCoin,province,city,area,town);
 		appService.addUser(user);
 		
 		return SUCCESS;
@@ -188,6 +224,10 @@ public class UserAction extends BaseAction{
 		user.setValidationAnswer(validationAnswer);
 		user.setCredit(credit);
 		user.setBookCoin(bookCoin);
+		user.setProvince(province);
+		user.setCity(city);
+		user.setArea(area);
+		user.setTown(town);
 		appService.updateUser(user);
 		
 		return SUCCESS;

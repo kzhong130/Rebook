@@ -31,6 +31,10 @@ create table user
    validationAnswer     varchar(200)                   default null,
    credit               int                            not null default 0,
    bookCoin             int                            not null default 0,
+   province				varchar(50)					   default null,
+   city				    varchar(50)					   default null,
+   area				    varchar(50)					   default null,
+   town					varchar(50)					   default null,
    primary key (userID),
    unique (userName)
 );
