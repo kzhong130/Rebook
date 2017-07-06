@@ -44,5 +44,17 @@
 		<property name="bookCoin" type="int">
 			<column name="bookCoin"/>
 		</property>
+		<property name="province" type="java.lang.String">
+			<column name="province" />
+		</property>
+		<property name="city" type="java.lang.String">
+			<column name="city" />
+		</property>
+		<property name="area" type="java.lang.String">
+			<column name="area" />
+		</property>
+		<property name="town" type="java.lang.String">
+			<column name="town" />
+		</property>
     </class>
 </hibernate-mapping>

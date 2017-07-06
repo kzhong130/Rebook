@@ -18,12 +18,16 @@ public class User {
 	private String validationAnswer;
 	private int credit;
 	private int bookCoin;
+	private String province;
+	private String city;
+	private String area;
+	private String town;
 	
 	public User(){
 		
 	}
 	
-	public User(String userName,String password,String realName,String sex,String phone,String email,String address,Timestamp registerDate,String validationProblem,String validationAnswer,int credit,int bookCoin){
+	public User(String userName,String password,String realName,String sex,String phone,String email,String address,Timestamp registerDate,String validationProblem,String validationAnswer,int credit,int bookCoin,String province,String city,String area,String town){
 		this.userName = userName;
 		this.password = password;
 		this.realName = realName;
@@ -36,6 +40,10 @@ public class User {
 		this.validationAnswer = validationAnswer;
 		this.credit = credit;
 		this.bookCoin = bookCoin;
+		this.province = province;
+		this.city = city;
+		this.area = area;
+		this.town = town;
 	}
 	
 	public int getUserID(){
@@ -140,6 +148,38 @@ public class User {
 	
 	public void setBookCoin(int bookCoin){
 		this.bookCoin = bookCoin;
+	}
+	
+	public String getProvince(){
+		return province;
+	}
+	
+	public void setProvince(String province){
+		this.province = province;
+	}
+	
+	public String getCity(){
+		return city;
+	}
+	
+	public void setCity(String city){
+		this.city = city;
+	}
+	
+	public String getArea(){
+		return area;
+	}
+	
+	public void setArea(String area){
+		this.area = area;
+	}
+	
+	public String getTown(){
+		return town;
+	}
+	
+	public void setTown(String town){
+		this.town = town;
 	}
 	
 }
