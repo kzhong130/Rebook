@@ -278,7 +278,7 @@ alter table buyOrderFeedback
 create table coinChangeRecord 
 (
    ID                   int                            not null auto_increment,
-   userID               int                            not null,
+   userName               varchar(20)                            not null,
    number               int                            not null,
    time                 datetime                       not null,
    reason               enum("buy","sell","lendin","lendout","other") not null,
@@ -286,8 +286,8 @@ create table coinChangeRecord
 );
 
 alter table coinChangeRecord
-   add constraint FK_Reference_17 foreign key (userID)
-      references user (userID) on update cascade on delete cascade;
+   add constraint FK_Reference_17 foreign key (userName)
+      references user (userName) on update cascade on delete cascade;
 
 
 
@@ -300,7 +300,7 @@ alter table coinChangeRecord
 create table creditChangeRecord 
 (
    ID                   int                            not null auto_increment,
-   userID               int                            not null,
+   userName               varchar(20)                            not null,
    number               int                            not null,
    time                 datetime                       not null,
    reason               enum("good seller","good lendin","good lendout","bad seller","bad lendin","bad lendout","other")  not null,
@@ -308,8 +308,8 @@ create table creditChangeRecord
 );
 
 alter table creditChangeRecord
-   add constraint FK_Reference_18 foreign key (userID)
-      references user (userID) on update cascade on delete cascade;
+   add constraint FK_Reference_18 foreign key (userName)
+      references user (userName) on update cascade on delete cascade;
 
 
 

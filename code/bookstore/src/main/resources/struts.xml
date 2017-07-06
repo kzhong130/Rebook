@@ -41,6 +41,10 @@
 		<action name="BookCommentAction" class="action.BookCommentAction">
 			<result name="success">bookcomment/commentsuccess.jsp</result>
 		</action>
+		
+		<action name="MemberCenterAction" class="action.MemberCenterAction">
+			<result name="initialize success">member_center.jsp</result>
+		</action>
 
 		
 		<action name="*">

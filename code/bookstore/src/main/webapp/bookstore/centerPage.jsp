@@ -386,7 +386,7 @@ var userName = '<%=session.getAttribute("loginUserName")%>'
 if (userName != "null"){
 
 	var str = "<li><a href='#'>我要卖书</a>";
-	str += "<li><a href='member_center.jsp'>个人中心</a>"
+	str += "<li><a href='MemberCenterAction!initialize'>个人中心</a>"
 	str+="<li><a href='AccountAction!logout'>登出</a>"
 	$('#personalInfo').html(str);
 }

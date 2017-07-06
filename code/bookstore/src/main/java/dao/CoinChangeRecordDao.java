@@ -15,5 +15,5 @@ public interface CoinChangeRecordDao {
 	
 	public List<CoinChangeRecord> getAllCoinChangeRecords();
 	
-	public List<CoinChangeRecord> getCoinChangeRecordByUserID(int userID);
+	public List<CoinChangeRecord> getCoinChangeRecordByUserName(String userName);
 }

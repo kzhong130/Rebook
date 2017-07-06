@@ -16,4 +16,6 @@ public interface BookCommentDao {
 	public List<BookComment> getAllBookComments();
 	
 	public List<BookComment> getBookCommentsByISBN(String ISBN);
+	
+	public List<BookComment> getBookCommentsByUserName(String userName);
 }
