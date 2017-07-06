@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@page import="model.CoinChangeRecord"%>    
+<%@page import="java.util.ArrayList" %> 
+<%@page import="model.User" %> 
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -24,6 +27,12 @@
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
+<%
+	ArrayList<CoinChangeRecord> coinChangeRecords = new ArrayList<CoinChangeRecord>();
+	coinChangeRecords = (ArrayList<CoinChangeRecord>)session.getAttribute("coinChangeRecord");
+	User user = (User)session.getAttribute("user");
+%>
 <body>
 <!-- 开始 -->
 <div class="my_info_title">书币记录
@@ -53,7 +62,7 @@
   </div>
 </div>
 <div class="integration_record_jfjl">
-  <div class="integration_record_jfjl_title"> 书币记录 <font class="font_size14">总书币为：<% %></font> </div>
+  <div class="integration_record_jfjl_title"> 书币记录 <font class="font_size14">总书币为：<%=user.getBookCoin() %></font> </div>
   <div class="integration_record_jfjl_content">
     <table class="table table-bordered text-center">
       <tr class="active">

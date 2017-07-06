@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class CreditChangeRecord {
 	private int ID;
-	private int userID;
+	private String userName;
 	private int number;
 	private Timestamp time;
 	private String reason;
@@ -13,8 +13,8 @@ public class CreditChangeRecord {
 		
 	}
 	
-	public CreditChangeRecord(int userID, int number,Timestamp time,String reason){
-		this.userID = userID;
+	public CreditChangeRecord(String userName, int number,Timestamp time,String reason){
+		this.userName = userName;
 		this.number = number;
 		this.time = time;
 		this.reason = reason;
@@ -28,12 +28,12 @@ public class CreditChangeRecord {
 		this.ID = ID;
 	}
 	
-	public int getUserID(){
-		return userID;
+	public String getUserName(){
+		return userName;
 	}
 	
-	public void setUserID(int userID){
-		this.userID = userID;
+	public void setUserName(String userName){
+		this.userName = userName;
 	}
 	
 	public int getNumber(){

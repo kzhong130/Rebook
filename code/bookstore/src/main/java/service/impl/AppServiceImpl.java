@@ -9,9 +9,13 @@ import service.AppService;
 import model.User;
 import model.Book;
 import model.BookComment;
+import model.CoinChangeRecord;
+import model.CreditChangeRecord;
 import dao.UserDao;
 import dao.BookCommentDao;
 import dao.BookDao;
+import dao.CoinChangeRecordDao;
+import dao.CreditChangeRecordDao;
 
 import org.apache.http.HttpEntity;  
 import org.apache.http.HttpResponse;
@@ -31,6 +35,8 @@ public class AppServiceImpl implements AppService {
 	private UserDao userDao;
 	private BookDao bookDao;
 	private BookCommentDao bookCommentDao;
+	private CreditChangeRecordDao creditChangeRecordDao;
+	private CoinChangeRecordDao coinChangeRecordDao;
 
 
 	
@@ -45,6 +51,16 @@ public class AppServiceImpl implements AppService {
 	public void setBookCommentDao(BookCommentDao bookCommentDao){
 		this.bookCommentDao = bookCommentDao;
 	}
+	
+	public void setCreditChangeRecordDao(CreditChangeRecordDao creditChangeRecordDao){
+		this.creditChangeRecordDao = creditChangeRecordDao;
+	}
+	
+	public void setCoinChangeRecordDao(CoinChangeRecordDao coinChangeRecordDao){
+		this.coinChangeRecordDao = coinChangeRecordDao;
+	}
+	
+	
 	
 	/*
 	 * User
@@ -211,7 +227,25 @@ public class AppServiceImpl implements AppService {
 	public List<Book> searchBookByName(String bookName){
 		return bookDao.searchBookByName(bookName);
 	}
+	
+	public List<Book> getBookByBookComment(List<BookComment> bookComments){
+		List<String> searchedISBN = new ArrayList<String>();
+		String ISBN = new String();
+		Book book = new Book();
+		List<Book> books = new ArrayList<Book>();
+		for (int i=0; i<bookComments.size(); i++){
+			ISBN = bookComments.get(i).getISBN();
+			if (!searchedISBN.contains(ISBN)){
+				searchedISBN.add(ISBN);
+				book = bookDao.getBookByISBN(ISBN);
+				books.add(book);
+			}
+		}
+		return books;
+	}
 
+	
+	
 	/*
 	 * BookComment
 	 */
@@ -221,5 +255,25 @@ public class AppServiceImpl implements AppService {
 	
 	public List<BookComment> getBookCommentsByISBN(String ISBN){
 		return bookCommentDao.getBookCommentsByISBN(ISBN);
+	}
+	
+	public List<BookComment> getBookCommentsByUserName(String userName){
+		return bookCommentDao.getBookCommentsByUserName(userName);
+	}
+	
+	
+	
+	/*
+	 * CreditChangeRecord
+	 */
+	public List<CreditChangeRecord> getCreditChangeRecordByUserName(String userName){
+		return creditChangeRecordDao.getCreditChangeRecordByUserName(userName);
+	}
+	
+	/*
+	 * CoinChangeRecord
+	 */
+	public List<CoinChangeRecord> getCoinChangeRecordByUserName(String userName){
+		return coinChangeRecordDao.getCoinChangeRecordByUserName(userName);
 	}
 }
