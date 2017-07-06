@@ -12,8 +12,11 @@
 <meta name="keywords" content="搜索关键字，以半角英文逗号隔开" />
 <!-- 搜索关键字 -->
 <meta name="viewport" content="width=device-width, initial-scale=1">
+ <script type="text/javascript" src="../js/jquery.min.js"></script>
+ <script type="text/javascript" src="../js/jquery.citys.js"></script>    
 <script type="text/javascript" src="http://code.jquery.com/jquery-2.0.0.js"></script>
 <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.js"></script>
+
 <title>个人中心-基本资料</title>
 
 <!-- Bootstrap -->
@@ -74,10 +77,11 @@
         <input class="my_info_content_care_table_text" name="email" type="text" value=<% %>></td>    <!-- 从数据库取 -->
       </tr>
       <tr>
-        <td align="right" class="color555">地址：</td>
+        <td align="right" class="color555">地址：<br>&nbsp;</td>
         <td class="color555 td2"><div id="demo3">
                       <select name="province"></select>
                       <select name="city"></select>
+                      <br>
                       <select name="area"></select>
                       <select name="town"></select>
             </div></td>
@@ -126,7 +130,7 @@
         			province:'福建',
         			city:'厦门',
         			area:'思明',
-        			towm:'思明南路'            /*这四个值应从数据库取*/
+            /*这四个值应从数据库取*/
         			onChange:function(info){
         				townFormat(info);
         			}
