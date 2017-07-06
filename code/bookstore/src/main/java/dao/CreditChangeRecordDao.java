@@ -13,7 +13,7 @@ public interface CreditChangeRecordDao {
 	
 	public CreditChangeRecord getCreditChangeRecordByID(int ID);
 	
-	public List<CreditChangeRecord> getCreditChangeRecordByUserID(int userID);
+	public List<CreditChangeRecord> getCreditChangeRecordByUserName(String userName);
 	
 	public List<CreditChangeRecord> getAllCreditChangeRecords();
 }

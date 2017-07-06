@@ -31,6 +31,10 @@ create table user
    validationAnswer     varchar(200)                   default null,
    credit               int                            not null default 0,
    bookCoin             int                            not null default 0,
+   province				varchar(50)					   default null,
+   city				    varchar(50)					   default null,
+   area				    varchar(50)					   default null,
+   town					varchar(50)					   default null,
    primary key (userID),
    unique (userName)
 );
@@ -64,7 +68,7 @@ create table book
    author               varchar(200)                    not null,
    publisher            varchar(200)                    not null,
    pageNumber           int                            not null,
-   price                decimal(10,2)                  not null,
+   price                varchar(50)                 not null,
    doubanRate           float                          default null,	/*豆瓣评分*/
    raterNumber          int                            default null,	/*豆瓣上参与评分人数*/
    summary              text,						   
@@ -83,7 +87,7 @@ create table bookComment
 (
    ID                   int                            not null auto_increment,
    ISBN                 varchar(20)                    not null,
-   userID               int                            not null,
+   userName               varchar(20)                            not null,
    commentTime          datetime                       not null,
    content              text                           not null,
    checkResult          enum("pass","reject")          default null,
@@ -93,8 +97,8 @@ create table bookComment
 alter table bookComment add constraint FK_Reference_1 foreign key (ISBN)
       references book (ISBN) on update cascade on delete cascade;
 
-alter table bookComment add constraint FK_Referance_2 foreign key (userID)
-      references user (userID) on update cascade on delete cascade;
+alter table bookComment add constraint FK_Referance_2 foreign key (userName)
+      references user (userName) on update cascade on delete cascade;
 
 
 
@@ -274,7 +278,7 @@ alter table buyOrderFeedback
 create table coinChangeRecord 
 (
    ID                   int                            not null auto_increment,
-   userID               int                            not null,
+   userName               varchar(20)                            not null,
    number               int                            not null,
    time                 datetime                       not null,
    reason               enum("buy","sell","lendin","lendout","other") not null,
@@ -282,8 +286,8 @@ create table coinChangeRecord
 );
 
 alter table coinChangeRecord
-   add constraint FK_Reference_17 foreign key (userID)
-      references user (userID) on update cascade on delete cascade;
+   add constraint FK_Reference_17 foreign key (userName)
+      references user (userName) on update cascade on delete cascade;
 
 
 
@@ -296,7 +300,7 @@ alter table coinChangeRecord
 create table creditChangeRecord 
 (
    ID                   int                            not null auto_increment,
-   userID               int                            not null,
+   userName               varchar(20)                            not null,
    number               int                            not null,
    time                 datetime                       not null,
    reason               enum("good seller","good lendin","good lendout","bad seller","bad lendin","bad lendout","other")  not null,
@@ -304,8 +308,8 @@ create table creditChangeRecord
 );
 
 alter table creditChangeRecord
-   add constraint FK_Reference_18 foreign key (userID)
-      references user (userID) on update cascade on delete cascade;
+   add constraint FK_Reference_18 foreign key (userName)
+      references user (userName) on update cascade on delete cascade;
 
 
 

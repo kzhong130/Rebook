@@ -150,10 +150,33 @@ $('.red_button').click(function(){
         type:"POST",  
         url:"AccountAction!register",  
         async:false,
-        data:{userName:$(".reg_user").val(),password:$(".reg_password").val(),realName:$(".reg_realname").val(),sex:$(".reg_sex").val(),phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:maddress,validationProblem:$(".reg_validationProblem").val(),validationAnswer:$(".reg_validationAnswer").val()} ,
-        
+        data:{province:province,city:city,area:area,town:town,userName:$(".reg_user").val(),password:$(".reg_password").val(),realName:$(".reg_realname").val(),sex:$(".reg_sex").val(),phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:maddress,validationProblem:$(".reg_validationProblem").val(),validationAnswer:$(".reg_validationAnswer").val()} ,
+        success:function(result){
+        	try{
+        		result=eval('('+result+')');
+        		alert("regiser success");
+				window.location.replace("test.jsp");	
+        	}
+        	catch(err){
+        		alert("用户已存在，请更换用户名");
+        	}
+        },
+        error:function(){
+        	alert("用户已存在，请更换用户名");
+        }
     });
-	window.location.replace("test.jsp");
+		/*$.post("AccountAction!register",{userName:$(".reg_user").val(),password:$(".reg_password").val(),realName:$(".reg_realname").val(),sex:$(".reg_sex").val(),phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:maddress,validationProblem:$(".reg_validationProblem").val(),validationAnswer:$(".reg_validationAnswer").val()},function(result){
+			if (result.success){
+				alert(result.success);
+				window.location.replace("test.jsp");	
+				
+			} else {
+				alert("result.success");
+				alert("user exist");
+			}
+		},'json');
+		alert("user exist");
+		*/
 	  
   }else {
 	  

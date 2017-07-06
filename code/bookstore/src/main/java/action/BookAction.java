@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Book;
+import model.BookComment;
 
 public class BookAction extends BaseAction{
 	private static final long serialVersionUID = 1L;
@@ -166,9 +167,10 @@ public class BookAction extends BaseAction{
 	
 	public String getBookInfo() throws Exception{
 		String ISBN = request().getParameter("ISBN");
-		System.out.println(ISBN);
 		Book book = appService.getBookByISBN(ISBN);
-		request().setAttribute("book", book);
+		request().getSession().setAttribute("book", book);
+		List<BookComment> bookComments = appService.getBookCommentsByISBN(ISBN);
+		request().getSession().setAttribute("bookComment",bookComments);
 		return "bookInfo";
 	}
 	
@@ -193,10 +195,10 @@ public class BookAction extends BaseAction{
 				bookNames = bookNames +'$' + books.get(i).getBookName();
 			}
 		}
-		request().getSession().setAttribute("bookISBNs", bookISBNs);
-		request().getSession().setAttribute("bookAuthors", bookAuthors);
-		request().getSession().setAttribute("bookImages", bookImages);
-		request().getSession().setAttribute("bookNames", bookNames);
+		request().getSession().setAttribute("searchBookISBNs", bookISBNs);
+		request().getSession().setAttribute("searchBookAuthors", bookAuthors);
+		request().getSession().setAttribute("searchBookImages", bookImages);
+		request().getSession().setAttribute("searchBookNames", bookNames);
 		return "bookSearch";
 	}
 	
