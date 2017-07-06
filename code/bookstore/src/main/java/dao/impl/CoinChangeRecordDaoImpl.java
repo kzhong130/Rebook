@@ -33,7 +33,7 @@ public class CoinChangeRecordDaoImpl extends HibernateDaoSupport implements Coin
 	
 	public List<CoinChangeRecord> getCoinChangeRecordByUserName(String userName){
 		@SuppressWarnings("unchecked")
-		List<CoinChangeRecord> coinChangeRecords = getHibernateTemplate().find("from CoinChangeRecord as b where b.userName = ?",userName);
+		List<CoinChangeRecord> coinChangeRecords = getHibernateTemplate().find("from CoinChangeRecord as b where b.userName = ? order by b.time",userName);
 		return coinChangeRecords;
 	}
 }

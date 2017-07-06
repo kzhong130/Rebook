@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@page import="model.User" %> 
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -27,6 +28,10 @@
 <link href="css/crowdfunding.css" rel="stylesheet">
 
 </head>
+
+<%
+	User user = (User)session.getAttribute("user");
+%>
 <body>
 <!-- top + banner 开始 -->
 <nav>
@@ -55,8 +60,33 @@
   <div id="vertical_navigation" class="col-lg-3 background831312 nopadding">
     <div class="dead_pic"><span class="username">你好，</span><br>
       <span class="username"><%=session.getAttribute("loginUserName") %></span></div>
-    <div class="usertype">书币余额：<% %><br>
-        信用：<img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> </div>
+    <div class="usertype">书币余额：<%=user.getBookCoin() %><br>
+        信用：
+        <%
+        	if (user.getCredit() > 80 && user.getCredit() <= 100){ 
+        %>
+        <img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/star.png"></img> </div>
+        <%} %>
+        <%
+        	if (user.getCredit() > 60 && user.getCredit() <= 80){
+        %>
+        <img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> </div>
+        <%} %>
+        <%
+        	if (user.getCredit() > 40 && user.getCredit() <= 60){
+        %>
+        <img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> </div>
+        <%} %>
+        <%
+        	if (user.getCredit() > 20 && user.getCredit() <= 40 ){
+        %>
+        <img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> </div> 
+        <%} %>
+        <%
+        	if (user.getCredit() >= 0 && user.getCredit() <= 20){
+        %>
+        <img style="margin-right:0px;" src="img/member_center/star.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> <img style="margin-right:0px;" src="img/member_center/xx2.png"></img> </div> 
+        <%} %>
     <div class="menu">
       <div class="menu_title"> 我的信息 </div>
       <div class="menu_list">

@@ -27,7 +27,7 @@ public class CreditChangeRecordDaoImpl extends HibernateDaoSupport implements Cr
 	
 	public List<CreditChangeRecord> getCreditChangeRecordByUserName(String userName){
 		@SuppressWarnings("unchecked")
-		List<CreditChangeRecord> creditChangeRecords = (List<CreditChangeRecord>)getHibernateTemplate().find("from CreditChangeRecord as b where b.userName = ?",userName);
+		List<CreditChangeRecord> creditChangeRecords = (List<CreditChangeRecord>)getHibernateTemplate().find("from CreditChangeRecord as b where b.userName = ? order by b.time",userName);
 		return creditChangeRecords;
 	}
 	
