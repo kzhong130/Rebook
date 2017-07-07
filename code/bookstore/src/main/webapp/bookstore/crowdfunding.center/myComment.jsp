@@ -34,6 +34,7 @@
 	books = (ArrayList<Book>)session.getAttribute("bookByBookComment");
 %>
 <body>
+
 	<!-- 开始 -->
 	<div class="my_info_title">
 		我的书评
@@ -121,6 +122,7 @@
 			}
 		});
 	}
+	
 </script>
 </body>
 </html>

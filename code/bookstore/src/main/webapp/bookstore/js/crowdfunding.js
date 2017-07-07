@@ -6,6 +6,7 @@
 $(document).ready(function(){
  
 });
+
 /**
  * 用于众筹个人中心左侧竖型菜单的动态样式切换
  * @method listClick
@@ -14,6 +15,10 @@ $(document).ready(function(){
  * @return {null} 无
  */
 function listClick(value){
+	/*var height = document.body.scrollHeight; 
+	alert(height);
+	height = (parseInt(height/500)+1)*500;
+	alert(height);*/
 	if(value == 1){
 		$("#listClick_1").css("border-bottom","1px solid #efbb24");
 		$("#listClick_1").css("color","#efbb24");
@@ -23,8 +28,8 @@ function listClick(value){
 		$("#listClick_4").css("color","#666");
 		
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/my_info.jsp");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
+		//$("#crowdfunding_iframe").attr("height","1045");
+		//$("#vertical_navigation").css("height","1050px");
 		
 		$("#listClick1").attr("class","menu_list_on");
 		$("#listClick2").attr("class","");
@@ -45,8 +50,8 @@ function listClick(value){
 	}
 	if(value == 2){
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/make_head.html");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
+		//$("#crowdfunding_iframe").attr("height","1045");
+		//$("#vertical_navigation").css("height","1050px");
 		
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","menu_list_on");
@@ -74,8 +79,8 @@ function listClick(value){
 		$("#listClick_4").css("color","#666");
 		
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/identity_prove.html");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
+		//$("#crowdfunding_iframe").attr("height","1045");
+		//$("#vertical_navigation").css("height","1050px");
 		
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","");
@@ -103,8 +108,8 @@ function listClick(value){
 		$("#listClick_4").css("color","#efbb24");
 		
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/make_password.jsp");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
+		//$("#crowdfunding_iframe").attr("height","1045");
+		//$("#vertical_navigation").css("height","1050px");
 		
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","");
@@ -125,8 +130,8 @@ function listClick(value){
 	}
 	if(value == 5){
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/apply_lingtou.html");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
+		//$("#crowdfunding_iframe").attr("height","1045");
+		//$("#vertical_navigation").css("height","1050px");
 		
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","");
@@ -147,8 +152,8 @@ function listClick(value){
 	}
 	if(value == 6){
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/project_manage.html");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
+		//$("#crowdfunding_iframe").attr("height","1045");
+		//$("#vertical_navigation").css("height","1050px");
 		
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","");
@@ -169,8 +174,8 @@ function listClick(value){
 	}
 	if(value == 7){
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/touhou_manage.html");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
+		//$("#crowdfunding_iframe").attr("height","1045");
+		//$("#vertical_navigation").css("height","1050px");
 		
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","");
@@ -191,8 +196,8 @@ function listClick(value){
 	}
 	if(value == 8){
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/my_account.html");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
+		//$("#crowdfunding_iframe").attr("height","1045");
+		//$("#vertical_navigation").css("height","1050px");
 		
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","");
@@ -213,8 +218,8 @@ function listClick(value){
 	}
 	if(value == 9){
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/investment_inquiry.html");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
+		//$("#crowdfunding_iframe").attr("height","1045");
+		//$("#vertical_navigation").css("height","1050px");
 		
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","");
@@ -235,8 +240,8 @@ function listClick(value){
 	}
 	if(value == 10){
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/apply_refund.html");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
+		//$("#crowdfunding_iframe").attr("height","1045");
+		//$("#vertical_navigation").css("height","1050px");
 		
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","");
@@ -258,8 +263,8 @@ function listClick(value){
 	if(value == 11){
 		
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/grade_integration.html");
-		$("#crowdfunding_iframe").attr("height","2000");
-		$("#vertical_navigation").css("height","2005px");
+		//$("#crowdfunding_iframe").attr("height","2000");
+		//$("#vertical_navigation").css("height","2005px");
 		
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","");
@@ -287,8 +292,8 @@ function listClick(value){
 		$("#listClick_13").css("color","#666");
 		
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/creditRecord.jsp");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
+		//$("#crowdfunding_iframe").attr("height","1045");
+		//$("#vertical_navigation").css("height","1050px");
 		
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","");
@@ -316,8 +321,8 @@ function listClick(value){
 		$("#listClick_13").css("color","#efbb24");
 		
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/bookcoinRecord.jsp");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
+		//$("#crowdfunding_iframe").attr("height","1045");
+		//$("#vertical_navigation").css("height","1050px");
 		
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","");
@@ -338,8 +343,8 @@ function listClick(value){
 	}
 	if(value == 14){
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/messages.html");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
+		//$("#crowdfunding_iframe").attr("height","1045");
+		//$("#vertical_navigation").css("height","1050px");
 		
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","");
@@ -360,8 +365,8 @@ function listClick(value){
 	}
 	if(value == 15){
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/inbox.html");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
+		//$("#crowdfunding_iframe").attr("height","1045");
+		//$("#vertical_navigation").css("height","1050px");
 		
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","");
@@ -382,9 +387,9 @@ function listClick(value){
 	}
 	if(value == 16){
 		$("#crowdfunding_iframe").attr("src","crowdfunding.center/myComment.jsp");
-		$("#crowdfunding_iframe").attr("height","1045");
-		$("#vertical_navigation").css("height","1050px");
-		
+		//alert(height+5+"px");
+		//$("#crowdfunding_iframe").attr("height",1045);
+		//$("#vertical_navigation").css("height","1050px");
 		$("#listClick1").attr("class","");
 		$("#listClick2").attr("class","");
 		$("#listClick3").attr("class","");
