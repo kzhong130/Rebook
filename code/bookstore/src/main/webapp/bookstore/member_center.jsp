@@ -224,5 +224,15 @@
 	<script src="js/basics.js"></script>
 	<!-- JS公共部分 结束 -->
 	<script src="js/crowdfunding.js"></script>
+	<script type="text/javascript">
+	$("#crowdfunding_iframe").load(function () {
+	    var mainheight = $(this).contents().find("body").height() + 30;
+	    if (mainheight < 1045){
+	    	mainheight = 1045;
+	    }
+	    $(this).height(mainheight);
+	    $("#vertical_navigation").css("height",mainheight+5+"px");
+	});
+	</script>
 </body>
 </html>
