@@ -115,6 +115,7 @@
 	<%
         	if (user.getCredit() >= 0 && user.getCredit() <= 20){
         %>
+
 	<img style="margin-right: 0px;" src="img/member_center/star.png"></img>
 	<img style="margin-right: 0px;" src="img/member_center/xx2.png"></img>
 	<img style="margin-right: 0px;" src="img/member_center/xx2.png"></img>
@@ -176,8 +177,7 @@
 		<div class="menu_title">退出</div>
 		<div class="menu_list">
 			<ul class="list-unstyled">
-				<li id="listClick14" class="" onClick="listClick(14)"><img
-					src="img/member_center/left_icon_1.png"> 退出账号</li>
+				<li><a href='AccountAction!logout'><img src="img/member_center/left_icon_1.png"> 退出账号</a></li>
 			</ul>
 		</div>
 	</div>
@@ -190,6 +190,7 @@
 	</div>
 	</div>
 	<!-- 核心 结束 -->
+
 
 	<!-- 版权 开始 -->
 
