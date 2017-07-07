@@ -6,7 +6,7 @@
 <struts>
 	<constant name="struts.i18n.encoding" value="utf-8" />
 	<constant name="struts.devMode" value="true" />
-	<package name="process" extends="struts-default" >
+	<package name="process" extends="struts-default">
 
 		<!-- User -->
 		<action name="userAction" class="action.UserAction">
@@ -14,7 +14,7 @@
 			<result name="login success">index.jsp</result>
 			<result name="login fail">loginfail.jsp</result>
 		</action>
-		
+
 		<!-- Book -->
 		<action name="bookAction" class="action.BookAction">
 			<result name="success">bookinfo.jsp</result>
@@ -22,7 +22,7 @@
 			<result name="bookInfo">book.jsp</result>
 			<result name="bookSearch">searchPage.jsp</result>
 		</action>
-		
+
 		<action name="AccountAction" class="action.AccountAction">
 			<result name="registerSuccess">index.jsp</result>
 			<result name="login success">login/loginsuccess.jsp</result>
@@ -37,21 +37,20 @@
 			<result name="WA">fp2.jsp</result>
 			<result name="change">fp4.jsp</result>
 		</action>
-		
+
 		<action name="BookCommentAction" class="action.BookCommentAction">
 			<result name="success">bookcomment/commentsuccess.jsp</result>
-		</action>
-		
-		<action name="MemberCenterAction" class="action.MemberCenterAction">
-			<result name="initialize success">member_center.jsp</result>
-			<result name="success">member_center.jsp</result>
-			
+			<result name="delete success">myComment.jsp</result>
 		</action>
 
-		
+		<action name="MemberCenterAction" class="action.MemberCenterAction">
+			<result name="initialize success">member_center.jsp</result>
+		</action>
+
+
 		<action name="*">
 			<result>/{1}.jsp</result>
 		</action>
 	</package>
-	
+
 </struts>

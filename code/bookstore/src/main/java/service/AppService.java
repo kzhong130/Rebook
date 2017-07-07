@@ -37,6 +37,7 @@ public interface AppService {
 	public Integer addBookComment(BookComment bookComment);
 	public List<BookComment> getBookCommentsByISBN(String ISBN);
 	public List<BookComment> getBookCommentsByUserName(String userName);
+	public void deleteBookCommentByID(int ID);
 	
 	/*
 	 * CreditChangeRecord
