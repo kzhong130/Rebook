@@ -261,6 +261,10 @@ public class AppServiceImpl implements AppService {
 		return bookCommentDao.getBookCommentsByUserName(userName);
 	}
 	
+	public void deleteBookCommentByID(int ID){
+		bookCommentDao.delete(bookCommentDao.getBookCommentByID(ID));
+	}
+	
 	
 	
 	/*
