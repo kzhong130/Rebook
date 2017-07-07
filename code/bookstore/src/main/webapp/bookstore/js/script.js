@@ -145,12 +145,25 @@ $('.red_button').click(function(){
 	  var detail=$(".reg_address").val();
 	  //alert(detail);
 	  var maddress=province+city+area+town+detail;
-	  //alert(maddress);
+
+	  var b1= document.getElementsByName('sex');
+	  var sex;
+
+	  for (var i = 0; i < b1.length; i++) {
+
+	  if (b1[i].checked == true) {//如果选中，下面的alert就会弹出选中的值
+
+		  //alert(b1[i].value);
+		  sex=b1[i].value;
+	  }
+
+	  }
+	
   	$.ajax({  
         type:"POST",  
         url:"AccountAction!register",  
         async:false,
-        data:{province:province,city:city,area:area,town:town,userName:$(".reg_user").val(),password:$(".reg_password").val(),realName:$(".reg_realname").val(),sex:$(".reg_sex").val(),phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:detail,validationProblem:$(".reg_validationProblem").val(),validationAnswer:$(".reg_validationAnswer").val()} ,
+        data:{province:province,city:city,area:area,town:town,userName:$(".reg_user").val(),password:$(".reg_password").val(),realName:$(".reg_realname").val(),sex:sex,phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:detail,validationProblem:$(".reg_validationProblem").val(),validationAnswer:$(".reg_validationAnswer").val()} ,
         success:function(result){
         	try{
         		result=eval('('+result+')');

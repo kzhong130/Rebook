@@ -44,6 +44,8 @@
 		
 		<action name="MemberCenterAction" class="action.MemberCenterAction">
 			<result name="initialize success">member_center.jsp</result>
+			<result name="success">member_center.jsp</result>
+			
 		</action>
 
 		
