@@ -62,12 +62,14 @@
      <table>
      
         <tr>
+
           <td class="bookimage"><a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a></td>
           <td><p class="bookname"><span class="bookname"><%=book.getBookName() %></span>
               <button class="delete" name="" type="onclick" >删 除</button></p>
               <p class="comment"><%=bookComment.getContent() %>
 </p>
               <p class="comment"><%=bookComment.getCommentTime().toString().substring(0, 19) %></p></td>
+  
         </tr>
         
      </table>

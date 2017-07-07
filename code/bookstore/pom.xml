@@ -236,6 +236,14 @@
     	<version>2.4</version>
     	<classifier>jdk15</classifier><!--指定jdk版本--> 
 	</dependency>
+	
+<!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpcore -->
+<dependency>
+    <groupId>org.apache.httpcomponents</groupId>
+    <artifactId>httpcore</artifactId>
+    <version>4.4.5</version>
+</dependency>
+
 
 	
 		

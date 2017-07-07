@@ -227,7 +227,7 @@ session.setAttribute("prePage",url);
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="js/page.js"></script>
 <script type="text/javascript">
 function changePage(futurePageNum){

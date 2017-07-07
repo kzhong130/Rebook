@@ -157,3 +157,7 @@ a{text-decoration:none;}*/
     margin: 5px;
     background-color: #DDDDDD;
 }
+.searchresult{
+	font-size:24px;
+	color:#d19826;
+}
