@@ -43,7 +43,7 @@
  <hr>
 <div class="integration_record">
   <div class="integration_record_float"> 收支
-    <select>
+    <select id="showType">
       <option value ="--全部--">--全部--</option>
       <option value ="increase">增加</option>
       <option value ="decrease">减少</option>
@@ -51,37 +51,67 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     时间范围：</div>
   <div class="input-append date form_datetime integration_record_float">
-    <input class="integration_record_time" type="text" value="" readonly>
+    <input class="integration_record_time" type="text" id="startTime" value="" readonly>
     <span class="add-on"><i class="icon-th"></i></span> </div>
   <div class="input-append date form_datetime integration_record_float"> &nbsp;-&nbsp;
-    <input class="integration_record_time"  type="text" value="" readonly>
+    <input class="integration_record_time"  type="text" id="endTime" value="" readonly>
     <span class="add-on"><i class="icon-th"></i></span> </div>
   <div class="integration_record_float"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="button" class="but2" value="查询">
+    <input type="button" class="but2" value="查询" id="searchButton">
   </div>
 </div>
 <div class="integration_record_jfjl">
   <div class="integration_record_jfjl_title"> 书币记录 <font class="font_size14">总书币为：<%=user.getBookCoin() %></font> </div>
   <div class="integration_record_jfjl_content">
-    <table class="table table-bordered text-center">
+    <table class="table table-bordered text-center" id="myTable">
       <tr class="active">
-        <td>操作</td>
         <td>书币数量变更</td>
         <td>详情</td>
         <td>变更时间</td>
       </tr>
-      <tr>
-        <td>任务奖励<% %></td>
-        <td><font class="colord19826">+20<% %></font></td>
-        <td>注册会员签到<% %></td>
-        <td>2015-07-28 17:26:15<% %></td>                 <!-- 该tr需按数据库多次循环 -->
+      <%
+      		String number;
+      		String reason="";
+      		if (coinChangeRecords.size()>0){
+      			for (int i=0; i<coinChangeRecords.size(); i++){
+      				if (coinChangeRecords.get(i).getNumber()>0){
+      					number = "+"+Integer.toString(coinChangeRecords.get(i).getNumber());
+      				}
+      				else {
+      					number = Integer.toString(coinChangeRecords.get(i).getNumber());
+      				}
+
+					if ("buy".equals(coinChangeRecords.get(i).getReason())){
+						reason="购书成功";
+					}
+					if("sell".equals(coinChangeRecords.get(i).getReason())){
+						reason="卖书成功";
+					}
+					if("lendin".equals(coinChangeRecords.get(i).getReason())){
+						reason="借入图书";
+					}
+					if("lendout".equals(coinChangeRecords.get(i).getReason())){
+						reason="借出图书";
+					}
+					if("other".equals(coinChangeRecords.get(i).getReason())){
+						reason="其他";
+					}
+      				
+      				
+      %>
+      <tr id="tableRow">
+        <td><font class="colord19826"><%=number %></font></td>
+        <td><%=reason %></td>
+        <td><%=coinChangeRecords.get(i).getTime().toString().substring(0, 19) %></td>                 <!-- 该tr需按数据库多次循环 -->
       </tr>
+      <%} %>
+      <%} %>
     </table>
   </div>
-  <div class="integration_record_jfjl_page">
-    第 1/1 页，共1条记录<% %>                                  <!-- 可以的话实现分页功能 -->
-  </div>
+  <!-- <div class="integration_record_jfjl_page" >
+    第 1/1 页，共<% %>条记录                    
+  </div> -->
 </div>
 
 <!-- 结束 --> 
@@ -104,6 +134,91 @@ $(document).ready(function(){
         minuteStep: 10
     });
 });
+$("#searchButton").click(function(){
+	//alert($("#showType").val());
+	//alert(mytable.rows[1].cells[0].innerText[0]);
+	var showType = $("#showType").val();
+	var startTime = $("#startTime").val();
+	var endTime = $("#endTime").val();
+	var mytable = document.getElementById("myTable");
+	if (startTime != ""){
+		startTime += " 00:00:00";
+	}
+	if (endTime != ""){
+		endTime += "23:59:59";
+	}
+	if (startTime == "" && endTime != ""){
+		alert("请输入开始时间！");
+	}
+	else if (startTime !="" && endTime ==""){
+		alert("请输入结束时间！");
+	}
+	else if (endTime < startTime){
+		alert("结束时间不能比开始时间早！");
+		
+	}
+	
+	else{
+		if(showType=="--全部--" && startTime == "" && endTime == ""){
+			for (var i=1; i<myTable.rows.length; i++){
+				mytable.rows[i].style.display="";
+			}
+		}
+		else if (showType== "--全部--" && startTime !="" && endTime != ""){
+			for (var i=1; i<mytable.rows.length; i++){
+				if (mytable.rows[i].cells[2].innerText < startTime || mytable.rows[i].cells[2].innerText > endTime){
+					mytable.rows[i].style.display="none";
+				}
+				else{
+					mytable.rows[i].style.display="";
+				}
+			}
+		}
+		else if (showType == "increase" && startTime == "" && endTime == ""){
+			for (var i=1; i<mytable.rows.length; i++){
+				if (mytable.rows[i].cells[0].innerText[0] == "-"){
+					mytable.rows[i].style.display="none";
+				}
+				else{
+					mytable.rows[i].style.display="";
+				}
+			}
+		}
+		else if (showType == "increase" && startTime != "" && endTime != ""){
+			for (var i=1; i<mytable.rows.length; i++){
+				if (mytable.rows[i].cells[0].innerText[0] == "-" || mytable.rows[i].cells[2].innerText < startTime || mytable.rows[i].cells[2].innerText > endTime){
+					mytable.rows[i].style.display="none";
+				}
+				else{
+					mytable.rows[i].style.display="";
+				}
+			}
+		}
+		else if (showType == "decrease" && startTime =="" && endTime == ""){
+			for (var i=1; i<mytable.rows.length; i++){
+				if (mytable.rows[i].cells[0].innerText[0] == "+"){
+					mytable.rows[i].style.display = "none";
+				}
+				else{
+					mytable.rows[i].style.display="";
+				}
+			}
+		}
+		else if (showType == "decrease" && startTime !="" && startTime != ""){
+			for (var i=1; i<mytable.rows.length; i++){
+				if (mytable.rows[i].cells[0].innerText[0] == "+" || mytable.rows[i].cells[2].innerText < startTime || mytable.rows[i].cells[2].innerText > endTime){
+					mytable.rows[i].style.display = "none";
+				}
+				else{
+					mytable.rows[i].style.display="";
+				}
+			}
+		}
+	}
+	$("#startTime").val("");
+	$("#endTime").val("");
+	
+})
 </script>
 </body>
 </html>

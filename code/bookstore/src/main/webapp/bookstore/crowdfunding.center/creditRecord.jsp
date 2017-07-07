@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@page import="model.CreditChangeRecord"%> 
+<%@page import="java.util.ArrayList" %> 
+<%@page import="model.User" %> 
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -24,6 +27,12 @@
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
+<%
+	ArrayList<CreditChangeRecord> creditChangeRecords = new ArrayList<CreditChangeRecord>();
+	creditChangeRecords = (ArrayList<CreditChangeRecord>)session.getAttribute("creditChangeRecord");
+	User user = (User)session.getAttribute("user");
+%>
 <body>
 <!-- 开始 -->
 <div class="my_info_title">信用记录
@@ -34,7 +43,7 @@
  <hr>
 <div class="integration_record">
   <div class="integration_record_float"> 变更
-    <select>
+    <select id="showType">
       <option value ="--全部--">--全部--</option>
       <option value ="increase">增加</option>
       <option value ="decrease">减少</option>
@@ -42,37 +51,70 @@
     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     时间范围：</div>
   <div class="input-append date form_datetime integration_record_float">
-    <input class="integration_record_time" type="text" value="" readonly>
+    <input class="integration_record_time" type="text" id="startTime" value="" readonly>
     <span class="add-on"><i class="icon-th"></i></span> </div>
   <div class="input-append date form_datetime integration_record_float"> &nbsp;-&nbsp;
-    <input class="integration_record_time"  type="text" value="" readonly>
+    <input class="integration_record_time"  type="text" id="endTime" value="" readonly>
     <span class="add-on"><i class="icon-th"></i></span> </div>
   <div class="integration_record_float"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     &nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="button" class="but2" value="查询">
+    <input type="button" class="but2" value="查询" id="searchButton">
   </div>
 </div>
 <div class="integration_record_jfjl">
-  <div class="integration_record_jfjl_title"> 信用变更记录 <font class="font_size14">目前信用值为：<% %></font> </div>
+  <div class="integration_record_jfjl_title"> 信用变更记录 <font class="font_size14">目前信用值为：<%=user.getCredit() %></font> </div>
   <div class="integration_record_jfjl_content">
-    <table class="table table-bordered text-center">
+    <table class="table table-bordered text-center" id="myTable">
       <tr class="active">
-        <td>操作</td>
         <td>信用变更</td>
         <td>详情</td>
         <td>变更时间</td>
       </tr>
-      <tr>
-        <td>任务奖励<% %></td>
-        <td><font class="colord19826">+20<% %></font></td>
-        <td>注册会员签到<% %></td>
-        <td>2015-07-28 17:26:15<% %></td>                 <!-- 该tr需按数据库多次循环 -->
+      <%
+      		String number;
+      		String reason="";
+      		if (creditChangeRecords.size() > 0){
+      			for (int i = 0; i < creditChangeRecords.size(); i++){
+      				if (creditChangeRecords.get(i).getNumber() > 0){
+      					number = "+"+Integer.toString(creditChangeRecords.get(i).getNumber());
+      				}
+      				else{
+      					number = Integer.toString(creditChangeRecords.get(i).getNumber());
+      				}
+      				if("good seller".equals(creditChangeRecords.get(i).getReason())){
+      					reason = "卖书成功并收获好评";
+      				}
+      				if("good lendin".equals(creditChangeRecords.get(i).getReason())){
+      					reason = "借入书籍并收获好评";
+      				}
+      				if("good lendout".equals(creditChangeRecords.get(i).getReason())){
+      					reason = "借出书籍并收获好评";
+      				}
+      				if("bad seller".equals(creditChangeRecords.get(i).getReason())){
+      					reason = "卖书后收到差评";
+      				}
+      				if("bad lendin".equals(creditChangeRecords.get(i).getReason())){
+      					reason = "借入书籍收到差评";
+      				}
+      				if ("bad lendout".equals(creditChangeRecords.get(i).getReason())){
+      					reason = "借出书籍收到差评";
+      				}
+      				if ("other".equals(creditChangeRecords.get(i).getReason())){
+      					reason = "其他";
+      				}
+      %>
+      <tr id="tableRow">
+      	<td><font class="colord19826"><%=number %></font></td>
+        <td><%=reason %></td>
+        <td><%=creditChangeRecords.get(i).getTime().toString().substring(0, 19) %></td>
       </tr>
+      <%} %>
+      <%} %>
     </table>
   </div>
-  <div class="integration_record_jfjl_page">
-    第 1/1 页，共1条记录<% %>                                  <!-- 可以的话实现分页功能 -->
-  </div>
+  <!-- <div class="integration_record_jfjl_page">
+    第 1/1 页，共1条记录<% %>                             
+  </div>-->
 </div>
 
 <!-- 结束 --> 
@@ -95,6 +137,92 @@ $(document).ready(function(){
         minuteStep: 10
     });
 });
+
+$("#searchButton").click(function(){
+	//alert($("#showType").val());
+	//alert(mytable.rows[1].cells[0].innerText[0]);
+	var showType = $("#showType").val();
+	var startTime = $("#startTime").val();
+	var endTime = $("#endTime").val();
+	var mytable = document.getElementById("myTable");
+	if (startTime != ""){
+		startTime += " 00:00:00";
+	}
+	if (endTime != ""){
+		endTime += "23:59:59";
+	}
+	if (startTime == "" && endTime != ""){
+		alert("请输入开始时间！");
+	}
+	else if (startTime !="" && endTime ==""){
+		alert("请输入结束时间！");
+	}
+	else if (endTime < startTime){
+		alert("结束时间不能比开始时间早！");
+		
+	}
+	
+	else{
+		if(showType=="--全部--" && startTime == "" && endTime == ""){
+			for (var i=1; i<myTable.rows.length; i++){
+				mytable.rows[i].style.display="";
+			}
+		}
+		else if (showType== "--全部--" && startTime !="" && endTime != ""){
+			for (var i=1; i<mytable.rows.length; i++){
+				if (mytable.rows[i].cells[2].innerText < startTime || mytable.rows[i].cells[2].innerText > endTime){
+					mytable.rows[i].style.display="none";
+				}
+				else{
+					mytable.rows[i].style.display="";
+				}
+			}
+		}
+		else if (showType == "increase" && startTime == "" && endTime == ""){
+			for (var i=1; i<mytable.rows.length; i++){
+				if (mytable.rows[i].cells[0].innerText[0] == "-"){
+					mytable.rows[i].style.display="none";
+				}
+				else{
+					mytable.rows[i].style.display="";
+				}
+			}
+		}
+		else if (showType == "increase" && startTime != "" && endTime != ""){
+			for (var i=1; i<mytable.rows.length; i++){
+				if (mytable.rows[i].cells[0].innerText[0] == "-" || mytable.rows[i].cells[2].innerText < startTime || mytable.rows[i].cells[2].innerText > endTime){
+					mytable.rows[i].style.display="none";
+				}
+				else{
+					mytable.rows[i].style.display="";
+				}
+			}
+		}
+		else if (showType == "decrease" && startTime =="" && endTime == ""){
+			for (var i=1; i<mytable.rows.length; i++){
+				if (mytable.rows[i].cells[0].innerText[0] == "+"){
+					mytable.rows[i].style.display = "none";
+				}
+				else{
+					mytable.rows[i].style.display="";
+				}
+			}
+		}
+		else if (showType == "decrease" && startTime !="" && startTime != ""){
+			for (var i=1; i<mytable.rows.length; i++){
+				if (mytable.rows[i].cells[0].innerText[0] == "+" || mytable.rows[i].cells[2].innerText < startTime || mytable.rows[i].cells[2].innerText > endTime){
+					mytable.rows[i].style.display = "none";
+				}
+				else{
+					mytable.rows[i].style.display="";
+				}
+			}
+		}
+	}
+	$("#startTime").val("");
+	$("#endTime").val("");
+	
+})
 </script>
 </body>
 </html>

@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+<%@page import="model.BookComment"%> 
+<%@page import="java.util.ArrayList" %> 
+<%@page import="model.Book" %> 
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -23,6 +26,13 @@
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 </head>
+
+<%
+	ArrayList<BookComment> bookComments = new ArrayList<BookComment>();
+	bookComments = (ArrayList<BookComment>)session.getAttribute("bookComment");
+	ArrayList<Book> books = new ArrayList<Book>();
+	books = (ArrayList<Book>)session.getAttribute("bookByBookComment");
+%>
 <body>
 <!-- 开始 -->
 <div class="my_info_title">我的书评
@@ -33,23 +43,33 @@
 <hr>
 
 <!-- 每个评论 -->
+	<%
+     	Book book = new Book();
+     	BookComment bookComment = new BookComment();
+     	String ISBN = "";
+     	if (bookComments.size() > 0){
+     		for (int i=0; i<bookComments.size(); i++){
+     			bookComment = bookComments.get(i);
+     			ISBN = bookComment.getISBN();
+     			for (int j=0; j<books.size(); j++){
+     				if (books.get(j).getISBN().equals(ISBN)){
+     					book = books.get(j);
+     					break;
+     				}
+     			}
+     %>
 <div class="commentbox">
      <table>
+     
         <tr>
-          <td class="bookimage"><a href=<% %>><img class="listbook" src=<% %>"https://img1.doubanio.com/mpic/s29465919.jpg"/></a></td>
-          <td class="bookcontent">
-          <table>
-              <tr>
-              <td class="bookname"><% %>如何读懂经典</td>
-              <td class="deletebutton"><button class="delete" name="" type="onclick" >删 除</button></td>
-              </tr>
-              <tr>
-              <td colspan="2" >
-              <p class="comment"><%   %>那些改变了世界的书，真的有那么难读？ 《荷马史诗》到底写了什么？ 但丁的《神曲》魅力何在？莎翁陛下的经典段落有哪些？ 为什么大家这么喜爱《傲慢与偏见》？ 《尤利西斯》在讲什么？</p>
-              <p class="time"><% %>2017-7-5 11:30:00</p></td>
-              </tr>
-          </table>
-          </td>
+
+          <td class="bookimage"><a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a></td>
+          <td><p class="bookname"><span class="bookname"><%=book.getBookName() %></span>
+              <button class="delete" name="" type="onclick" >删 除</button></p>
+              <p class="comment"><%=bookComment.getContent() %>
+</p>
+              <p class="comment"><%=bookComment.getCommentTime().toString().substring(0, 19) %></p></td>
+  
         </tr>
         
      </table>
@@ -58,6 +78,8 @@
 
 
 </div>
+<%} %>
+     <%} %>
 
 
 

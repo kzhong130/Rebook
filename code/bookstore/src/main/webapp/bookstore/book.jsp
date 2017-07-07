@@ -211,7 +211,7 @@ session.setAttribute("prePage", url);
     			
     	%>
     	<hr>
-    	<p><%=bookComments.get(i).getUserName() %>    <%=bookComments.get(i).getCommentTime() %></p>
+    	<p><%=bookComments.get(i).getUserName() %>    <%=bookComments.get(i).getCommentTime().toString().substring(0, 19) %></p>
     	<p><%=bookComments.get(i).getContent() %>
     	<%} %>
     	<%} %>
