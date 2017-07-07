@@ -2,13 +2,17 @@ package action;
 
 import service.AppService;
 
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.struts2.ServletActionContext;
+
 import model.Book;
 import model.BookComment;
 import model.User;
+import net.sf.json.JSONObject;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
 
@@ -30,6 +34,16 @@ public class MemberCenterAction extends BaseAction{
 	private String city;
 	private String area;
 	private String town;
+	private String oldpassword;
+	
+	public void setOldpassword(String oldpassword){
+		this.oldpassword=oldpassword;
+	}
+	
+	public String getOldpassword(){
+		return oldpassword;
+	}
+	
 	
 	private AppService appService;
 	
@@ -194,5 +208,25 @@ public class MemberCenterAction extends BaseAction{
 		return "initialize success";
 	}
 	
+	public String changePassword() throws Exception{
+		User user=(User) request().getSession().getAttribute("user");
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject(); 
+		System.out.println(2333);
+		if(!oldpassword.equals(user.getPassword())){
+			obj.put("success",false); 
+		}
+		else{
+			user.setPassword(password);
+			appService.updateUser(user);
+			obj.put("success", true);
 
+		}
+		String str=obj.toString();
+		System.out.println(str);
+		out.write(str);
+		out.close();
+		
+		return "success";
+	}
 }
