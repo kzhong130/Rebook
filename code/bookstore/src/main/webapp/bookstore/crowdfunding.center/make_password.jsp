@@ -45,20 +45,22 @@
     <tbody>
       <tr>
         <td align="right" class="color555 td1">旧密码：</td>
-        <td class="color555 td2"><input class="oldPassword" name="oldPassword" type="text"></td> 
+        <td class="color555 td2"><input class="oldPassword" name="oldPassword" placeholder="输入旧密码" type="password"></td> 
         <span class="tip confirm_hint"></span>
         
       </tr>
       <tr>
         <td align="right" class="color555">新密码：</td>
-        <td class="color555"><input class="password" name="password" type="password"></td>
+        <td class="color555"><input class="password" placeholder="6-16位密码" name="password" type="password"></td>
+        <span class="tip password_len"></span>
       </tr>
       <tr>
         <td align="right" class="color555">确认新密码：</td>
-        <td class="color555"><input class="checkpassword" name="checkpassword" type="password"></td>
+        <td class="color555"><input class="checkpassword" placeholder="确认密码" name="checkpassword" type="password"></td>
+        <span class="tip password_hint"></span>
+        
       </tr>
-      <span class="tip password_hint"></span>
-      
+            
       <tr>
         <td align="center" class="color555" colspan="2">
         <button class="my_info_content_care_table_submit" name="" type="onclick" onclick="changePs()" >保    存</button></td>
@@ -71,9 +73,20 @@
 <script type="text/javascript">
 	var if_old_right=false;
 	var if_password_same=false;
+	var password_Boolean=false;
 	
-	//alert($(".oldpassword").val());
+	$('.password').blur(function(){
+ 		 if ((/^[a-z0-9_-]{6,16}$/).test($(".password").val())){
+   		 $('.password_len').html("✔").css("color","green");
 
+    	 password_Boolean = true;
+  		}else {
+   			 $('.password_len').html("×").css("color","red");
+   			 password_Boolean = false;
+  		}
+	});
+	
+	
 	$('.checkpassword').blur(function(){
 		  if (($(".checkpassword").val())==($(".password").val())){
 		    $('.password_hint').html("✔").css("color","green");
@@ -85,14 +98,14 @@
 	});
 	//还没有改正action传递
 	function changePs(){
-		if(if_password_same){
+		if(if_password_same&&password_Boolean){
 			$.ajax({  
 		        type:"POST",  
 		        url:"MemberCenterAction!changePassword",  
 		        async:false,
 		        data:{password:$(".password").val(),oldpassword:$(".oldPassword").val()},
 		        success:function(result){
-		        	alert(result);
+		        	//alert(result);
 		        	result=eval('('+result+')');
 		        	if(result.success){
 		       			alert("修改密码成功！");
@@ -106,7 +119,7 @@
 		    //alert("information right");
 		}
 		else{
-			alert("请确认两次输入的密码一致");
+			alert("请确认密码长度，并确认两次输入的密码一致");
 		}
 	}
 </script>
