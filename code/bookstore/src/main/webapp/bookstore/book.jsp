@@ -211,7 +211,7 @@ session.setAttribute("prePage", url);
     			
     	%>
     	<hr>
-    	<p><%=bookComments.get(i).getUserName() %>    <%=bookComments.get(i).getCommentTime() %></p>
+    	<p><%=bookComments.get(i).getUserName() %>    <%=bookComments.get(i).getCommentTime().toString().substring(0, 19) %></p>
     	<p><%=bookComments.get(i).getContent() %>
     	<%} %>
     	<%} %>
@@ -573,7 +573,7 @@ var userName = '<%=session.getAttribute("loginUserName")%>'
 if (userName != "null"){
 
 	var str = "<li><a href='#'>我要卖书</a>";
-	str += "<li><a href='#'>个人中心</a>"
+	str += "<li><a href='MemberCenterAction!initialize'>个人中心</a>"
 	str+="<li><a href='AccountAction!logout'>登出</a>"
 	$('#personalInfo').html(str);
 }
