@@ -59,17 +59,24 @@
      			}
      %>
 <div class="commentbox">
-     <table>
+     <table  style="width:828px;">
      
         <tr>
 
           <td class="bookimage"><a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a></td>
-          <td><p class="bookname"><span class="bookname"><%=book.getBookName() %></span>
-              <button class="delete" name="" type="onclick" >删 除</button></p>
-              <p class="comment"><%=bookComment.getContent() %>
-</p>
-              <p class="comment"><%=bookComment.getCommentTime().toString().substring(0, 19) %></p></td>
-  
+          <td class="bookcontent">
+          <table class="allwidth">
+              <tr>
+              <td class="bookname">《<%=book.getBookName() %>》</td>
+              <td class="deletebutton"><button class="delete" name="" type="onclick" >删 除</button></td>
+              </tr>
+              <tr>
+              <td colspan="2">
+              <p class="comment"><%=bookComment.getContent() %></p>
+              <p class="time"><%=bookComment.getCommentTime().toString().substring(0, 19) %></p></td>
+              </tr>
+           </table>
+           </td>
         </tr>
         
      </table>
@@ -78,6 +85,7 @@
 
 
 </div>
+<br>
 <%} %>
      <%} %>
 
@@ -97,6 +105,5 @@
 <!-- 结束 --> 
 <script src="../js/jquery-2.1.1.min.js"></script> 
 <script src="../js/bootstrap.min.js"></script> 
-
 </body>
 </html>
