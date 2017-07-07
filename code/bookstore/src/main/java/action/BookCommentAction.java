@@ -2,12 +2,18 @@ package action;
 
 import service.AppService;
 
+import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.struts2.ServletActionContext;
+
+import model.Book;
 import model.BookComment;
+import model.User;
+import net.sf.json.JSONObject;
 
 public class BookCommentAction extends BaseAction{
 	private static final long serialVersionUID = 1L;
@@ -85,5 +91,24 @@ public class BookCommentAction extends BaseAction{
 		List<BookComment> bookComments = appService.getBookCommentsByISBN(ISBN);
 		request().getSession().setAttribute("bookComment", bookComments);
 		return SUCCESS;
+	}
+	
+	public String deleteBookComment() throws Exception{
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject();
+		System.out.println(ID);
+		appService.deleteBookCommentByID(ID);
+		obj.put("success", true);
+		String str=obj.toString();
+		out.write(str);
+		out.close();
+		
+		String userName = (String)request().getSession().getAttribute("loginUserName");
+		List<BookComment> bookComments = appService.getBookCommentsByUserName(userName);
+		request().getSession().setAttribute("bookComment", bookComments);
+		List<Book> books = appService.getBookByBookComment(bookComments);
+		request().getSession().setAttribute("bookByBookComment", books);
+		
+		return "delete success";
 	}
 }
