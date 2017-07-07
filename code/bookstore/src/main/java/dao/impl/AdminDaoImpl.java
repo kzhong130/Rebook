@@ -30,4 +30,11 @@ public class AdminDaoImpl extends HibernateDaoSupport implements AdminDao{
 		Admin admin = admins.size() > 0 ? admins.get(0) : null;
 		return admin;
 	}
+	
+	public Admin getAdminByAdminName(String adminName){
+		@SuppressWarnings("unchecked")
+		List<Admin> admins = (List<Admin>)getHibernateTemplate().find("from Admin as b where b.adminName = ?", adminName);
+		Admin admin = admins.size() > 0 ? admins.get(0) : null;
+		return admin;
+	}
 }

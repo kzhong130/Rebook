@@ -25,7 +25,8 @@
 
 		<action name="AccountAction" class="action.AccountAction">
 			<result name="registerSuccess">index.jsp</result>
-			<result name="login success">login/loginsuccess.jsp</result>
+			<result name="userlogin success">login/loginsuccess.jsp</result>
+			<result name="adminlogin success">dashboard_user.jsp</result>
 			<result name="login fail">login/loginfail.jsp</result>
 			<result name="logout success">logout/logoutsuccess.jsp</result>
 		</action>

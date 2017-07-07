@@ -7,6 +7,9 @@
 		<id name="adminID" type="int">
 			<column name="adminID" />
 		</id>
+		<property name="adminName" type="java.lang.String">
+			<column name="adminName" />
+		</property>
 		<property name="password" type="java.lang.String">
 			<column name="password"/>
 		</property>

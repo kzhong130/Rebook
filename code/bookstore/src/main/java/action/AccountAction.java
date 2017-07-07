@@ -3,10 +3,14 @@ package action;
 import java.io.PrintWriter;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import org.apache.struts2.ServletActionContext;
 
+import model.Admin;
+import model.Book;
+import model.BookComment;
 import model.User;
 import net.sf.json.JSONObject;
 import service.AppService;
@@ -215,17 +219,42 @@ public class AccountAction extends BaseAction{
 	
 	public String login() throws Exception{
 		User user = appService.getUserByUserName(userName);
-		if (user == null){
-			request().getSession().setAttribute("login","error");
-			return "login fail";
+		if (user == null){	//是管理员
+			Admin admin = appService.getAdminByAdminName(userName);
+			if (admin == null){		//根据名字查不到此人是用户或管理员
+				request().getSession().setAttribute("login","error");
+				return "login fail";
+			}
+			if (admin.getPassword().equals(password)){		//管理员密码正确
+				request().getSession().setAttribute("loginUserName", userName);
+				request().getSession().removeAttribute("login");
+				List<User> users = appService.getAllUsers();
+				request().getSession().setAttribute("allUsers",users);
+				List<Book> books = appService.getAllBooks();
+				request().getSession().setAttribute("allBooks", books);
+				List<BookComment> bookComments = appService.getAllBookComments();
+				request().getSession().setAttribute("allBookComments", bookComments);
+				return "adminlogin success";
+			}	
+			else{		//管理员密码错误
+				request().getSession().setAttribute("login", "error");
+				return "login fail";
+			}
 		}
-		if (user.getPassword().equals(password)){
-			request().getSession().setAttribute("loginUserName", userName);
-			request().getSession().removeAttribute("login");
-			return "login success";
+		//非管理员
+		else{
+			if (user.getPassword().equals(password)){		//用户密码正确
+				request().getSession().setAttribute("loginUserName", userName);
+				request().getSession().removeAttribute("login");
+				return "userlogin success";
+			}
+			else{		//用户密码错误
+				request().getSession().setAttribute("login", "error");
+				return "login fail";
+			}
 		}
-		request().getSession().setAttribute("login", "error");
-		return "login fail";
+		
+		
 	}
 	
 	public String logout() throws Exception{

@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -18,9 +20,17 @@
     <!-- Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css"> 
+    
+    <%@page import="model.User"%>    
+    <%@page import="java.util.ArrayList" %>    
 </head>
 
 <body>
+<%
+	ArrayList<User> users = new ArrayList<User>();
+	users = (ArrayList<User>)session.getAttribute("allUsers");
+%>
+
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
@@ -295,21 +305,35 @@
                                             </tr>
                                         </thead>
                                         <tbody class="text-center">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>John</td>
-                                                <td>John15482</td>
-                                                <td>男</td>
-                                                <td>13888888888</td>
-                                                <td><div title="jbbbbbbbbd@gmail.com" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">jbbbbbbbbd@gmail.com</div></td>
-                                                <td><div title="上海市 闵行区 江川路街道" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">上海市 闵行区 江川路街道</div></td>
-                                                <td>2017-07-05</td>
-                                                <td>100%</td>
-                                                <td>120</td>
+                                           <%
+                                           		String gender="";
+                                           		String address="";
+                                           		if (users.size() > 0){
+                                           			for (int i=0; i < users.size(); i++){
+                                           				if (users.get(i).getSex().equals("male")){
+                                           					gender="男";
+                                           				}
+                                           				else{
+                                           					gender="女";
+                                           				}
+                                           				address = users.get(i).getProvince() + users.get(i).getCity() + users.get(i).getArea() + users.get(i).getTown() + users.get(i).getAddress();
+                                           %>
+											<tr>
+                                                <td><%=users.get(i).getUserID() %></td>
+                                                <td><%=users.get(i).getUserName() %></td>
+                                                <td><%=users.get(i).getRealName() %></td>
+                                                <td><%=gender %></td>
+                                                <td><%=users.get(i).getPhone() %></td>
+                                                <td><div title="<%=users.get(i).getEmail() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=users.get(i).getEmail() %></div></td>
+                                                <td><div title="<%=address %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=address %></div></td>
+                                                <td><%=users.get(i).getRegisterDate().toString().substring(0,19) %></td>
+                                                <td><%=users.get(i).getCredit() %></td>
+                                                <td><%=users.get(i).getBookCoin() %></td>
                                                 <td><button class="btn btn-success btn-xs">重置</button></td>
                                                 
                                             </tr>
-
+                                            <%} %>
+											<%} %>
                                         </tbody>
                                     </table>
                                 </div>

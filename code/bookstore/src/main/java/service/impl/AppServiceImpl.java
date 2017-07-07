@@ -7,11 +7,13 @@ import java.util.List;
 
 import service.AppService;
 import model.User;
+import model.Admin;
 import model.Book;
 import model.BookComment;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
 import dao.UserDao;
+import dao.AdminDao;
 import dao.BookCommentDao;
 import dao.BookDao;
 import dao.CoinChangeRecordDao;
@@ -37,6 +39,7 @@ public class AppServiceImpl implements AppService {
 	private BookCommentDao bookCommentDao;
 	private CreditChangeRecordDao creditChangeRecordDao;
 	private CoinChangeRecordDao coinChangeRecordDao;
+	private AdminDao adminDao;
 
 
 	
@@ -60,6 +63,9 @@ public class AppServiceImpl implements AppService {
 		this.coinChangeRecordDao = coinChangeRecordDao;
 	}
 	
+	public void setAdminDao(AdminDao adminDao){
+		this.adminDao = adminDao;
+	}
 	
 	
 	/*
@@ -265,6 +271,10 @@ public class AppServiceImpl implements AppService {
 		bookCommentDao.delete(bookCommentDao.getBookCommentByID(ID));
 	}
 	
+	public List<BookComment> getAllBookComments(){
+		return bookCommentDao.getAllBookComments();
+	}
+	
 	
 	
 	/*
@@ -279,5 +289,12 @@ public class AppServiceImpl implements AppService {
 	 */
 	public List<CoinChangeRecord> getCoinChangeRecordByUserName(String userName){
 		return coinChangeRecordDao.getCoinChangeRecordByUserName(userName);
+	}
+	
+	/*
+	 * Admin
+	 */
+	public Admin getAdminByAdminName(String adminName){
+		return adminDao.getAdminByAdminName(adminName);
 	}
 }
