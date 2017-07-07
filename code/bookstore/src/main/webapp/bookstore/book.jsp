@@ -143,7 +143,7 @@ session.setAttribute("prePage", url);
     ArrayList<BookComment> bookComments = new ArrayList<BookComment>();
     bookComments = (ArrayList<BookComment>)session.getAttribute("bookComment");
 %>
-
+<br>
 <!-- 书籍封面&基本信息 -->
 <div class="container">
   <div class="row">
@@ -573,7 +573,7 @@ var userName = '<%=session.getAttribute("loginUserName")%>'
 if (userName != "null"){
 
 	var str = "<li><a href='#'>我要卖书</a>";
-	str += "<li><a href='#'>个人中心</a>"
+	str += "<li><a href='MemberCenterAction!initialize'>个人中心</a>"
 	str+="<li><a href='AccountAction!logout'>登出</a>"
 	$('#personalInfo').html(str);
 }

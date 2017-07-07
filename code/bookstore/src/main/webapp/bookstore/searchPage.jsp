@@ -134,9 +134,11 @@ session.setAttribute("prePage",url);
         </li>
     </ul>
     </div>
-    
+
 </div>
-<br><p10>搜索结果</p10></br>   <!-- 字号需要调整 -->
+
+
+<div class="container" >  <hr> <p class="searchresult">搜索结果</p></div>   <!-- 字号需要调整 -->
 
 	<%
 		int pageNum=0;
@@ -151,7 +153,7 @@ session.setAttribute("prePage",url);
 
 
 <div class="container">
-<hr>
+
 <input style="display:none" value="1" id="futurePageNum" onchange="changePage(this.value)"/>
 <input style="display:none" value="<%=session.getAttribute("searchBookISBNs") %>" id="bookISBNs" />
 <input style="display:none" value="<%=session.getAttribute("searchBookAuthors") %>" id="bookAuthors" />
@@ -226,7 +228,7 @@ session.setAttribute("prePage",url);
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
 <script type="text/javascript" src="js/page.js"></script>
 <script type="text/javascript">
 function changePage(futurePageNum){

@@ -67,21 +67,35 @@
        <div class="liutext"><em>4</em><br /><strong>完成</strong></div>
       </div>
      </div><!--for-liucheng/-->
-     <form action="fpAction!changePassword" method="post" class="forget-pwd">
+     <form action="fpAction!changePassword" method="post" class="forget-pwd" onsubmit="return check();">
        <dl>
         <dt>新密码：</dt>                                                
-        <dd><input type="password" id="newpassword"  name="password" class="reg_newpassword"/></dd>          <!-- 新密码所在的input -->
+        <dd>        
+        <input type="password" id="newpassword"  name="password" class="reg_newpassword"  placeholder="6-16位密码" /></dd>          <!-- 新密码所在的input -->
         <div class="clears"></div>
        </dl> 
        <dl>
         <dt>确认密码：</dt>
-        <dd><input type="password" id="checkpassword"/></dd>                        <!-- 确认密码所在的input -->
+        <dd><input type="password" id="checkpassword"  placeholder="确认密码" class="reg_confirm"/></dd>                        <!-- 确认密码所在的input -->
         <div class="clears"></div>
        </dl> 
-       <div class="subtijiao"><input type="submit" value="提交" /></div>             <!-- 提交需判断（a）两个密码是否一致 -->
+       <div class="subtijiao"><input type="submit" value="提交" /></div>              <!-- 提交需判断（a）两个密码是否一致 -->
       </form><!--forget-pwd/-->
    </div><!--web-width/-->
   </div><!--content/-->
+
+<script type="text/javascript">
+function check(){
+	var pwd1 = document.getElementById("password").value;
+	var pwd2 = document.getElementById("checkpassword").value;
+   if((pwd1 == pwd2) && (/^[a-z0-9_-]{6,16}$/).test(pwd1)){
+	  return true;
+   }else {
+	  alert(pwd1+","+pwd2);
+	  return false;
+   }
+}
+</script>
   
 </body>
 </html>
