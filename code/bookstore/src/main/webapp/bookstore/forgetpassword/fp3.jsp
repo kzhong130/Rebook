@@ -10,6 +10,12 @@
 <link href="../css/bootstrap.css" rel="stylesheet" />
 </head>
 
+<%
+	String path=request.getContextPath();
+%>
+
+ <script type="text/javascript" src="<%=path %>/bookstore/js/jquery.min.js"></script>
+ <script type="text/javascript" src="<%=path %>/bookstore/js/jquery.citys.js"></script>   
 <body>
 <nav>
   <div class="container"> 
@@ -67,34 +73,74 @@
        <div class="liutext"><em>4</em><br /><strong>完成</strong></div>
       </div>
      </div><!--for-liucheng/-->
-     <form action="fpAction!changePassword" method="post" class="forget-pwd" onsubmit="return check();">
+     <!-- <form  method="post" class="forget-pwd" onsubmit="return check();">-->
        <dl>
         <dt>新密码：</dt>                                                
         <dd>        
-        <input type="password" id="newpassword"  name="password" class="reg_newpassword"  placeholder="6-16位密码" /></dd>          <!-- 新密码所在的input -->
+        <input type="password" id="newpassword"  name="password" class="password"  placeholder="6-16位密码" /></dd>          <!-- 新密码所在的input -->
         <div class="clears"></div>
        </dl> 
        <dl>
         <dt>确认密码：</dt>
-        <dd><input type="password" id="checkpassword"  placeholder="确认密码" class="reg_confirm"/></dd>                        <!-- 确认密码所在的input -->
+        <dd><input type="password" id="checkpassword"  placeholder="确认密码" class="checkpassword" name="checkpassword"/></dd>                        <!-- 确认密码所在的input -->
         <div class="clears"></div>
        </dl> 
-       <div class="subtijiao"><input type="submit" value="提交" /></div>              <!-- 提交需判断（a）两个密码是否一致 -->
-      </form><!--forget-pwd/-->
+        <button class="my_info_content_care_table_submit" name="" type="onclick" onclick="change()" >修改密码</button></td>
+     <!-- </form>--><!--forget-pwd/-->
    </div><!--web-width/-->
   </div><!--content/-->
 
 <script type="text/javascript">
-function check(){
-	var pwd1 = document.getElementById("password").value;
-	var pwd2 = document.getElementById("checkpassword").value;
-   if((pwd1 == pwd2) && (/^[a-z0-9_-]{6,16}$/).test(pwd1)){
-	  return true;
-   }else {
-	  alert(pwd1+","+pwd2);
-	  return false;
-   }
-}
+var if_old_right=false;
+var if_password_same=false;
+var password_Boolean=false;
+
+$('.password').blur(function(){
+		 if ((/^[a-z0-9_-]{6,16}$/).test($(".password").val())){
+		 //$('.password_len').html("✔").css("color","green");
+
+	 		password_Boolean = true;
+		}else {
+			 //$('.password_len').html("×").css("color","red");
+			 password_Boolean = false;
+		}
+});
+
+
+$('.checkpassword').blur(function(){
+	  if (($(".checkpassword").val())==($(".password").val())){
+	    //$('.password_hint').html("✔").css("color","green");
+	    if_password_same = true;
+	  }else {
+	    //$('.password_hint').html("×").css("color","red");
+	    if_password_same = false;
+	  }
+});
+
+	function change(){
+		//alert(2333);
+		//alert(password_Boolean);
+		//alert(if_password_same);
+		if(password_Boolean&&if_password_same){
+			//alert("sb");
+			$.ajax({  
+		        type:"POST",  
+		        url:"fpAction!changePassword",  
+		        async:false,
+		        data:{password:$(".password").val()},
+		        
+		    });
+			alert("修改密码成功！");
+			window.location.replace("fp4.jsp");
+		}
+		else{
+			if(!password_Boolean) alert("请确定密码长度");
+			if(!if_password_same) alert("请确定两次密码一样");
+		}
+		
+	}
+
+
 </script>
   
 </body>
