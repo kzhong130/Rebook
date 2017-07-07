@@ -45,19 +45,19 @@
     <tbody>
       <tr>
         <td align="right" class="color555 td1">旧密码：</td>
-        <td class="color555 td2"><input class="oldPassword" name="oldPassword" placeholder="输入旧密码" type="password"></td> 
-        <span class="tip confirm_hint"></span>
+        <td class="color555 td2"><input class="oldPassword" name="oldPassword" placeholder="输入旧密码" type="password">
+        <span class="tip confirm_hint"></span></td> 
         
       </tr>
       <tr>
         <td align="right" class="color555">新密码：</td>
-        <td class="color555"><input class="password" placeholder="6-16位密码" name="password" type="password"></td>
-        <span class="tip password_len"></span>
+        <td class="color555"><input class="password" placeholder="6-16位密码" name="password" type="password">
+        <span class="tip password_len"></span></td>
       </tr>
       <tr>
         <td align="right" class="color555">确认新密码：</td>
-        <td class="color555"><input class="checkpassword" placeholder="确认密码" name="checkpassword" type="password"></td>
-        <span class="tip password_hint"></span>
+        <td class="color555"><input class="checkpassword" placeholder="确认密码" name="checkpassword" type="password">
+        <span class="tip password_hint"></span></td>
         
       </tr>
             

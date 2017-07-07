@@ -227,6 +227,7 @@ input[placeholder], [placeholder], *[placeholder] {
   margin-top: 10px;
 }
 .reg_ul li span.tip{margin:6px 0 0 10px;width:40px;text-align:left;}
+.my_info_content_care_table span.tip{margin:6px 0 0 10px;width:40px;text-align:left;}
 .reg_ul li input{
   float: left;
   width: 228px;
