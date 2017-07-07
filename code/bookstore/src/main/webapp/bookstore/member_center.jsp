@@ -130,7 +130,7 @@
       <div class="menu_title"> 退出 </div>
       <div class="menu_list">
         <ul class="list-unstyled">
-          <li id="listClick14" class="" onClick="listClick(14)"><img src="img/member_center/left_icon_1.png"> 退出账号</li>
+          <li><a href='AccountAction!logout'><img src="img/member_center/left_icon_1.png"> 退出账号</a></li>
         </ul>
       </div>
     </div>
