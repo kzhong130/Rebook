@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@page import="model.CoinChangeRecord"%>    
-<%@page import="java.util.ArrayList" %> 
-<%@page import="model.User" %> 
+	pageEncoding="utf-8"%>
+<%@page import="model.CoinChangeRecord"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.User"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -19,7 +19,8 @@
 
 <!-- Bootstrap -->
 <link href="../css/bootstrap.min.css" rel="stylesheet">
-<link href="../css/crowdfunding.center/integration_record.css" rel="stylesheet">
+<link href="../css/crowdfunding.center/integration_record.css"
+	rel="stylesheet">
 <link href="../css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 
 <!--[if lt IE 9]>
@@ -34,43 +35,50 @@
 	User user = (User)session.getAttribute("user");
 %>
 <body>
-<!-- 开始 -->
-<div class="my_info_title">书币记录
-  <!--<span><button type="button" class="but">签到</button>
+	<!-- 开始 -->
+	<div class="my_info_title">
+		书币记录
+		<!--<span><button type="button" class="but">签到</button>
   <p>07月29日<br>
     漏签1天</p></span>-->
-  </div>
- <hr>
-<div class="integration_record">
-  <div class="integration_record_float"> 收支
-    <select id="showType">
-      <option value ="--全部--">--全部--</option>
-      <option value ="increase">增加</option>
-      <option value ="decrease">减少</option>
-    </select>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    时间范围：</div>
-  <div class="input-append date form_datetime integration_record_float">
-    <input class="integration_record_time" type="text" id="startTime" value="" readonly>
-    <span class="add-on"><i class="icon-th"></i></span> </div>
-  <div class="input-append date form_datetime integration_record_float"> &nbsp;-&nbsp;
-    <input class="integration_record_time"  type="text" id="endTime" value="" readonly>
-    <span class="add-on"><i class="icon-th"></i></span> </div>
-  <div class="integration_record_float"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <input type="button" class="but2" value="查询" id="searchButton">
-  </div>
-</div>
-<div class="integration_record_jfjl">
-  <div class="integration_record_jfjl_title"> 书币记录 <font class="font_size14">总书币为：<%=user.getBookCoin() %></font> </div>
-  <div class="integration_record_jfjl_content">
-    <table class="table table-bordered text-center" id="myTable">
-      <tr class="active">
-        <td>书币数量变更</td>
-        <td>详情</td>
-        <td>变更时间</td>
-      </tr>
-      <%
+	</div>
+	<hr>
+	<div class="integration_record">
+		<div class="integration_record_float">
+			收支 <select id="showType">
+				<option value="--全部--">--全部--</option>
+				<option value="increase">增加</option>
+				<option value="decrease">减少</option>
+			</select> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 时间范围：
+		</div>
+		<div class="input-append date form_datetime integration_record_float">
+			<input class="integration_record_time" type="text" id="startTime"
+				value="" readonly> <span class="add-on"><i
+				class="icon-th"></i></span>
+		</div>
+		<div class="input-append date form_datetime integration_record_float">
+			&nbsp;-&nbsp; <input class="integration_record_time" type="text"
+				id="endTime" value="" readonly> <span class="add-on"><i
+				class="icon-th"></i></span>
+		</div>
+		<div class="integration_record_float">
+			&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			&nbsp;&nbsp;&nbsp;&nbsp; <input type="button" class="but2" value="查询"
+				id="searchButton">
+		</div>
+	</div>
+	<div class="integration_record_jfjl">
+		<div class="integration_record_jfjl_title">
+			书币记录 <font class="font_size14">总书币为：<%=user.getBookCoin() %></font>
+		</div>
+		<div class="integration_record_jfjl_content">
+			<table class="table table-bordered text-center" id="myTable">
+				<tr class="active">
+					<td>书币数量变更</td>
+					<td>详情</td>
+					<td>变更时间</td>
+				</tr>
+				<%
       		String number;
       		String reason="";
       		if (coinChangeRecords.size()>0){
@@ -100,27 +108,28 @@
       				
       				
       %>
-      <tr id="tableRow">
-        <td><font class="colord19826"><%=number %></font></td>
-        <td><%=reason %></td>
-        <td><%=coinChangeRecords.get(i).getTime().toString().substring(0, 19) %></td>                 <!-- 该tr需按数据库多次循环 -->
-      </tr>
-      <%} %>
-      <%} %>
-    </table>
-  </div>
-  <!-- <div class="integration_record_jfjl_page" >
+				<tr id="tableRow">
+					<td><font class="colord19826"><%=number %></font></td>
+					<td><%=reason %></td>
+					<td><%=coinChangeRecords.get(i).getTime().toString().substring(0, 19) %></td>
+					<!-- 该tr需按数据库多次循环 -->
+				</tr>
+				<%} %>
+				<%} %>
+			</table>
+		</div>
+		<!-- <div class="integration_record_jfjl_page" >
     第 1/1 页，共<% %>条记录                    
   </div> -->
-</div>
+	</div>
 
-<!-- 结束 --> 
-<script src="../js/jquery-2.1.1.min.js"></script> 
-<script src="../js/bootstrap.min.js"></script> 
-<script src="../js/bootstrap-datetimepicker.min.js"></script> 
-<script src="../js/bootstrap-datetimepicker.zh-CN.js"></script>
-<script src="../js/my_info.js"></script>
-<script>
+	<!-- 结束 -->
+	<script src="../js/jquery-2.1.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script src="../js/bootstrap-datetimepicker.min.js"></script>
+	<script src="../js/bootstrap-datetimepicker.zh-CN.js"></script>
+	<script src="../js/my_info.js"></script>
+	<script>
 //JavaScript Document
 $(document).ready(function(){
 	$(".form_datetime").datetimepicker({

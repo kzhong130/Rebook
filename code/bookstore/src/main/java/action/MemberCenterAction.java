@@ -229,4 +229,19 @@ public class MemberCenterAction extends BaseAction{
 		
 		return "success";
 	}
+	
+	public String update() throws Exception{
+		User user=(User) request().getSession().getAttribute("user");
+		user.setAddress(address);
+		user.setPhone(phone);
+		user.setProvince(province);
+		user.setCity(city);
+		user.setArea(area);
+		user.setRealName(realName);
+		user.setTown(town);
+		user.setEmail(email);
+		appService.updateUser(user);
+		return "success";
+	}
+	
 }
