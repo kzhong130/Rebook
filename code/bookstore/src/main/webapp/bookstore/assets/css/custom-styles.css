@@ -676,6 +676,69 @@ font-size: 19px;
 	vertical-align: middle;
 }
 
-.form-control {
+.form-control-vam {
 	vertical-align: middle;
+}
+
+/* 自定义 btn-warning */
+.btn-warning1 {
+  color: #fff;
+  background-color: #3e3e3e;
+  /* border-color: #4cae4c; */
+}
+.btn-warning1:focus,
+.btn-warning1.focus {
+  color: #b8b8b8;
+  background-color: #3e3e3e;
+  /*border-color: #255625;*/
+}
+.btn-warning1:hover {
+  color: #b8b8b8;
+  background-color: #3e3e3e;
+  /*border-color: #398439;*/
+}
+.btn-warning1:active,
+.btn-warning1.active,
+.open > .dropdown-toggle.btn-warning1 {
+  color: #b8b8b8;
+  background-color: #3e3e3e;
+  /*border-color: #398439;*/
+}
+.btn-warning1:active:hover,
+.btn-warning1.active:hover,
+.open > .dropdown-toggle.btn-warning1:hover,
+.btn-warning1:active:focus,
+.btn-warning1.active:focus,
+.open > .dropdown-toggle.btn-warning1:focus,
+.btn-warning1:active.focus,
+.btn-warning1.active.focus,
+.open > .dropdown-toggle.btn-warning1.focus {
+  color: #b8b8b8;
+  background-color: #3e3e3e;
+  /*border-color: #255625;*/
+}
+.btn-warning1:active,
+.btn-warning1.active,
+.open > .dropdown-toggle.btn-warning1 {
+  background-image: none;
+}
+.btn-warning1.disabled:hover,
+.btn-warning1[disabled]:hover,
+fieldset[disabled] .btn-warning1:hover,
+.btn-warning1.disabled:focus,
+.btn-warning1[disabled]:focus,
+fieldset[disabled] .btn-warning1:focus,
+.btn-warning1.disabled.focus,
+.btn-warning1[disabled].focus,
+fieldset[disabled] .btn-warning1.focus {
+  background-color: #3e3e3e;
+  /*border-color: #4cae4c;*/
+}
+.btn-warning1 .badge {
+  color: #3e3e3e;
+  background-color: #fff;
+}
+
+.form-control-xs {
+	width: 25%;
 }
