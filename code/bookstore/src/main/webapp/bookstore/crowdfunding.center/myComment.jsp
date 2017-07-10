@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@page import="model.BookComment"%> 
-<%@page import="java.util.ArrayList" %> 
-<%@page import="model.Book" %> 
+	pageEncoding="utf-8"%>
+<%@page import="model.BookComment"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.Book"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -34,15 +34,17 @@
 	books = (ArrayList<Book>)session.getAttribute("bookByBookComment");
 %>
 <body>
-<!-- 开始 -->
-<div class="my_info_title">我的书评
-  <!--<span><button type="button" class="but">签到</button>
+
+	<!-- 开始 -->
+	<div class="my_info_title">
+		我的书评
+		<!--<span><button type="button" class="but">签到</button>
   <p>07月29日<br>
     漏签1天</p></span>-->
-</div>
-<hr>
+	</div>
+	<hr>
 
-<!-- 每个评论 -->
+	<!-- 每个评论 -->
 	<%
      	Book book = new Book();
      	BookComment bookComment = new BookComment();
@@ -58,35 +60,38 @@
      				}
      			}
      %>
+
 <div class="commentbox">
-     <table>
+     <table  style="width:828px;">
      
         <tr>
 
           <td class="bookimage"><a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a></td>
-          <td><p class="bookname"><span class="bookname"><%=book.getBookName() %></span>
-              <button class="delete" name="" type="onclick" >删 除</button></p>
-              <p class="comment"><%=bookComment.getContent() %>
-</p>
-              <p class="comment"><%=bookComment.getCommentTime().toString().substring(0, 19) %></p></td>
-  
+          <td class="bookcontent">
+          <table class="allwidth">
+              <tr>
+              <td class="bookname">《<%=book.getBookName() %>》</td>
+              <td class="deletebutton"><button class="delete" name="" type="onclick" >删 除</button></td>
+              </tr>
+              <tr>
+              <td colspan="2">
+              <p class="comment"><%=bookComment.getContent() %></p>
+              <p class="time"><%=bookComment.getCommentTime().toString().substring(0, 19) %></p></td>
+              </tr>
+           </table>
+           </td>
         </tr>
         
-     </table>
+
+		</table>
 
 
 
 
-</div>
-<%} %>
-     <%} %>
-
-
-
-
-
-
-
+	</div>
+	<br>
+	<%} %>
+	<%} %>
 
 
 
@@ -94,9 +99,39 @@
 
 
 
-<!-- 结束 --> 
-<script src="../js/jquery-2.1.1.min.js"></script> 
-<script src="../js/bootstrap.min.js"></script> 
+
+
+
+
+
+
+
+
+	<!-- 结束 -->
+	<script src="../js/jquery-2.1.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+	function deleteBookComment(ob){
+		var value = $(ob).attr("value");
+		$.ajax({
+			type:"POST",
+			url:"BookCommentAction!deleteBookComment",
+			async:false,
+			data:{ID:$(ob).attr("value")},
+			success:function(result){
+				result=eval('('+result+')');
+				if(result.success){
+					alert("删除成功！");
+					location.reload();
+				}
+				else{
+					alert("删除失败！");
+				}
+			}
+		});
+	}
+	
+</script>
 
 </body>
 </html>
