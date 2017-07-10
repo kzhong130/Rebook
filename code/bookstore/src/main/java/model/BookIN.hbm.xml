@@ -35,8 +35,8 @@
 		<property name="city" type="java.lang.String">
 			<column name="city"/>
 		</property>
-		<property name="latestReturnDate" type="java.sql.Timestamp">
-			<column name="lastestReturnDate"/>
+		<property name="longestDuration" type="int">
+			<column name="longestDuration"/>
 		</property>
 		<property name="ownerPhone" type="java.lang.String">
 			<column name="ownerPhone"/>

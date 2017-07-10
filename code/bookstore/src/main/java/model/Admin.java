@@ -2,6 +2,7 @@ package model;
 
 public class Admin {
 	private int adminID;
+	private String adminName;
 	private String password;
 	private String realName;
 	private String sex;
@@ -13,7 +14,8 @@ public class Admin {
 		
 	}
 	
-	public Admin(String password, String realName, String sex, String phone, String email, String address){
+	public Admin(String adminName,String password, String realName, String sex, String phone, String email, String address){
+		this.adminName = adminName;
 		this.password = password;
 		this.realName = realName;
 		this.sex = sex;
@@ -76,5 +78,13 @@ public class Admin {
 	
 	public void setAddress(String address){
 		this.address = address;
+	}
+	
+	public String getAdminName(){
+		return adminName;
+	}
+	
+	public void setAdminName(String adminName){
+		this.adminName = adminName;
 	}
 }

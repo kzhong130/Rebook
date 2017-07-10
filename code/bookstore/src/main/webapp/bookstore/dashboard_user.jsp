@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -18,9 +20,17 @@
     <!-- Google Fonts-->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="assets/js/Lightweight-Chart/cssCharts.css"> 
+    
+    <%@page import="model.User"%>    
+    <%@page import="java.util.ArrayList" %>    
 </head>
 
 <body>
+<%
+	ArrayList<User> users = new ArrayList<User>();
+	users = (ArrayList<User>)session.getAttribute("allUsers");
+%>
+
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
@@ -30,7 +40,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><strong style="vertical-align: middle"><img src="assets/img/logo_transparent_white.png" height="20px"></strong></a>
+                <a class="navbar-brand" href="test.jsp"><strong style="vertical-align: middle"><img src="assets/img/logo_transparent_white.png" height="20px"></strong></a>
 		<!-- sideNav折叠按钮		
 		<div id="sideNav" href="">
 		<i class="fa fa-bars icon"></i> 
@@ -41,7 +51,7 @@
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.welcome-messages -->
                 <li>
-					<font size="+1" style="vertical-align: middle">Welcome, bbeas</font>
+					<font size="+1" style="vertical-align: middle">Welcome, <%=session.getAttribute("loginUserName") %></font>
                 </li>
                 <!-- /.dropdown-tasks -->
                 <!--
@@ -193,15 +203,15 @@
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> 基本信息</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
+                        <li><a href="AccountAction!logout"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
                         </li>
                     </ul>
                 </li>
                           <form class="navbar-form navbar-right" role="search" style="margin:13px 20px 0 0">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input id="searchInput" type="text" class="form-control" placeholder="Search">
         </div>
-        <button type="submit" class="btn btn-default">搜索</button>
+        <button type="button" class="btn btn-default" id="searchButton">搜索</button>
       </form>
             </ul>
         </nav>
@@ -211,17 +221,17 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a class="active-menu" href="dashboard_user.html"><i class="fa fa-user"></i> 用户信息</a>
+                        <a class="active-menu" href="dashboard_user.jsp"><i class="fa fa-user"></i> 用户信息</a>
                     </li>
                     
                     <li>
                         <a href="#"><i class="fa fa-book"></i> 书籍信息<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="dashboard_book.html">基本信息</a>
+                                <a href="dashboard_book.jsp">基本信息</a>
                             </li>
                             <li>
-                                <a href="dashboard_bookComment.html">书籍评论</a>
+                                <a href="dashboard_bookComment.jsp">书籍评论</a>
                             </li>
                             <li>
                                 <a href="#">书籍发布情况</a>
@@ -278,7 +288,7 @@
                           
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover" style="table-layout:fixed">
+                                    <table class="table table-striped table-bordered table-hover" style="table-layout:fixed" id="myTable">
                                         <thead>
                                             <tr>
                                                 <th class="text-center" width="5%">ID</th>
@@ -295,21 +305,35 @@
                                             </tr>
                                         </thead>
                                         <tbody class="text-center">
-                                            <tr>
-                                                <td>1</td>
-                                                <td>John</td>
-                                                <td>John15482</td>
-                                                <td>男</td>
-                                                <td>13888888888</td>
-                                                <td><div title="jbbbbbbbbd@gmail.com" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">jbbbbbbbbd@gmail.com</div></td>
-                                                <td><div title="上海市 闵行区 江川路街道" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">上海市 闵行区 江川路街道</div></td>
-                                                <td>2017-07-05</td>
-                                                <td>100%</td>
-                                                <td>120</td>
-                                                <td><button class="btn btn-success btn-xs">重置</button></td>
+                                           <%
+                                           		String gender="";
+                                           		String address="";
+                                           		if (users.size() > 0){
+                                           			for (int i=0; i < users.size(); i++){
+                                           				if (users.get(i).getSex().equals("male")){
+                                           					gender="男";
+                                           				}
+                                           				else{
+                                           					gender="女";
+                                           				}
+                                           				address = users.get(i).getProvince() + users.get(i).getCity() + users.get(i).getArea() + users.get(i).getTown() + users.get(i).getAddress();
+                                           %>
+											<tr style="display">
+                                                <td><%=users.get(i).getUserID() %></td>
+                                                <td><%=users.get(i).getUserName() %></td>
+                                                <td><%=users.get(i).getRealName() %></td>
+                                                <td><%=gender %></td>
+                                                <td><%=users.get(i).getPhone() %></td>
+                                                <td><div title="<%=users.get(i).getEmail() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=users.get(i).getEmail() %></div></td>
+                                                <td><div title="<%=address %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=address %></div></td>
+                                                <td><%=users.get(i).getRegisterDate().toString().substring(0,19) %></td>
+                                                <td><%=users.get(i).getCredit() %></td>
+                                                <td><%=users.get(i).getBookCoin() %></td>
+                                                <td><button class="btn btn-success btn-xs" id="<%=users.get(i).getUserID()%>" onclick="resetPassword(this)">重置</button></td>
                                                 
                                             </tr>
-
+                                            <%} %>
+											<%} %>
                                         </tbody>
                                     </table>
                                 </div>
@@ -352,8 +376,47 @@
 
       
     <!-- Chart Js -->
-    <script type="text/javascript" src="assets/js/Chart.min.js"></script>  
+    <script type="text/javascript" src="assets/js/chart.min.js"></script>  
     <script type="text/javascript" src="assets/js/chartjs.js"></script> 
+    <script type="text/javascript" >
+    	function resetPassword(ob){
+    		var userID = ob.id;
+    		$.ajax({
+    			type:"POST",
+    			url:"AccountAction!resetPassword",
+    			async:false,
+    			data:{userID:userID},
+    			success:function(result){
+    				result=eval('('+result+')');
+    				if (result.success){
+    					alert("重置成功");
+    				}
+    				else{
+    					alert("重置失败");
+    				}
+    			}
+    		})
+    	}
+    	
+    	$("#searchButton").click(function(){
+    		var keyword = $("#searchInput").val();
+    		var tempText = "";
+    		var mytable = document.getElementById("myTable");
+    		
+    		for (var i=1; i<mytable.rows.length; i++){
+    			mytable.rows[i].style.display="none";
+    			for (var j=0; j<mytable.rows[i].cells.length-1; j++){
+    				tempText = mytable.rows[i].cells[j].innerText;
+        			if (tempText.indexOf(keyword) >= 0){	//查到结果
+        				mytable.rows[i].style.display="";
+        				break;
+        			}
+    			}
+    			
+    		}
+
+    	})
+    </script>
 
 </body>
 

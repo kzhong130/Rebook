@@ -13,5 +13,7 @@ public interface AdminDao {
 	
 	public Admin getAdminByAdminID(int adminID);
 	
+	public Admin getAdminByAdminName(String adminName);
+	
 	public List<Admin> getAllAdmins();
 }

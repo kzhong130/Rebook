@@ -53,7 +53,9 @@ create table admin
    phone                varchar(20)                    not null,
    email                varchar(20)                    not null,
    address              varchar(50)                    not null,
-   primary key (adminID)
+   adminName			varchar(20)					   not null,
+   primary key (adminID),
+   unique (adminName)
 );
 
 
