@@ -46,7 +46,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="#"><img
+				<a class="navbar-brand" href="test.jsp"><img
 					src="images/index1_logo.png" /></a>
 			</div>
 

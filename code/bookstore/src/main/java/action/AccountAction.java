@@ -234,6 +234,7 @@ public class AccountAction extends BaseAction{
 				request().getSession().setAttribute("allBooks", books);
 				List<BookComment> bookComments = appService.getAllBookComments();
 				request().getSession().setAttribute("allBookComments", bookComments);
+				request().getSession().setAttribute("admin", "admin");
 				return "adminlogin success";
 			}	
 			else{		//管理员密码错误
@@ -258,9 +259,31 @@ public class AccountAction extends BaseAction{
 	}
 	
 	public String logout() throws Exception{
-		request().getSession().removeAttribute("loginUserName");
-		return "logout success";
+		if (request().getSession().getAttribute("admin") == null){
+			request().getSession().removeAttribute("loginUserName");
+			return "logout success";
+		}
+		else{
+			request().getSession().removeAttribute("loginUserName");
+			request().getSession().removeAttribute("admin");
+			return "admin logout success";
+		}
 		
+		
+	}
+	
+	public String resetPassword() throws Exception{
+		User user = appService.getUserByUserID(userID);
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject();
+		user.setPassword("111111");
+		appService.updateUser(user);
+		obj.put("success", true);
+		String str = obj.toString();
+		out.write(str);
+		out.close();
+		
+		return "reset success";
 	}
 	
 	
