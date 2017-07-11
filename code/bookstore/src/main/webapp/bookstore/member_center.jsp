@@ -24,7 +24,7 @@
     <![endif]-->
 <link href="css/style.css" rel="stylesheet">
 <!-- CSS公共部分 结束 -->
-
+<link rel="stylesheet" href="css/login.css">
 <link href="css/crowdfunding.css" rel="stylesheet">
 
 </head>
@@ -53,7 +53,7 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right hidden-sm">
-					<li><a href="#" class="title">我要卖书</a></li>
+					<li><a href="#" class="td" style="color:#707070">出借/卖书</a> </li>
 					<li><a href="test.jsp" class="title">返回首页</a></li>
 				</ul>
 			</div>
@@ -61,6 +61,40 @@
 		</div>
 		<!-- /.container-fluid -->
 	</nav>
+
+<div id="gray"></div>
+<div class="popup" id="lendsell">
+
+	<div class="top_nav" id='top_nav'>
+		<div align="center">
+			<span>出借/卖书</span>
+			<a class="guanbi"></a>
+		</div>
+	</div>
+	
+	<div class="min">
+	
+		<div class="tc_login">
+		
+			<div class="right">
+				<form method="POST" name="form_login" target="_top" action=<% %>>
+					<div align="center">
+					    <p style="font-size:14px;color:#707070;float:left;">请输入您出借/卖的书对应的ISBN </p>
+						<input type="text" name="ISBN" id="ISBN" required="required" placeholder="ISBN" autocomplete="off" class="input_yh">
+						<p style="font-size:5px;color:#fff;"> </p>
+					</div>
+					<div align="center">
+						<input type="submit" class="button" title="" value="查询">
+					</div>
+				</form> 
+			</div>
+		
+		</div>
+	
+	</div>
+
+</div>
+
 
 	<!-- top + banner 结束 -->
 	<!-- 核心 开始 -->
@@ -224,6 +258,75 @@
 	<script src="js/basics.js"></script>
 	<!-- JS公共部分 结束 -->
 	<script src="js/crowdfunding.js"></script>
+	<script type="text/javascript">
+
+//点击登录class为td 显示
+$(".td").click(function(){
+	$("#gray").show();
+	$("#lendsell").show();//查找ID为lendsell的DIV show()显示#gray
+	tc_center();
+});
+//点击关闭按钮
+$("a.guanbi").click(function(){
+	$("#gray").hide();
+	$("#lendsell").hide();//查找ID为lendsell的DIV hide()隐藏
+})
+
+//窗口水平居中
+$(window).resize(function(){
+	tc_center();
+});
+
+function tc_center(){
+	var _top=($(window).height()-$(".popup").height())/2;
+	var _left=($(window).width()-$(".popup").width())/2;
+	
+	$(".popup").css({top:_top,left:_left});
+}
+
+
+function tt(dd){
+    //alert(dd);
+}
+var GG = {
+    "kk":function(mm){
+       // alert(mm);
+    }
+}
+
+var books = $('#bookISBNs').val().split("$");
+var listCount = parseInt(books.length);
+$("#page").initPage(listCount,1,GG.kk);
+
+$(document).ready(function(){ 
+
+	$(".top_nav").mousedown(function(e){ 
+		$(this).css("cursor","move");//改变鼠标指针的形状 
+		var offset = $(this).offset();//DIV在页面的位置 
+		var x = e.pageX - offset.left;//获得鼠标指针离DIV元素左边界的距离 
+		var y = e.pageY - offset.top;//获得鼠标指针离DIV元素上边界的距离 
+		$(document).bind("mousemove",function(ev){ //绑定鼠标的移动事件，因为光标在DIV元素外面也要有效果，所以要用doucment的事件，而不用DIV元素的事件 
+		
+			$(".popup").stop();//加上这个之后 
+			
+			var _x = ev.pageX - x;//获得X轴方向移动的值 
+			var _y = ev.pageY - y;//获得Y轴方向移动的值 
+		
+			$(".popup").animate({left:_x+"px",top:_y+"px"},10); 
+		}); 
+
+	}); 
+
+	$(document).mouseup(function() { 
+		$(".popup").css("cursor","default"); 
+		$(this).unbind("mousemove");
+	})
+})
+
+
+
+
+</script>
 	<script type="text/javascript">
 	$("#crowdfunding_iframe").load(function () {
 	    var mainheight = $(this).contents().find("body").height() + 30;

@@ -1,0 +1,118 @@
+input[placeholder], [placeholder], *[placeholder] { 
+ color:#707070 !important; 
+} 
+
+.reg_div{
+  margin:auto;
+  width: 100%;
+  height:390px;
+  border:0px solid #333;
+  text-align: center;
+  background-color: #ffffff;
+}
+.reg_div p a{
+  padding: 30px 0px;
+  font-size: 30px;
+}
+
+.reg_ul{
+  width: 100%;
+}
+.reg_ul li{
+  margin: auto;
+  overflow: hidden;
+  width: 100%;
+  margin-top: 10px;
+  list-style: none;
+}
+
+.reg_ul li span{
+  float: left;
+  width:100px;
+  text-align:right;
+  display:inline-block;
+  margin: auto;
+  margin-left:10px;
+  margin-top: 10px;
+}
+.reg_ul li span.tip{margin:6px 0 0 10px;width:40px;text-align:left;}
+.reg_ul li input{
+  float: left;
+  width: 228px;
+  height: 30px;
+  border:1px solid #707070;
+  border-radius: 3px;
+  padding-left: 20px;
+  outline:medium;
+  margin-left: 10px;
+}
+.reg_ul li input[type="radio"] { 
+	margin: 3px 3px 0px 15px;  
+	float: none;
+    width: 15px;
+    height: 15px;
+    border:1px solid #707070;
+    border-radius: 3px;
+    padding-left: 0px;
+    outline:medium;
+    text-align:left;
+    align:left;
+}
+
+.reg_ul li button{
+  margin: auto;
+  color: #ffffff;
+  background-color: #efbb24;
+  font-size: 16px;
+  padding: 10px 60px;
+  outline: inherit;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.reg_ul li button:hover{
+    background: #d19826;
+}
+
+
+
+.citys{
+    margin-top: 10px;
+}
+.citys p{
+    line-height: 28px;
+    text-align:left;
+    margin:0 0 0 120px;
+}
+.citys p select{
+    text-align:left;
+    float:!left;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.

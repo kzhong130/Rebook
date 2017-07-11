@@ -1,11 +1,4 @@
 @charset "utf-8";
-/*
-*{padding:0px;margin:0px;}
-body{min-width:980px;background-color:#fafafa;font:12px/1.5 arial,sans-serif;}
-body,ul,h1{margin:0px;}
-ul{list-style-type:none;}
-img{display:block;}/*变成块集元素
-a{text-decoration:none;}*/
 
 /*--弹窗样式--*/
 
@@ -111,9 +104,10 @@ a{text-decoration:none;}*/
     height: 50px;
     font-size: 16px;
     text-align: center;
+    align:center;
     text-transform: uppercase;
     width: 100%;
-	padding:0 0px 0 0px;
+	padding:0;
 	font-weight: bold;
 	outline: none;
 	text-decoration: none;
