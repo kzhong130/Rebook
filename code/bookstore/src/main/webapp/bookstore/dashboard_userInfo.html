@@ -77,12 +77,12 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a href="dashboard_user.html"><i class="fa fa-user"></i> 用户信息</a>
+                        <a href="dashboard_user.html" class="active-menu"><i class="fa fa-user"></i> 用户信息</a>
                     </li>
                     
                     <li>
-                        <a href="#" class="active-menu"><i class="fa fa-book"></i> 书籍信息<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                        <a href="#"><i class="fa fa-book"></i> 书籍信息<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
                             <li>
                                 <a href="dashboard_book.html">基本信息</a>
                             </li>
@@ -94,6 +94,7 @@
                             </li>
 							</ul>
                     </li> 
+
                     
 					 <li>
                         <a href="#"><i class="fa fa-file-text"></i> 订单信息<span class="fa arrow"></span></a>
@@ -113,7 +114,6 @@
                     
 
                 </ul>
-
             </div>
 
         </nav>
@@ -121,39 +121,53 @@
 		<div id="page-wrapper">
 		  <div class="header"> 
                         <h2 class="page-header">
-                            书籍评论 <small>
-                            comment</small>
+                            用户信息 <small>
+                            user</small>
                         </h2>
 									
 		</div>
             <div id="page-inner">
+
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
 
                         <div class="panel panel-default">
                           
                             <div class="panel-body">
-								<p>ISBN: </p>
-                                <p>书名: </p>
-                                <p>用户ID: </p>
+                            <form class="form-horizontal" role="form">
+                            	<div class="col-md-10 col-sm-10 col-xs-10">
+								<p>ID: </p>
                                 <p>用户名: </p>
-                                <p>时间: </p>
-                                <p>内容: </p><br>
-                                <!-- 字体有点丑之后一起改 -->
-                                <form role="form">
-												<div class="form-group">
-													<label for="状态">状态: </label>
-													<label class="checkbox-inline">
-													<input type="radio" name="bookCommentCheck" id="bookCommentCheck1" value="已通过"> 已通过
-													</label>
-													<label class="checkbox-inline">
-													<input type="radio" name="bookCommentCheck" id="bookCommentCheck0" value="未通过"> 未通过
-													</label>
-												</div>
-												
-                          <input type="submit" class="btn btn-success" value="确认修改">&nbsp;&nbsp;
-                           <a href="dashboard_bookComment.html" class="btn btn-default">返回</a>
-                           </form>
+                                <p>真实姓名: </p>
+                                <p>性别: </p>
+                                <p>联系方式: </p>
+                                <p>E-mail: </p>
+                                <p>地址: </p>
+                                <p>注册日期: </p>
+                                <br>
+                                <!-- 这两个字体有点丑，等功能实现之后再统一改好了TvT -->
+                                <div class="form-group">
+                                <label for="信用" class="col-sm-1 control-label">信用: </label>
+    							<div class="col-sm-9">
+      							<input type="text" class="form-control form-control-xs" id="信用" placeholder="100%">
+								</div></div>
+                                <div class="form-group">
+                                <label for="书币" class="col-sm-1 control-label">书币: </label>
+    							<div class="col-sm-9">				
+      							<input type="text" class="form-control form-control-xs" id="书币" placeholder="120">
+                               	</div></div>
+                               	<br>
+                               	<div>
+                                <input type="submit" class="btn btn-success" value="确认修改">&nbsp;&nbsp;
+                                <a href="dashboard_user.html" class="btn btn-default">返回</a>
+                                </div>
+								</div>
+                               </form>
+                                <div class="col-md-2 col-sm-2 col-xs-2" style="text-align: center">
+                                <p><button class="btn btn-warning1">重置密码</button><hr style="padding-top: -10px;padding-bottom: -10px;"><button class="btn btn-warning1">删除用户</button></p>
+								</div>
+                           
+								
                             </div>
                         </div>
 

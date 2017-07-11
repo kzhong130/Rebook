@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+    pageEncoding="utf-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
       <meta charset="utf-8" />
@@ -10,12 +12,44 @@
     <link href="assets/css/bootstrap_book.css" rel="stylesheet" />
      <!-- FontAwesome Styles-->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
+     <!-- Morris Chart Styles-->
+    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
         <!-- Custom Styles-->
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
      <!-- Google Fonts-->
    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
+     <%@page import="model.BookComment"%>    
+    <%@page import="java.util.ArrayList" %>    
+    <%@page import="model.Book" %>
+       <!-- jQuery Js -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+
+	<!-- JS Scripts-->
+    <script type="text/javascript">
+       	//文本溢出点击显示
+			 $(document).ready(function(){
+			 $("button").click(function(){
+				 $("overflowText").toggle();
+			 });
+		 });
+	</script>
+
 </head>
 <body>
+<%
+	String ISBN = request.getParameter("ISBN");
+	String bookName="";
+	ArrayList<BookComment> bookComments = (ArrayList<BookComment>)session.getAttribute("allBookComments");
+	ArrayList<Book> books = (ArrayList<Book>)session.getAttribute("allBooks");
+	if (ISBN != null){
+		for (int i=0; i<books.size(); i++){
+			if (books.get(i).getISBN().equals(ISBN)){
+				bookName = books.get(i).getBookName();
+				break;
+			}
+		}
+	}
+%>
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
             <div class="navbar-header">
@@ -25,13 +59,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html"><strong style="vertical-align: middle"><img src="assets/img/logo_transparent_white.png" height="20px"></strong></a>
+                <a class="navbar-brand" href="test.jsp"><strong style="vertical-align: middle"><img src="assets/img/logo_transparent_white.png" height="20px"></strong></a>
 				
             </div>
 
             <ul class="nav navbar-top-links navbar-right">
                 <li>
-					<font size="+1" style="vertical-align: middle">Welcome, bbeas</font>
+					<font size="+1" style="vertical-align: middle">Welcome, <%=session.getAttribute("loginUserName") %></font>
                 </li>
 
                 <!-- /.dropdown-user -->
@@ -43,17 +77,18 @@
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> 基本信息</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="#"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
+                        <li><a href="AccountAction!logout"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
                         </li>
                     </ul>
                 </li>
-          <form class="navbar-form navbar-right" role="search" style="margin:13px 20px 0 0">
+                          <form class="navbar-form navbar-right" role="search" style="margin:13px 20px 0 0">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control" placeholder="Search" id="searchInput">
         </div>
-        <button type="submit" class="btn btn-default">搜索</button>
+        <button type="button" class="btn btn-default" id="searchButton">搜索</button>
       </form>
             </ul>
+
         </nav>
         <!--/. NAV TOP  -->
         <nav class="navbar-default navbar-side" role="navigation">
@@ -61,17 +96,17 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a href="dashboard_user.html"><i class="fa fa-user"></i> 用户信息</a>
+                        <a href="dashboard_user.jsp"><i class="fa fa-user"></i> 用户信息</a>
                     </li>
                     
                     <li>
                         <a href="#" class="active-menu"><i class="fa fa-book"></i> 书籍信息<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                             <li>
-                                <a href="dashboard_book.html">基本信息</a>
+                                <a href="dashboard_book.jsp">基本信息</a>
                             </li>
                             <li>
-                                <a href="dashboard_bookComment.html">书籍评论</a>
+                                <a href="dashboard_bookComment.jsp">书籍评论</a>
                             </li>
                             <li>
                                 <a href="#">书籍发布情况</a>
@@ -105,8 +140,8 @@
 		<div id="page-wrapper">
 		  <div class="header"> 
                         <h2 class="page-header">
-                            书籍信息 <small>
-                            book</small>
+                            书籍评论 <small>
+                            comment</small>
                         </h2>
                         <!-- home/dashboard/data
 						<ol class="breadcrumb">
@@ -373,29 +408,116 @@
                           
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover" style="table-layout:fixed">
+                                    <table class="table table-striped table-bordered table-hover" style="table-layout:fixed" id="myTable">
                                         <thead>
                                             <tr class="text-center">
                                                 <th class="text-center" width="15%">ISBN</th>
-                                                <th class="text-center" width="20%">书名</th>
-                                                <th class="text-center" width="20%">作者</th>
-                                                <th class="text-center" width="20%">出版社</th>
-                                                <th class="text-center" width="10%">价格</th>
-                                                <th class="text-center">书评</th>
-                                                <th class="text-center" width="8%">发布情况</th>
+                                                <th class="text-center" width="10%">书名</th>
+                                                <th class="text-center">用户名</th>
+                                                <th class="text-center">时间</th>
+                                                <th class="text-center" width="25%">内容</th>
+                                                <th class="text-center" width="12%">状态</th>
+                                                <th class="text-center" width="6%">详情</th>
                                             </tr>
                                         </thead>
                                         <tbody class="text-center">
+                                            <%
+                                            	if (ISBN != null){
+                                            		if(bookComments.size()>0){
+                                            			for (int i=0; i<bookComments.size(); i++){
+                                            				if (bookComments.get(i).getISBN().equals(ISBN)){
+                                            			
+                                            %>
                                             <tr>
-                                                <td><div title="9787201116693" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">9787201116693</div></td>
-                                                <td><div title="外婆的道歉信" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">外婆的道歉信</div></td>
-                                                <td><div title="弗雷德里克·巴克曼" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">弗雷德里克·巴克曼</div></td>
-                                                <td><div title="天津人民出版社" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">天津人民出版社哈哈哈哈哈哈哈哈哈</div></td>
-                                                <td>42.00元</td>
-                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookComment.html">查看</a></td>
-                                                <td><button class="btn btn-success btn-xs">查看</button></td>
+												  <td><%=bookComments.get(i).getISBN() %></td>
+                                                <td><div title="<%=bookName	 %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookName %></div></td>
+                                                <td><%=bookComments.get(i).getUserName() %></td>
+                                                <td><%=bookComments.get(i).getCommentTime().toString().substring(0, 19) %></td>
+                                                <td><div title="<%=bookComments.get(i).getContent() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookComments.get(i).getContent() %></div></td>
+                                               	<!-- 可用title="" -->
+                                                <td>
+                                                <form role="form">
+												<%
+													if ("reject".equals(bookComments.get(i).getCheckResult())){
+												%>
+												<div class="form-group">
+													<select class="form-control">
+													<option value="0"  selected="selected">未通过</option>
+													<option value="1">已通过</option>
+													</select>
+												</div>
+												<%} 
+													if("pass".equals(bookComments.get(i).getCheckResult())  || bookComments.get(i).getCheckResult() == null){
+												%>
+												<div class="form-group">
+													<select class="form-control">
+													<option value="0"  >未通过</option>
+													<option value="1" selected="selected">已通过</option>
+													</select>
+												</div>
+												<%} %>
+												</form>
+                                                </td>
+                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookCommentInfo.jsp?ISBN=<%=bookComments.get(i).getISBN()%>&ID=<%=bookComments.get(i).getID()%>">查看</a></td>
+                                                
                                             </tr>
-											
+                                            <%} %>
+                                            <%} %>
+                                            <%} %>
+                                            <%} %>
+                                            <%
+                                            	if (ISBN ==null){
+                                            		if (bookComments.size() >0){
+                                            			for (int i=0; i<bookComments.size(); i++){
+                                          
+                                            %>
+                                            <tr>
+												  <td><%=bookComments.get(i).getISBN() %></td>
+                                                <%
+                                                	for (int j=0; j<books.size(); j++){
+                                                		if (books.get(j).getISBN().equals(bookComments.get(i).getISBN())){
+                                                			bookName = books.get(j).getBookName();
+                                                			break;
+                                                		}
+                                                	}
+                                                %>
+                                                <td><div title="<%=bookName	 %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookName %></div></td>
+                                                <td><%=bookComments.get(i).getUserName() %></td>
+                                                <td><%=bookComments.get(i).getCommentTime().toString().substring(0, 19) %></td>
+                                                <td><div title="<%=bookComments.get(i).getContent() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookComments.get(i).getContent() %></div></td>
+                                               	<!-- 可用title="" -->
+                                                <td>
+                                                <form role="form">
+												<%
+													if ("reject".equals(bookComments.get(i).getCheckResult())){
+												%>
+												<div class="form-group">
+													<select class="form-control">
+													<option value="0"  selected="selected">未通过</option>
+													<option value="1">已通过</option>
+													</select>
+												</div>
+												<%} 
+													if("pass".equals(bookComments.get(i).getCheckResult())  || bookComments.get(i).getCheckResult() == null){
+												%>
+												<div class="form-group">
+													<select class="form-control">
+													<option value="0"  >未通过</option>
+													<option value="1" selected="selected">已通过</option>
+													</select>
+												</div>
+
+												<%} %>
+												
+												</form>
+                                                </td>
+                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookCommentInfo.jsp?ISBN=<%=bookComments.get(i).getISBN()%>&ID=<%=bookComments.get(i).getID()%>">查看</a></td>
+                                                
+                                            </tr>
+                                            <%} %>
+												<%} %>
+												<%} %>
+                                            
                                         </tbody>
                                     </table>
                                 </div>
@@ -405,9 +527,7 @@
                     </div>
                 </div>
                 <!-- /. ROW  -->
-			
-		
-				<footer><p>Copyright &copy; 2017.Company name All rights reserved.</p>
+                <footer><p>Copyright &copy; 2017.Company name All rights reserved.</p>
 				</footer>
             </div>
             <!-- /. PAGE INNER  -->
@@ -415,15 +535,41 @@
         <!-- /. PAGE WRAPPER  -->
         </div>
      <!-- /. WRAPPER  -->
-    <!-- JS Scripts-->
-    <!-- jQuery Js -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
+
       <!-- Bootstrap Js -->
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
     <script src="assets/js/jquery.metisMenu.js"></script>
-      <!-- Custom Js -->
+    <!-- Chart Js -->
+    <script type="text/javascript" src="assets/js/Chart.min.js"></script>  
+    <script type="text/javascript" src="assets/js/chartjs.js"></script> 
+     <!-- Morris Chart Js -->
+     <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
+    <script src="assets/js/morris/morris.js"></script>
+     <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
- 
+	<script type="text/javascript">
+	$("#searchButton").click(function(){
+		var keyword = $("#searchInput").val();
+		var tempText = "";
+		var mytable = document.getElementById("myTable");
+		
+		for (var i=1; i<mytable.rows.length; i++){
+			mytable.rows[i].style.display="none";
+			for (var j=0; j<mytable.rows[i].cells.length-1; j++){
+				tempText = mytable.rows[i].cells[j].innerText;
+    			if (tempText.indexOf(keyword) >= 0){	//查到结果
+    				mytable.rows[i].style.display="";
+    				break;
+    			}
+			}
+			
+		}
+
+	})
+	</script>
+
+
+       
 </body>
 </html>

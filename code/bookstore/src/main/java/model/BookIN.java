@@ -13,7 +13,7 @@ public class BookIN {
 	private String type;
 	private String sendWay;
 	private String city;
-	private Timestamp latestReturnDate;
+	private int longestDuration;
 	private String ownerPhone;
 	private String ownerAddress;
 	private String inStatus;
@@ -24,7 +24,7 @@ public class BookIN {
 		
 	}
 	
-	public BookIN(int userID, String ISBN,String recency,Timestamp inTime,int coinNumber,String ownerName,String type,String sendWay,String city,Timestamp latestReturnDate,String ownerPhone,String ownerAddress,String inStatus,String note,String province){
+	public BookIN(int userID, String ISBN,String recency,Timestamp inTime,int coinNumber,String ownerName,String type,String sendWay,String city,int longestDuration,String ownerPhone,String ownerAddress,String inStatus,String note,String province){
 		this.userID = userID;
 		this.ISBN = ISBN;
 		this.recency = recency;
@@ -34,7 +34,7 @@ public class BookIN {
 		this.type = type;
 		this.sendWay = sendWay;
 		this.city = city;
-		this.latestReturnDate = latestReturnDate;
+		this.longestDuration = longestDuration;
 		this.ownerPhone = ownerPhone;
 		this.ownerAddress = ownerAddress;
 		this.inStatus = inStatus;
@@ -122,12 +122,12 @@ public class BookIN {
 		this.city = city;
 	}
 	
-	public Timestamp getLatestReturnDate(){
-		return latestReturnDate;
+	public int getLongestDuration(){
+		return longestDuration;
 	}
 	
-	public void setLatestReturnDate(Timestamp latestReturnDate){
-		this.latestReturnDate = latestReturnDate;
+	public void setLongestDuration(int longestDuration){
+		this.longestDuration = longestDuration;
 	}
 	
 	public String getOwnerPhone(){

@@ -395,12 +395,27 @@ if (login_status=="error"){
 }
 
 var userName = '<%=session.getAttribute("loginUserName")%>'
+var admin = '<%=session.getAttribute("admin")%>'
 
 if (userName != "null"){
+	if (admin == "null"){
+		var str = "<li><a href='#'>我要卖书</a>";
+		str += "<li><a href='MemberCenterAction!initialize'>个人中心</a>"
+		str+="<li><a href='AccountAction!logout'>登出</a>"
+		$('#personalInfo').html(str);
+	}
+	else{
+		var str="<li><a href='#'>我要卖书</a>";
+		str+="<li><a href='dashboard_user.jsp'>管理中心</a>";
+		str+="<li><A href='AccountAction!logout'>登出</a>";
+		$('#personalInfo').html(str);
+	}
+
 
 	var str =  "<li><a href='MemberCenterAction!initialize'>个人中心</a>"
 	str+="<li><a href='AccountAction!logout'>登出</a>"
 	$('#personalInfo').html(str);
+
 }
 	
 

@@ -2,6 +2,8 @@ package service;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import model.Admin;
 import model.Book;
 import model.BookComment;
 import model.CoinChangeRecord;
@@ -38,6 +40,7 @@ public interface AppService {
 	public List<BookComment> getBookCommentsByISBN(String ISBN);
 	public List<BookComment> getBookCommentsByUserName(String userName);
 	public void deleteBookCommentByID(int ID);
+	public List<BookComment> getAllBookComments();
 	
 	/*
 	 * CreditChangeRecord
@@ -49,5 +52,10 @@ public interface AppService {
 	 * CoinChangeRecord
 	 */
 	public List<CoinChangeRecord> getCoinChangeRecordByUserName(String userName);
+	
+	/*
+	 * Admin
+	 */
+	public Admin getAdminByAdminName(String adminName);
 
 }
