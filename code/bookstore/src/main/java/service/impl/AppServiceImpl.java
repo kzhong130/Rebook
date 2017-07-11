@@ -275,6 +275,13 @@ public class AppServiceImpl implements AppService {
 		return bookCommentDao.getAllBookComments();
 	}
 	
+	public BookComment getBookCommentByID(int ID){
+		return bookCommentDao.getBookCommentByID(ID);
+	}
+	
+	public void updateBookComment(BookComment bookComment){
+		bookCommentDao.update(bookComment);
+	}
 	
 	
 	/*
@@ -284,11 +291,19 @@ public class AppServiceImpl implements AppService {
 		return creditChangeRecordDao.getCreditChangeRecordByUserName(userName);
 	}
 	
+	public Integer addCreditChangeRecord(CreditChangeRecord creditChangeRecord){
+		return creditChangeRecordDao.save(creditChangeRecord);
+	}
+	
 	/*
 	 * CoinChangeRecord
 	 */
 	public List<CoinChangeRecord> getCoinChangeRecordByUserName(String userName){
 		return coinChangeRecordDao.getCoinChangeRecordByUserName(userName);
+	}
+	
+	public Integer addCoinChangeRecord(CoinChangeRecord coinChangeRecord){
+		return coinChangeRecordDao.save(coinChangeRecord);
 	}
 	
 	/*

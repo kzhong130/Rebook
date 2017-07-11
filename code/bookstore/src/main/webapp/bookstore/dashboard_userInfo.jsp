@@ -18,9 +18,8 @@
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
      <!-- Google Fonts-->
    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
-        <%@page import="model.BookComment"%>    
+   <%@page import="model.User"%>    
     <%@page import="java.util.ArrayList" %>    
-    <%@page import="model.Book" %>
        <!-- jQuery Js -->
     <script src="assets/js/jquery-1.10.2.js"></script>
 
@@ -37,31 +36,27 @@
 </head>
 <body>
 <%
-	String ISBN = request.getParameter("ISBN");
-
-	int ID = Integer.parseInt(request.getParameter("ID"));
-	
-	ArrayList<Book> books = (ArrayList<Book>)session.getAttribute("allBooks");
-	Book book = new Book();
-	if (books.size() > 0){
-		for (int i=0; i<books.size(); i++){
-			if (books.get(i).getISBN().equals(ISBN)){
-				book = books.get(i);
+	int userID = Integer.parseInt(request.getParameter("userID"));
+	ArrayList<User> users = (ArrayList<User>)session.getAttribute("allUsers");
+	User user = new User();
+	String gender = "";
+	String address = "";
+	if (users.size() > 0){
+		for (int i=0; i< users.size(); i++){
+			if (users.get(i).getUserID() == userID){
+				user = users.get(i);
 				break;
 			}
 		}
 	}
-	ArrayList<BookComment> bookComments = (ArrayList<BookComment>)session.getAttribute("allBookComments");
-	BookComment bookComment = new BookComment();
-	if (bookComments.size()>0){
-		for (int i=0; i<bookComments.size(); i++){
-			if (bookComments.get(i).getID() == ID){
-				bookComment = bookComments.get(i);
-				break;
-			}
-		}
+	if ("male".equals(user.getSex())){
+		gender = "男";
+	}
+	else{
+		gender = "女";
 	}
 	
+	address = user.getProvince() + user.getCity() + user.getArea() + user.getTown() + user.getAddress();
 %>
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -95,7 +90,7 @@
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search">
         </div>
-        <button type="submit" class="btn btn-default">搜索</button>
+        <button type="button" class="btn btn-default">搜索</button>
       </form>
             </ul>
 
@@ -106,12 +101,12 @@
                 <ul class="nav" id="main-menu">
 
                     <li>
-                        <a href="dashboard_user.jsp"><i class="fa fa-user"></i> 用户信息</a>
+                        <a href="dashboard_user.jsp" class="active-menu"><i class="fa fa-user"></i> 用户信息</a>
                     </li>
                     
                     <li>
-                        <a href="#" class="active-menu"><i class="fa fa-book"></i> 书籍信息<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                        <a href="#"><i class="fa fa-book"></i> 书籍信息<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
                             <li>
                                 <a href="dashboard_book.jsp">基本信息</a>
                             </li>
@@ -123,6 +118,7 @@
                             </li>
 							</ul>
                     </li> 
+
                     
 					 <li>
                         <a href="#"><i class="fa fa-file-text"></i> 订单信息<span class="fa arrow"></span></a>
@@ -142,7 +138,6 @@
                     
 
                 </ul>
-
             </div>
 
         </nav>
@@ -150,53 +145,53 @@
 		<div id="page-wrapper">
 		  <div class="header"> 
                         <h2 class="page-header">
-                            书籍评论 <small>
-                            comment</small>
+                            用户信息 <small>
+                            user</small>
                         </h2>
 									
 		</div>
             <div id="page-inner">
+
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
 
                         <div class="panel panel-default">
                           
                             <div class="panel-body">
-								<p>ISBN: <%=book.getISBN() %></p>
-                                <p>书名: <%=book.getBookName() %></p>
-                                <p>用户名:<%=bookComment.getUserName() %> </p>
-                                <p>时间:<%=bookComment.getCommentTime().toString().substring(0, 19) %> </p>
-                                <p>内容: <%=bookComment.getContent() %></p><br>
-                                <!-- 字体有点丑之后一起改 -->
-                                <form role="form">
-                                <%
-                                	if ("reject".equals(bookComment.getCheckResult())){
-                                %>
-												<div class="form-group">
-													<label for="状态">状态: </label>
-													<label class="checkbox-inline">
-													<input type="radio" name="bookCommentCheck" id="bookCommentCheck1" value="已通过" > 已通过
-													</label>
-													<label class="checkbox-inline">
-													<input type="radio" name="bookCommentCheck" id="bookCommentCheck0" value="未通过" checked="true"> 未通过
-													</label>
-												</div>
-								<%} %>
-								<%if ("pass".equals(bookComment.getCheckResult()) || bookComment.getCheckResult()==null){ %>
-								<div class="form-group">
-													<label for="状态">状态: </label>
-													<label class="checkbox-inline">
-													<input type="radio" name="bookCommentCheck" id="bookCommentCheck1" value="已通过" checked="true"> 已通过
-													</label>
-													<label class="checkbox-inline">
-													<input type="radio" name="bookCommentCheck" id="bookCommentCheck0" value="未通过" > 未通过
-													</label>
-												</div>
-								<%} %>
-												
-                          <input type="button" class="btn btn-success" value="确认修改" id="<%=bookComment.getID()%>" onclick="updateBookComment(this)">&nbsp;&nbsp;
-                           <a href="dashboard_bookComment.jsp" class="btn btn-default">返回</a>
-                           </form>
+                            <form class="form-horizontal" role="form">
+                            	<div class="col-md-10 col-sm-10 col-xs-10">
+								<p>ID:<%=user.getUserID() %> </p>
+                                <p>用户名: <%=user.getUserName() %></p>
+                                <p>真实姓名: <%=user.getRealName() %></p>
+                                <p>性别:<%=gender %> </p>
+                                <p>联系方式:<%=user.getPhone() %> </p>
+                                <p>E-mail: <%=user.getEmail() %></p>
+                                <p>地址:<%=address %> </p>
+                                <p>注册日期: <%=user.getRegisterDate().toString().substring(0, 19) %></p>
+                                <br>
+                                <!-- 这两个字体有点丑，等功能实现之后再统一改好了TvT -->
+                                <div class="form-group">
+                                <label for="信用" class="col-sm-1 control-label">信用: </label>
+    							<div class="col-sm-9">
+      							<input type="text" class="form-control form-control-xs" id="credit" name="credit" value="<%=user.getCredit() %>">
+								</div></div>
+                                <div class="form-group">
+                                <label for="书币" class="col-sm-1 control-label">书币: </label>
+    							<div class="col-sm-9">				
+      							<input type="text" class="form-control form-control-xs" id="bookCoin" name="bookCoin" value="<%=user.getBookCoin() %>">
+                               	</div></div>
+                               	<br>
+                               	<div>
+                                <input type="button" class="btn btn-success" value="确认修改" onclick="updateUser(this)" id="<%=user.getUserID() %>">&nbsp;&nbsp;
+                                <a href="dashboard_user.jsp" class="btn btn-default">返回</a>
+                                </div>
+								</div>
+                               </form>
+                                <div class="col-md-2 col-sm-2 col-xs-2" style="text-align: center">
+                                <p><button class="btn btn-warning1" id="<%=user.getUserID() %>" onclick="resetPassword(this)">重置密码</button><hr style="padding-top: -10px;padding-bottom: -10px;"><button class="btn btn-warning1" id="<%=user.getUserID() %>" onclick="deleteUser(this)">删除用户</button></p>
+								</div>
+                           
+								
                             </div>
                         </div>
 
@@ -225,33 +220,66 @@
      <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
    <script type="text/javascript">
-   	function updateBookComment(ob){
-   		var ID = ob.id;
-   		var checkResult;
-   		if (document.getElementById("bookCommentCheck1").checked){
-   			checkResult = "pass";
-   		}
-   		else{
-   			checkResult = "reject";
-   		}
-   		$.ajax({
-   			type:"POST",
-   			url:"BookCommentAction!updateBookComment",
-   			async:false,
-   			data:{ID:ID,checkResult:checkResult},
-   			success:function(result){
-   				result=eval('('+result+')');
-   				if(result.success){
-   					alert("修改成功");
-   					location.reload();
-   				}
-   				else{
-   					alert("修改失败");
-   				}
-   			}
-   		})
-   		
-   	}
+   function resetPassword(ob){
+		var userID = ob.id;
+		$.ajax({
+			type:"POST",
+			url:"AccountAction!resetPassword",
+			async:false,
+			data:{userID:userID},
+			success:function(result){
+				result=eval('('+result+')');
+				if (result.success){
+					alert("重置成功");
+				}
+				else{
+					alert("重置失败");
+				}
+			}
+		})
+	}
+   
+   function deleteUser(ob){
+		var userID = ob.id;
+		$.ajax({
+			type:"POST",
+			url:"AccountAction!deleteAccount",
+			async:false,
+			data:{userID:userID},
+			success:function(result){
+				result=eval('('+result+')');
+				if(result.success){
+					alert("删除成功");
+					window.location.href="dashboard_user.jsp"
+				}
+				else{
+					alert("删除失败");
+				}
+			}
+		})
+	}
+   
+   function updateUser(ob){
+	   var bookCoin = $("#bookCoin").val();
+	   var credit = $("#credit").val();
+	   var userID = ob.id;
+	  $.ajax({
+		  type:"POST",
+		  url:"AccountAction!updateAccount",
+		  async:false,
+		  data:{userID:userID,bookCoin:bookCoin,credit:credit},
+		  success:function(result){
+			  result = eval('('+result+')');
+			  if (result.success){
+				  alert("修改成功");
+				  location.reload();
+			  }
+			  else{
+				  alert("修改失败");
+			  }
+		  }
+	  })
+   }
    </script>
 
 

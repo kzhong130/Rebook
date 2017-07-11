@@ -87,6 +87,7 @@ public class BookCommentAction extends BaseAction{
 		bookComment.setCommentTime(nousedate);
 		bookComment.setContent(content);
 		bookComment.setUserName(userName);
+		bookComment.setCheckResult("pass");
 		appService.addBookComment(bookComment);
 		List<BookComment> bookComments = appService.getBookCommentsByISBN(ISBN);
 		request().getSession().setAttribute("bookComment", bookComments);
@@ -110,5 +111,21 @@ public class BookCommentAction extends BaseAction{
 		request().getSession().setAttribute("bookByBookComment", books);
 		
 		return "delete success";
+	}
+	
+	public String updateBookComment() throws Exception{
+		BookComment bookComment = appService.getBookCommentByID(ID);
+		bookComment.setCheckResult(checkResult);
+		appService.updateBookComment(bookComment);
+		List<BookComment> bookComments = appService.getAllBookComments();
+		request().getSession().setAttribute("allBookComments", bookComments);
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject();
+		obj.put("success", true);
+		String str=obj.toString();
+		out.write(str);
+		out.close();
+		
+		return "update success";
 	}
 }
