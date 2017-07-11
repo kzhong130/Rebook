@@ -12,6 +12,8 @@ import model.Admin;
 import model.Book;
 import model.BookComment;
 import model.User;
+import model.CreditChangeRecord;
+import model.CoinChangeRecord;
 import net.sf.json.JSONObject;
 import service.AppService;
 
@@ -192,6 +194,7 @@ public class AccountAction extends BaseAction{
 	}
 	
 	public String register() throws Exception{
+		System.out.println("aaa");
 		Date date = new Date();       
 		Timestamp nousedate = new Timestamp(date.getTime());
 		User user=new User(userName,password,realName,sex,phone,email,address,nousedate,validationProblem,validationAnswer,50,50,province,city,area,town);
@@ -286,5 +289,49 @@ public class AccountAction extends BaseAction{
 		return "reset success";
 	}
 	
+	public String deleteAccount() throws Exception{
+		User user = appService.getUserByUserID(userID);
+		appService.deleteUser(user);
+		List<User> users = appService.getAllUsers();
+		request().getSession().setAttribute("allUsers",users);
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject();
+		obj.put("success", true);
+		String str = obj.toString();
+		out.write(str);
+		out.close();
+		
+		return "delete success";
+	}
+	
+	public String updateAccount() throws Exception{
+		User user = appService.getUserByUserID(userID);
+		int oldcredit = user.getCredit();
+		int oldbookcoin = user.getBookCoin();
+		String userName = user.getUserName();
+		user.setCredit(credit);
+		user.setBookCoin(bookCoin);
+		appService.updateUser(user);
+		Date date = new Date();       
+		Timestamp nousedate = new Timestamp(date.getTime());
+		if (oldcredit != credit){
+			CreditChangeRecord creditChangeRecord = new CreditChangeRecord(userName,credit-oldcredit,nousedate,"other");
+			appService.addCreditChangeRecord(creditChangeRecord);
+		}
+		if (oldbookcoin != bookCoin){
+			CoinChangeRecord coinChangeRecord = new CoinChangeRecord(userName,bookCoin-oldbookcoin,nousedate,"other");
+			appService.addCoinChangeRecord(coinChangeRecord);
+		}
+		List<User> users = appService.getAllUsers();
+		request().getSession().setAttribute("allUsers",users);
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject();
+		obj.put("success", true);
+		String str = obj.toString();
+		out.write(str);
+		out.close();
+		
+		return "update success";
+	}
 	
 }

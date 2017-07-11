@@ -170,6 +170,7 @@ public class BookAction extends BaseAction{
 		Book book = appService.getBookByISBN(ISBN);
 		request().getSession().setAttribute("book", book);
 		List<BookComment> bookComments = appService.getBookCommentsByISBN(ISBN);
+		
 		request().getSession().setAttribute("bookComment",bookComments);
 		return "bookInfo";
 	}

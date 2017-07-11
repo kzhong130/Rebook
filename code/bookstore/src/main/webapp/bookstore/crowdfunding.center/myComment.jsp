@@ -71,7 +71,7 @@
           <table class="allwidth">
               <tr>
               <td class="bookname">《<%=book.getBookName() %>》</td>
-              <td class="deletebutton"><button class="delete" name="" type="onclick" >删 除</button></td>
+              <td class="deletebutton"><button class="delete" value="<%=bookComment.getID() %>" onclick="deleteBookComment(this)" >删 除</button></td>
               </tr>
               <tr>
               <td colspan="2">

@@ -18,11 +18,11 @@
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
      <!-- Google Fonts-->
    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
-     <%@page import="model.BookComment"%>    
-    <%@page import="java.util.ArrayList" %>    
-    <%@page import="model.Book" %>
        <!-- jQuery Js -->
     <script src="assets/js/jquery-1.10.2.js"></script>
+    <%@page import="model.BookComment"%>    
+    <%@page import="java.util.ArrayList" %>    
+    <%@page import="model.Book" %>
 
 	<!-- JS Scripts-->
     <script type="text/javascript">
@@ -74,9 +74,6 @@
                         <i class="fa fa-user fa-fw" style="color:#efbb24"></i> <i class="fa fa-caret-down" style="color:#efbb24"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
-                        <li><a href="#"><i class="fa fa-user fa-fw"></i> 基本信息</a>
-                        </li>
-                        <li class="divider"></li>
                         <li><a href="AccountAction!logout"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
                         </li>
                     </ul>
@@ -143,265 +140,11 @@
                             书籍评论 <small>
                             comment</small>
                         </h2>
-                        <!-- home/dashboard/data
-						<ol class="breadcrumb">
-					  <li><a href="#">Home</a></li>
-					  <li><a href="#">Dashboard</a></li>
-					  <li class="active">Data</li>
-					</ol> 
-								-->
-									
+
 		</div>
             <div id="page-inner">
 
-				<!-- 访问量数据统计
                 <div class="row">
-                    <div class="col-md-3 col-sm-12 col-xs-12">
-					<div class="board">
-                        <div class="panel panel-primary">
-						<div class="number">
-							<h3>
-								<h3>44,023</h3>
-								<small>Daily Visits</small>
-							</h3> 
-						</div>
-						<div class="icon">
-						   <i class="fa fa-eye fa-5x red"></i>
-						</div>
-		 
-                        </div>
-						</div>
-                    </div>
-					
-					       <div class="col-md-3 col-sm-12 col-xs-12">
-					<div class="board">
-                        <div class="panel panel-primary">
-						<div class="number">
-							<h3>
-								<h3>32,850</h3>
-								<small>Sales</small>
-							</h3> 
-						</div>
-						<div class="icon">
-						   <i class="fa fa-shopping-cart fa-5x blue"></i>
-						</div>
-		 
-                        </div>
-						</div>
-                    </div>
-					
-					       <div class="col-md-3 col-sm-12 col-xs-12">
-					<div class="board">
-                        <div class="panel panel-primary">
-						<div class="number">
-							<h3>
-								<h3>56,150</h3>
-								<small>Comments</small>
-							</h3> 
-						</div>
-						<div class="icon">
-						   <i class="fa fa-comments fa-5x green"></i>
-						</div>
-		 
-                        </div>
-						</div>
-                    </div>
-					
-					       <div class="col-md-3 col-sm-12 col-xs-12">
-					<div class="board">
-                        <div class="panel panel-primary">
-						<div class="number">
-							<h3>
-								<h3>89,645</h3>
-								<small>Daily Profits</small>
-							</h3> 
-						</div>
-						<div class="icon">
-						   <i class="fa fa-user fa-5x yellow"></i>
-						</div>
-		 
-                        </div>
-						</div>
-                    </div>
-				   
-                </div>
-                -->
-                
-                <!-- 两张表格
-				     <div class="row">
-                        <div class="col-sm-6 col-xs-12">  
-                            <div class="panel panel-default chartJs">
-                                <div class="panel-heading">
-                                    <div class="card-title">
-                                        <div class="title">Line Chart</div>
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <canvas id="line-chart" class="chart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="panel panel-default chartJs">
-                                <div class="panel-heading">
-                                    <div class="card-title">
-                                        <div class="title">Bar Chart</div>
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <canvas id="bar-chart" class="chart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-				-->
-				
-		<!-- %百分比图
-		<div class="row">
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>Profit</h4>
-						<div class="easypiechart" id="easypiechart-blue" data-percent="82" ><span class="percent">82%</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>Sales</h4>
-						<div class="easypiechart" id="easypiechart-orange" data-percent="55" ><span class="percent">55%</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>Customers</h4>
-						<div class="easypiechart" id="easypiechart-teal" data-percent="84" ><span class="percent">84%</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>No. of Visits</h4>
-						<div class="easypiechart" id="easypiechart-red" data-percent="46" ><span class="percent">46%</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>-->
-        	
-        	<!-- 企业网站模板
-			<div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >企业网站模板</a></div>
-			-->
-				
-				<!-- line chart
-				<div class="row">
-				<div class="col-md-5">
-						<div class="panel panel-default">
-						<div class="panel-heading">
-							Line Chart
-						</div>
-						<div class="panel-body">
-							<div id="morris-line-chart"></div>
-						</div>						
-					</div>   
-					</div>		
-					
-						<div class="col-md-7">
-					<div class="panel panel-default">
-					<div class="panel-heading">
-                                Bar Chart Example
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-bar-chart"></div>
-                            </div>
-						
-					</div>  
-					</div>
-					
-				</div> 
-			 	-->
-				
-				<!-- area chart
-                <div class="row">
-                    <div class="col-md-9 col-sm-12 col-xs-12">
-                        <div class="panel panel-default">                            
-							<div class="panel-heading">
-							Area Chart
-						</div>
-						<div class="panel-body">
-							<div id="morris-area-chart"></div>
-						</div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-12 col-xs-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Donut Chart Example
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-donut-chart"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-				<div class="row">
-				<div class="col-md-12">
-				
-					</div>		
-				</div> 	
-                -->
-
-                <div class="row">
-                    <!-- task panel
-                    <div class="col-md-4 col-sm-12 col-xs-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Tasks Panel
-                            </div>
-                            <div class="panel-body">
-                                <div class="list-group">
-
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">7 minutes ago</span>
-                                        <i class="fa fa-fw fa-comment"></i> Commented on a post
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">16 minutes ago</span>
-                                        <i class="fa fa-fw fa-truck"></i> Order 392 shipped
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">36 minutes ago</span>
-                                        <i class="fa fa-fw fa-globe"></i> Invoice 653 has paid
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">1 hour ago</span>
-                                        <i class="fa fa-fw fa-user"></i> A new user has been added
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">1.23 hour ago</span>
-                                        <i class="fa fa-fw fa-user"></i> A new user has added
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">yesterday</span>
-                                        <i class="fa fa-fw fa-globe"></i> Saved the world
-                                    </a>
-                                </div>
-                                <div class="text-right">
-                                    <a href="#">More Tasks <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    -->
                     <div class="col-md-12 col-sm-12 col-xs-12">
 
                         <div class="panel panel-default">
@@ -423,41 +166,22 @@
                                         <tbody class="text-center">
                                             <%
                                             	if (ISBN != null){
-                                            		if(bookComments.size()>0){
+                                            		if (bookComments.size()>0){
                                             			for (int i=0; i<bookComments.size(); i++){
                                             				if (bookComments.get(i).getISBN().equals(ISBN)){
-                                            			
                                             %>
                                             <tr>
 												  <td><%=bookComments.get(i).getISBN() %></td>
-                                                <td><div title="<%=bookName	 %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookName %></div></td>
+                                                <td><div title="<%=bookName %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookName %></div></td>
                                                 <td><%=bookComments.get(i).getUserName() %></td>
                                                 <td><%=bookComments.get(i).getCommentTime().toString().substring(0, 19) %></td>
                                                 <td><div title="<%=bookComments.get(i).getContent() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookComments.get(i).getContent() %></div></td>
-                                               	<!-- 可用title="" -->
-                                                <td>
-                                                <form role="form">
-												<%
-													if ("reject".equals(bookComments.get(i).getCheckResult())){
-												%>
-												<div class="form-group">
-													<select class="form-control">
-													<option value="0"  selected="selected">未通过</option>
-													<option value="1">已通过</option>
-													</select>
-												</div>
-												<%} 
-													if("pass".equals(bookComments.get(i).getCheckResult())  || bookComments.get(i).getCheckResult() == null){
-												%>
-												<div class="form-group">
-													<select class="form-control">
-													<option value="0"  >未通过</option>
-													<option value="1" selected="selected">已通过</option>
-													</select>
-												</div>
-												<%} %>
-												</form>
-                                                </td>
+                                                <%if ("reject".equals(bookComments.get(i).getCheckResult())){ %>
+                                                <td>未通过</td>
+                                                <%} %>
+                                                <%if("pass".equals(bookComments.get(i).getCheckResult())  || bookComments.get(i).getCheckResult() == null){ %>
+                                                <td>已通过</td>
+                                                <%} %>
                                                 <td><a class="btn btn-success btn-xs" href="dashboard_bookCommentInfo.jsp?ISBN=<%=bookComments.get(i).getISBN()%>&ID=<%=bookComments.get(i).getID()%>">查看</a></td>
                                                 
                                             </tr>
@@ -466,58 +190,36 @@
                                             <%} %>
                                             <%} %>
                                             <%
-                                            	if (ISBN ==null){
-                                            		if (bookComments.size() >0){
-                                            			for (int i=0; i<bookComments.size(); i++){
-                                          
+                                            	if (ISBN == null){
+                                            		if (bookComments.size()>0){
+                                            			for (int i=0; i<bookComments.size(); i++){	 		
                                             %>
-                                            <tr>
+                                             <tr>
 												  <td><%=bookComments.get(i).getISBN() %></td>
-                                                <%
-                                                	for (int j=0; j<books.size(); j++){
-                                                		if (books.get(j).getISBN().equals(bookComments.get(i).getISBN())){
-                                                			bookName = books.get(j).getBookName();
-                                                			break;
-                                                		}
-                                                	}
-                                                %>
-                                                <td><div title="<%=bookName	 %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookName %></div></td>
+												  <%
+												  for (int j=0; j<books.size(); j++){
+                                              		if (books.get(j).getISBN().equals(bookComments.get(i).getISBN())){
+                                              			bookName = books.get(j).getBookName();
+                                              			break;
+                                              		}
+                                              	}
+												  %>
+                                                <td><div title="<%=bookName %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookName %></div></td>
                                                 <td><%=bookComments.get(i).getUserName() %></td>
                                                 <td><%=bookComments.get(i).getCommentTime().toString().substring(0, 19) %></td>
                                                 <td><div title="<%=bookComments.get(i).getContent() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookComments.get(i).getContent() %></div></td>
-                                               	<!-- 可用title="" -->
-                                                <td>
-                                                <form role="form">
-												<%
-													if ("reject".equals(bookComments.get(i).getCheckResult())){
-												%>
-												<div class="form-group">
-													<select class="form-control">
-													<option value="0"  selected="selected">未通过</option>
-													<option value="1">已通过</option>
-													</select>
-												</div>
-												<%} 
-													if("pass".equals(bookComments.get(i).getCheckResult())  || bookComments.get(i).getCheckResult() == null){
-												%>
-												<div class="form-group">
-													<select class="form-control">
-													<option value="0"  >未通过</option>
-													<option value="1" selected="selected">已通过</option>
-													</select>
-												</div>
-
-												<%} %>
-												
-												</form>
-                                                </td>
+                                                <%if ("reject".equals(bookComments.get(i).getCheckResult())){ %>
+                                                <td>未通过</td>
+                                                <%} %>
+                                                <%if("pass".equals(bookComments.get(i).getCheckResult())  || bookComments.get(i).getCheckResult() == null){ %>
+                                                <td>已通过</td>
+                                                <%} %>
                                                 <td><a class="btn btn-success btn-xs" href="dashboard_bookCommentInfo.jsp?ISBN=<%=bookComments.get(i).getISBN()%>&ID=<%=bookComments.get(i).getID()%>">查看</a></td>
                                                 
                                             </tr>
                                             <%} %>
-												<%} %>
-												<%} %>
-                                            
+                                            <%} %>
+                                            <%} %>
                                         </tbody>
                                     </table>
                                 </div>
@@ -541,15 +243,15 @@
     <!-- Metis Menu Js -->
     <script src="assets/js/jquery.metisMenu.js"></script>
     <!-- Chart Js -->
-    <script type="text/javascript" src="assets/js/Chart.min.js"></script>  
+    <script type="text/javascript" src="assets/js/chart.min.js"></script>  
     <script type="text/javascript" src="assets/js/chartjs.js"></script> 
      <!-- Morris Chart Js -->
      <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
     <script src="assets/js/morris/morris.js"></script>
      <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
-	<script type="text/javascript">
-	$("#searchButton").click(function(){
+   <script type="text/javascript">
+   $("#searchButton").click(function(){
 		var keyword = $("#searchInput").val();
 		var tempText = "";
 		var mytable = document.getElementById("myTable");
@@ -567,9 +269,8 @@
 		}
 
 	})
-	</script>
 
-
+</script>
        
 </body>
 </html>

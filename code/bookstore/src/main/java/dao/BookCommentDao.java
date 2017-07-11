@@ -15,7 +15,7 @@ public interface BookCommentDao {
 	
 	public List<BookComment> getAllBookComments();
 	
-	public List<BookComment> getBookCommentsByISBN(String ISBN);
+	public List<BookComment> getBookCommentsByISBN(String ISBN);	//得到的是没有被reject的评论
 	
 	public List<BookComment> getBookCommentsByUserName(String userName);
 }

@@ -122,7 +122,7 @@ create table bookIN
    type                 enum("lend","sell")            not null,
    sendWay              varchar(200)                   not null,
    city                 varchar(20)                    not null,
-   latestReturnDate     datetime                       default null,	/*借书时才需要*/
+   longestDuration      int                       default null,	/*借书时才需要*/
    ownerPhone           varchar(20)                    not null,
    ownerAddress         varchar(50)                    default null,	/*借书时才需要*/
    inStatus             enum("yes","no")               not null,

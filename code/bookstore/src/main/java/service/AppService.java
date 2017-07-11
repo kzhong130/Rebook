@@ -37,21 +37,25 @@ public interface AppService {
 	 * BookComment
 	 */
 	public Integer addBookComment(BookComment bookComment);
-	public List<BookComment> getBookCommentsByISBN(String ISBN);
+	public List<BookComment> getBookCommentsByISBN(String ISBN);	//得到的是没有被reject的bookComment
 	public List<BookComment> getBookCommentsByUserName(String userName);
 	public void deleteBookCommentByID(int ID);
 	public List<BookComment> getAllBookComments();
+	public BookComment getBookCommentByID(int ID);
+	public void updateBookComment(BookComment bookComment);
 	
 	/*
 	 * CreditChangeRecord
 	 */
 	public List<CreditChangeRecord> getCreditChangeRecordByUserName(String userName);
+	public Integer addCreditChangeRecord(CreditChangeRecord creditChangeRecord);
 	
 	
 	/*
 	 * CoinChangeRecord
 	 */
 	public List<CoinChangeRecord> getCoinChangeRecordByUserName(String userName);
+	public Integer addCoinChangeRecord(CoinChangeRecord coinChangeRecord);
 	
 	/*
 	 * Admin
