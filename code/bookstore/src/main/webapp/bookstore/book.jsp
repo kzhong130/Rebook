@@ -53,7 +53,6 @@ session.setAttribute("prePage", url);
       </form>  -->
       
       <ul class="nav navbar-nav navbar-right hidden-sm" id="personalInfo">
-        <li><a href="#">我要卖书</a> </li>
         <li><a href="register.jsp">注册</a> </li>
         <li><a href="#" class="tc" >登录</a> </li>
       </ul>
@@ -100,41 +99,7 @@ session.setAttribute("prePage", url);
 	</div>
 
 </div>
-<!--
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="jumbotron">
-        <h1 class="text-center">Lorem ipsum dolor sit amet, consectetur.</h1>
-        <div class="row">
-          <div class="col-lg-2 col-lg-offset-4 col-md-offset-4 col-md-2 col-sm-offset-3 col-sm-3 col-xs-offset-3 col-xs-3">
-            <p><a class="btn btn-success btn-lg" href="#" role="button">FREE TRIAL</a> </p>
-          </div>
-          <div class="col-lg-2 col-md-6 col-sm-6">
-            <p><a class="btn btn-primary btn-lg" href="#" role="button">BUY NOW</a> </p>
-          </div>
-        </div>
-        <p class="text-center">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam, vel minima quis commodi atque animi eum unde culpa magnam vero.</p>
-        <img src="images/1200X400.gif" alt="" class="img-responsive"> </div>
-    </div>
-  </div>
-</div>
--->
-<!--
-<div class="container">
-  <div class="row">
-    <div class="text-center col-sm-6">
-      <h3>Lorem ipsum</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, magnam?</p>
-      <a class="btn btn-danger btn-lg" href="#" role="button">Tutorials</a></div>
-    <div class="text-center col-sm-6">
-      <h3>Lorem ipsum</h3>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum, magnam?</p>
-      <a class="btn btn-info btn-lg" href="#" role="button">Documentation</a></div>
-  </div>
-</div>
-<hr>
--->
+
 <%
 	Book book = new Book();
     if (session.getAttribute("book")!=null){
@@ -170,6 +135,8 @@ session.setAttribute("prePage", url);
         <p>参评人数：<%=book.getRaterNumber() %></p>
         <hr>
         <p><a href="#" class="btn btn-success" role="button">查看发布信息</a></p>
+        <!-- 如果没登录，跳出信息显示请先登录 -->
+        <p><a href="#" class="btn btn-success" role="button">出借/卖书</a></p>
       </div>
 	</div> 
   </div>
@@ -572,8 +539,7 @@ var userName = '<%=session.getAttribute("loginUserName")%>'
 
 if (userName != "null"){
 
-	var str = "<li><a href='#'>我要卖书</a>";
-	str += "<li><a href='MemberCenterAction!initialize'>个人中心</a>"
+	var str = "<li><a href='MemberCenterAction!initialize'>个人中心</a>";
 	str+="<li><a href='AccountAction!logout'>登出</a>"
 	$('#personalInfo').html(str);
 }

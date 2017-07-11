@@ -49,10 +49,12 @@ session.setAttribute("prePage",url);
         <button type="submit" class="btn btn-default" >搜索</button>
       </form>
       <ul class="nav navbar-nav navbar-right hidden-sm" id="personalInfo">
-        <li><a href="#">我要卖书</a> </li>
         <li><a href="register.jsp">注册</a> </li>
         <li><a href="#" class="tc">登录</a> </li>
       </ul>
+       <ul class="nav navbar-nav navbar-right hidden-sm">
+          <li><a href="#" class="td">出借/卖书</a> </li>
+       </ul>
     </div>
     <!-- /.navbar-collapse --> 
   </div>
@@ -90,6 +92,38 @@ session.setAttribute("prePage",url);
 				<div align="right">
 					<a href="register.jsp" target="_blank">立即注册</a>                                     <!-- 注册的页面 -->
 				</div>  
+			</div>
+		
+		</div>
+	
+	</div>
+
+</div>
+
+<div class="popup" id="lendsell">
+
+	<div class="top_nav" id='top_nav'>
+		<div align="center">
+			<span>出借/卖书</span>
+			<a class="guanbi"></a>
+		</div>
+	</div>
+	
+	<div class="min">
+	
+		<div class="tc_login">
+		
+			<div class="right">
+				<form method="POST" name="form_login" target="_top" action=<% %>>
+					<div align="center">
+					    <p style="font-size:14px;color:#707070;float:left;">请输入您出借/卖的书对应的ISBN </p>
+						<input type="text" name="ISBN" id="ISBN" required="required" placeholder="ISBN" autocomplete="off" class="input_yh">
+						<p style="font-size:5px;color:#fff;"> </p>
+					</div>
+					<div align="center">
+						<input type="submit" class="button" title="" value="查询">
+					</div><!-- 如果查到书，就跳到lendsellbook.jsp，而且应该要传书的ISBN过去 -->
+				</form> 
 			</div>
 		
 		</div>
@@ -285,10 +319,17 @@ $(".tc").click(function(){
 	$("#popup").show();//查找ID为popup的DIV show()显示#gray
 	tc_center();
 });
+//点击登录class为td 显示
+$(".td").click(function(){
+	$("#gray").show();
+	$("#lendsell").show();//查找ID为lendsell的DIV show()显示#gray
+	tc_center();
+});
 //点击关闭按钮
 $("a.guanbi").click(function(){
 	$("#gray").hide();
 	$("#popup").hide();//查找ID为popup的DIV hide()隐藏
+	$("#lendsell").hide();//查找ID为lendsell的DIV hide()隐藏
 })
 
 //窗口水平居中
@@ -302,6 +343,7 @@ function tc_center(){
 	
 	$(".popup").css({top:_top,left:_left});
 }
+
 
 function tt(dd){
     //alert(dd);
@@ -341,35 +383,6 @@ $(document).ready(function(){
 	})
 })
 
-/*jQuery(document).ready(function($){  
-        $("form#login").submit(function(form)  
-            {  
-  
-                $.ajax({  
-                    url: "LoginAction",  
-                    method: 'POST',  
-                    dataType: 'text',  
-                    data: {   
-                        userName: $("form#login").find('#userName').val(),  
-                        password: $(form).find('#password').val()  
-                    },  
-                    success: function (json) {  
-                        var obj = $.parseJSON(json);  //使用这个方法解析json  
-                        var state_value = obj.result;  //result是和action中定义的result变量的get方法对应的   
-                        if(state_value=="true"){  
-                            alert("true");  
-                        }else{  
-                            alert("false");  
-                        }  
-                    },  
-                    error: function (json) { 
-                        alert("json=" + json);  
-                        return false;  
-                    }  
-                });  
-  
-            }) 
-        }) */
 
 
 
@@ -385,8 +398,7 @@ var userName = '<%=session.getAttribute("loginUserName")%>'
 
 if (userName != "null"){
 
-	var str = "<li><a href='#'>我要卖书</a>";
-	str += "<li><a href='MemberCenterAction!initialize'>个人中心</a>"
+	var str =  "<li><a href='MemberCenterAction!initialize'>个人中心</a>"
 	str+="<li><a href='AccountAction!logout'>登出</a>"
 	$('#personalInfo').html(str);
 }
