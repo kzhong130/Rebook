@@ -327,7 +327,6 @@ public class AppServiceImpl implements AppService {
 	}
 	@Override
 	public Integer addBookIN(BookIN bookIN) {
-		System.out.println(222);
 		return bookINDao.save(bookIN);
   }
 	

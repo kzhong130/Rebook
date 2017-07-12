@@ -150,10 +150,31 @@ public class LendSellAction extends BaseAction{
 		bookIn.setType("sell");
 		bookIn.setUserName((String) request().getSession().getAttribute("loginUserName"));
 		bookIn.setInStatus("yes");
-		System.out.println(2333);
 		appService.addBookIN(bookIn);
-		System.out.println(11111);
 		return "sell";
+	}
+	
+	public String lendInfo() throws Exception{
+		BookIN bookIn=new BookIN();
+		bookIn.setProvince(province);
+		bookIn.setCity(city);
+		bookIn.setRecency(recency);
+		bookIn.setNote(note);
+		bookIn.setOwnerName(ownerName);
+		bookIn.setCoinNumber(coinNumber);
+		bookIn.setOwnerPhone(ownerPhone);
+		bookIn.setISBN(ISBN);
+		Date date = new Date();       
+		Timestamp nousedate = new Timestamp(date.getTime());
+		bookIn.setInTime(nousedate);
+		bookIn.setSendWay(sendWay);
+		bookIn.setType("lend");
+		bookIn.setUserName((String) request().getSession().getAttribute("loginUserName"));
+		bookIn.setLongestDuration(longestDuration);
+		bookIn.setOwnerAddress(ownerAddress);
+		bookIn.setInStatus("yes");
+		appService.addBookIN(bookIn);
+		return "lend";
 	}
 }
 
