@@ -20,7 +20,7 @@
    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
        <!-- jQuery Js -->
     <script src="assets/js/jquery-1.10.2.js"></script>
-    <%@page import="model.BookComment"%>    
+     <%@page import="model.BookIN"%>    
     <%@page import="java.util.ArrayList" %>    
     <%@page import="model.Book" %>
 
@@ -38,8 +38,8 @@
 <body>
 <%
 	String ISBN = request.getParameter("ISBN");
-	String bookName="";
-	ArrayList<BookComment> bookComments = (ArrayList<BookComment>)session.getAttribute("allBookComments");
+	String bookName = "";
+	ArrayList<BookIN> bookINs = (ArrayList<BookIN>)session.getAttribute("allBookINs");
 	ArrayList<Book> books = (ArrayList<Book>)session.getAttribute("allBooks");
 	if (ISBN != null){
 		for (int i=0; i<books.size(); i++){
@@ -137,8 +137,8 @@
 		<div id="page-wrapper">
 		  <div class="header"> 
                         <h2 class="page-header">
-                            书籍评论 <small>
-                            comment</small>
+                            书籍发布情况 <small>
+                            release</small>
                         </h2>
 
 		</div>
@@ -154,69 +154,98 @@
                                     <table class="table table-striped table-bordered table-hover" style="table-layout:fixed" id="myTable">
                                         <thead>
                                             <tr class="text-center">
-                                                <th class="text-center" width="15%">ISBN</th>
-                                                <th class="text-center" width="10%">书名</th>
-                                                <th class="text-center">用户名</th>
-                                                <th class="text-center">时间</th>
-                                                <th class="text-center" width="25%">内容</th>
-                                                <th class="text-center" width="12%">状态</th>
-                                                <th class="text-center" width="6%">详情</th>
+                                                <th class="text-center" width="17%">ISBN</th>
+                                                <th class="text-center" width="20%">书名</th>
+                                                <th class="text-center" width="18%">用户名</th>
+                                                <th class="text-center" width="12%">书币</th>
+                                                <th class="text-center" width="12%">发布时间</th>
+                                                <th class="text-center" width="7%">借/买</th>
+                                                <th class="text-center" width="7%">状态</th>
+                                                <th class="text-center" width="7%">详情</th>
                                             </tr>
                                         </thead>
                                         <tbody class="text-center">
-                                            <%
-                                            	if (ISBN != null){
-                                            		if (bookComments.size()>0){
-                                            			for (int i=0; i<bookComments.size(); i++){
-                                            				if (bookComments.get(i).getISBN().equals(ISBN)){
-                                            %>
+										<%
+										String type="";	
+										String status="";
+										if (ISBN==null){
+											if (bookINs.size() > 0){
+													for (int i=0; i<bookINs.size(); i++){
+											
+										%>
                                             <tr>
-												  <td><%=bookComments.get(i).getISBN() %></td>
-                                                <td><div title="<%=bookName %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookName %></div></td>
-                                                <td><%=bookComments.get(i).getUserName() %></td>
-                                                <td><%=bookComments.get(i).getCommentTime().toString().substring(0, 19) %></td>
-                                                <td><div title="<%=bookComments.get(i).getContent() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookComments.get(i).getContent() %></div></td>
-                                                <%if ("reject".equals(bookComments.get(i).getCheckResult())){ %>
-                                                <td>未通过</td>
-                                                <%} %>
-                                                <%if("pass".equals(bookComments.get(i).getCheckResult())  || bookComments.get(i).getCheckResult() == null){ %>
-                                                <td>已通过</td>
-                                                <%} %>
-                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookCommentInfo.jsp?ISBN=<%=bookComments.get(i).getISBN()%>&ID=<%=bookComments.get(i).getID()%>">查看</a></td>
-                                                
-                                            </tr>
-                                            <%} %>
-                                            <%} %>
-                                            <%} %>
-                                            <%} %>
-                                            <%
-                                            	if (ISBN == null){
-                                            		if (bookComments.size()>0){
-                                            			for (int i=0; i<bookComments.size(); i++){	 		
-                                            %>
-                                             <tr>
-												  <td><%=bookComments.get(i).getISBN() %></td>
+												  <td><%=bookINs.get(i).getISBN() %></td>
 												  <%
-												  for (int j=0; j<books.size(); j++){
-                                              		if (books.get(j).getISBN().equals(bookComments.get(i).getISBN())){
-                                              			bookName = books.get(j).getBookName();
-                                              			break;
-                                              		}
-                                              	}
+												  	for (int j=0; j<books.size(); j++){
+												  		if(books.get(j).getISBN().equals(bookINs.get(i).getISBN())){
+												  			bookName = books.get(j).getBookName();
+												  			break;
+												  		}
+												  	}
 												  %>
                                                 <td><div title="<%=bookName %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookName %></div></td>
-                                                <td><%=bookComments.get(i).getUserName() %></td>
-                                                <td><%=bookComments.get(i).getCommentTime().toString().substring(0, 19) %></td>
-                                                <td><div title="<%=bookComments.get(i).getContent() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookComments.get(i).getContent() %></div></td>
-                                                <%if ("reject".equals(bookComments.get(i).getCheckResult())){ %>
-                                                <td>未通过</td>
-                                                <%} %>
-                                                <%if("pass".equals(bookComments.get(i).getCheckResult())  || bookComments.get(i).getCheckResult() == null){ %>
-                                                <td>已通过</td>
-                                                <%} %>
-                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookCommentInfo.jsp?ISBN=<%=bookComments.get(i).getISBN()%>&ID=<%=bookComments.get(i).getID()%>">查看</a></td>
+                                                <td><%=bookINs.get(i).getUserName() %></td>
+                                                <td><%=bookINs.get(i).getCoinNumber() %></td>
+                                                <td><%=bookINs.get(i).getInTime().toString().substring(0, 19) %></td>
+                                                <%
+                                                	if ("lend".equals(bookINs.get(i).getType())){
+                                                		type="借";
+                                                	}
+                                                	if ("sell".equals(bookINs.get(i).getType())){
+                                                		type="卖";
+                                                	}
+                                                %>
+                                                <td><%=type %></td>
+                                                <%
+                                                if ("yes".equals(bookINs.get(i).getInStatus())){
+                                                	status="上架";
+                                                }
+                                                if ("no".equals(bookINs.get(i).getInStatus())){
+                                                	status="下架";
+                                                }
+                                                %>
+                                                <td><%=status %></td>
+                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookInInfo.jsp?ISBN=<%=bookINs.get(i).getISBN()%>&ID=<%=bookINs.get(i).getBookRecordID()%>">查看</a></td>
                                                 
                                             </tr>
+                                            <%} %>
+                                            <%} %>
+                                            <%} %>
+                                            <%
+                                            BookIN bookIN = new BookIN();	
+                                            if (ISBN != null){
+                                            		if (bookINs.size() > 0){
+                                            			for (int i=0; i<bookINs.size(); i++){	
+                                            				if (bookINs.get(i).getISBN().equals(ISBN)){
+                                            %>
+                                            <tr>
+                                            	<td><%=bookINs.get(i).getISBN() %></td>
+                                            	<td><div title="<%=bookName %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookName %></div></td>
+                                            	 <td><%=bookINs.get(i).getUserName() %></td>
+                                                <td><%=bookINs.get(i).getCoinNumber() %></td>
+                                                <td><%=bookINs.get(i).getInTime().toString().substring(0, 19) %></td>
+                                                 <%
+                                                	if ("lend".equals(bookINs.get(i).getType())){
+                                                		type="借";
+                                                	}
+                                                	if ("sell".equals(bookINs.get(i).getType())){
+                                                		type="卖";
+                                                	}
+                                                %>
+                                                <td><%=type %></td>
+                                                 <%
+                                                if ("yes".equals(bookINs.get(i).getInStatus())){
+                                                	status="上架";
+                                                }
+                                                if ("no".equals(bookINs.get(i).getInStatus())){
+                                                	status="下架";
+                                                }
+                                                %>
+                                                <td><%=status %></td>
+                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookInInfo.jsp?ISBN=<%=bookINs.get(i).getISBN()%>&ID=<%=bookINs.get(i).getBookRecordID()%>">查看</a></td>
+                                                
+                                            </tr>
+                                            <%} %>
                                             <%} %>
                                             <%} %>
                                             <%} %>
@@ -250,7 +279,7 @@
     <script src="assets/js/morris/morris.js"></script>
      <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
-   <script type="text/javascript">
+      <script type="text/javascript">
    $("#searchButton").click(function(){
 		var keyword = $("#searchInput").val();
 		var tempText = "";
@@ -271,6 +300,8 @@
 	})
 
 </script>
+
+
        
 </body>
 </html>

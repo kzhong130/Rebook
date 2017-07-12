@@ -18,11 +18,11 @@
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
      <!-- Google Fonts-->
    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
-        <%@page import="model.BookComment"%>    
-    <%@page import="java.util.ArrayList" %>    
-    <%@page import="model.Book" %>
        <!-- jQuery Js -->
     <script src="assets/js/jquery-1.10.2.js"></script>
+    <%@page import="model.BookIN"%>    
+    <%@page import="java.util.ArrayList" %>    
+    <%@page import="model.Book" %>
 
 	<!-- JS Scripts-->
     <script type="text/javascript">
@@ -51,12 +51,12 @@
 			}
 		}
 	}
-	ArrayList<BookComment> bookComments = (ArrayList<BookComment>)session.getAttribute("allBookComments");
-	BookComment bookComment = new BookComment();
-	if (bookComments.size()>0){
-		for (int i=0; i<bookComments.size(); i++){
-			if (bookComments.get(i).getID() == ID){
-				bookComment = bookComments.get(i);
+	ArrayList<BookIN> bookINs = (ArrayList<BookIN>)session.getAttribute("allBookINs");
+	BookIN bookIN = new BookIN();
+	if (bookINs.size()>0){
+		for (int i=0; i<bookINs.size(); i++){
+			if (bookINs.get(i).getBookRecordID() == ID){
+				bookIN = bookINs.get(i);
 				break;
 			}
 		}
@@ -111,7 +111,7 @@
                     
                     <li>
                         <a href="#" class="active-menu"><i class="fa fa-book"></i> 书籍信息<span class="fa arrow"></span></a>
-                            <ul class="nav nav-second-level">
+                        <ul class="nav nav-second-level">
                             <li>
                                 <a href="dashboard_book.jsp">基本信息</a>
                             </li>
@@ -123,6 +123,7 @@
                             </li>
 							</ul>
                     </li> 
+
                     
 					 <li>
                         <a href="#"><i class="fa fa-file-text"></i> 订单信息<span class="fa arrow"></span></a>
@@ -142,7 +143,6 @@
                     
 
                 </ul>
-
             </div>
 
         </nav>
@@ -150,53 +150,104 @@
 		<div id="page-wrapper">
 		  <div class="header"> 
                         <h2 class="page-header">
-                            书籍评论 <small>
-                            comment</small>
+                            用户信息 <small>
+                            user</small>
                         </h2>
 									
 		</div>
             <div id="page-inner">
+
                 <div class="row">
                     <div class="col-md-12 col-sm-12 col-xs-12">
 
                         <div class="panel panel-default">
                           
                             <div class="panel-body">
-								<p>ISBN: <%=book.getISBN() %></p>
+                            <%
+                            	String type="";
+                            	if ("lend".equals(bookIN.getType())){
+                            		type="借";
+                            	}
+                            	if ("sell".equals(bookIN.getType())){
+                            		type="卖";
+                            	}
+                            	String longestDuration ="";
+                            	if (bookIN.getLongestDuration() == null){
+                            		longestDuration = "无";
+                            	}
+                            	if (bookIN.getLongestDuration() != null){
+                            		longestDuration = bookIN.getLongestDuration() + "天";
+                            	}
+                            	String recency="";
+                            	if ("20%".equals(bookIN.getRecency())){
+                            		recency="两成新";
+                            	}
+                            	if ("50%".equals(bookIN.getRecency())){
+                            		recency="五成新";
+                            	}
+                            	if ("80%".equals(bookIN.getRecency())){
+                            		recency="八成新";
+                            	}
+                            	if ("100%".equals(bookIN.getRecency())){
+                            		recency="全新";
+                            	}
+                            	String note="";
+                            	if (bookIN.getNote() == null){
+                            		note = "无";
+                            	}
+                            	if (bookIN.getNote() != null){
+                            		note = bookIN.getNote();
+                            	}
+                            %>
+                            <form class="form-horizontal" role="form">
+								<p>ISBN: <%=bookIN.getISBN() %></p>
                                 <p>书名: <%=book.getBookName() %></p>
-                                <p>用户名:<%=bookComment.getUserName() %> </p>
-                                <p>时间:<%=bookComment.getCommentTime().toString().substring(0, 19) %> </p>
-                                <p>内容: <%=bookComment.getContent() %></p><br>
-                                <!-- 字体有点丑之后一起改 -->
-                                <form role="form">
+                                <p>用户名: <%=bookIN.getUserName() %></p>
+                                <p>书主姓名: <%=bookIN.getOwnerName() %></p>
+                                <p>书主电话: <%=bookIN.getOwnerPhone() %>
+                                <p>书币要求: <%=bookIN.getCoinNumber() %></p>
+                                <p>借/买: <%=type %></p>
+                                <p>发布时间: <%=bookIN.getInTime().toString().substring(0, 19) %></p>
+                                <p>送书方式: <%=bookIN.getSendWay() %></p>
+                                <p>所在城市: <%=bookIN.getProvince() + bookIN.getCity() %></p>
+                                <p>最长借书时间: <%=longestDuration %> </p>
+                                <p>书主地址: <%=bookIN.getProvince() + bookIN.getCity() + bookIN.getOwnerAddress() %> </p>
+                                <p>新旧程度: <%=recency %></p>
+                                <p>备注: <%=note %></p>
+                                <br>
+                                <!-- 这个字体有点丑，等功能实现之后再统一改好了TvT -->
                                 <%
-                                	if ("reject".equals(bookComment.getCheckResult())){
+                                	if("yes".equals(bookIN.getInStatus())){
                                 %>
-												<div class="form-group">
+                                <div class="form-group">
 													<label for="状态">状态: </label>
 													<label class="checkbox-inline">
-													<input type="radio" name="bookCommentCheck" id="bookCommentCheck1" value="已通过" > 已通过
+													<input type="radio" name="bookInCheck" id="bookInCheck1" value="上架" checked="true"> 上架
 													</label>
 													<label class="checkbox-inline">
-													<input type="radio" name="bookCommentCheck" id="bookCommentCheck0" value="未通过" checked="true"> 未通过
+													<input type="radio" name="bookInCheck" id="bookInCheck0" value="下架"> 下架
 													</label>
 												</div>
 								<%} %>
-								<%if ("pass".equals(bookComment.getCheckResult()) || bookComment.getCheckResult()==null){ %>
-								<div class="form-group">
+								<%
+									if ("no".equals(bookIN.getInStatus())){
+								%>
+								 <div class="form-group">
 													<label for="状态">状态: </label>
 													<label class="checkbox-inline">
-													<input type="radio" name="bookCommentCheck" id="bookCommentCheck1" value="已通过" checked="true"> 已通过
+													<input type="radio" name="bookInCheck" id="bookInCheck1" value="上架"> 上架
 													</label>
 													<label class="checkbox-inline">
-													<input type="radio" name="bookCommentCheck" id="bookCommentCheck0" value="未通过" > 未通过
+													<input type="radio" name="bookInCheck" id="bookInCheck0" value="下架"  checked="true"> 下架
 													</label>
 												</div>
-								<%} %>
+									<%} %>
 												
-                          <input type="button" class="btn btn-success" value="确认修改" id="<%=bookComment.getID()%>" onclick="updateBookComment(this)">&nbsp;&nbsp;
-                           <a href="dashboard_bookComment.jsp" class="btn btn-default">返回</a>
-                           </form>
+                          <input type="button" class="btn btn-success" value="确认修改" id="<%=bookIN.getBookRecordID()%>" onclick = "updateBookIN(this)">&nbsp;&nbsp;
+                           <a href="dashboard_bookIn.jsp" class="btn btn-default">返回</a>
+                                
+                           
+								
                             </div>
                         </div>
 
@@ -225,34 +276,33 @@
      <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
    <script type="text/javascript">
-   	function updateBookComment(ob){
-   		var ID = ob.id;
-   		var checkResult;
-   		if (document.getElementById("bookCommentCheck1").checked){
-   			checkResult = "pass";
-   		}
-   		else{
-   			checkResult = "reject";
-   		}
-   		$.ajax({
-   			type:"POST",
-   			url:"BookCommentAction!updateBookComment",
-   			async:false,
-   			data:{ID:ID,checkResult:checkResult},
-   			success:function(result){
-   				result=eval('('+result+')');
-   				if(result.success){
-   					location.reload();
-   					alert("修改成功");
-   					
-   				}
-   				else{
-   					alert("修改失败");
-   				}
-   			}
-   		})
-   		
-   	}
+   function updateBookIN(ob){
+	   var bookRecordID = ob.id;
+	   var inStatus;
+	   if (document.getElementById("bookInCheck1").checked){
+		   inStatus="yes";
+	   }
+	   else{
+		   inStatus = "no";
+	   }
+	   $.ajax({
+		   type:"POST",
+		   url:"BookINAction!updateBookIN",
+		   async:false,
+		   data:{bookRecordID:bookRecordID,inStatus:inStatus},
+		   success:function(result){
+			   result = eval('('+result+')');
+			   if(result.success){
+				   location.reload();
+				   alert("修改成功");
+				  
+			   }
+			   else{
+				   alert("修改失败");
+			   }
+		   }
+	   })
+   }
    </script>
 
 
