@@ -13,7 +13,7 @@ public class BookIN {
 	private String type;
 	private String sendWay;
 	private String city;
-	private int longestDuration;
+	private Integer longestDuration;
 	private String ownerPhone;
 	private String ownerAddress;
 	private String inStatus;
@@ -24,7 +24,7 @@ public class BookIN {
 		
 	}
 	
-	public BookIN(String userName, String ISBN,String recency,Timestamp inTime,int coinNumber,String ownerName,String type,String sendWay,String city,int longestDuration,String ownerPhone,String ownerAddress,String inStatus,String note,String province){
+	public BookIN(String userName, String ISBN,String recency,Timestamp inTime,int coinNumber,String ownerName,String type,String sendWay,String city,Integer longestDuration,String ownerPhone,String ownerAddress,String inStatus,String note,String province){
 		this.userName = userName;
 		this.ISBN = ISBN;
 		this.recency = recency;
@@ -122,11 +122,11 @@ public class BookIN {
 		this.city = city;
 	}
 	
-	public int getLongestDuration(){
+	public Integer getLongestDuration(){
 		return longestDuration;
 	}
 	
-	public void setLongestDuration(int longestDuration){
+	public void setLongestDuration(Integer longestDuration){
 		this.longestDuration = longestDuration;
 	}
 	

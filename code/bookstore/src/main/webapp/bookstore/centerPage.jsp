@@ -114,14 +114,14 @@ session.setAttribute("prePage",url);
 		<div class="tc_login">
 		
 			<div class="right">
-				<form method="POST" name="form_login" target="_top" action=<% %>>
+				<form method="POST" name="form_login" target="_top" action="LendSellAction!searchBook">
 					<div align="center">
 					    <p style="font-size:14px;color:#707070;float:left;">请输入您出借/卖的书对应的ISBN </p>
 						<input type="text" name="ISBN" id="ISBN" required="required" placeholder="ISBN" autocomplete="off" class="input_yh">
 						<p style="font-size:5px;color:#fff;"> </p>
 					</div>
 					<div align="center">
-						<input type="submit" class="button" title="" value="查询">
+						<input type="submit"  class="button" title="" value="查询">
 					</div><!-- 如果查到书，就跳到lendsellbook.jsp，而且应该要传书的ISBN过去 -->
 				</form> 
 			</div>
@@ -320,9 +320,12 @@ $(".tc").click(function(){
 });
 //点击登录class为td 显示
 $(".td").click(function(){
+	if(<%=session.getAttribute("loginUserName")%>==null) alert("请先登录");
+	else{
 	$("#gray").show();
 	$("#lendsell").show();//查找ID为lendsell的DIV show()显示#gray
 	tc_center();
+	}
 });
 //点击关闭按钮
 $("a.guanbi").click(function(){
@@ -381,35 +384,7 @@ $(document).ready(function(){
 	})
 })
 
-/*jQuery(document).ready(function($){  
-        $("form#login").submit(function(form)  
-            {  
-  
-                $.ajax({  
-                    url: "LoginAction",  
-                    method: 'POST',  
-                    dataType: 'text',  
-                    data: {   
-                        userName: $("form#login").find('#userName').val(),  
-                        password: $(form).find('#password').val()  
-                    },  
-                    success: function (json) {  
-                        var obj = $.parseJSON(json);  //使用这个方法解析json  
-                        var state_value = obj.result;  //result是和action中定义的result变量的get方法对应的   
-                        if(state_value=="true"){  
-                            alert("true");  
-                        }else{  
-                            alert("false");  
-                        }  
-                    },  
-                    error: function (json) { 
-                        alert("json=" + json);  
-                        return false;  
-                    }  
-                });  
-  
-            }) 
-        }) */
+
 
 
 

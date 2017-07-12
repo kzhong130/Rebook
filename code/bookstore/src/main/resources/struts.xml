@@ -48,7 +48,12 @@
 		<action name="MemberCenterAction" class="action.MemberCenterAction">
 			<result name="initialize success">member_center.jsp</result>
 		</action>
-
+		
+		<action name="LendSellAction" class="action.LendSellAction">
+			<result name="search">lendsellbook.jsp</result>
+			<result name="sell">lendsellbook.jsp</result>
+			
+		</action>
 
 		<action name="*">
 			<result>/{1}.jsp</result>

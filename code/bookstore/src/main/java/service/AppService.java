@@ -67,5 +67,6 @@ public interface AppService {
 	 * BookIN
 	 */
 	public List<BookIN> getAllBookINs();
+	public Integer addBookIN(BookIN bookIN);
 
 }
