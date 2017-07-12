@@ -133,8 +133,8 @@ create table bookIN
 );
 
 alter table bookIN
-   add constraint FK_Reference_3 foreign key (userID) 
-		references user (userID) on update cascade on delete cascade;
+   add constraint FK_Reference_3 foreign key (userName) 
+		references user (userName) on update cascade on delete cascade;
         
 alter table bookIN
 	add constraint FK_Reference_4 foreign key(ISBN)
@@ -150,7 +150,8 @@ create table lendOrder
 (
    lendID               int                            not null auto_increment,
    bookRecordID         int                            not null,
-   lenderID             int                            not null,
+   requestID			int							   not null,
+   lenderName           varchar(20)                    not null,
    returnWay            text                           not null,
    lendAddress          varchar(50)                    not null,
    lendPhone            varchar(20)                    not null,
@@ -158,21 +159,25 @@ create table lendOrder
    arrivalTime          datetime                       default null,
    returnTime           datetime                       default null,
    status               enum("0","1","2","3","4","5","6","7","8","9")  not null,	/*0~9各自有不同含义*/
-   ownerID				int 						   not null,
+   ownerName			varchar(20) 					not null,
    primary key (lendID)
 );
 
 alter table lendOrder
-   add constraint FK_Reference_5 foreign key (lenderID)
-      references user (userID) on update cascade on delete cascade;
+   add constraint FK_Reference_5 foreign key (lenderName)
+      references user (userName) on update cascade on delete cascade;
 
 alter table lendOrder
    add constraint FK_Reference_6 foreign key (bookRecordID)
       references bookIN (bookRecordID) on update cascade on delete cascade;
       
 alter table lendOrder
-	add constraint FK_Reference_7 foreign key (ownerID)
-		references user(userID) on update cascade on delete cascade;
+	add constraint FK_Reference_7 foreign key (ownerName)
+		references user(userName) on update cascade on delete cascade;
+        
+alter table lendOrder
+	add constraint FK_Reference_25 foreign key (requestID)
+		references requestBook(requestID) on update cascade on delete cascade;
 
 
 
@@ -185,27 +190,32 @@ create table buyOrder
 (
    buyID                int                            not null auto_increment,
    bookRecordID         int                            not null,
-   buyerID              int                            not null,
+   requestID			int 						   not null,
+   buyerName              varchar(20)                            not null,
    buyAddress           varchar(50)                    not null,
    buyPhone             varchar(20)                    not null,
    receiver             varchar(20)                    not null,
    arrivalTime          datetime                       default null,
    status               enum("0","1","2","3","4","5")  not null,	/*0~5各有不同含义*/
-   ownerID              int                            not null,
+   ownerName              varchar(20)                            not null,
    primary key (buyID)
 );
 
 alter table buyOrder
-   add constraint FK_Reference_8 foreign key (buyerID)
-      references user (userID) on update cascade on delete cascade;
+   add constraint FK_Reference_8 foreign key (buyerName)
+      references user (userName) on update cascade on delete cascade;
 
 alter table buyOrder
    add constraint FK_Reference_9 foreign key (bookRecordID)
       references bookIN (bookRecordID) on update cascade on delete cascade;
 	
 alter table buyOrder
-	add constraint FK_Reference_10 foreign key(ownerID)
-		references user(userID) on update cascade on delete cascade;
+	add constraint FK_Reference_10 foreign key(ownerName)
+		references user(userName) on update cascade on delete cascade;
+	
+alter table buyOrder
+	add constraint FK_Reference_26 foreign key(requestID)
+		references requestBook(requestID) on update cascade on delete cascade;
         
 
 
@@ -373,6 +383,9 @@ create table requestBook(
     province			varchar(20)			not null,
     address				varchar(50)			not null,
     receiverName		varchar(20)			not null,
+	requestStatus		enum("waiting","accept","reject")	not null,
+    returnWay			text				default null,		/*仅在借书申请时需要*/
+    phone				varchar(20)			not null,
     primary key(requestID)
 );
 
