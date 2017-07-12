@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class BookIN {
 	private int bookRecordID;
-	private int userID;
+	private String userName;
 	private String ISBN;
 	private String recency;
 	private Timestamp inTime;
@@ -24,8 +24,8 @@ public class BookIN {
 		
 	}
 	
-	public BookIN(int userID, String ISBN,String recency,Timestamp inTime,int coinNumber,String ownerName,String type,String sendWay,String city,int longestDuration,String ownerPhone,String ownerAddress,String inStatus,String note,String province){
-		this.userID = userID;
+	public BookIN(String userName, String ISBN,String recency,Timestamp inTime,int coinNumber,String ownerName,String type,String sendWay,String city,int longestDuration,String ownerPhone,String ownerAddress,String inStatus,String note,String province){
+		this.userName = userName;
 		this.ISBN = ISBN;
 		this.recency = recency;
 		this.inTime = inTime;
@@ -50,12 +50,12 @@ public class BookIN {
 		this.bookRecordID = bookRecordID;
 	}
 	
-	public int getUserID(){
-		return userID;
+	public String getUserName(){
+		return userName;
 	}
 	
-	public void setUserID(int userID){
-		this.userID = userID;
+	public void setUserName(String userName){
+		this.userName = userName;
 	}
 	
 	public String getISBN(){

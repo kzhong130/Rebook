@@ -6,6 +6,7 @@ import java.util.List;
 import model.Admin;
 import model.Book;
 import model.BookComment;
+import model.BookIN;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
 import model.User;
@@ -61,5 +62,10 @@ public interface AppService {
 	 * Admin
 	 */
 	public Admin getAdminByAdminName(String adminName);
+	
+	/*
+	 * BookIN
+	 */
+	public List<BookIN> getAllBookINs();
 
 }

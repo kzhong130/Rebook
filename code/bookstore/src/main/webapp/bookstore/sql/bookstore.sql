@@ -1,3 +1,4 @@
+drop table if exists requestBook;
 drop table if exists buyOrderCommentRecord;
 drop table if exists lendOrderCommentRecord;
 drop table if exists creditChangeRecord;
@@ -113,7 +114,7 @@ alter table bookComment add constraint FK_Referance_2 foreign key (userName)
 create table bookIN 
 (
    bookRecordID         int                            not null auto_increment,
-   userID               int                            not null,
+   userName             varchar(20)                            not null,
    ISBN                 varchar(20)                    not null,
    recency              enum("20%","50%","80%","100%") not null,
    inTime               datetime                       not null,
@@ -364,3 +365,21 @@ alter table buyOrderCommentRecord
       references buyOrder (buyID) on update cascade on delete cascade;
 
 
+create table requestBook(
+	requestID			int					not null auto_increment,
+    bookRecordID		int					not null,
+    userName			varchar(20)			not null,
+    city				varchar(20)			not null,
+    province			varchar(20)			not null,
+    address				varchar(50)			not null,
+    receiverName		varchar(20)			not null,
+    primary key(requestID)
+);
+
+alter table requestBook
+	add constraint FK_Reference_23 foreign key (bookRecordID)
+		references bookIN(bookRecordID) on update cascade on delete cascade;
+
+alter table requestBook
+	add constraint FK_Reference_24 foreign key (userName)
+		references user(userName) on update cascade on delete cascade;

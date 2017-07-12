@@ -10,12 +10,14 @@ import model.User;
 import model.Admin;
 import model.Book;
 import model.BookComment;
+import model.BookIN;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
 import dao.UserDao;
 import dao.AdminDao;
 import dao.BookCommentDao;
 import dao.BookDao;
+import dao.BookINDao;
 import dao.CoinChangeRecordDao;
 import dao.CreditChangeRecordDao;
 
@@ -40,6 +42,7 @@ public class AppServiceImpl implements AppService {
 	private CreditChangeRecordDao creditChangeRecordDao;
 	private CoinChangeRecordDao coinChangeRecordDao;
 	private AdminDao adminDao;
+	private BookINDao bookINDao;
 
 
 	
@@ -67,6 +70,9 @@ public class AppServiceImpl implements AppService {
 		this.adminDao = adminDao;
 	}
 	
+	public void setBookINDao(BookINDao bookINDao){
+		this.bookINDao = bookINDao;
+	}
 	
 	/*
 	 * User
@@ -311,5 +317,12 @@ public class AppServiceImpl implements AppService {
 	 */
 	public Admin getAdminByAdminName(String adminName){
 		return adminDao.getAdminByAdminName(adminName);
+	}
+	
+	/*
+	 * BookIN
+	 */
+	public List<BookIN> getAllBookINs(){
+		return bookINDao.getAllBookINs();
 	}
 }

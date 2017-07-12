@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+	<class name="model.RequestBook" table="requestBook">
+		<id name="requestID" type="int">
+			<column name="requestID"/>
+			<generator class="assigned" />
+		</id>
+		<property name="bookRecordID" type="int">
+			<column name="bookRecordID" />
+		</property>
+		<property name="userName" type="java.lang.String">
+			<column name="userName" />
+		</property>
+		<property name="city" type="java.lang.String">
+			<column name="city" />
+		</property>
+		<property name="province" type="java.lang.String">
+			<column name="province" />
+		</property>
+		<property name="address" type="java.lang.String">
+			<column name="address" />
+		</property>
+		<property name="receiverName" type="java.lang.String">
+			<column name="receiverName" />
+		</property>
+		<property name="requestStatus" type="java.lang.String">
+			<column name="requestStatus" />
+		</property>
+	</class>
+</hibernate-mapping>

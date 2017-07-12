@@ -5,7 +5,8 @@ import java.sql.Timestamp;
 public class LendOrder {
 	private int lendID;
 	private int bookRecordID;
-	private int lenderID;
+	private int requestID;
+	private String lenderName;
 	private String returnWay;
 	private String lendAddress;
 	private String lendPhone;
@@ -13,15 +14,16 @@ public class LendOrder {
 	private Timestamp arrivalTime;
 	private Timestamp returnTime;
 	private String status;
-	private int ownerID;
+	private String ownerName;
 	
 	public LendOrder(){
 		
 	}
 	
-	public LendOrder(int bookRecordID,int lenderID,String returnWay,String lendAddress,String lendPhone,String receiver,Timestamp arrivalTime,Timestamp returnTime,String status,int ownerID){
+	public LendOrder(int bookRecordID,int requestID,String lenderName,String returnWay,String lendAddress,String lendPhone,String receiver,Timestamp arrivalTime,Timestamp returnTime,String status,String ownerName){
 		this.bookRecordID = bookRecordID;
-		this.lenderID = lenderID;
+		this.requestID = requestID;
+		this.lenderName = lenderName;
 		this.returnWay = returnWay;
 		this.lendAddress = lendAddress;
 		this.lendPhone = lendPhone;
@@ -29,7 +31,7 @@ public class LendOrder {
 		this.arrivalTime = arrivalTime;
 		this.returnTime = returnTime;
 		this.status = status;
-		this.ownerID = ownerID;
+		this.ownerName = ownerName;
 	}
 	
 	public int getLendID(){
@@ -48,12 +50,20 @@ public class LendOrder {
 		this.bookRecordID = bookRecordID;
 	}
 	
-	public int getLenderID(){
-		return lenderID;
+	public int getRequestID(){
+		return requestID;
 	}
 	
-	public void setLenderID(int lenderID){
-		this.lenderID = lenderID;
+	public void setRequestID(int requestID){
+		this.requestID = requestID;
+	}
+	
+	public String getLenderName(){
+		return lenderName;
+	}
+	
+	public void setLenderName(String lenderName){
+		this.lenderName = lenderName;
 	}
 	
 	public String getReturnWay(){
@@ -112,11 +122,11 @@ public class LendOrder {
 		this.status = status;
 	}
 	
-	public int getOwnerID(){
-		return ownerID;
+	public String getOwnerName(){
+		return ownerName;
 	}
 	
-	public void setOwnerID(int ownerID){
-		this.ownerID = ownerID;
+	public void setOwnerName(String ownerName){
+		this.ownerName = ownerName;
 	}
 }
