@@ -195,7 +195,7 @@ function listClick(value){
 		$("#listClick16").attr("class","");
 	}
 	if(value == 8){
-		$("#crowdfunding_iframe").attr("src","crowdfunding.center/my_account.html");
+		$("#crowdfunding_iframe").attr("src","crowdfunding.center/sellBook.jsp");
 		//$("#crowdfunding_iframe").attr("height","1045");
 		//$("#vertical_navigation").css("height","1050px");
 		
@@ -217,7 +217,7 @@ function listClick(value){
 		$("#listClick16").attr("class","");
 	}
 	if(value == 9){
-		$("#crowdfunding_iframe").attr("src","crowdfunding.center/investment_inquiry.html");
+		$("#crowdfunding_iframe").attr("src","crowdfunding.center/lendedBook.jsp");
 		//$("#crowdfunding_iframe").attr("height","1045");
 		//$("#vertical_navigation").css("height","1050px");
 		

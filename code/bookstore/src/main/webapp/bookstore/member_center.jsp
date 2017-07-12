@@ -46,7 +46,7 @@
 						class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="test.jsp"><img
+				<a class="navbar-brand" href="#"><img
 					src="images/index1_logo.png" /></a>
 			</div>
 
@@ -102,7 +102,8 @@
 		<div id="vertical_navigation"
 			class="col-lg-3 background831312 nopadding">
 			<div class="dead_pic">
-				<span class="username">你好，</span><br> <span class="username"><%=session.getAttribute("loginUserName") %></span>
+				<span class="hello">你好，</span>
+				<br> <span class="username"><%=session.getAttribute("loginUserName") %></span>
 			</div>
 			<div class="usertype">
 				书币余额：<%=user.getBookCoin() %><br> 信用：
@@ -192,18 +193,18 @@
 				<li id="listClick8" class="" onClick="listClick(8)"><img
 					src="img/member_center/left_icon_13.png"> 我卖的书</li>
 				<li id="listClick9" class="" onClick="listClick(9)"><img
-					src="img/member_center/left_icon_13.png"> 被借的书</li>
+					src="img/member_center/left_icon_13.png"> 出借的书</li>
 			</ul>
 		</div>
 	</div>
 	<div class="menu">
-		<div class="menu_title">我收到的申请</div>
+		<div class="menu_title">我的申请</div>
 		<div class="menu_list">
 			<ul class="list-unstyled">
 				<li id="listClick11" class="" onClick="listClick(11)"><img
-					src="img/member_center/left_icon_14.png"> 未处理</li>
+					src="img/member_center/left_icon_14.png"> 我发送的申请</li>
 				<li id="listClick12" class="" onClick="listClick(12)"><img
-					src="img/member_center/left_icon_16.png"> 已处理</li>
+					src="img/member_center/left_icon_16.png"> 我收到的申请</li>
 			</ul>
 		</div>
 	</div>
