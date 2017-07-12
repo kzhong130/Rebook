@@ -48,6 +48,10 @@
 		<action name="MemberCenterAction" class="action.MemberCenterAction">
 			<result name="initialize success">member_center.jsp</result>
 		</action>
+		
+		<action name="BookINAction" class="action.BookINAction">
+		
+		</action>
 
 
 		<action name="*">

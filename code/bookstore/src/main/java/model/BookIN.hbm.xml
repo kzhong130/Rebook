@@ -35,7 +35,7 @@
 		<property name="city" type="java.lang.String">
 			<column name="city"/>
 		</property>
-		<property name="longestDuration" type="int">
+		<property name="longestDuration" type="java.lang.Integer">
 			<column name="longestDuration"/>
 		</property>
 		<property name="ownerPhone" type="java.lang.String">

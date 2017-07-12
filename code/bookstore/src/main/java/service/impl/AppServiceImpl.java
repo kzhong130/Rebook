@@ -325,4 +325,12 @@ public class AppServiceImpl implements AppService {
 	public List<BookIN> getAllBookINs(){
 		return bookINDao.getAllBookINs();
 	}
+	
+	public BookIN getBookINByBookRecordID(int bookRecordID){
+		return bookINDao.getBookINByBookRecordID(bookRecordID);
+	}
+	
+	public void updateBookIN(BookIN bookIN){
+		bookINDao.update(bookIN);
+	}
 }

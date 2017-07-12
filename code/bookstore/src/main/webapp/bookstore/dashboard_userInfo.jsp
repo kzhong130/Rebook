@@ -114,7 +114,7 @@
                                 <a href="dashboard_bookComment.jsp">书籍评论</a>
                             </li>
                             <li>
-                                <a href="#">书籍发布情况</a>
+                                <a href="dashboard_bookIn.jsp">书籍发布情况</a>
                             </li>
 							</ul>
                     </li> 

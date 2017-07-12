@@ -67,5 +67,6 @@ public interface AppService {
 	 * BookIN
 	 */
 	public List<BookIN> getAllBookINs();
-
+	public BookIN getBookINByBookRecordID(int bookRecordID);
+	public void updateBookIN(BookIN bookIN);
 }
