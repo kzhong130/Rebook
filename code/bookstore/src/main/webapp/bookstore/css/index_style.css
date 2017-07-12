@@ -28,6 +28,21 @@ div.background
  float:left;
  text-align:center;
 }
+ div.test
+{
+display: -webkit-box;
+-webkit-box-orient: vertical;
+-webkit-line-clamp: 2;
+white-space:nowrap; 
+width:228px;
+overflow:hidden; 
+text-overflow:ellipsis;
+}
+div.test:hover
+{
+text-overflow:inherit;
+overflow:visible;
+}
  
 div.box
 {
