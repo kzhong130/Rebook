@@ -206,7 +206,7 @@ session.setAttribute("prePage", url);
           <span class="tip lendnote_hint"></span>
       </li>
       <li id="checklend5" style="margin:0 20px 0 0;">
-          <button type="button" name="button" class="red_lendbutton" >确认出借</button>
+          <button type="button" onclick="borrow()" name="button" class="red_lendbutton" >确认出借</button>
       </li>
       </ul>
       </td></tr>
@@ -220,7 +220,7 @@ session.setAttribute("prePage", url);
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
 
 <script type="text/javascript">
-	alert(2333);
+	
 	var Mobile_Boolean=false;
 
 	$('.reg_ownerphone').blur(function(){
@@ -305,7 +305,7 @@ session.setAttribute("prePage", url);
 				 select=document.getElementsByName("area")[0];
 				  var city=select.options[select.selectedIndex].text;
 			}
-		 	alert(document.getElementsByName("recency")[0].value);
+		 	//alert(document.getElementsByName("recency")[0].value);
 		  	$.ajax({  
 		        type:"POST",  
 		        url:"LendSellAction!sellInfo",  
@@ -313,7 +313,32 @@ session.setAttribute("prePage", url);
 				data:{ISBN:<%=book.getISBN()%>,province:province,city:city,ownerName:$(".reg_ownername").val(),ownerPhone:$(".reg_ownerphone").val(),coinNumber:$(".reg_sellcoinnumber").val(),note:$(".reg_sellnote").val(),recency:document.getElementsByName("recency")[0].value,sendWay:document.getElementsByName("sendway")[0].value},
 		        
 		    });
-		  	alert("2333");
+		}
+		else{
+			alert("请完善信息");
+		}
+	};
+	
+	function borrow(){
+		if(Mobile_Boolean&&user_Boolean&&lendcoin_Boolean&&lendday_Boolean&&address_Boolean){
+			var select = document.getElementsByName("province")[0];
+		 	var province=select.options[select.selectedIndex].text;
+		 	if(document.getElementsByName("city")[0].value!=""){
+				  select=document.getElementsByName("city")[0];
+				  var city=select.options[select.selectedIndex].text;
+			}
+			else {
+				 select=document.getElementsByName("area")[0];
+				  var city=select.options[select.selectedIndex].text;
+			}
+		 	//alert(document.getElementsByName("recency")[0].value);
+		  	$.ajax({  
+		        type:"POST",  
+		        url:"LendSellAction!lendInfo",  
+		        async:false,
+				data:{ownerAddress:$(".reg_owneraddress").val(),longestDuration:$(".reg_lenddaynumber").val(),ISBN:<%=book.getISBN()%>,province:province,city:city,ownerName:$(".reg_ownername").val(),ownerPhone:$(".reg_ownerphone").val(),coinNumber:$(".reg_lendcoinnumber").val(),note:$(".reg_lendnote").val(),recency:document.getElementsByName("recency")[0].value,sendWay:document.getElementsByName("sendway")[0].value},
+		        
+		    });
 		}
 		else{
 			alert("请完善信息");

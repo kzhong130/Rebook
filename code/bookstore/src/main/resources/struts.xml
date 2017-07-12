@@ -53,6 +53,7 @@
 		<action name="LendSellAction" class="action.LendSellAction">
 			<result name="search">lendsellbook.jsp</result>
 			<result name="sell">lendsellbook.jsp</result>
+			<result name="lend">lendsellbook.jsp</result>
 			
 		</action>
 
