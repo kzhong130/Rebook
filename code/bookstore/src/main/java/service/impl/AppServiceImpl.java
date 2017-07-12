@@ -325,6 +325,11 @@ public class AppServiceImpl implements AppService {
 	public List<BookIN> getAllBookINs(){
 		return bookINDao.getAllBookINs();
 	}
+	@Override
+	public Integer addBookIN(BookIN bookIN) {
+		System.out.println(222);
+		return bookINDao.save(bookIN);
+  }
 	
 	public BookIN getBookINByBookRecordID(int bookRecordID){
 		return bookINDao.getBookINByBookRecordID(bookRecordID);

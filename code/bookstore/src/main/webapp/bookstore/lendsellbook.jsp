@@ -17,9 +17,10 @@
 <link rel="stylesheet" href="css/register2.css">
 <link rel="sytlesheet" href="css/lendsellbook.css">
 <link rel="stylesheet" href="css/bootstrap.css">
-<script type="text/javascript" src="js/jquery.min.js"></script>
-<script type="text/javascript" src="js/jquery.citys.js"></script>   
 
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/jquery.citys.js"></script>
+<script src="js/bootstrap.js"></script>
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -71,11 +72,11 @@ session.setAttribute("prePage", url);
 
 <%
 	Book book = new Book();
-    if (session.getAttribute("book")!=null){
-    	book = (Book)session.getAttribute("book");
+    if (request.getAttribute("book")!=null){
+    	book = (Book)request.getAttribute("book");
     }
-    ArrayList<BookComment> bookComments = new ArrayList<BookComment>();
-    bookComments = (ArrayList<BookComment>)session.getAttribute("bookComment");
+    //ArrayList<BookComment> bookComments = new ArrayList<BookComment>();
+    //bookComments = (ArrayList<BookComment>)session.getAttribute("bookComment");
 %>
 <br>
 <!-- 书籍封面&基本信息 -->
@@ -182,7 +183,7 @@ session.setAttribute("prePage", url);
           <span class="tip sellnote_hint"></span>
       </li>
       <li id="checksell3" style="margin:0 20px 0 0;">
-          <button type="button" name="button" class="red_sellbutton" >确认卖书</button>
+          <button type="button" onclick="sell()" name="button" class="red_sellbutton" >确认卖书</button>
       </li>
       <li id="checklend4">          
           <span>书主详细地址：</span>
@@ -215,12 +216,116 @@ session.setAttribute("prePage", url);
 <hr>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
-<script src="js/jquery-1.11.3.min.js"></script> 
+<!--<script src="js/jquery-1.11.3.min.js"></script> -->
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
-<script src="js/bootstrap.js"></script>
-<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
-<script type="text/javascript" src="js/jquery-1.9.1.js"></script>
-<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+
+<script type="text/javascript">
+	alert(2333);
+	var Mobile_Boolean=false;
+
+	$('.reg_ownerphone').blur(function(){
+	  if ((/^1[34578]\d{9}$/).test($(".reg_ownerphone").val())){
+	    $('.ownerphone_hint').html("✔").css("color","green");
+	    Mobile_Boolean = true;
+	  }else {
+	    $('.ownerphone_hint').html("×").css("color","red");
+	    Mobile_Boolean = false;
+	  }
+	});
+
+	var user_Boolean=false;
+	
+	$('.reg_ownername').blur(function(){
+		  if ((/^[\u4E00-\u9FA5]{2,5}(?:·[\u4E00-\u9FA5]{2,5})*$/).test($(".reg_ownername").val())){
+		    $('.ownername_hint').html("✔").css("color","green");
+		    user_Boolean = true;
+		  }else {
+		    $('.ownername_hint').html("×").css("color","red");
+		    user_Boolean = false;
+		  }
+	});
+
+	var sellcoin_Boolean=false;
+	
+	$('.reg_sellcoinnumber').blur(function(){
+		  if ((/^[0-9]*[1-9][0-9]*$/).test($(".reg_sellcoinnumber").val())){
+		    $('.sellcoinnumber_hint').html("✔").css("color","green");
+		    sellcoin_Boolean = true;
+		  }else {
+		    $('.sellcoinnumber_hint').html("×").css("color","red");
+		    sellcoin_Boolean = false;
+		  }
+	});
+	
+	var lendcoin_Boolean=false;
+	
+	$('.reg_lendcoinnumber').blur(function(){
+		  if ((/^[0-9]*[1-9][0-9]*$/).test($(".reg_lendcoinnumber").val())){
+		    $('.lendcoinnumber_hint').html("✔").css("color","green");
+		    lendcoin_Boolean = true;
+		  }else {
+		    $('.lendcoinnumber_hint').html("×").css("color","red");
+		    lendcoin_Boolean = false;
+		  }
+	});
+	
+	
+	var address_Boolean=false;
+	$('.reg_owneraddress').blur(function(){
+		  if ($(".reg_owneraddress").val()!=""){
+		    $('.owneraddress_hint').html("✔").css("color","green");
+		    address_Boolean = true;
+		  }else {
+		    $('.owneraddress_hint').html("×").css("color","red");
+		    address_Boolean = false;
+		  }
+	});
+	
+	var lendday_Boolean=false;
+	
+	$('.reg_lenddaynumber').blur(function(){
+		  if ((/^[0-9]*[1-9][0-9]*$/).test($(".reg_lenddaynumber").val())){
+		    $('.lenddaynumber_hint').html("✔").css("color","green");
+		    lendday_Boolean = true;
+		  }else {
+		    $('.lenddaynumber_hint').html("×").css("color","red");
+		    lendday_Boolean = false;
+		  }
+	});
+	
+	function sell(){
+		if(Mobile_Boolean&&user_Boolean&&sellcoin_Boolean){
+			var select = document.getElementsByName("province")[0];
+		 	var province=select.options[select.selectedIndex].text;
+		 	if(document.getElementsByName("city")[0].value!=""){
+				  select=document.getElementsByName("city")[0];
+				  var city=select.options[select.selectedIndex].text;
+			}
+			else {
+				 select=document.getElementsByName("area")[0];
+				  var city=select.options[select.selectedIndex].text;
+			}
+		 	alert(document.getElementsByName("recency")[0].value);
+		  	$.ajax({  
+		        type:"POST",  
+		        url:"LendSellAction!sellInfo",  
+		        async:false,
+				data:{ISBN:<%=book.getISBN()%>,province:province,city:city,ownerName:$(".reg_ownername").val(),ownerPhone:$(".reg_ownerphone").val(),coinNumber:$(".reg_sellcoinnumber").val(),note:$(".reg_sellnote").val(),recency:document.getElementsByName("recency")[0].value,sendWay:document.getElementsByName("sendway")[0].value},
+		        
+		    });
+		  	alert("2333");
+		}
+		else{
+			alert("请完善信息");
+		}
+	};
+
+	
+	
+
+
+</script>
+
 <script type="text/javascript">
       $('#demo2').citys({
         required:false,
