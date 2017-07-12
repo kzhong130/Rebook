@@ -78,7 +78,7 @@
                                 <a href="dashboard_bookComment.jsp">书籍评论</a>
                             </li>
                             <li>
-                                <a href="#">书籍发布情况</a>
+                                <a href="dashboard_bookIn.jsp">书籍发布情况</a>
                             </li>
 							</ul>
                     </li> 
@@ -402,7 +402,7 @@
                                                 <td><div title="<%=books.get(i).getPublisher() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=books.get(i).getPublisher() %></div></td>
                                                 <td><%=books.get(i).getPrice() %></td>
                                                 <td><a class="btn btn-success btn-xs" href="dashboard_bookComment.jsp?ISBN=<%=books.get(i).getISBN() %>"  >查看</a></td>
-                                                <td><button class="btn btn-success btn-xs">查看</button></td>
+                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookIn.jsp?ISBN=<%=books.get(i).getISBN()%>">查看</button></td>
                                             </tr>
                                             <%} %>
 											<%} %>

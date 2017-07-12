@@ -1,8 +1,22 @@
-package model;
+package action;
 
+import service.AppService;
+
+import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
-public class BookIN {
+import org.apache.struts2.ServletActionContext;
+
+import model.Book;
+import model.BookIN;
+import net.sf.json.JSONObject;
+
+public class BookINAction extends BaseAction{
+	private static final long serialVersionUID = 1L;
+	
 	private int bookRecordID;
 	private String userName;
 	private String ISBN;
@@ -20,27 +34,8 @@ public class BookIN {
 	private String note;
 	private String province;
 	
-	public BookIN(){
-		
-	}
+	private AppService appService;
 	
-	public BookIN(String userName, String ISBN,String recency,Timestamp inTime,int coinNumber,String ownerName,String type,String sendWay,String city,int longestDuration,String ownerPhone,String ownerAddress,String inStatus,String note,String province){
-		this.userName = userName;
-		this.ISBN = ISBN;
-		this.recency = recency;
-		this.inTime = inTime;
-		this.coinNumber = coinNumber;
-		this.ownerName = ownerName;
-		this.type = type;
-		this.sendWay = sendWay;
-		this.city = city;
-		this.longestDuration = longestDuration;
-		this.ownerPhone = ownerPhone;
-		this.ownerAddress = ownerAddress;
-		this.inStatus = inStatus;
-		this.note = note;
-		this.province = province;
-	}
 	
 	public int getBookRecordID(){
 		return bookRecordID;
@@ -168,5 +163,25 @@ public class BookIN {
 	
 	public void setProvince(String province){
 		this.province = province;
+	}
+	
+	public void setAppService(AppService appService){
+		this.appService = appService;
+	}
+	
+	public String updateBookIN() throws Exception{
+		BookIN bookIN = appService.getBookINByBookRecordID(bookRecordID);
+		bookIN.setInStatus(inStatus);
+		appService.updateBookIN(bookIN);
+		List<BookIN> bookINs = appService.getAllBookINs();
+		request().getSession().setAttribute("allBookINs", bookINs);
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject();
+		obj.put("success", true);
+		String str=obj.toString();
+		out.write(str);
+		out.close();
+		
+		return "update success";
 	}
 }
