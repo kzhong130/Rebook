@@ -8,8 +8,8 @@
 			<column name="bookRecordID" />
 			<generator class="assigned"/>
 		</id>
-		<property name="userID" type="int">
-			<column name="userID"/>
+		<property name="userName" type="java.lang.String">
+			<column name="userName"/>
 		</property>
 		<property name="ISBN" type="java.lang.String">
 			<column name="ISBN"/>

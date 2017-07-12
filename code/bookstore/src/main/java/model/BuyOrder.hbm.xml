@@ -11,8 +11,11 @@
 		<property name="bookRecordID" type="int">
 			<column name="bookRecordID"/>
 		</property>
-		<property name="buyerID" type="int">
-			<column name="buyerID"/>
+		<property name="requestID" type="int">
+			<column name="requestID"/>
+		</property>
+		<property name="buyerName" type="java.lang.String">
+			<column name="buyerName"/>
 		</property>
 		<property name="buyAddress" type="java.lang.String">
 			<column name="buyAddress"/>
@@ -29,8 +32,8 @@
 		<property name="status" type="java.lang.String">
 			<column name="status"/>
 		</property>
-		<property name="ownerID" type="int">
-			<column name="ownerID"/>
+		<property name="ownerName" type="java.lang.String">
+			<column name="ownerName"/>
 		</property>
 	</class>
 </hibernate-mapping>

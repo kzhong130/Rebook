@@ -5,27 +5,29 @@ import java.sql.Timestamp;
 public class BuyOrder {
 	private int buyID;
 	private int bookRecordID;
-	private int buyerID;
+	private int requestID;
+	private String buyerName;
 	private String buyAddress;
 	private String buyPhone;
 	private String receiver;
 	private Timestamp arrivalTime;
 	private String status;
-	private int ownerID;
+	private String ownerName;
 	
 	public BuyOrder(){
 		
 	}
 	
-	public BuyOrder(int bookRecordID,int buyerID,String buyAddress,String buyPhone,String receiver,Timestamp arrivalTime,String status,int ownerID){
+	public BuyOrder(int bookRecordID,int requestID,String buyerName,String buyAddress,String buyPhone,String receiver,Timestamp arrivalTime,String status,String ownerName){
 		this.bookRecordID = bookRecordID;
-		this.buyerID = buyerID;
+		this.requestID = requestID;
+		this.buyerName = buyerName;
 		this.buyAddress = buyAddress;
 		this.buyPhone = buyPhone;
 		this.receiver = receiver;
 		this.arrivalTime = arrivalTime;
 		this.status = status;
-		this.ownerID = ownerID;
+		this.ownerName = ownerName;
 	}
 	
 	public int getBuyID(){
@@ -44,12 +46,20 @@ public class BuyOrder {
 		this.bookRecordID = bookRecordID;
 	}
 	
-	public int getBuyerID(){
-		return buyerID;
+	public int getRequestID(){
+		return requestID;
 	}
 	
-	public void setBuyerID(int buyerID){
-		this.buyerID = buyerID;
+	public void setRequestID(int requestID){
+		this.requestID = requestID;
+	}
+	
+	public String getBuyerName(){
+		return buyerName;
+	}
+	
+	public void setBuyerName(String buyerName){
+		this.buyerName = buyerName;
 	}
 	
 	public String getBuyAddress(){
@@ -92,11 +102,11 @@ public class BuyOrder {
 		this.status = status;
 	}
 	
-	public int getOwnerID(){
-		return ownerID;
+	public String getOwnerName(){
+		return ownerName;
 	}
 	
-	public void setOwnerID(int ownerID){
-		this.ownerID = ownerID;
+	public void setOwnerName(String ownerName){
+		this.ownerName = ownerName;
 	}
 }

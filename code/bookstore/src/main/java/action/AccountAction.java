@@ -11,6 +11,7 @@ import org.apache.struts2.ServletActionContext;
 import model.Admin;
 import model.Book;
 import model.BookComment;
+import model.BookIN;
 import model.User;
 import model.CreditChangeRecord;
 import model.CoinChangeRecord;
@@ -237,6 +238,8 @@ public class AccountAction extends BaseAction{
 				request().getSession().setAttribute("allBooks", books);
 				List<BookComment> bookComments = appService.getAllBookComments();
 				request().getSession().setAttribute("allBookComments", bookComments);
+				List<BookIN> bookINs = appService.getAllBookINs();
+				request().getSession().setAttribute("allBookINs", bookINs);
 				request().getSession().setAttribute("admin", "admin");
 				return "adminlogin success";
 			}	
