@@ -57,6 +57,7 @@ padding:10px 8px 10px 8px;
 
 .bookimage{
 	width:15%;
+	
 }
 
 div.commentbox img
@@ -64,6 +65,8 @@ div.commentbox img
 width:90%;
 height:auto;
 margin:0 5px 0 5px;
+
+
 }
 
 .bookname{
@@ -76,6 +79,7 @@ margin:0 5px 0 5px;
 	padding-top:0px;
 	padding-left:9px;
 	padding-right:4px;
+	vertical-align: top;
 }	
 .deletebutton{
 	float:! right;
@@ -111,3 +115,6 @@ button.delete{
 botton.delete:hover{
 	background-color: #d19826;
 	}
+.allwidth{
+	width:691px;
+}

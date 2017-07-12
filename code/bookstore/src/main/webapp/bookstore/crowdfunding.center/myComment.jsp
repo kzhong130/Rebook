@@ -66,12 +66,12 @@
      
         <tr>
 
-          <td class="bookimage"><a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a></td>
-          <td class="bookcontent">
-          <table class="allwidth">
+          <td class="bookimage" style="vertical-align:text-top;"><a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a></td>
+          <td class="bookcontent" style="vertical-align:top;">
+          <table class="allwidth" style="width:691px;">
               <tr>
               <td class="bookname">《<%=book.getBookName() %>》</td>
-              <td class="deletebutton"><button class="delete" value="<%=bookComment.getID() %>" onclick="deleteBookComment(this)" >删 除</button></td>
+              <td class="deletebutton"><button class="delete" name="" type="onclick" >删 除</button></td>
               </tr>
               <tr>
               <td colspan="2">
