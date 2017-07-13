@@ -155,11 +155,11 @@
                                         <thead>
                                             <tr class="text-center">
                                                 <th class="text-center" width="15%">ISBN</th>
-                                                <th class="text-center" width="10%">书名</th>
-                                                <th class="text-center">用户名</th>
-                                                <th class="text-center">时间</th>
+                                                <th class="text-center" width="14%">书名</th>
+                                                <th class="text-center" width="14%">用户名</th>
+                                                <th class="text-center" width="17%">时间</th>
                                                 <th class="text-center" width="25%">内容</th>
-                                                <th class="text-center" width="12%">状态</th>
+                                                <th class="text-center" width="8%">状态</th>
                                                 <th class="text-center" width="6%">详情</th>
                                             </tr>
                                         </thead>

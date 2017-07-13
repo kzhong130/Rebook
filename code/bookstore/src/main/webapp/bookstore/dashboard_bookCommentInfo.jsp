@@ -162,38 +162,41 @@
                         <div class="panel panel-default">
                           
                             <div class="panel-body">
-								<p>ISBN: <%=book.getISBN() %></p>
-                                <p>书名: <%=book.getBookName() %></p>
-                                <p>用户名:<%=bookComment.getUserName() %> </p>
-                                <p>时间:<%=bookComment.getCommentTime().toString().substring(0, 19) %> </p>
-                                <p>内容: <%=bookComment.getContent() %></p><br>
-                                <!-- 字体有点丑之后一起改 -->
+								<p><span class="col-md-2">ISBN: </span><span class="col-md-10"><%=book.getISBN() %></span></p>
+                                <p><span class="col-md-2">书名: </span><span class="col-md-10"><%=book.getBookName() %></span></p>
+                                <p><span class="col-md-2">用户名:</span><span class="col-md-10"><%=bookComment.getUserName() %> </span></p>
+                                <p><span class="col-md-2">时间:</span><span class="col-md-10"><%=bookComment.getCommentTime().toString().substring(0, 19) %> </span></p>
+                                <p><span class="col-md-2">内容: </span><span class="col-md-10"><%=bookComment.getContent() %></span></p><br>
                                 <form role="form">
                                 <%
                                 	if ("reject".equals(bookComment.getCheckResult())){
                                 %>
 												<div class="form-group">
-													<label for="状态">状态: </label>
+													<p><span class="col-md-2">状态: </span></p>
+ 													<!--<label for="状态">状态: </label> -->
+ 													<div class="col-md-10" style="margin:-5px 0 0 -20px">
 													<label class="checkbox-inline">
 													<input type="radio" name="bookCommentCheck" id="bookCommentCheck1" value="已通过" > 已通过
 													</label>
 													<label class="checkbox-inline">
 													<input type="radio" name="bookCommentCheck" id="bookCommentCheck0" value="未通过" checked="true"> 未通过
-													</label>
+													</label></div>
 												</div>
 								<%} %>
 								<%if ("pass".equals(bookComment.getCheckResult()) || bookComment.getCheckResult()==null){ %>
-								<div class="form-group">
-													<label for="状态">状态: </label>
+								<div class="form-group" >
+													<p><span class="col-md-2">状态: </span></p>
+ 													<!--<label for="状态">状态: </label> -->
+ 													<div class="col-md-10" style="margin:-5px 0 0 -20px">
 													<label class="checkbox-inline">
 													<input type="radio" name="bookCommentCheck" id="bookCommentCheck1" value="已通过" checked="true"> 已通过
 													</label>
 													<label class="checkbox-inline">
 													<input type="radio" name="bookCommentCheck" id="bookCommentCheck0" value="未通过" > 未通过
-													</label>
+													</label></div>
 												</div>
 								<%} %>
-												
+								<br><br>&nbsp;&nbsp;&nbsp;				
                           <input type="button" class="btn btn-success" value="确认修改" id="<%=bookComment.getID()%>" onclick="updateBookComment(this)">&nbsp;&nbsp;
                            <a href="dashboard_bookComment.jsp" class="btn btn-default">返回</a>
                            </form>

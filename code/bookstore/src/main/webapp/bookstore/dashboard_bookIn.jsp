@@ -154,11 +154,11 @@
                                     <table class="table table-striped table-bordered table-hover" style="table-layout:fixed" id="myTable">
                                         <thead>
                                             <tr class="text-center">
-                                                <th class="text-center" width="17%">ISBN</th>
+                                                <th class="text-center" width="16%">ISBN</th>
                                                 <th class="text-center" width="20%">书名</th>
-                                                <th class="text-center" width="18%">用户名</th>
+                                                <th class="text-center" width="14%">用户名</th>
                                                 <th class="text-center" width="12%">书币</th>
-                                                <th class="text-center" width="12%">发布时间</th>
+                                                <th class="text-center" width="17%">发布时间</th>
                                                 <th class="text-center" width="7%">借/买</th>
                                                 <th class="text-center" width="7%">状态</th>
                                                 <th class="text-center" width="7%">详情</th>

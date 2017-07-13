@@ -150,8 +150,8 @@
 		<div id="page-wrapper">
 		  <div class="header"> 
                         <h2 class="page-header">
-                            用户信息 <small>
-                            user</small>
+                            书籍发布情况 <small>
+                            release</small>
                         </h2>
 									
 		</div>
@@ -200,54 +200,57 @@
                             	}
                             %>
                             <form class="form-horizontal" role="form">
-								<p>ISBN: <%=bookIN.getISBN() %></p>
-                                <p>书名: <%=book.getBookName() %></p>
-                                <p>用户名: <%=bookIN.getUserName() %></p>
-                                <p>书主姓名: <%=bookIN.getOwnerName() %></p>
-                                <p>书主电话: <%=bookIN.getOwnerPhone() %>
-                                <p>书币要求: <%=bookIN.getCoinNumber() %></p>
-                                <p>借/买: <%=type %></p>
-                                <p>发布时间: <%=bookIN.getInTime().toString().substring(0, 19) %></p>
-                                <p>送书方式: <%=bookIN.getSendWay() %></p>
-                                <p>所在城市: <%=bookIN.getProvince() + bookIN.getCity() %></p>
-                                <p>最长借书时间: <%=longestDuration %> </p>
-                                <p>书主地址: <%=bookIN.getProvince() + bookIN.getCity() + bookIN.getOwnerAddress() %> </p>
-                                <p>新旧程度: <%=recency %></p>
-                                <p>备注: <%=note %></p>
-                                <br>
-                                <!-- 这个字体有点丑，等功能实现之后再统一改好了TvT -->
+								<p><span class="col-md-2">ISBN: </span><span class="col-md-10"><%=bookIN.getISBN() %></span></p>
+                                <p><span class="col-md-2">书名: </span><span class="col-md-10"><%=book.getBookName() %></span></p>
+                                <p><span class="col-md-2">用户名: </span><span class="col-md-10"><%=bookIN.getUserName() %></span></p>
+                                <p><span class="col-md-2">书主姓名: </span><span class="col-md-10"><%=bookIN.getOwnerName() %></span></p>
+                                <p><span class="col-md-2">书主电话: </span><span class="col-md-10"><%=bookIN.getOwnerPhone() %></span></p>
+                                <p><span class="col-md-2">书币要求: </span><span class="col-md-10"><%=bookIN.getCoinNumber() %></span></p>
+                                <p><span class="col-md-2">借/买: </span><span class="col-md-10"><%=type %></span></p>
+                                <p><span class="col-md-2">发布时间: </span><span class="col-md-10"><%=bookIN.getInTime().toString().substring(0, 19) %></span></p>
+                                <p><span class="col-md-2">送书方式: </span><span class="col-md-10"><%=bookIN.getSendWay() %></span></p>
+                                <p><span class="col-md-2">所在城市: </span><span class="col-md-10"><%=bookIN.getProvince() + bookIN.getCity() %></span></p>
+                                <p><span class="col-md-2">最长借书时间: </span><span class="col-md-10"><%=longestDuration %> </span></p>
+                                <p><span class="col-md-2">书主地址: </span><span class="col-md-10"><%=bookIN.getProvince() + bookIN.getCity() + bookIN.getOwnerAddress() %> </span></p>
+                                <p><span class="col-md-2">新旧程度: </span><span class="col-md-10"><%=recency %></span></p>
+                                <p><span class="col-md-2">备注: </span><span class="col-md-10"><%=note %></span></p>
                                 <%
                                 	if("yes".equals(bookIN.getInStatus())){
                                 %>
                                 <div class="form-group">
-													<label for="状态">状态: </label>
+                                					<p><span class="col-md-2">&nbsp;&nbsp;&nbsp;&nbsp;状态: </span></p>
+ 													<!--<label for="状态">状态: </label> -->
+ 													<div class="col-md-10">
+ 													<div style="margin:-15px 0 0 -10px">
 													<label class="checkbox-inline">
 													<input type="radio" name="bookInCheck" id="bookInCheck1" value="上架" checked="true"> 上架
 													</label>
 													<label class="checkbox-inline">
 													<input type="radio" name="bookInCheck" id="bookInCheck0" value="下架"> 下架
 													</label>
-												</div>
+												</div></div></div>
 								<%} %>
 								<%
 									if ("no".equals(bookIN.getInStatus())){
 								%>
 								 <div class="form-group">
-													<label for="状态">状态: </label>
+													<p><span class="col-md-2">状态: </span></p>
+ 													<!--<label for="状态">状态: </label> -->
+ 													<div class="col-md-10" style="margin:-30px 0 0 -20px">
 													<label class="checkbox-inline">
 													<input type="radio" name="bookInCheck" id="bookInCheck1" value="上架"> 上架
 													</label>
 													<label class="checkbox-inline">
 													<input type="radio" name="bookInCheck" id="bookInCheck0" value="下架"  checked="true"> 下架
 													</label>
-												</div>
+												</div></div>
 									<%} %>
-												
+							<br>&nbsp;&nbsp;&nbsp;
                           <input type="button" class="btn btn-success" value="确认修改" id="<%=bookIN.getBookRecordID()%>" onclick = "updateBookIN(this)">&nbsp;&nbsp;
                            <a href="dashboard_bookIn.jsp" class="btn btn-default">返回</a>
                                 
                            
-								
+								</form>
                             </div>
                         </div>
 
