@@ -198,6 +198,14 @@
                             	if (bookIN.getNote() != null){
                             		note = bookIN.getNote();
                             	}
+                            	
+                            	String sendWay = "";
+                            	if ("mail".equals(bookIN.getSendWay())){
+                            		sendWay = "邮寄";
+                            	}
+                            	if ("face".equals(bookIN.getSendWay())){
+                            		sendWay = "当面";
+                            	}
                             %>
                             <form class="form-horizontal" role="form">
 								<p>ISBN: <%=bookIN.getISBN() %></p>
@@ -208,7 +216,7 @@
                                 <p>书币要求: <%=bookIN.getCoinNumber() %></p>
                                 <p>借/买: <%=type %></p>
                                 <p>发布时间: <%=bookIN.getInTime().toString().substring(0, 19) %></p>
-                                <p>送书方式: <%=bookIN.getSendWay() %></p>
+                                <p>送书方式: <%=sendWay %></p>
                                 <p>所在城市: <%=bookIN.getProvince() + bookIN.getCity() %></p>
                                 <p>最长借书时间: <%=longestDuration %> </p>
                                 <p>书主地址: <%=bookIN.getProvince() + bookIN.getCity() + bookIN.getOwnerAddress() %> </p>
