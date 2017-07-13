@@ -65,6 +65,10 @@
 		<action name="AdminCenterAction" class="action.AdminCenterAction">
 			<result name="initialize success">dashboard_user.jsp</result>
 		</action>
+		
+		<action name="LendOrderAction" class="action.LendOrderAction">
+		
+		</action>
 
 
 		<action name="*">
