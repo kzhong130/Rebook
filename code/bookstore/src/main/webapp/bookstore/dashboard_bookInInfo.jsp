@@ -198,8 +198,17 @@
                             	if (bookIN.getNote() != null){
                             		note = bookIN.getNote();
                             	}
+                            	
+                            	String sendWay = "";
+                            	if ("mail".equals(bookIN.getSendWay())){
+                            		sendWay = "邮寄";
+                            	}
+                            	if ("face".equals(bookIN.getSendWay())){
+                            		sendWay = "当面";
+                            	}
                             %>
                             <form class="form-horizontal" role="form">
+
 								<p><span class="col-md-2">ISBN: </span><span class="col-md-10"><%=bookIN.getISBN() %></span></p>
                                 <p><span class="col-md-2">书名: </span><span class="col-md-10"><%=book.getBookName() %></span></p>
                                 <p><span class="col-md-2">用户名: </span><span class="col-md-10"><%=bookIN.getUserName() %></span></p>
@@ -214,6 +223,7 @@
                                 <p><span class="col-md-2">书主地址: </span><span class="col-md-10"><%=bookIN.getProvince() + bookIN.getCity() + bookIN.getOwnerAddress() %> </span></p>
                                 <p><span class="col-md-2">新旧程度: </span><span class="col-md-10"><%=recency %></span></p>
                                 <p><span class="col-md-2">备注: </span><span class="col-md-10"><%=note %></span></p>
+
                                 <%
                                 	if("yes".equals(bookIN.getInStatus())){
                                 %>

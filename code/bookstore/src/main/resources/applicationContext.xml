@@ -99,6 +99,7 @@
 		<property name="coinChangeRecordDao" ref="coinChangeRecordDao" />
 		<property name="adminDao" ref="adminDao" />
 		<property name="bookINDao" ref="bookINDao" />
+		<property name="lendOrderDao" ref="lendOrderDao" />
 	</bean>
 	
 	<!-- Hibernate Transaction Manager -->

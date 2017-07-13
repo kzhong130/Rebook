@@ -241,7 +241,7 @@ session.setAttribute("prePage", url);
    				<td>快递/上门</td>
    				<td>上海</td>
    				<td>10</td>
-   				<td>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈韩寒会画画后悔画韩红韩红要和韩寒嘿嘿嘿韩寒喊韩红坏坏</td>
+   				<td>哈哈哈哈坏</td>
    				<td><a class="btn btn-success btn-sm -sm" role="button">借书</a></td>
     		</tr>
     		<tr class="text-center">
@@ -251,7 +251,7 @@ session.setAttribute("prePage", url);
    				<td>快递</td>
    				<td>上海</td>
    				<td>10</td>
-   				<td>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈韩寒会画画后悔画韩红韩红要和韩寒嘿嘿嘿韩寒喊韩红坏坏</td>
+   				<td>哈哈哈哈坏</td>
 				<td><a class="btn btn-success btn-sm" role="button">借书</a></td>
     		</tr>
     	</tbody>
@@ -545,7 +545,7 @@ var userName = '<%=session.getAttribute("loginUserName")%>'
 			$('#personalInfo').html(str);
 		}
 		else{
-			var str ="<li><a href='dashboard_user.jsp'>管理中心</a>";
+			var str ="<li><a href='AdminCenterAction!initialize'>管理中心</a>";
 			str+="<li><A href='AccountAction!logout'>登出</a>";
 			$('#personalInfo').html(str);
 		}

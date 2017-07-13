@@ -24,7 +24,7 @@ public class BookIN {
 		
 	}
 	
-	public BookIN(String userName, String ISBN,String recency,Timestamp inTime,int coinNumber,String ownerName,String type,String sendWay,String city,int longestDuration,String ownerPhone,String ownerAddress,String inStatus,String note,String province){
+	public BookIN(String userName, String ISBN,String recency,Timestamp inTime,int coinNumber,String ownerName,String type,String sendWay,String city,Integer longestDuration,String ownerPhone,String ownerAddress,String inStatus,String note,String province){
 		this.userName = userName;
 		this.ISBN = ISBN;
 		this.recency = recency;

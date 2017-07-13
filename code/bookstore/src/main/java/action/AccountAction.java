@@ -232,14 +232,6 @@ public class AccountAction extends BaseAction{
 			if (admin.getPassword().equals(password)){		//管理员密码正确
 				request().getSession().setAttribute("loginUserName", userName);
 				request().getSession().removeAttribute("login");
-				List<User> users = appService.getAllUsers();
-				request().getSession().setAttribute("allUsers",users);
-				List<Book> books = appService.getAllBooks();
-				request().getSession().setAttribute("allBooks", books);
-				List<BookComment> bookComments = appService.getAllBookComments();
-				request().getSession().setAttribute("allBookComments", bookComments);
-				List<BookIN> bookINs = appService.getAllBookINs();
-				request().getSession().setAttribute("allBookINs", bookINs);
 				request().getSession().setAttribute("admin", "admin");
 				return "adminlogin success";
 			}	

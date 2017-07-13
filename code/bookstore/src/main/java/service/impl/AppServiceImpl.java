@@ -13,6 +13,7 @@ import model.BookComment;
 import model.BookIN;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
+import model.LendOrder;
 import dao.UserDao;
 import dao.AdminDao;
 import dao.BookCommentDao;
@@ -20,6 +21,7 @@ import dao.BookDao;
 import dao.BookINDao;
 import dao.CoinChangeRecordDao;
 import dao.CreditChangeRecordDao;
+import dao.LendOrderDao;
 
 import org.apache.http.HttpEntity;  
 import org.apache.http.HttpResponse;
@@ -43,6 +45,7 @@ public class AppServiceImpl implements AppService {
 	private CoinChangeRecordDao coinChangeRecordDao;
 	private AdminDao adminDao;
 	private BookINDao bookINDao;
+	private LendOrderDao lendOrderDao;
 
 
 	
@@ -72,6 +75,10 @@ public class AppServiceImpl implements AppService {
 	
 	public void setBookINDao(BookINDao bookINDao){
 		this.bookINDao = bookINDao;
+	}
+	
+	public void setLendOrderDao(LendOrderDao lendOrderDao){
+		this.lendOrderDao = lendOrderDao;
 	}
 	
 	/*
@@ -111,6 +118,7 @@ public class AppServiceImpl implements AppService {
 	@SuppressWarnings("deprecation")
 	public Book readBookByISBN(String ISBN){
 		Book book = new Book();
+		ISBN = ISBN.trim();
 		book = bookDao.getBookByISBN(ISBN);
 		if (book == null){	/*fail to find the book in database*/
 			book = new Book();
@@ -134,97 +142,107 @@ public class AppServiceImpl implements AppService {
 				httpclient.getConnectionManager().shutdown();
 			}
 			
-			/* bookName */
-			String bookName = json.getString("title");
-			if(bookName == null || bookName.length() <= 0){
-				bookName = "Unknown";
+			try{
+				String msg = json.getString("msg");
 			}
-		    
-			/* Author */
-			JSONArray authorArray = json.getJSONArray("author");
-			String author = new String();
-			for (int i = 0 ; i < authorArray.size(); i++){
-				if (i == 0){ 
-					author = authorArray.getString(i);
+			catch(Exception e){
+				/* bookName */
+				String bookName = json.getString("title");
+				if(bookName == null || bookName.length() <= 0){
+					bookName = "Unknown";
+				}
+			    
+				/* Author */
+				JSONArray authorArray = json.getJSONArray("author");
+				String author = new String();
+				for (int i = 0 ; i < authorArray.size(); i++){
+					if (i == 0){ 
+						author = authorArray.getString(i);
+					}
+					else{
+						
+						author = author + "," + authorArray.getString(i);
+					}
+				}
+				
+				/* Publisher */
+				String publisher = json.getString("publisher");
+				if(publisher == null || publisher.length() <= 0){
+					publisher = "Unknown";
+				}
+				
+				/* pageNumber */
+				int pageNumber = 0;
+				System.out.println(json.getString("pages"));
+				System.out.println(json.getString("pages").length());
+				if(json.getString("pages") == null || json.getString("pages").length() <= 0){
+					pageNumber = 0;
+				}
+				 else{
+					 pageNumber = json.getInt("pages");
+				 }
+				
+				/* price */
+				/*String pricestr = json.getString("price");
+				float price = 0;
+				if (pricestr == null || pricestr.length()<=0){
+					price = 0;
 				}
 				else{
-					
-					author = author + "," + authorArray.getString(i);
-				}
-			}
-			
-			/* Publisher */
-			String publisher = json.getString("publisher");
-			if(publisher == null || publisher.length() <= 0){
-				publisher = "Unknown";
-			}
-			
-			/* pageNumber */
-			int pageNumber = 0;
-			System.out.println(json.getString("pages"));
-			System.out.println(json.getString("pages").length());
-			if(json.getString("pages") == null || json.getString("pages").length() <= 0){
-				pageNumber = 0;
-			}
-			 else{
-				 pageNumber = json.getInt("pages");
-			 }
-			
-			/* price */
-			/*String pricestr = json.getString("price");
-			float price = 0;
-			if (pricestr == null || pricestr.length()<=0){
-				price = 0;
-			}
-			else{
-				int length = pricestr.length();
-				if (pricestr.charAt(0) < '0' || pricestr.charAt(0) > '9'){	/* Format like USD 30*/
-					/*int startindex = 0;
-					for (int i = 0; i < length; i++){
-						if (pricestr.charAt(i) < '0' || pricestr.charAt(i) > '9'){
-							continue;
+					int length = pricestr.length();
+					if (pricestr.charAt(0) < '0' || pricestr.charAt(0) > '9'){	/* Format like USD 30*/
+						/*int startindex = 0;
+						for (int i = 0; i < length; i++){
+							if (pricestr.charAt(i) < '0' || pricestr.charAt(i) > '9'){
+								continue;
+							}
+							else{
+								startindex = i;
+								break;
+							}
 						}
-						else{
-							startindex = i;
-							break;
-						}
+						price = Float.parseFloat(pricestr.substring(startindex, length));
 					}
-					price = Float.parseFloat(pricestr.substring(startindex, length));
+					else{	/* Format like 30元 */
+						/*price = Float.parseFloat(pricestr.substring(0, length-1));
+					}
+				}*/
+				
+				String price = json.getString("price");
+				
+				/* pubdate */
+				String pubdate = json.getString("pubdate");
+				if (pubdate == null || pubdate.length() <= 0){
+					pubdate = "Unknown";
 				}
-				else{	/* Format like 30元 */
-					/*price = Float.parseFloat(pricestr.substring(0, length-1));
-				}
-			}*/
-			
-			String price = json.getString("price");
-			
-			/* pubdate */
-			String pubdate = json.getString("pubdate");
-			if (pubdate == null || pubdate.length() <= 0){
-				pubdate = "Unknown";
-			}
-			
-			float doubanRate = Float.parseFloat(json.getJSONObject("rating").getString("average"));
-			int raterNumber = Integer.parseInt(json.getJSONObject("rating").getString("numRaters"));
-			String summary = json.getString("summary");
-			String image = json.getString("image");
+				
+				float doubanRate = Float.parseFloat(json.getJSONObject("rating").getString("average"));
+				int raterNumber = Integer.parseInt(json.getJSONObject("rating").getString("numRaters"));
+				String summary = json.getString("summary");
+				String image = json.getString("image");
 
-			
+				
+				book = new Book();
+				book.setAuthor(author);
+				book.setBookName(bookName);
+				book.setDoubanRate(doubanRate);
+				book.setImage(image);
+				book.setISBN(ISBN);
+				book.setPageNumber(pageNumber);
+				book.setPrice(price);
+				book.setPublisher(publisher);
+				book.setRaterNumber(raterNumber);
+				book.setSummary(summary);
+				book.setPubdate(pubdate);
+				bookDao.save(book);
+				return book;
+			}
 			book = new Book();
-			book.setAuthor(author);
-			book.setBookName(bookName);
-			book.setDoubanRate(doubanRate);
-			book.setImage(image);
-			book.setISBN(ISBN);
-			book.setPageNumber(pageNumber);
-			book.setPrice(price);
-			book.setPublisher(publisher);
-			book.setRaterNumber(raterNumber);
-			book.setSummary(summary);
-			book.setPubdate(pubdate);
-			bookDao.save(book);
+			return book;
 		}
 		return book;
+			
+			
 	}
 
 	@Override
@@ -325,6 +343,10 @@ public class AppServiceImpl implements AppService {
 	public List<BookIN> getAllBookINs(){
 		return bookINDao.getAllBookINs();
 	}
+	@Override
+	public Integer addBookIN(BookIN bookIN) {
+		return bookINDao.save(bookIN);
+  }
 	
 	public BookIN getBookINByBookRecordID(int bookRecordID){
 		return bookINDao.getBookINByBookRecordID(bookRecordID);
@@ -332,5 +354,12 @@ public class AppServiceImpl implements AppService {
 	
 	public void updateBookIN(BookIN bookIN){
 		bookINDao.update(bookIN);
+	}
+	
+	/*
+	 * LendOrder
+	 */
+	public List<LendOrder> getAllLendOrders(){
+		return lendOrderDao.getAllLendOrders();
 	}
 }

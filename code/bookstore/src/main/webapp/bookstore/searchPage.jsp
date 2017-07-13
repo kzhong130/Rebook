@@ -379,7 +379,7 @@ var userName = '<%=session.getAttribute("loginUserName")%>'
 		}
 		else{
 			var str="<li><a href='#'>我要卖书</a>";
-			str+="<li><a href='dashboard_user.jsp'>管理中心</a>";
+			str+="<li><a href='AdminCenterAction!initialize'>管理中心</a>";
 			str+="<li><A href='AccountAction!logout'>登出</a>";
 			$('#personalInfo').html(str);
 		}

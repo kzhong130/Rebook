@@ -1,0 +1,173 @@
+@CHARSET "UTF-8";
+
+hr{
+	width:100%;
+	border:0;
+	background-color:#efbb24;
+	height:1px;
+}
+.my_info_title{
+	background-color:#efbb24;
+	color: #fff;
+	font-size: 24px;
+	margin-top:15px;
+	width:130px;
+	height:36px;
+	text-align:center;
+	
+	}
+
+
+div.bookinfobox
+{
+	 background-image: url(../images/orderbookinfo.png);
+	 background-repeat: no-repeat;
+	 background-position: bottom center;
+	 background-size:100%;
+	 
+	 font-size:20px;
+	 box-sizing:!border-box;
+	 -moz-box-sizing:!border-box; /* Firefox */
+	 -webkit-box-sizing:!border-box; /* Safari */
+	 width:100%;
+	 height:180px;
+	 text-align:center;
+	 padding:0px 8px 10px 3px;
+	 border:0px solid #D3D3D3;
+}
+
+.bookimage{
+	width:10%;
+	padding:15px 0 0 0;
+}
+
+div.bookinfobox img
+{
+   width:55%;
+   height:auto;
+   margin:10px 5px 0 5px;
+}
+
+.bookcontent{
+	padding-top:0px;
+	padding-left:9px;
+	padding-right:4px;
+	vertical-align: top;
+	margin:0;
+}	
+
+.bookname{
+	font-size:24px;
+	text-align:left;
+	height:34px;
+	margin:10px 0 0 0px;
+}
+.comment{
+	font-size:16px;
+	text-align:left;
+	margin:0 0 0 7px;
+}
+	
+input[placeholder], [placeholder], *[placeholder] { 
+ color:#707070 !important; 
+} 
+.reg_div{
+  border:0px solid #333;
+  text-align: left;
+  background-color: #ffffff;
+  font-size:14px;
+}
+.reg_ul{
+  width: 100%;
+  text-align: left;
+  padding-left:0px;
+}
+.reg_ul li{
+  margin: auto;
+  overflow: hidden;
+  width: 100%;
+  margin: 0px;
+  list-style-type:none;
+}
+.reg_ul li span{
+  float: left;
+  width:75px;
+  text-align:right;
+  display:inline-block;
+  margin: auto;
+  margin-left:0px;
+  margin-bottom: 10px;
+}
+.reg_ul li span.tip{margin:6px 0 0 10px;width:40px;text-align:left;}
+.reg_ul li input{
+  float: left;
+  width: 228px;
+  height: 24px;
+  border:1px solid #707070;
+  border-radius: 3px;
+  padding-left: 10px;
+  outline:medium;
+  margin-left: 5px;
+}
+.citys{
+    margin-bottom: 10px;
+}
+.citys p{
+    line-height: 28px;
+    text-align:left;
+    margin:0 0 0 80px;
+}
+.citys p select{
+    text-align:left;
+    float:!left;
+}
+div.paybox
+{
+	 font-size:16px;
+	 box-sizing:!border-box;
+	 -moz-box-sizing:!border-box; /* Firefox */
+	 -webkit-box-sizing:!border-box; /* Safari */
+	 width:100%;
+	 height:180px;
+	 text-align:right;
+	 padding:0px 8px 10px 3px;
+	 border:0px solid #D3D3D3;
+}
+.paybox span.money{
+	color:#efbb24;
+	font-size:26px;
+}
+span.return{
+	height:38px;
+	width:60px;
+	padding:30px 0 1px 0;
+	margin-top:20px;
+}
+
+
+
+button.pay{
+	width:60px;
+	font-size:20px;
+	display: inline-block;
+	padding: 4px 8px;
+	margin-bottom: 0px;
+	font-weight: 400;
+	line-height: 1.42857;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-moz-user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #FFF;
+	background-color: #efbb24;
+	float:! right;
+	text-align:! right;
+	width:140px;
+	vertical-align:! bottom;
+	}
+botton.pay:hover{
+	background-color: #d19826;
+	}

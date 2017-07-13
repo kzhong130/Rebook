@@ -49,8 +49,21 @@
 			<result name="initialize success">member_center.jsp</result>
 		</action>
 		
+
+		<action name="LendSellAction" class="action.LendSellAction">
+			<result name="search">lendsellbook.jsp</result>
+			<result name="search fail">searchFail/searchFail.jsp</result>
+			<result name="sell">lendsellbook.jsp</result>
+			<result name="lend">lendsellbook.jsp</result>
+			
+		</action>
+
 		<action name="BookINAction" class="action.BookINAction">
 		
+		</action>
+		
+		<action name="AdminCenterAction" class="action.AdminCenterAction">
+			<result name="initialize success">dashboard_user.jsp</result>
 		</action>
 
 
