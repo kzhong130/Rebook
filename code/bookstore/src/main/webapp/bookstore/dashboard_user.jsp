@@ -151,14 +151,14 @@
                                     <table class="table table-striped table-bordered table-hover" style="table-layout:fixed" id="myTable">
                                         <thead>
                                             <tr><!-- 把性别、邮箱和地址放在详情页里，增加了删除和详情 -->
-                                                <th class="text-center" width="12%">ID</th>
-                                                <th class="text-center" width="16%">用户名</th>
+                                                <th class="text-center" width="10%">ID</th>
+                                                <th class="text-center" width="14%">用户名</th>
                                                 <th class="text-center" width="12%">真实姓名</th>
                                                 <!--<th class="text-center" width="5%">性别</th>-->
-                                                <th class="text-center" width="15%">联系方式</th>
+                                                <th class="text-center" width="12%">联系方式</th>
                                                 <!--<th class="text-center" width="17%">E-mail</th>
                                                 <th class="text-center" width="12%">地址</th>-->
-                                                <th class="text-center" width="10%">注册日期</th>
+                                                <th class="text-center" width="17%">注册日期</th>
                                                 <th class="text-center" width="8%">信用</th>
                                                 <th class="text-center" width="10%">书币</th>
                                                 

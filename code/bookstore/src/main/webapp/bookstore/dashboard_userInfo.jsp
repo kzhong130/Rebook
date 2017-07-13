@@ -160,35 +160,39 @@
                             <div class="panel-body">
                             <form class="form-horizontal" role="form">
                             	<div class="col-md-10 col-sm-10 col-xs-10">
-								<p>ID:<%=user.getUserID() %> </p>
-                                <p>用户名: <%=user.getUserName() %></p>
-                                <p>真实姓名: <%=user.getRealName() %></p>
-                                <p>性别:<%=gender %> </p>
-                                <p>联系方式:<%=user.getPhone() %> </p>
-                                <p>E-mail: <%=user.getEmail() %></p>
-                                <p>地址:<%=address %> </p>
-                                <p>注册日期: <%=user.getRegisterDate().toString().substring(0, 19) %></p>
+								<p><span class="col-md-2">ID:</span><span class="col-md-10"><%=user.getUserID() %></span></p>
+                                <p><span class="col-md-2">用户名: </span><span class="col-md-10"><%=user.getUserName() %></span></p>
+                                <p><span class="col-md-2">真实姓名: </span><span class="col-md-10"><%=user.getRealName() %></span></p>
+                                <p><span class="col-md-2">性别:</span><span class="col-md-10"><%=gender %> </span></p>
+                                <p><span class="col-md-2">联系方式:</span><span class="col-md-10"><%=user.getPhone() %> </span></p>
+                                <p><span class="col-md-2">E-mail: </span><span class="col-md-10"><%=user.getEmail() %></span></p>
+                                <p><span class="col-md-2">地址:</span><span class="col-md-10"><%=address %> </span></p>
+                                <p><span class="col-md-2">注册日期: </span><span class="col-md-10"><%=user.getRegisterDate().toString().substring(0, 19) %></span></p>
                                 <br>
                                 <!-- 这两个字体有点丑，等功能实现之后再统一改好了TvT -->
                                 <div class="form-group">
-                                <label for="信用" class="col-sm-1 control-label">信用: </label>
-    							<div class="col-sm-9">
-      							<input type="text" class="form-control form-control-xs" id="credit" name="credit" value="<%=user.getCredit() %>">
+                                <!-- 暴力方法解决的对齐 -->
+                                <p><span class="col-md-2">&nbsp;&nbsp;&nbsp;&nbsp;信用: </span></p>
+								<!-- <label for="信用" class="col-sm-1 control-label">信用: </label> -->
+    							<div class="col-md-10">
+      							<input type="text" class="form-control form-control-pad form-control-xs" id="credit" name="credit" value="<%=user.getCredit() %>">
 								</div></div>
+								<div style="margin:-25px 0 -5px 0">
                                 <div class="form-group">
-                                <label for="书币" class="col-sm-1 control-label">书币: </label>
-    							<div class="col-sm-9">				
-      							<input type="text" class="form-control form-control-xs" id="bookCoin" name="bookCoin" value="<%=user.getBookCoin() %>">
-                               	</div></div>
+                                <p><span class="col-md-2">&nbsp;&nbsp;&nbsp;&nbsp;书币: </span></p>
+                                <!--<label for="书币" class="col-sm-1 control-label">书币: </label> -->
+    							<div class="col-md-10">				
+      							<input type="text" class="form-control form-control-pad form-control-xs" id="bookCoin" name="bookCoin" value="<%=user.getBookCoin() %>">
+                               	</div></div></div>
                                	<br>
                                	<div>
-                                <input type="button" class="btn btn-success" value="确认修改" onclick="updateUser(this)" id="<%=user.getUserID() %>">&nbsp;&nbsp;
+                                &nbsp;&nbsp;&nbsp;<input type="button" class="btn btn-success" value="确认修改" onclick="updateUser(this)" id="<%=user.getUserID() %>">&nbsp;&nbsp;
                                 <a href="dashboard_user.jsp" class="btn btn-default">返回</a>
                                 </div>
 								</div>
                                </form>
                                 <div class="col-md-2 col-sm-2 col-xs-2" style="text-align: center">
-                                <p><button class="btn btn-warning1" id="<%=user.getUserID() %>" onclick="resetPassword(this)">重置密码</button><hr style="padding-top: -10px;padding-bottom: -10px;"><button class="btn btn-warning1" id="<%=user.getUserID() %>" onclick="deleteUser(this)">删除用户</button></p>
+                                <p><button class="btn btn-warning1" id="<%=user.getUserID() %>" onclick="resetPassword(this)">重置密码</button><hr style="margin-top:5px;margin-bottom:10px;"><button class="btn btn-warning1" id="<%=user.getUserID() %>" onclick="deleteUser(this)">删除用户</button></p>
 								</div>
                            
 								

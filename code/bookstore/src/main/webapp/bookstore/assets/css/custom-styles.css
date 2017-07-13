@@ -680,7 +680,7 @@ font-size: 19px;
 	vertical-align: middle;
 }
 
-/* 自定义 btn-warning */
+/* 鑷畾涔� btn-warning */
 .btn-warning1 {
   color: #fff;
   background-color: #3e3e3e;
@@ -742,18 +742,21 @@ fieldset[disabled] .btn-warning1.focus {
 .form-control-xs {
 	width: 25%;
 }
-/* 更改颜色 */
+/* 鏇存敼棰滆壊 */
 .color-ylw{ 
 color: #efbb24 !important;
 }
-/* 确认修改按钮的对齐 */
+/* 纭淇敼鎸夐挳鐨勫榻� */
 .btn-submit-pad{
 	margin: 0 0 10px 17px;
 }
-/* 状态选择的对齐 */
+/* 鐘舵�侀�夋嫨鐨勫榻� */
 .form-group-pad{
 	margin: 0 0 15px 0;
 }
-.form-control {
-	margin:-5px 0 0 10px !important;
+.form-control-pad {
+	margin:-5px 0 0 0px !important;
+}
+.brpad{
+	margin:-10px 0;
 }
