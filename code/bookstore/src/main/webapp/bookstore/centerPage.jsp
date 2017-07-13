@@ -285,11 +285,15 @@ function changePage(futurePageNum){
 					targetStr+="'><img class='listbook' src="
 					targetStr+=bookImages[i]
 					targetStr+=" />";
-					targetStr+="<br> <br>"
+					targetStr+="<br> <br><div title='"
 					targetStr+=bookNames[i]
-					targetStr+="<br>"
+					targetStr+="' style='overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>"
+					targetStr+=bookNames[i]
+					targetStr+="</div><div title='"
 					targetStr+=bookAuthors[i]
-					targetStr+="</a></div>";
+					targetStr+="' style='overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>"
+					targetStr+=bookAuthors[i]
+					targetStr+="</div></a></div>";
 			}
 		}
 		else{
@@ -299,9 +303,13 @@ function changePage(futurePageNum){
 				targetStr+="'><img class='listbook' src="
 				targetStr+=bookImages[i]
 				targetStr+=" />";
-				targetStr+="<br> <br><div class='test'>"
+				targetStr+="<br> <br><div title='"
 				targetStr+=bookNames[i]
-				targetStr+="<br>"
+				targetStr+="' style='overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>"
+				targetStr+=bookNames[i]
+				targetStr+="</div><div title='"
+				targetStr+=bookAuthors[i]
+				targetStr+="' style='overflow:hidden;white-space:nowrap;text-overflow:ellipsis'>"
 				targetStr+=bookAuthors[i]
 				targetStr+="</div></a></div>";
 			}
