@@ -104,7 +104,7 @@
                         <a href="#"><i class="fa fa-file-text"></i> 订单信息<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="#">有书借</a>
+                                <a href="dashboard_orderLend.jsp">有书借</a>
                             </li>
                             <li>
                                 <a href="#">有书买</a>
