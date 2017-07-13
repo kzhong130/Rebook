@@ -66,9 +66,9 @@ session.setAttribute("prePage", url);
     bookComments = (ArrayList<BookComment>)session.getAttribute("bookComment");
 %>
 <p></p>
-<!-- 购书申请 -->
+<!-- 借书申请 -->
 <div class="container">
-<div class="my_info_title">购书申请</div>
+<div class="my_info_title">借书申请</div>
 <br>
 </div>
 
@@ -87,8 +87,14 @@ session.setAttribute("prePage", url);
         </tr>
       </table>
   </div>
-      <p class="comment">书主信息：<% %>洪晓雅&nbsp;&nbsp;<% %>15821911839&nbsp;&nbsp;<% %>福建厦门</p>         
-      <p class="comment">新旧程度：<% %>五成新&emsp;&emsp;&emsp;&emsp;送书方式：<% %>邮寄</p>
+      <p class="comment">书主信息：<% %>洪晓雅&nbsp;&nbsp;
+                                  <% %>15821911839&nbsp;&nbsp;
+                                  <% %>福建厦门&nbsp;&nbsp;
+                                  <% %>翔安区新店镇新兴街610号</p>  
+             
+      <p class="comment">新旧程度：<% %>五成新&emsp;&emsp;&emsp;&emsp;
+                                                                  送书方式：<% %>邮寄&emsp;&emsp;&emsp;&emsp;
+                                                                  借书天数：<% %>20</p>
       <p class="comment">备注：<% %>请小心的对待这本书（没有备注则写无）</p>         
    <hr>
    
@@ -121,6 +127,14 @@ session.setAttribute("prePage", url);
           <input type="text" name="detail" value="" placeholder="详细地址" class="reg_buyaddress">
           <span class="tip buyaddress_hint"></span>      
       </li>
+      <li>
+          <span>送书方式：</span>
+          <div class="citys"><p>
+          <select name="sendway" class="reg_sendway">
+            <option value ="face">当面</option>
+            <option value ="mail">邮寄</option>
+          </select></p></div> 
+      </li>
       </ul>
     </div>
     <!-- 支付按钮 -->
@@ -128,7 +142,7 @@ session.setAttribute("prePage", url);
      <table  style="width:100%;">
         <tr>
           <td>
-             <p>支付：<span class="money">10<% %>书币</span></p>
+             <p>支付：<span class="money">30<% %>书币</span></p>
          </td>
         </tr>
         <tr>

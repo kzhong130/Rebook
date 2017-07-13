@@ -20,7 +20,7 @@ hr{
 
 div.bookinfobox
 {
-	 background-image: url(../images/orderbookinfo.jpg);
+	 background-image: url(../images/orderbookinfo.png);
 	 background-repeat: no-repeat;
 	 background-position: bottom center;
 	 background-size:100%;
@@ -67,39 +67,6 @@ div.bookinfobox img
 	text-align:left;
 	margin:0 0 0 7px;
 }
-
-
-
-.deletebutton{
-	float:! right;
-	text-align:! right;
-	width:140px;
-	vertical-align:! bottom;
-}
-
-button.delete{
-	width:60px;
-	font-size:16px;
-	display: inline-block;
-	padding: 4px 8px;
-	margin-bottom: 0px;
-	font-weight: 400;
-	line-height: 1.42857;
-	white-space: nowrap;
-	vertical-align: middle;
-	cursor: pointer;
-	-moz-user-select: none;
-	background-image: none;
-	border: 1px solid transparent;
-	border-radius: 4px;
-	color: #FFF;
-	background-color: #efbb24;
-	}
-botton.delete:hover{
-	background-color: #d19826;
-	}
-
-
 	
 input[placeholder], [placeholder], *[placeholder] { 
  color:#707070 !important; 
@@ -108,6 +75,7 @@ input[placeholder], [placeholder], *[placeholder] {
   border:0px solid #333;
   text-align: left;
   background-color: #ffffff;
+  font-size:14px;
 }
 .reg_ul{
   width: 100%;
@@ -147,9 +115,59 @@ input[placeholder], [placeholder], *[placeholder] {
 .citys p{
     line-height: 28px;
     text-align:left;
-    margin:0 0 0 120px;
+    margin:0 0 0 80px;
 }
 .citys p select{
     text-align:left;
     float:!left;
 }
+div.paybox
+{
+	 font-size:16px;
+	 box-sizing:!border-box;
+	 -moz-box-sizing:!border-box; /* Firefox */
+	 -webkit-box-sizing:!border-box; /* Safari */
+	 width:100%;
+	 height:180px;
+	 text-align:right;
+	 padding:0px 8px 10px 3px;
+	 border:0px solid #D3D3D3;
+}
+.paybox span.money{
+	color:#efbb24;
+	font-size:26px;
+}
+span.return{
+	height:38px;
+	width:60px;
+	padding:30px 0 1px 0;
+	margin-top:20px;
+}
+
+
+
+button.pay{
+	width:60px;
+	font-size:20px;
+	display: inline-block;
+	padding: 4px 8px;
+	margin-bottom: 0px;
+	font-weight: 400;
+	line-height: 1.42857;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-moz-user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #FFF;
+	background-color: #efbb24;
+	float:! right;
+	text-align:! right;
+	width:140px;
+	vertical-align:! bottom;
+	}
+botton.pay:hover{
+	background-color: #d19826;
+	}

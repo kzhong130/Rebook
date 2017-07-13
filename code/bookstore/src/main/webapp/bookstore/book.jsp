@@ -241,7 +241,7 @@ session.setAttribute("prePage", url);
    				<td>快递/上门</td>
    				<td>上海</td>
    				<td>10</td>
-   				<td>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈韩寒会画画后悔画韩红韩红要和韩寒嘿嘿嘿韩寒喊韩红坏坏</td>
+   				<td>哈哈哈哈坏</td>
    				<td><a class="btn btn-success btn-sm -sm" role="button">借书</a></td>
     		</tr>
     		<tr class="text-center">
@@ -251,7 +251,7 @@ session.setAttribute("prePage", url);
    				<td>快递</td>
    				<td>上海</td>
    				<td>10</td>
-   				<td>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈韩寒会画画后悔画韩红韩红要和韩寒嘿嘿嘿韩寒喊韩红坏坏</td>
+   				<td>哈哈哈哈坏</td>
 				<td><a class="btn btn-success btn-sm" role="button">借书</a></td>
     		</tr>
     	</tbody>
