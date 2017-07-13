@@ -68,7 +68,15 @@ margin:0 5px 0 5px;
 
 
 }
-
+.numberlist{
+	font-size:24px;
+	text-align:center;
+	padding:0 0 5px 0px;
+	height:40px;
+	width:60px
+	
+	
+}
 .bookname{
 	font-size:24px;
 	text-align:left;
@@ -347,4 +355,8 @@ botton.delete:hover{
 .searchresult{
 	font-size:24px;
 	color:#d19826;
+}
+hr.fortr{
+	margin-top:5px;
+	margin-bottom:10px;
 }

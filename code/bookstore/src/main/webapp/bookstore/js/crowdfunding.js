@@ -49,7 +49,7 @@ function listClick(value){
 		$("#listClick16").attr("class","");
 	}
 	if(value == 2){
-		$("#crowdfunding_iframe").attr("src","crowdfunding.center/make_head.html");
+		$("#crowdfunding_iframe").attr("src","crowdfunding.center/make_password.jsp");
 		//$("#crowdfunding_iframe").attr("height","1045");
 		//$("#vertical_navigation").css("height","1050px");
 		
@@ -78,7 +78,7 @@ function listClick(value){
 		$("#listClick_4").css("border-bottom","1px solid #CCC");
 		$("#listClick_4").css("color","#666");
 		
-		$("#crowdfunding_iframe").attr("src","crowdfunding.center/identity_prove.html");
+		$("#crowdfunding_iframe").attr("src","crowdfunding.center/bookcoinRecord.jsp");
 		//$("#crowdfunding_iframe").attr("height","1045");
 		//$("#vertical_navigation").css("height","1050px");
 		
@@ -107,7 +107,7 @@ function listClick(value){
 		$("#listClick_4").css("border-bottom","1px solid #efbb24");
 		$("#listClick_4").css("color","#efbb24");
 		
-		$("#crowdfunding_iframe").attr("src","crowdfunding.center/make_password.jsp");
+		$("#crowdfunding_iframe").attr("src","crowdfunding.center/creditRecord.jsp");
 		//$("#crowdfunding_iframe").attr("height","1045");
 		//$("#vertical_navigation").css("height","1050px");
 		
@@ -129,7 +129,7 @@ function listClick(value){
 		$("#listClick16").attr("class","");
 	}
 	if(value == 5){
-		$("#crowdfunding_iframe").attr("src","crowdfunding.center/apply_lingtou.html");
+		$("#crowdfunding_iframe").attr("src","crowdfunding.center/myComment.jsp");
 		//$("#crowdfunding_iframe").attr("height","1045");
 		//$("#vertical_navigation").css("height","1050px");
 		
@@ -239,7 +239,7 @@ function listClick(value){
 		$("#listClick16").attr("class","");
 	}
 	if(value == 10){
-		$("#crowdfunding_iframe").attr("src","crowdfunding.center/apply_refund.html");
+		$("#crowdfunding_iframe").attr("src","crowdfunding.center/unprocessed.jsp");
 		//$("#crowdfunding_iframe").attr("height","1045");
 		//$("#vertical_navigation").css("height","1050px");
 		
@@ -262,7 +262,7 @@ function listClick(value){
 	}
 	if(value == 11){
 		
-		$("#crowdfunding_iframe").attr("src","crowdfunding.center/grade_integration.html");
+		$("#crowdfunding_iframe").attr("src","crowdfunding.center/processed.jsp");
 		//$("#crowdfunding_iframe").attr("height","2000");
 		//$("#vertical_navigation").css("height","2005px");
 		
