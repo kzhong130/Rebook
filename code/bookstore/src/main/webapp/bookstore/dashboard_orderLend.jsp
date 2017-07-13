@@ -43,7 +43,26 @@
 	ArrayList<Book> books = (ArrayList<Book>)session.getAttribute("allBooks");
 	ArrayList<BookIN> myBookINs = new ArrayList<BookIN>();
 	ArrayList<Book> myBooks = new ArrayList<Book>();
-	
+	if (lendOrders.size()>0){
+		for (int i=0; i<lendOrders.size(); i++){
+			int bookRecordID = lendOrders.get(i).getBookRecordID();
+			for (int j=0; j<bookINs.size(); j++){
+				if (bookINs.get(j).getBookRecordID() == bookRecordID){
+					myBookINs.add(bookINs.get(j));
+					break;
+				}
+			}
+		}
+	}
+	for (int i=0; i<myBookINs.size(); i++){
+		String ISBN = myBookINs.get(i).getISBN();
+		for (int j=0; j<books.size(); j++){
+			if (ISBN.equals(books.get(j).getISBN())){
+				myBooks.add(books.get(j));
+				break;
+			}
+		}
+	}
 %>
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -75,9 +94,9 @@
                 </li>
                           <form class="navbar-form navbar-right" role="search" style="margin:13px 20px 0 0">
         <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
+          <input type="text" class="form-control" placeholder="Search" id="searchInput">
         </div>
-        <button type="button" class="btn btn-default">搜索</button>
+        <button type="button" class="btn btn-default" id="searchButton">搜索</button>
       </form>
             </ul>
 
@@ -151,7 +170,7 @@
                           
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover" style="table-layout:fixed">
+                                    <table class="table table-striped table-bordered table-hover" style="table-layout:fixed" id="myTable">
                                         <thead>
                                             <tr class="text-center">
                                                 <th class="text-center" width="11%">订单号</th>
@@ -159,27 +178,82 @@
                                                 <th class="text-center" width="12%">书籍发布编号</th>
                                                 <th class="text-center" width="14%">借阅者</th>
                                                 <th class="text-center" width="14%">出借者</th>
-                                                <th class="text-center" width="12%">联系方式</th>
-                                                <th class="text-center" width="10%">还书时间</th>
+                                                <th class="text-center" width="12%">借阅者联系方式</th>
+                                                <th class="text-center" width="10%">最长借书时间</th>
                                                 <th class="text-center" width="6%">状态</th>
                                                 <th class="text-center" width="6%">详情</th>
                                             </tr>
                                         </thead>
-                                        <tbody class="text-center">
-                                            <c:foreach items = ""  var ="" varStatus = "">
+                                        <%
+                                        	if (lendOrders.size()>0){
+                                        		BookIN myBookIN = new BookIN();
+                                        		Book myBook = new Book();
+                                        		String status = "";
+                                        		String duration = "";
+                                        		for (int i=0; i<lendOrders.size(); i++){
+                                        			int bookRecordID = lendOrders.get(i).getBookRecordID();
+                                        			for (int j=0; j<myBookINs.size(); j++){
+                                        				if (myBookINs.get(j).getBookRecordID() == bookRecordID){
+                                        					myBookIN = myBookINs.get(j);
+                                        					break;
+                                        				}
+                                        			}
+                                        			String ISBN = myBookIN.getISBN();
+                                        			for (int k=0; k<myBooks.size(); k++){
+                                        				if (ISBN.equals(myBooks.get(k).getISBN())){
+                                        					myBook = myBooks.get(k);
+                                        					break;
+                                        				}
+                                        			}
+                                        			duration = myBookIN.getLongestDuration() + "天";
+                                        			if ("0".equals(lendOrders.get(i).getStatus())){
+                                        				status = "借阅者已下单";
+                                        			}
+                                        			if ("1".equals(lendOrders.get(i).getStatus())){
+                                        				status = "出借者已确认";
+                                        			}
+                                        			if("2".equals(lendOrders.get(i).getStatus())){
+                                        				status = "订单取消";
+                                        			}
+                                        			if ("3".equals(lendOrders.get(i).getStatus())){
+                                        				status = "出借者已发货";
+                                        			}
+                                        			if ("4".equals(lendOrders.get(i).getStatus())){
+                                        				status = "借阅者已收货";
+                                        			}
+                                        			if("5".equals(lendOrders.get(i).getStatus())){
+                                        				status = "借阅者已发货";
+                                        			}
+                                        			if("6".equals(lendOrders.get(i).getStatus())){
+                                        				status = "出借者已收货";
+                                        			}
+                                        			if("7".equals(lendOrders.get(i).getStatus())){
+                                        				status = "仅借阅者可评价";
+                                        			}
+                                        			if("8".equals(lendOrders.get(i).getStatus())){
+                                        				status = "仅出借者可评价";
+                                        			}
+                                        			if("9".equals(lendOrders.get(i).getStatus())){
+                                        				status = "双方都不可评价";
+                                        			}
+                                        			
+                                        		
+                                        	
+                                        %>
                                             <tr>
-                                            	<td>1</td>
-                                                <td><div title="外婆的道歉信" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">外婆的道歉信</div></td>
-												<td>1</td>
-                                                <td>zk</td>
-                                                <td>zcx</td>
-                                                <td>13888888888</td>
-                                                <td>2017-07-05</td>
-                                                <td>上架</td>
-                                                <td><a class="btn btn-success btn-xs" href="dashboard_orderLendInfo.html">查看</a></td>
+                                            	<td><%=lendOrders.get(i).getLendID() %></td>
+                                                <td><div title="<%=myBook.getBookName() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=myBook.getBookName() %></div></td>
+												<td><%=myBookIN.getBookRecordID() %></td>
+                                                <td><%=lendOrders.get(i).getLenderName() %></td>
+                                                <td><%=lendOrders.get(i).getOwnerName() %></td>
+                                                <td><%=lendOrders.get(i).getLendPhone() %></td>
+                                                <td><%=duration %></td>
+                                                <td><%=status %></td>
+                                                <td><a class="btn btn-success btn-xs" href="dashboard_orderLendInfo.jsp?ISBN=<%=myBook.getISBN()%>&ID=<%=lendOrders.get(i).getLendID()%>">查看</a></td>
                                                 
                                             </tr>
-                                            </c:foreach>
+											<%} %>
+											<%} %>
                                         </tbody>
                                     </table>
                                 </div>
@@ -210,7 +284,26 @@
     <script src="assets/js/morris/morris.js"></script>
      <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
-   
+    <script type="text/javascript">
+    $("#searchButton").click(function(){
+		var keyword = $("#searchInput").val();
+		var tempText = "";
+		var mytable = document.getElementById("myTable");
+		
+		for (var i=1; i<mytable.rows.length; i++){
+			mytable.rows[i].style.display="none";
+			for (var j=0; j<mytable.rows[i].cells.length-1; j++){
+				tempText = mytable.rows[i].cells[j].innerText;
+    			if (tempText.indexOf(keyword) >= 0){	//查到结果
+    				mytable.rows[i].style.display="";
+    				break;
+    			}
+			}
+			
+		}
+
+	})
+    </script>
 
 
        

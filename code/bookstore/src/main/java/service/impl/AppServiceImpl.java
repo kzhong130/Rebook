@@ -362,4 +362,12 @@ public class AppServiceImpl implements AppService {
 	public List<LendOrder> getAllLendOrders(){
 		return lendOrderDao.getAllLendOrders();
 	}
+	
+	public LendOrder getLendOrderByLendID(int lendID){
+		return lendOrderDao.getLendOrderByLendID(lendID);
+	}
+	
+	public void updateLendOrder(LendOrder lendOrder){
+		lendOrderDao.update(lendOrder);
+	}
 }

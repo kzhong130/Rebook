@@ -77,5 +77,6 @@ public interface AppService {
 	 * LendOrder
 	 */
 	public List<LendOrder> getAllLendOrders();
-	
+	public LendOrder getLendOrderByLendID(int lendID);
+	public void updateLendOrder(LendOrder lendOrder);
 }
