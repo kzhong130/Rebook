@@ -164,6 +164,7 @@ session.setAttribute("prePage", url);
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="js/jquery-1.9.1.js"></script>
+  <script type="text/javascript" src="js/jquery.citys.js"></script>      
 <script type="text/javascript">
         		var $town = $('#demo3 select[name="town"]');
         		var townFormat = function(info){
@@ -184,7 +185,7 @@ session.setAttribute("prePage", url);
                 $('#demo3').citys({
         			province:'福建省',
         			city:'厦门市',
-        			town:'翔安区'
+        			town:'翔安区',
         	 		
             /*这2个值应从数据库取*/
         			onChange:function(info){
