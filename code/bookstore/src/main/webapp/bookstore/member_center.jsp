@@ -164,13 +164,13 @@
 			<ul class="list-unstyled">
 				<li id="listClick1" class="menu_list_on" onClick="listClick(1)"><img
 					src="img/member_center/left_icon_1.png"> 基本信息</li>
-				<li id="listClick4" class="" onClick="listClick(4)"><img
+				<li id="listClick2" class="" onClick="listClick(2)"><img
 					src="img/member_center/left_icon_3.png"> 修改密码</li>
-				<li id="listClick13" class="" onClick="listClick(13)"><img
+				<li id="listClick3" class="" onClick="listClick(3)"><img
 					src="img/member_center/left_icon_9.png"> 书币记录</li>
-				<li id="listClick12" class="" onClick="listClick(12)"><img
+				<li id="listClick4" class="" onClick="listClick(4)"><img
 					src="img/member_center/left_icon_9.png"> 信用纪录</li>
-				<li id="listClick16" class="" onClick="listClick(16)"><img
+				<li id="listClick5" class="" onClick="listClick(5)"><img
 					src="img/member_center/left_icon_5.png"> 我的书评</li>
 			</ul>
 		</div>
@@ -198,13 +198,13 @@
 		</div>
 	</div>
 	<div class="menu">
-		<div class="menu_title">我的申请</div>
+		<div class="menu_title">我发送的申请</div>
 		<div class="menu_list">
 			<ul class="list-unstyled">
+				<li id="listClick10" class="" onClick="listClick(10)"><img
+					src="img/member_center/left_icon_14.png"> 未被处理</li>
 				<li id="listClick11" class="" onClick="listClick(11)"><img
-					src="img/member_center/left_icon_14.png"> 我发送的申请</li>
-				<li id="listClick12" class="" onClick="listClick(12)"><img
-					src="img/member_center/left_icon_16.png"> 我收到的申请</li>
+					src="img/member_center/left_icon_16.png"> 已被处理</li>
 			</ul>
 		</div>
 	</div>

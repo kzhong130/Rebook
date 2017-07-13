@@ -52,8 +52,8 @@
 
           <td class="bookimage" style="vertical-align:text-top;">
           <a href=<% %>><img class="listbook" src="https://img3.doubanio.com/mpic/s28332051.jpg<% %>"/></a><br>
-
-          
+          <p style="font-size:3px;"></p>
+          <button class="delete" style="width:100px" id="application" >查看申请</button>         
           </td>
           
           <td class="bookcontent" style="vertical-align:top;">
@@ -85,6 +85,7 @@
               
               
               <td class="deletebutton" style="vertical-align:bottom;">
+              
               <button class="delete tc" name="" >修改</button>
               <button class="delete" value="<% %>" onclick="" >删 除</button>
               </td>
@@ -99,8 +100,30 @@
 
 
 
-	</div>
-	<br>
+</div>
+<!-- 每个申请细节 -->	
+<div class="commentbox" id="appDetail" style="display:none;">
+     <table  style="width:828px;">
+        <tr>
+              <td class="numberlist">1<% %></td>
+
+              <td>
+              <p class="comment">申请者：<% %><span><% %></span>&emsp;&emsp;&emsp;&emsp;送书方式：<% %>邮寄</p>
+              <p class="comment">书主信息：<% %>洪晓雅&nbsp;&nbsp;<% %>15821911839&nbsp;&nbsp;<% %>福建省厦门市翔安区新店镇新兴街610号</p>
+              </td>
+
+              <td class="deletebutton" style="vertical-align:bottom;">
+              <button class="delete" value="<% %>" onclick="">通过</button><br>
+              <button class="delete" value="<% %>" onclick="">拒绝</button>
+              </td>
+
+
+        </tr>
+		</table>
+</div>
+<br>
+
+	
 <!-- 修改的按钮 -->
 <div id="gray"></div>
 <div class="popup" id="popup">
@@ -222,29 +245,9 @@
 
 	<!-- 结束 -->
 	<script src="../js/jquery-2.1.1.min.js"></script>
+	<script src="../js/jquery-1.11.3.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-	function deleteBookComment(ob){
-		var value = $(ob).attr("value");
-		$.ajax({
-			type:"POST",
-			url:"BookCommentAction!deleteBookComment",
-			async:false,
-			data:{ID:$(ob).attr("value")},
-			success:function(result){
-				result=eval('('+result+')');
-				if(result.success){
-					alert("删除成功！");
-					location.reload();
-				}
-				else{
-					alert("删除失败！");
-				}
-			}
-		});
-	}
-	
-</script>
+
 <script type="text/javascript">
 //窗口效果
 //点击登录class为tc 显示
@@ -283,9 +286,6 @@ var GG = {
     }
 }
 
-var books = $('#bookISBNs').val().split("$");
-var listCount = parseInt(books.length);
-$("#page").initPage(listCount,1,GG.kk);
 
 $(document).ready(function(){ 
 
@@ -310,6 +310,10 @@ $(document).ready(function(){
 		$(".popup").css("cursor","default"); 
 		$(this).unbind("mousemove");
 	})
+	
+	$(".application").click(function(){
+        $(".appDetail").slideToggle("slow");
+    });
 })
 
 </script>
@@ -453,6 +457,15 @@ $(document).ready(function(){
       			alert("请完善信息");
       		}
       	}  
+</script>
+
+<script type="text/javascript"> 
+     /*$(document).ready(function(){
+    	    $(".appDetail").hide();
+            $(".application").click(function(){
+                  $(".appDetail").slideToggle("slow");
+            });
+     });*/
 </script>
 </body>
 </html>
