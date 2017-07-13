@@ -320,7 +320,8 @@ $(".tc").click(function(){
 });
 //点击登录class为td 显示
 $(".td").click(function(){
-	if(<%=session.getAttribute("loginUserName")%>==null) alert("请先登录");
+	var aaa="<%=session.getAttribute("loginUserName")%>";
+	if(aaa=="null") alert("请先登录");
 	else{
 	$("#gray").show();
 	$("#lendsell").show();//查找ID为lendsell的DIV show()显示#gray
@@ -406,12 +407,18 @@ if (userName != "null"){
 		$('#personalInfo').html(str);
 	}
 	else{
-		var str ="<li><a href='dashboard_user.jsp'>管理中心</a>";
+		var str ="<li><a href='AdminCenterAction!initialize'>管理中心</a>";
 		str+="<li><A href='AccountAction!logout'>登出</a>";
 		$('#personalInfo').html(str);
 	}
 
 	
+}
+
+var search = '<%=session.getAttribute("search")%>';
+if (search != "null"){
+	alert("您输入的ISBN有误，请重新输入");
+	<% session.removeAttribute("search"); %>
 }
 	
 
