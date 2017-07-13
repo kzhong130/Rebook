@@ -58,10 +58,7 @@ session.setAttribute("prePage", url);
         <button type="submit" class="btn btn-default">搜索</button>
       </form>  -->
       
-      <ul class="nav navbar-nav navbar-right hidden-sm" id="personalInfo">
-        <li><a href='MemberCenterAction!initialize'>个人中心</a></li>
-        <li><a href='AccountAction!logout'>登出</a></li>
-      </ul>
+
     </div>
     <!-- /.navbar-collapse --> 
   </div>

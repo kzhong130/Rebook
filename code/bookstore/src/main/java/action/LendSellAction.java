@@ -29,6 +29,10 @@ public class LendSellAction extends BaseAction{
 	public String searchBook() throws Exception{
 		Book book = new Book();
 		book = appService.readBookByISBN(ISBN);
+		if (book.getISBN() == null){
+			request().getSession().setAttribute("search", "fail");
+			return "search fail";
+		}
 		request().setAttribute("book",book);
 		return "search";
 	}

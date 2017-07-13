@@ -9,6 +9,7 @@ import model.BookComment;
 import model.BookIN;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
+import model.LendOrder;
 import model.User;
 
 public interface AppService {
@@ -71,5 +72,10 @@ public interface AppService {
 	public Integer addBookIN(BookIN bookIN);
 	public BookIN getBookINByBookRecordID(int bookRecordID);
 	public void updateBookIN(BookIN bookIN);
-
+	
+	/*
+	 * LendOrder
+	 */
+	public List<LendOrder> getAllLendOrders();
+	
 }
