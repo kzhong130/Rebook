@@ -180,6 +180,7 @@ public class BookAction extends BaseAction{
 		
 		List<User> users = appService.getUserByBookINs(bookINs);
 		request().getSession().setAttribute("userByBookIN", users);
+
 		return "bookInfo";
 	}
 	
