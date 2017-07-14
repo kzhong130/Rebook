@@ -29,5 +29,8 @@
 		<property name="requestStatus" type="java.lang.String">
 			<column name="requestStatus" />
 		</property>
+		<property name="phone" type="java.lang.String" >
+			<column name = "phone" />
+		</property>
 	</class>
 </hibernate-mapping>

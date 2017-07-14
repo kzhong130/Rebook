@@ -14,6 +14,7 @@ import model.BookIN;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
 import model.LendOrder;
+import model.RequestBook;
 import dao.UserDao;
 import dao.AdminDao;
 import dao.BookCommentDao;
@@ -22,6 +23,7 @@ import dao.BookINDao;
 import dao.CoinChangeRecordDao;
 import dao.CreditChangeRecordDao;
 import dao.LendOrderDao;
+import dao.RequestBookDao;
 
 import org.apache.http.HttpEntity;  
 import org.apache.http.HttpResponse;
@@ -46,6 +48,11 @@ public class AppServiceImpl implements AppService {
 	private AdminDao adminDao;
 	private BookINDao bookINDao;
 	private LendOrderDao lendOrderDao;
+	private RequestBookDao requestBookDao;
+	
+	public void setRequestBookDao(RequestBookDao requestBookDao){
+		this.requestBookDao=requestBookDao;
+	}
 
 
 	
@@ -370,4 +377,9 @@ public class AppServiceImpl implements AppService {
 	public void updateLendOrder(LendOrder lendOrder){
 		lendOrderDao.update(lendOrder);
 	}
+	
+	public List<RequestBook> getProcessRequest(String userName){
+		return requestBookDao.getProcessedRequest(userName);	
+	}
+	
 }

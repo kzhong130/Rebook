@@ -13,8 +13,8 @@
 	<!-- Beans -->
 	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"
 		destroy-method="close" p:driverClass="com.mysql.jdbc.Driver"
-		p:jdbcUrl="jdbc:mysql://localhost:3307/bookstore" p:user="root"
-		p:password="zcx0605" p:maxPoolSize="40" p:minPoolSize="1"
+		p:jdbcUrl="jdbc:mysql://localhost:3306/exchange" p:user="root"
+		p:password="111111" p:maxPoolSize="40" p:minPoolSize="1"
 		p:initialPoolSize="1" p:maxIdleTime="20" />
 	
 	<bean id="sessionFactory"
@@ -35,6 +35,8 @@
 				<value>model/LendOrder.hbm.xml</value>
 				<value>model/LendOrderCommentRecord.hbm.xml</value>
 				<value>model/LendOrderFeedback.hbm.xml</value>
+				<value>model/RequestBook.hbm.xml</value>
+				
 			</list>
 		</property>
 		<!-- Hibernate SessionFactory -->
@@ -88,6 +90,9 @@
 	<bean id="lendOrderFeedbackDao" class="dao.impl.LendOrderFeedbackDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
+	<bean id="requestBookDao" class="dao.impl.RequestBookDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
 	
 	<!-- Service -->
 	<bean id="appService" class="service.impl.AppServiceImpl">
@@ -100,6 +105,8 @@
 		<property name="adminDao" ref="adminDao" />
 		<property name="bookINDao" ref="bookINDao" />
 		<property name="lendOrderDao" ref="lendOrderDao" />
+		<property name="requestBookDao" ref="requestBookDao" />
+		
 	</bean>
 	
 	<!-- Hibernate Transaction Manager -->
