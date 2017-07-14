@@ -171,7 +171,7 @@
                                 <%
                                 	if ("reject".equals(bookComment.getCheckResult())){
                                 %>
-												<div class="form-group">
+												<div class="form-group" style="margin:-20px 0 0 0">
 													<p><span class="col-md-2">状态: </span></p>
  													<!--<label for="状态">状态: </label> -->
  													<div class="col-md-10" style="margin:-5px 0 0 -20px">
