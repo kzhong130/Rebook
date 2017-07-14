@@ -20,6 +20,9 @@
 <!-- Bootstrap -->
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/crowdfunding.center/sell_book.css" rel="stylesheet">
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/jquery.citys.js"></script>          
+ 
 
 <!--[if lt IE 9]>
       <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -244,9 +247,11 @@
 
 
 	<!-- 结束 -->
+	<!-- 
 	<script src="../js/jquery-2.1.1.min.js"></script>
 	<script src="../js/jquery-1.11.3.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
+	-->
 
 <script type="text/javascript">
 //窗口效果

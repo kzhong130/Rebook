@@ -137,6 +137,16 @@ public class LendSellAction extends BaseAction{
 		this.province=province;
 	}
 	
+	private String town;
+	
+	public String getTown(){
+		return town;
+	}
+	
+	public void setTown(String town){
+		this.town=town;
+	}
+	
 	public String sellInfo() throws Exception{
 		BookIN bookIn=new BookIN();
 		bookIn.setProvince(province);
@@ -147,6 +157,7 @@ public class LendSellAction extends BaseAction{
 		bookIn.setCoinNumber(coinNumber);
 		bookIn.setOwnerPhone(ownerPhone);
 		bookIn.setISBN(ISBN);
+		bookIn.setTown(town);
 		Date date = new Date();       
 		Timestamp nousedate = new Timestamp(date.getTime());
 		bookIn.setInTime(nousedate);
@@ -168,6 +179,7 @@ public class LendSellAction extends BaseAction{
 		bookIn.setCoinNumber(coinNumber);
 		bookIn.setOwnerPhone(ownerPhone);
 		bookIn.setISBN(ISBN);
+		bookIn.setTown(town);
 		Date date = new Date();       
 		Timestamp nousedate = new Timestamp(date.getTime());
 		bookIn.setInTime(nousedate);

@@ -299,15 +299,15 @@ session.setAttribute("prePage", url);
 				  var city=select.options[select.selectedIndex].text;
 			}
 			else {
-				 select=document.getElementsByName("area")[0];
-				  var city=select.options[select.selectedIndex].text;
+				 var city="";
 			}
-		 	//alert(document.getElementsByName("recency")[0].value);
+		 	select=document.getElementsByName("area")[0];
+			var town=select.options[select.selectedIndex].text;
 		  	$.ajax({  
 		        type:"POST",  
 		        url:"LendSellAction!sellInfo",  
 		        async:false,
-				data:{ISBN:<%=book.getISBN()%>,province:province,city:city,ownerName:$(".reg_ownername").val(),ownerPhone:$(".reg_ownerphone").val(),coinNumber:$(".reg_sellcoinnumber").val(),note:$(".reg_sellnote").val(),recency:document.getElementsByName("recency")[0].value,sendWay:document.getElementsByName("sendway")[0].value},
+				data:{town:town,ISBN:<%=book.getISBN()%>,province:province,city:city,ownerName:$(".reg_ownername").val(),ownerPhone:$(".reg_ownerphone").val(),coinNumber:$(".reg_sellcoinnumber").val(),note:$(".reg_sellnote").val(),recency:document.getElementsByName("recency")[0].value,sendWay:document.getElementsByName("sendway")[0].value},
 		        
 		    });
 		}
@@ -326,14 +326,15 @@ session.setAttribute("prePage", url);
 			}
 			else {
 				 select=document.getElementsByName("area")[0];
-				  var city=select.options[select.selectedIndex].text;
+				  var city="";
 			}
-		 	//alert(document.getElementsByName("recency")[0].value);
+		 	select=document.getElementsByName("area")[0];
+			var town=select.options[select.selectedIndex].text;
 		  	$.ajax({  
 		        type:"POST",  
 		        url:"LendSellAction!lendInfo",  
 		        async:false,
-				data:{ownerAddress:$(".reg_owneraddress").val(),longestDuration:$(".reg_lenddaynumber").val(),ISBN:<%=book.getISBN()%>,province:province,city:city,ownerName:$(".reg_ownername").val(),ownerPhone:$(".reg_ownerphone").val(),coinNumber:$(".reg_lendcoinnumber").val(),note:$(".reg_lendnote").val(),recency:document.getElementsByName("recency")[0].value,sendWay:document.getElementsByName("sendway")[0].value},
+				data:{town:town,ownerAddress:$(".reg_owneraddress").val(),longestDuration:$(".reg_lenddaynumber").val(),ISBN:<%=book.getISBN()%>,province:province,city:city,ownerName:$(".reg_ownername").val(),ownerPhone:$(".reg_ownerphone").val(),coinNumber:$(".reg_lendcoinnumber").val(),note:$(".reg_lendnote").val(),recency:document.getElementsByName("recency")[0].value,sendWay:document.getElementsByName("sendway")[0].value},
 		        
 		    });
 		}

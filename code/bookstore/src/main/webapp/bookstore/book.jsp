@@ -136,7 +136,7 @@ session.setAttribute("prePage", url);
         <hr>
         <p><a href="#" class="btn btn-success" role="button">查看发布信息</a></p>
         <!-- 如果没登录，跳出信息显示请先登录 -->
-        <p><a href="#" class="btn btn-success" role="button">出借/卖书</a></p>
+        <p><a href="LendSellAction!searchBook?ISBN=<%=book.getISBN() %>" class="btn btn-success" role="button">出借/卖书</a></p>
       </div>
 	</div> 
   </div>

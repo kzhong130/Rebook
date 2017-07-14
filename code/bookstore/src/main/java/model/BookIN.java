@@ -19,12 +19,13 @@ public class BookIN {
 	private String inStatus;
 	private String note;
 	private String province;
+	private String town;
 	
 	public BookIN(){
 		
 	}
 	
-	public BookIN(String userName, String ISBN,String recency,Timestamp inTime,int coinNumber,String ownerName,String type,String sendWay,String city,Integer longestDuration,String ownerPhone,String ownerAddress,String inStatus,String note,String province){
+	public BookIN(String userName, String ISBN,String recency,Timestamp inTime,int coinNumber,String ownerName,String type,String sendWay,String city,Integer longestDuration,String ownerPhone,String ownerAddress,String inStatus,String note,String province,String town){
 		this.userName = userName;
 		this.ISBN = ISBN;
 		this.recency = recency;
@@ -40,6 +41,15 @@ public class BookIN {
 		this.inStatus = inStatus;
 		this.note = note;
 		this.province = province;
+		this.town=town;
+	}
+	
+	public String getTown(){
+		return town;
+	}
+	
+	public void setTown(String town){
+		this.town=town;
 	}
 	
 	public int getBookRecordID(){
