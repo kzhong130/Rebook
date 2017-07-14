@@ -20,7 +20,8 @@
 <!-- Bootstrap -->
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/crowdfunding.center/sell_book.css" rel="stylesheet">
-
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+  <script type="text/javascript" src="../js/jquery.citys.js"></script>    
 <!--[if lt IE 9]>
       <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
@@ -51,50 +52,73 @@
         <tr>
 
           <td class="bookimage" style="vertical-align:text-top;">
-          <a href=<% %>><img class="listbook" src="https://img3.doubanio.com/mpic/s28332051.jpg<% %>"/></a><br>
-
-          
+          <a href=<% %>><img class="listbook" src="https://img3.doubanio.com/mpic/s28332051.jpg<% %>"/></a><br>         
           </td>
           
           <td class="bookcontent" style="vertical-align:top;">
           <table class="allwidth" style="width:691px;">
               <tr>
               <td class="bookname">《<% %>斯通纳》<span class="isbn"><% %>9787208130500</span></td>
-              <td><p class="time">书币要求：<span class="coin"><% %>30&nbsp;&nbsp;</span></p></td>
+              <td style="vertical-align:top;">
+              <button class="btn btn-link" value="<% %>" onclick="" style="padding:3px 10px 0 0;color:#efbb24;float:right;">删除</button>
+              <button type="button" class="btn btn-link tc" style="padding:3px 5px 0 0;color:#efbb24;float:right;">编辑</button>
+              </td>
               </tr>
-              
-              
+                        
               <tr>
-              <td><p class="comment">书主信息：<% %>洪晓雅&nbsp;&nbsp;<% %>15821911839&nbsp;&nbsp;<% %>福建厦门</p></td>
-              <td><p class="time">状态：<% %>在架上&nbsp;&nbsp;</p></td>
+              <td>
+              <p class="comment">书主信息：<% %>洪晓雅&nbsp;&nbsp;<% %>15821911839&nbsp;&nbsp;<% %>福建厦门</p>
+              <p class="comment">新旧程度：<% %>五成新&emsp;&emsp;&emsp;&emsp;送书方式：<% %>邮寄</p>
+              </td>
+              
+              <td>
+              <p class="time">书币要求：<span class="coin"><% %>30&nbsp;&nbsp;</span></p>
+              <p class="time">状态：<% %>在架上&nbsp;&nbsp;</p>
+              </td>
               </tr>
               
               <tr>
               <td>
-              <p class="comment">新旧程度：<% %>五成新&emsp;&emsp;&emsp;&emsp;送书方式：<% %>邮寄</p>
               <p class="comment">备注：<% %>请小心的对待这本书（没有备注则写无）</p>
               <p class="comment">录入时间：<% %>2017.7.11 13:52:12</p>
               </td>
               
               
               
-              <td class="deletebutton" style="vertical-align:bottom;">
-              <button class="delete tc" name="" >修改</button>
-              <button class="delete" value="<% %>" onclick="" >删 除</button>
+              <td class="deletebutton" style="vertical-align:bottom;padding-left:10px;">
+
+              <button class="delete" style="width:110px" id="application" >查看申请</button> 
               </td>
               </tr>
            </table>
            </td>
         </tr>
-        
-
 		</table>
+</div>
+
+<!-- 每个申请细节 -->	
+<div class="commentbox" id="appDetail" style="display:none;">
+     <table  style="width:828px;">
+        <tr>
+              <td class="numberlist">1<% %></td>
+
+              <td>
+              <p class="comment">申请者：<% %><span><% %></span>&emsp;&emsp;&emsp;&emsp;送书方式：<% %>邮寄</p>
+              <p class="comment">书主信息：<% %>洪晓雅&nbsp;&nbsp;<% %>15821911839&nbsp;&nbsp;<% %>福建省厦门市翔安区新店镇新兴街610号</p>
+              </td>
+
+              <td class="deletebutton">
+              <button class="pass" value="<% %>" onclick="">通过</button>
+              <button class="reject" value="<% %>" onclick="">拒绝</button>
+              </td>
 
 
+        </tr>
+		</table>
+</div>
+<br>	
+	
 
-
-	</div>
-	<br>
 <!-- 修改的按钮 -->
 <div id="gray"></div>
 <div class="popup" id="popup">
@@ -208,31 +232,14 @@
 
 
 
+
 	<!-- 结束 -->
+	<!-- 
 	<script src="../js/jquery-2.1.1.min.js"></script>
+	<script src="../js/jquery-1.11.3.min.js"></script>
 	<script src="../js/bootstrap.min.js"></script>
-	<script type="text/javascript">
-	function deleteBookComment(ob){
-		var value = $(ob).attr("value");
-		$.ajax({
-			type:"POST",
-			url:"BookCommentAction!deleteBookComment",
-			async:false,
-			data:{ID:$(ob).attr("value")},
-			success:function(result){
-				result=eval('('+result+')');
-				if(result.success){
-					alert("删除成功！");
-					location.reload();
-				}
-				else{
-					alert("删除失败！");
-				}
-			}
-		});
-	}
-	
-</script>
+	-->
+
 <script type="text/javascript">
 //窗口效果
 //点击登录class为tc 显示
@@ -271,9 +278,6 @@ var GG = {
     }
 }
 
-var books = $('#bookISBNs').val().split("$");
-var listCount = parseInt(books.length);
-$("#page").initPage(listCount,1,GG.kk);
 
 $(document).ready(function(){ 
 
@@ -298,6 +302,10 @@ $(document).ready(function(){
 		$(".popup").css("cursor","default"); 
 		$(this).unbind("mousemove");
 	})
+	
+	$("#application").click(function(){
+        $("#appDetail").slideToggle("slow");
+    });
 })
 
 </script>
