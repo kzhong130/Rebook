@@ -8,6 +8,8 @@ import java.util.List;
 
 import model.Book;
 import model.BookComment;
+import model.BookIN;
+import model.User;
 
 public class BookAction extends BaseAction{
 	private static final long serialVersionUID = 1L;
@@ -169,9 +171,15 @@ public class BookAction extends BaseAction{
 		String ISBN = request().getParameter("ISBN");
 		Book book = appService.getBookByISBN(ISBN);
 		request().getSession().setAttribute("book", book);
-		List<BookComment> bookComments = appService.getBookCommentsByISBN(ISBN);
 		
+		List<BookComment> bookComments = appService.getBookCommentsByISBN(ISBN);
 		request().getSession().setAttribute("bookComment",bookComments);
+		
+		List<BookIN> bookINs = appService.getBookINByISBN(ISBN);
+		request().getSession().setAttribute("bookIN", bookINs);
+		
+		List<User> users = appService.getUserByBookINs(bookINs);
+		request().getSession().setAttribute("userByBookIN", users);
 		return "bookInfo";
 	}
 	

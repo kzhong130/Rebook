@@ -2,7 +2,8 @@
     pageEncoding="utf-8"%>
 <%@ page import="model.Book" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="model.BookComment" %>
+<%@ page import="model.User" %>
+<%@ page import="model.BookIN" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -58,12 +59,41 @@ session.setAttribute("prePage", url);
 
 
 <%
-	Book book = new Book();
-    if (session.getAttribute("book")!=null){
-    	book = (Book)session.getAttribute("book");
-    }
-    ArrayList<BookComment> bookComments = new ArrayList<BookComment>();
-    bookComments = (ArrayList<BookComment>)session.getAttribute("bookComment");
+int bookRecordID = Integer.parseInt(request.getParameter("ID"));
+Book book = new Book();
+if (session.getAttribute("book")!=null){
+	book = (Book)session.getAttribute("book");
+}
+ArrayList<BookIN> bookINs = new ArrayList<BookIN>();
+bookINs = (ArrayList<BookIN>)session.getAttribute("bookIN");
+BookIN bookIN = new BookIN();
+for (int i = 0; i<bookINs.size() ; i++){
+	if (bookINs.get(i).getBookRecordID() == bookRecordID){
+		bookIN = bookINs.get(i);
+		break;
+	}
+}
+String recency="";
+if ("20%".equals(bookIN.getRecency())){
+	recency = "两成新";
+}
+if ("50%".equals(bookIN.getRecency())){
+	recency = "五成新";
+}
+if ("80%".equals(bookIN.getRecency())){
+	recency = "八成新";
+}
+if ("100%".equals(bookIN.getRecency())){
+	recency = "全新";
+}
+
+String sendWay = "";
+if ("mail".equals(bookIN.getSendWay())){
+	sendWay = "邮寄";
+}
+if ("face".equals(bookIN.getSendWay())){
+	sendWay = "当面";
+}
 %>
 <p></p>
 <!-- 购书申请 -->
@@ -76,24 +106,28 @@ session.setAttribute("prePage", url);
   <div class="bookinfobox">
      <table  style="width:100%;">
         <tr>
-          <td class="bookimage" style="vertical-align:text-top;"><a href=<% %>><img class="listbook" src="https://img3.doubanio.com/mpic/s29459533.jpg<% %>"/></a></td>
+          <td class="bookimage" style="vertical-align:text-top;"><a href="bookAction!getBookInfo?ISBN=<%=book.getISBN()%> "><img class="listbook" src="<%=book.getImage() %>"/></a></td>
           <td class="bookcontent" style="vertical-align:top;">
-             <p class="bookname">《外婆的道歉信<% %>》</p>
-             <p class="comment">作者：<% %>[瑞典] 弗雷德里克·巴克曼</p>
-             <p class="comment">出版社：<% %>天津人民出版社</p>
-             <p class="comment">定价：<% %>42.00元</p>
+             <p class="bookname">《<%=book.getBookName() %>》</p>
+             <p class="comment">作者：<%=book.getAuthor() %></p>
+             <p class="comment">出版社：<%=book.getPublisher() %></p>
+             <p class="comment">定价：<%=book.getPrice() %></p>
          
            </td>
         </tr>
       </table>
   </div>
-      <p class="comment">书主信息：<% %>洪晓雅&nbsp;&nbsp;<% %>15821911839&nbsp;&nbsp;<% %>福建厦门</p>         
-      <p class="comment">新旧程度：<% %>五成新&emsp;&emsp;&emsp;&emsp;送书方式：<% %>邮寄</p>
-      <p class="comment">备注：<% %>请小心的对待这本书（没有备注则写无）</p>         
+      <p class="comment">书主信息：<%=bookIN.getOwnerName() %>&nbsp;&nbsp; <%=bookIN.getOwnerPhone() %>&nbsp;&nbsp;<%=bookIN.getProvince()+" "+bookIN.getCity() %></p>         
+      <p class="comment">新旧程度：<%=recency %>&emsp;&emsp;&emsp;&emsp;送书方式：<%=sendWay %></p>
+      <%if (bookIN.getNote()==null){ %>
+      <p class="comment">备注：无</p>       
+      <%} %>
+      <%if(bookIN.getNote()!=null){ %>  
+      <p class="comment">备注：<%=bookIN.getNote() %></p>  
+      <%} %>
    <hr>
    
    
-   <!-- 判断一下，如果上面的送书方式是上门的话下面一部分不需要显示 -->
    <div class="reg_div">
     <ul class="reg_ul">
       <li>
@@ -128,12 +162,12 @@ session.setAttribute("prePage", url);
      <table  style="width:100%;">
         <tr>
           <td>
-             <p>支付：<span class="money">10<% %>书币</span></p>
+             <p>支付：<span class="money"><%=bookIN.getCoinNumber() %>书币</span></p>
          </td>
         </tr>
         <tr>
           <td >
-             <a href="" ><span class="return">返回</span></a>
+             <a href="bookAction!getBookInfo?ISBN=<%=book.getISBN()%> " ><span class="return">返回</span></a>
              <button class="pay">提出申请</button>
          </td>
         </tr>
