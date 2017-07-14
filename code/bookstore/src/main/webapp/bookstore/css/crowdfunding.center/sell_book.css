@@ -55,6 +55,21 @@ padding:10px 8px 10px 8px;
  border:1px solid #D3D3D3;
 }
 
+div.applicationbox
+{
+font-size:20px;
+box-sizing:!border-box;
+-moz-box-sizing:!border-box; /* Firefox */
+-webkit-box-sizing:!border-box; /* Safari */
+width:100%;
+/*float:left;*/
+text-align:center;
+padding:10px 8px 10px 8px;
+border:1px solid #D3D3D3;
+/*border-bottom:1px solid #D3D3D3;
+border-right:1px solid #D3D3D3;
+border-top:0px solid #D3D3D3;*/
+}
 .bookimage{
 	width:15%;
 	
@@ -132,6 +147,51 @@ button.delete{
 botton.delete:hover{
 	background-color: #d19826;
 	}
+
+button.pass{
+	width:52px;
+	font-size:14px;
+	display: inline-block;
+	padding: 4px 8px;
+	margin-bottom: 0px;
+	font-weight: 400;
+	line-height: 1.42857;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-moz-user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #FFF;
+	background-color: #efbb24;
+	}
+botton.pass:hover{
+	background-color: #d19826;
+	}
+button.reject{
+	width:52px;
+	font-size:14px;
+	display: inline-block;
+	padding: 4px 8px;
+	margin-bottom: 0px;
+	font-weight: 400;
+	line-height: 1.42857;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-moz-user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	color: #FFF;
+	background-color: #3e3e3e;
+	}
+botton.reject:hover{
+	background-color: #d19826;
+	}
+
+	
 .allwidth{
 	width:691px;
 }
@@ -206,7 +266,7 @@ botton.delete:hover{
 #gray{width:100%;height:100%;background:rgba(0,0,0,0.3);position:fixed;top:0px;display:none;z-index:99;}
 
 .popup{
-	width:410px; 
+	width:450px; 
 	height:auto;
 	background-color:#fff;
 	position:absolute;
@@ -250,7 +310,7 @@ botton.delete:hover{
 	}
 	
 .popup .min{
-	width:410px;
+	width:450px;
 	height:auto;
 	}
 
@@ -359,4 +419,60 @@ botton.delete:hover{
 hr.fortr{
 	margin-top:5px;
 	margin-bottom:10px;
+}
+
+.btna {
+  display: inline-block;
+  padding: 1px 1px;
+  margin-bottom: 0;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857143;
+  white-space: nowrap;
+  vertical-align: middle;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-image: none;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+.btn:hover{
+  color: #333;
+  text-decoration: none;
+}
+.btnb {
+  font-weight: normal;
+  color: #404040;
+  border-radius: 0;
+}
+.btnb,
+.btnb[disabled],
+fieldset[disabled] .btnb {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+}
+.btnb,
+.btnb:hover,
+.btnb:focus,
+.btnb:active {
+  border-color: transparent;
+}
+.btnb:hover,
+.btnb:focus {
+  color: #000000;
+  text-decoration: underline;
+  background-color: transparent;
+}
+.btnb[disabled]:hover,
+fieldset[disabled] .btnb:hover,
+.btnb[disabled]:focus,
+fieldset[disabled] .btnb:focus {
+  color: #777;
+  text-decoration: none;
 }
