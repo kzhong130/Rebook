@@ -108,6 +108,18 @@ public class AppServiceImpl implements AppService {
 		return userDao.getUserByUserName(userName);
 	}
 	
+	public List<User> getUserByBookINs(List<BookIN> bookINs){
+		List<User> users = new ArrayList<User>();
+		for (int i=0; i<bookINs.size(); i++){
+			String userName = bookINs.get(i).getUserName();
+			User user = userDao.getUserByUserName(userName);
+			if (!users.contains(user)){
+				users.add(user);
+			}
+		}
+		return users;
+	}
+	
 	/*
 	 * Book
 	 */
@@ -354,6 +366,10 @@ public class AppServiceImpl implements AppService {
 	
 	public void updateBookIN(BookIN bookIN){
 		bookINDao.update(bookIN);
+	}
+	
+	public List<BookIN> getBookINByISBN(String ISBN){
+		return bookINDao.getBookINsByISBN(ISBN);
 	}
 	
 	/*

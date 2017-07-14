@@ -24,6 +24,7 @@ public interface AppService {
 	public User getUserByUserID(int userID);
 	public List<User> getAllUsers();
 	public User getUserByUserName(String userName);
+	public List<User> getUserByBookINs(List<BookIN> bookINs);
 	
 	/*
 	 * Book
@@ -72,6 +73,7 @@ public interface AppService {
 	public Integer addBookIN(BookIN bookIN);
 	public BookIN getBookINByBookRecordID(int bookRecordID);
 	public void updateBookIN(BookIN bookIN);
+	public List<BookIN> getBookINByISBN(String ISBN);
 	
 	/*
 	 * LendOrder
