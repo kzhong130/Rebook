@@ -156,7 +156,7 @@
                         </h2>
                         <ol class="breadcrumb">
 					  <li class="color-ylw">订单信息</li>
-					  <li class="active">有书借</li>
+					  <li class="active">有书买</li>
 					</ol> 
 
 
@@ -173,13 +173,12 @@
                                     <table class="table table-striped table-bordered table-hover" style="table-layout:fixed" id="myTable">
                                         <thead>
                                             <tr class="text-center">
-                                                <th class="text-center" width="13%">订单号</th>
-                                                <th class="text-center" width="15%">书名</th>
-                                                <th class="text-center" width="13%">书籍发布编号</th>
-                                                <th class="text-center" width="14%">借阅者</th>
-                                                <th class="text-center" width="14%">出借者</th>
-                                                <th class="text-center" width="12%">最长借书时间</th>
-                                                <th class="text-center" width="13%">状态</th>
+                                                <th class="text-center" width="15%">订单号</th>
+                                                <th class="text-center" width="19%">书名</th>
+                                                <th class="text-center" width="15%">书籍发布编号</th>
+                                                <th class="text-center" width="15%">借阅者</th>
+                                                <th class="text-center" width="15%">出借者</th>
+                                                <th class="text-center" width="15%">状态</th>
                                                 <th class="text-center" width="6%">详情</th>
                                             </tr>
                                         </thead>
@@ -245,7 +244,6 @@
 												<td><%=myBookIN.getBookRecordID() %></td>
                                                 <td><%=lendOrders.get(i).getLenderName() %></td>
                                                 <td><%=lendOrders.get(i).getOwnerName() %></td>
-                                                <td><%=duration %></td>
                                                 <td><%=status %></td>
                                                 <td><a class="btn btn-success btn-xs" href="dashboard_orderLendInfo.jsp?ISBN=<%=myBook.getISBN()%>&ID=<%=lendOrders.get(i).getLendID()%>">查看</a></td>
                                                 

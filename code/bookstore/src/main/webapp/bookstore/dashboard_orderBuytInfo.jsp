@@ -185,10 +185,10 @@
                                 	<span class="col-md-10"><%=book.getBookName() %> </span></p>
                                 <p><span class="col-md-2">书籍发布编号: </span>
                                 	<span class="col-md-10"><%=lendOrder.getBookRecordID() %> </span></p>
-                                <!-- 这里的借阅者和出借者就以ID+用户名的形式显示好了 -->
-								<p><span class="col-md-2">借阅者: </span>
+                                <!-- 这里的购书者和卖书者就以ID+用户名的形式显示好了 -->
+								<p><span class="col-md-2">购书者: </span>
                                		<span class="col-md-10"><%=lenderUser.getUserID() %> <%=lenderUser.getUserName() %></span></p>  
-                                <p><span class="col-md-2">出借者: </span> 
+                                <p><span class="col-md-2">卖书者: </span> 
                                 	<span class="col-md-10"><%=ownerUser.getUserID() %> <%=ownerUser.getUserName() %></span></p>
                                <%
                                	if (lendOrder.getArrivalTime() == null){
@@ -202,182 +202,83 @@
                                 <p><span class="col-md-2">到货时间: </span> 
                                 	<span class="col-md-10"><%=lendOrder.getArrivalTime().toString().substring(0, 19) %></span> </p>
                                 <%} %>
-                                <%
-                                if (lendOrder.getReturnTime() == null){
-                                %>
-                                <p><span class="col-md-2">还书时间: </span> 
-                                	<span class="col-md-10">尚未还书</span> </p>
-                                <%} %>
-                                <%
-                                if (lendOrder.getReturnTime() != null){
-                                %>
-                                <p><span class="col-md-2">还书时间: </span> 
-                                	<span class="col-md-10"><%=lendOrder.getReturnTime().toString().substring(0, 19) %></span> </p>
-                                <%} %>
-                                <%if("mail".equals(lendOrder.getReturnWay())){ %>
-                                <p><span class="col-md-2">还书方式: </span> 
-                                	<span class="col-md-10">邮寄</span></p>
-                                <%} %>
-                                <%if("face".equals(lendOrder.getReturnWay())){ %>
-                                <p><span class="col-md-2">还书方式: </span> 
-                                	<span class="col-md-10">当面</span></p>
-                                <%} %>
                                 <p><span class="col-md-2">收货人: </span> 
                                 	<span class="col-md-10"><%=lendOrder.getReceiver()%></span></p>
-                                <p><span class="col-md-2">借阅者联系方式: </span> 
+                                <p><span class="col-md-2">购书者联系方式: </span> 
                                 	<span class="col-md-10"><%=lendOrder.getLendPhone() %></span></p>
-                                <p><span class="col-md-2">借阅者地址: </span> 
+                                <p><span class="col-md-2">购书者地址: </span> 
                                 	<span class="col-md-10"><%=lendOrder.getLendAddress() %></span></p>
+                                
                                 <div class="form-group form-group-pad">
                                 	<!-- 暴力方法解决的对齐 -->
 									<p><span class="col-md-2">&nbsp;&nbsp;&nbsp;&nbsp;状态: </span></p>
 									<!--<label for="状态" class="col-sm-2">状态: </label>-->
 									<div class="col-md-3 form-control-pad">
 									<%if ("0".equals(lendOrder.getStatus())){ %>
-									<select id="orderLendStatus" class="form-control">
-          								<option value="0" selected="selected">借阅者已下单</option>
-          								<option value="1">出借者已确认</option>
+									<select id="orderBuyStatus" class="form-control">
+          								<option value="0" selected="selected">购书者已下单</option>
+          								<option value="1">卖书者已确认</option>
           								<option value="2">订单取消</option>
-          								<option value="3">出借者已发货</option>
-          								<option value="4">借阅者已收货</option>
-          								<option value="5">借阅者已发货</option>
-          								<option value="6">出借者已收货</option>
-          								<option value="7">仅借阅者可评价</option>
-          								<option value="8">仅出借者可评价</option>
-          								<option value="9">双方都不可评价</option>
+          								<option value="3">卖书者已发货</option>
+          								<option value="4">购书者已收货</option>
+          								<option value="5">购书者已发货</option>
         							</select>
         							<%} %>
         							<%if ("1".equals(lendOrder.getStatus())){ %>
-        							<select id="orderLendStatus" class="form-control">
-          								<option value="0" >借阅者已下单</option>
-          								<option value="1" selected="selected">出借者已确认</option>
+        							<select id="orderBuyStatus" class="form-control">
+          								<option value="0">购书者已下单</option>
+          								<option value="1" selected="selected">卖书者已确认</option>
           								<option value="2">订单取消</option>
-          								<option value="3">出借者已发货</option>
-          								<option value="4">借阅者已收货</option>
-          								<option value="5">借阅者已发货</option>
-          								<option value="6">出借者已收货</option>
-          								<option value="7">仅借阅者可评价</option>
-          								<option value="8">仅出借者可评价</option>
-          								<option value="9">双方都不可评价</option>
+          								<option value="3">卖书者已发货</option>
+          								<option value="4">购书者已收货</option>
+          								<option value="5">购书者已发货</option>
         							</select>
         							<%} %>
         							<%if("2".equals(lendOrder.getStatus())){ %>
-        							<select id="orderLendStatus" class="form-control">
-          								<option value="0" >借阅者已下单</option>
-          								<option value="1">出借者已确认</option>
+        							<select id="orderBuyStatus" class="form-control">
+          								<option value="0">购书者已下单</option>
+          								<option value="1">卖书者已确认</option>
           								<option value="2" selected="selected">订单取消</option>
-          								<option value="3">出借者已发货</option>
-          								<option value="4">借阅者已收货</option>
-          								<option value="5">借阅者已发货</option>
-          								<option value="6">出借者已收货</option>
-          								<option value="7">仅借阅者可评价</option>
-          								<option value="8">仅出借者可评价</option>
-          								<option value="9">双方都不可评价</option>
+          								<option value="3">卖书者已发货</option>
+          								<option value="4">购书者已收货</option>
+          								<option value="5">购书者已发货</option>
         							</select>
         							<%} %>
         							<%if ("3".equals(lendOrder.getStatus())){ %>
-        							<select id="orderLendStatus" class="form-control">
-          								<option value="0" >借阅者已下单</option>
-          								<option value="1">出借者已确认</option>
+        							<select id="orderBuyStatus" class="form-control">
+          								<option value="0">购书者已下单</option>
+          								<option value="1">卖书者已确认</option>
           								<option value="2">订单取消</option>
-          								<option value="3"  selected="selected">出借者已发货</option>
-          								<option value="4">借阅者已收货</option>
-          								<option value="5">借阅者已发货</option>
-          								<option value="6">出借者已收货</option>
-          								<option value="7">仅借阅者可评价</option>
-          								<option value="8">仅出借者可评价</option>
-          								<option value="9">双方都不可评价</option>
+          								<option value="3" selected="selected">卖书者已发货</option>
+          								<option value="4">购书者已收货</option>
+          								<option value="5">购书者已发货</option>
         							</select>
         							<%} %>
         							<%if ("4".equals(lendOrder.getStatus())){ %>
-        							<select id="orderLendStatus" class="form-control">
-          								<option value="0" >借阅者已下单</option>
-          								<option value="1">出借者已确认</option>
+        							<select id="orderBuyStatus" class="form-control">
+          								<option value="0">购书者已下单</option>
+          								<option value="1">卖书者已确认</option>
           								<option value="2">订单取消</option>
-          								<option value="3">出借者已发货</option>
-          								<option value="4" selected="selected">借阅者已收货</option>
-          								<option value="5">借阅者已发货</option>
-          								<option value="6">出借者已收货</option>
-          								<option value="7">仅借阅者可评价</option>
-          								<option value="8">仅出借者可评价</option>
-          								<option value="9">双方都不可评价</option>
+          								<option value="3">卖书者已发货</option>
+          								<option value="4" selected="selected">购书者已收货</option>
+          								<option value="5">购书者已发货</option>
         							</select>
         							<%} %>
         							<%if ("5".equals(lendOrder.getStatus())){ %>
-        							<select id="orderLendStatus" class="form-control">
-          								<option value="0" >借阅者已下单</option>
-          								<option value="1">出借者已确认</option>
+        							<select id="orderBuyStatus" class="form-control">
+          								<option value="0">购书者已下单</option>
+          								<option value="1">卖书者已确认</option>
           								<option value="2">订单取消</option>
-          								<option value="3">出借者已发货</option>
-          								<option value="4">借阅者已收货</option>
-          								<option value="5" selected="selected">借阅者已发货</option>
-          								<option value="6">出借者已收货</option>
-          								<option value="7">仅借阅者可评价</option>
-          								<option value="8">仅出借者可评价</option>
-          								<option value="9">双方都不可评价</option>
-        							</select>
-        							<%} %>
-        							<%if ("6".equals(lendOrder.getStatus())){ %>
-        							<select id="orderLendStatus" class="form-control">
-          								<option value="0" >借阅者已下单</option>
-          								<option value="1">出借者已确认</option>
-          								<option value="2">订单取消</option>
-          								<option value="3">出借者已发货</option>
-          								<option value="4">借阅者已收货</option>
-          								<option value="5">借阅者已发货</option>
-          								<option value="6"  selected="selected">出借者已收货</option>
-          								<option value="7">仅借阅者可评价</option>
-          								<option value="8">仅出借者可评价</option>
-          								<option value="9">双方都不可评价</option>
-        							</select>
-        							<%} %>
-        							<%if("7".equals(lendOrder.getStatus())){ %>
-        							<select id="orderLendStatus" class="form-control">
-          								<option value="0" >借阅者已下单</option>
-          								<option value="1">出借者已确认</option>
-          								<option value="2">订单取消</option>
-          								<option value="3">出借者已发货</option>
-          								<option value="4">借阅者已收货</option>
-          								<option value="5">借阅者已发货</option>
-          								<option value="6">出借者已收货</option>
-          								<option value="7" selected="selected">仅借阅者可评价</option>
-          								<option value="8" >仅出借者可评价</option>
-          								<option value="9">双方都不可评价</option>
-        							</select>
-        							<%} %>
-        							<%if("8".equals(lendOrder.getStatus())){ %>
-        							<select id="orderLendStatus" class="form-control">
-          								<option value="0" >借阅者已下单</option>
-          								<option value="1">出借者已确认</option>
-          								<option value="2">订单取消</option>
-          								<option value="3">出借者已发货</option>
-          								<option value="4">借阅者已收货</option>
-          								<option value="5">借阅者已发货</option>
-          								<option value="6">出借者已收货</option>
-          								<option value="7">仅借阅者可评价</option>
-          								<option value="8" selected="selected">仅出借者可评价</option>
-          								<option value="9" >双方都不可评价</option>
-        							</select>
-        							<%} %>
-        							<%if("9".equals(lendOrder.getStatus())){ %>
-        							<select id="orderLendStatus" class="form-control">
-          								<option value="0" >借阅者已下单</option>
-          								<option value="1">出借者已确认</option>
-          								<option value="2">订单取消</option>
-          								<option value="3">出借者已发货</option>
-          								<option value="4">借阅者已收货</option>
-          								<option value="5">借阅者已发货</option>
-          								<option value="6">出借者已收货</option>
-          								<option value="7">仅借阅者可评价</option>
-          								<option value="8" >仅出借者可评价</option>
-          								<option value="9" selected="selected" >双方都不可评价</option>
+          								<option value="3">卖书者已发货</option>
+          								<option value="4">购书者已收货</option>
+          								<option value="5" selected="selected">购书者已发货</option>
         							</select>
         							<%} %>
 									</div>
 								</div>
 												
-                          <input type="button" class="btn btn-success btn-submit-pad" value="确认修改" id="<%=lendOrder.getLendID() %>" onclick = "updateLendOrder(this)">
-                           <a href="dashboard_orderLend.jsp" class="btn btn-default btn-submit-pad">返回</a>
+                          <input type="button" class="btn btn-success btn-submit-pad" value="确认修改" id="<%=lendOrder.getLendID() %>" onclick = "updateBuyOrder(this)">
+                           <a href="dashboard_orderBuy.jsp" class="btn btn-default btn-submit-pad">返回</a>
                                 
                            
 								</form>	
