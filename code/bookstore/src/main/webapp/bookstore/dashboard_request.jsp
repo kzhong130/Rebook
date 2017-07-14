@@ -85,20 +85,28 @@
                     <li>
                         <a href="dashboard_request.jsp" class="active-menu"><i class="fa fa-list-alt"></i> 用户申请</a>
                     </li>
-					 <li>
+                    <li>
                         <a href="#"><i class="fa fa-file-text"></i> 订单信息<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="dashboard_orderLend.jsp">有书借</a>
                             </li>
                             <li>
-                                <a href="#">有书买</a>
+                                <a href="dashboard_orderBuy.jsp">有书买</a>
                             </li>
 							</ul>
 					</li>	
 							
                     <li>
                         <a href="#"><i class="fa fa-edit"></i> 用户反馈</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="dashboard_lendFeedback.jsp">有书借</a>
+                            </li>
+                            <li>
+                                <a href="dashboard_buyFeedback.jsp">有书买</a>
+                            </li>
+							</ul>
                     </li>
                     
 
@@ -111,303 +119,46 @@
 		<div id="page-wrapper">
 		  <div class="header"> 
                         <h2 class="page-header">
-                            书籍信息 <small>
-                            book</small>
+                            用户申请<small>
+                            request</small>
                         </h2>
-                        <!-- home/dashboard/data
-						<ol class="breadcrumb">
-					  <li><a href="#">Home</a></li>
-					  <li><a href="#">Dashboard</a></li>
-					  <li class="active">Data</li>
-					</ol> 
-								-->
 									
 		</div>
             <div id="page-inner">
-
-				<!-- 访问量数据统计
                 <div class="row">
-                    <div class="col-md-3 col-sm-12 col-xs-12">
-					<div class="board">
-                        <div class="panel panel-primary">
-						<div class="number">
-							<h3>
-								<h3>44,023</h3>
-								<small>Daily Visits</small>
-							</h3> 
-						</div>
-						<div class="icon">
-						   <i class="fa fa-eye fa-5x red"></i>
-						</div>
-		 
-                        </div>
-						</div>
-                    </div>
-					
-					       <div class="col-md-3 col-sm-12 col-xs-12">
-					<div class="board">
-                        <div class="panel panel-primary">
-						<div class="number">
-							<h3>
-								<h3>32,850</h3>
-								<small>Sales</small>
-							</h3> 
-						</div>
-						<div class="icon">
-						   <i class="fa fa-shopping-cart fa-5x blue"></i>
-						</div>
-		 
-                        </div>
-						</div>
-                    </div>
-					
-					       <div class="col-md-3 col-sm-12 col-xs-12">
-					<div class="board">
-                        <div class="panel panel-primary">
-						<div class="number">
-							<h3>
-								<h3>56,150</h3>
-								<small>Comments</small>
-							</h3> 
-						</div>
-						<div class="icon">
-						   <i class="fa fa-comments fa-5x green"></i>
-						</div>
-		 
-                        </div>
-						</div>
-                    </div>
-					
-					       <div class="col-md-3 col-sm-12 col-xs-12">
-					<div class="board">
-                        <div class="panel panel-primary">
-						<div class="number">
-							<h3>
-								<h3>89,645</h3>
-								<small>Daily Profits</small>
-							</h3> 
-						</div>
-						<div class="icon">
-						   <i class="fa fa-user fa-5x yellow"></i>
-						</div>
-		 
-                        </div>
-						</div>
-                    </div>
-				   
-                </div>
-                -->
-                
-                <!-- 两张表格
-				     <div class="row">
-                        <div class="col-sm-6 col-xs-12">  
-                            <div class="panel panel-default chartJs">
-                                <div class="panel-heading">
-                                    <div class="card-title">
-                                        <div class="title">Line Chart</div>
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <canvas id="line-chart" class="chart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-sm-6 col-xs-12">
-                            <div class="panel panel-default chartJs">
-                                <div class="panel-heading">
-                                    <div class="card-title">
-                                        <div class="title">Bar Chart</div>
-                                    </div>
-                                </div>
-                                <div class="panel-body">
-                                    <canvas id="bar-chart" class="chart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-				-->
-				
-		<!-- %百分比图
-		<div class="row">
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>Profit</h4>
-						<div class="easypiechart" id="easypiechart-blue" data-percent="82" ><span class="percent">82%</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>Sales</h4>
-						<div class="easypiechart" id="easypiechart-orange" data-percent="55" ><span class="percent">55%</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>Customers</h4>
-						<div class="easypiechart" id="easypiechart-teal" data-percent="84" ><span class="percent">84%</span>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-6 col-md-3">
-				<div class="panel panel-default">
-					<div class="panel-body easypiechart-panel">
-						<h4>No. of Visits</h4>
-						<div class="easypiechart" id="easypiechart-red" data-percent="46" ><span class="percent">46%</span>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>-->
-        	
-        	<!-- 企业网站模板
-			<div class="copyrights">Collect from <a href="http://www.cssmoban.com/" >企业网站模板</a></div>
-			-->
-				
-				<!-- line chart
-				<div class="row">
-				<div class="col-md-5">
-						<div class="panel panel-default">
-						<div class="panel-heading">
-							Line Chart
-						</div>
-						<div class="panel-body">
-							<div id="morris-line-chart"></div>
-						</div>						
-					</div>   
-					</div>		
-					
-						<div class="col-md-7">
-					<div class="panel panel-default">
-					<div class="panel-heading">
-                                Bar Chart Example
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-bar-chart"></div>
-                            </div>
-						
-					</div>  
-					</div>
-					
-				</div> 
-			 	-->
-				
-				<!-- area chart
-                <div class="row">
-                    <div class="col-md-9 col-sm-12 col-xs-12">
-                        <div class="panel panel-default">                            
-							<div class="panel-heading">
-							Area Chart
-						</div>
-						<div class="panel-body">
-							<div id="morris-area-chart"></div>
-						</div>
-                        </div>
-                    </div>
-                    <div class="col-md-3 col-sm-12 col-xs-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Donut Chart Example
-                            </div>
-                            <div class="panel-body">
-                                <div id="morris-donut-chart"></div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-				<div class="row">
-				<div class="col-md-12">
-				
-					</div>		
-				</div> 	
-                -->
-
-                <div class="row">
-                    <!-- task panel
-                    <div class="col-md-4 col-sm-12 col-xs-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading">
-                                Tasks Panel
-                            </div>
-                            <div class="panel-body">
-                                <div class="list-group">
-
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">7 minutes ago</span>
-                                        <i class="fa fa-fw fa-comment"></i> Commented on a post
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">16 minutes ago</span>
-                                        <i class="fa fa-fw fa-truck"></i> Order 392 shipped
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">36 minutes ago</span>
-                                        <i class="fa fa-fw fa-globe"></i> Invoice 653 has paid
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">1 hour ago</span>
-                                        <i class="fa fa-fw fa-user"></i> A new user has been added
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">1.23 hour ago</span>
-                                        <i class="fa fa-fw fa-user"></i> A new user has added
-                                    </a>
-                                    <a href="#" class="list-group-item">
-                                        <span class="badge">yesterday</span>
-                                        <i class="fa fa-fw fa-globe"></i> Saved the world
-                                    </a>
-                                </div>
-                                <div class="text-right">
-                                    <a href="#">More Tasks <i class="fa fa-arrow-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                    -->
                     <div class="col-md-12 col-sm-12 col-xs-12">
 
                         <div class="panel panel-default">
                           
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover" style="table-layout:fixed" id="myTable">
+                                    <table class="table table-striped table-bordered table-hover" style="table-layout:fixed">
                                         <thead>
                                             <tr class="text-center">
                                                 <th class="text-center" width="15%">ISBN</th>
-                                                <th class="text-center" width="20%">书名</th>
-                                                <th class="text-center" width="20%">作者</th>
-                                                <th class="text-center" width="20%">出版社</th>
-                                                <th class="text-center" width="10%">价格</th>
-                                                <th class="text-center">书评</th>
-                                                <th class="text-center" width="8%">发布情况</th>
+                                                <th class="text-center" width="18%">书名</th>
+                                                <th class="text-center" width="15%">申请人ID</th>
+                                                <th class="text-center" width="16%">申请人</th>
+                                                <th class="text-center" width="12%">城市</th>
+                                                <th class="text-center" width="10%">还书方式</th>
+                                                <th class="text-center" width="8%">状态</th>
+                                                <th class="text-center" width="6%">详情</th>
                                             </tr>
                                         </thead>
                                         <tbody class="text-center">
-                                            <%
-                                            	if (books.size()>0){
-                                            		for (int i=0; i<books.size(); i++){
-                                   						
-                                            %>
+                                            <c:foreach items = ""  var ="" varStatus = "">
                                             <tr>
-                                                <td><div title="<%=books.get(i).getISBN() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=books.get(i).getISBN() %></div></td>
-                                                <td><div title="<%=books.get(i).getBookName() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=books.get(i).getBookName() %></div></td>
-                                                <td><div title="<%=books.get(i).getAuthor() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=books.get(i).getAuthor() %></div></td>
-                                                <td><div title="<%=books.get(i).getPublisher() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=books.get(i).getPublisher() %></div></td>
-                                                <td><%=books.get(i).getPrice() %></td>
-                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookComment.jsp?ISBN=<%=books.get(i).getISBN() %>"  >查看</a></td>
-                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookIn.jsp?ISBN=<%=books.get(i).getISBN()%>">查看</button></td>
+												  <td>9787201116693</td>
+                                                <td><div title="外婆的道歉信" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">外婆的道歉信</div></td>
+                                                <td>1</td>
+                                                <td>zcx</td>
+                                                <td>12000</td>
+                                                <td>面交</td>
+                                                <td>待确认</td>
+                                                <td><a class="btn btn-success btn-xs" href="dashboard_requestInfo.jsp">查看</a></td>
+                                                
                                             </tr>
-                                            <%} %>
-											<%} %>
+                                            </c:foreach>
                                         </tbody>
                                     </table>
                                 </div>
