@@ -3,6 +3,8 @@
 <%@ page import="model.Book" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="model.BookComment" %>
+<%@ page import="model.BookIN" %>
+<%@ page import="model.User" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -107,6 +109,23 @@ session.setAttribute("prePage", url);
     }
     ArrayList<BookComment> bookComments = new ArrayList<BookComment>();
     bookComments = (ArrayList<BookComment>)session.getAttribute("bookComment");
+    
+    ArrayList<BookIN> bookINs = new ArrayList<BookIN>();
+    bookINs = (ArrayList<BookIN>)session.getAttribute("bookIN");
+    
+    ArrayList<User> users = new ArrayList<User>();
+    users = (ArrayList<User>)session.getAttribute("userByBookIN");
+    
+    ArrayList<BookIN> lendBookINs = new ArrayList<BookIN>();
+    ArrayList<BookIN> sellBookINs = new ArrayList<BookIN>();
+    for (int i=0; i<bookINs.size(); i++){
+    	if(bookINs.get(i).getType().equals("sell")){
+    		sellBookINs.add(bookINs.get(i));
+    	}
+    	if (bookINs.get(i).getType().equals("lend")){
+    		lendBookINs.add(bookINs.get(i));
+    	}
+    }
 %>
 <br>
 <!-- 书籍封面&基本信息 -->
@@ -235,16 +254,62 @@ session.setAttribute("prePage", url);
     		</tr>
     	</thead>
     	<tbody>
+    		<%
+    			for (int i=0; i<lendBookINs.size(); i++){
+    				User user = new User();
+    				for (int j=0; j<users.size(); j++){
+    					if (users.get(j).getUserName().equals(lendBookINs.get(i).getUserName())){
+    						user = users.get(j);
+    						break;
+    					}
+    				}
+    				String recency = "";
+    				if ("20%".equals(lendBookINs.get(i).getRecency())){
+    					recency = "两成新";
+    				}
+    				if ("50%".equals(lendBookINs.get(i).getRecency())){
+    					recency = "五成新";
+    				}
+    				if ("80%".equals(lendBookINs.get(i).getRecency())){
+    					recency = "八成新";
+    				}
+    				if ("100%".equals(lendBookINs.get(i).getRecency())){
+    					recency = "全新";
+    				}
+    				
+    				String sendWay = "";
+    				if ("mail".equals(lendBookINs.get(i).getSendWay())){
+    					sendWay = "邮寄";
+    				}
+    				if ("face".equals(lendBookINs.get(i).getSendWay())){
+    					sendWay = "当面";
+    				}
+    		%>
     		<tr class="text-center"> 
-    			<td>zcx</td>
+    			<td><%=user.getUserName() %></td>
+				<%if (user.getCredit() >= 0 && user.getCredit() <= 20){ %>
 				<td>♥</td>
-   				<td>80%</td>
-   				<td>快递/上门</td>
-   				<td>上海 上海</td>
-   				<td>30天</td>
-   				<td>20</td>
-   				<td><a class="btn btn-success btn-sm -sm" role="button">借书</a></td>
+				<%} %>
+				<%if (user.getCredit() > 20 && user.getCredit() <= 40){ %>
+				<td>♥♥</td>
+				<%} %>
+				<%if (user.getCredit() > 40 && user.getCredit() <= 60){ %>
+				<td>♥♥♥</td>
+				<%} %>
+				<%if (user.getCredit() > 60 && user.getCredit() <= 80){ %>
+				<td>♥♥♥♥</td>
+				<%} %>
+				<%if (user.getCredit() > 80 && user.getCredit() <= 100){ %>
+				<td>♥♥♥♥♥</td>
+				<%} %>
+   				<td><%=recency %></td>
+   				<td><%=sendWay %></td>
+   				<td><%=lendBookINs.get(i).getProvince() + " " + lendBookINs.get(i).getCity() %></td>
+   				<td><%=lendBookINs.get(i).getLongestDuration() + "天" %></td>
+   				<td><%=lendBookINs.get(i).getCoinNumber() %></td>
+   				<td><a class="btn btn-success btn-sm -sm" role="button" href="order_lend.jsp?ID=<%=lendBookINs.get(i).getBookRecordID() %>">借书</a></td>
     		</tr>
+    		<%} %>
     	</tbody>
     </table>
     </div>
@@ -270,15 +335,62 @@ session.setAttribute("prePage", url);
     		</tr>
     	</thead>
     	<tbody>
+    	<%
+    		for (int i=0; i<sellBookINs.size(); i++){
+    			User user = new User();
+    			for (int j=0; j<users.size(); j++){
+    				if (sellBookINs.get(i).getUserName().equals(users.get(j).getUserName())){
+    					user = users.get(j);
+    					break;
+    				}
+    			}
+    			String recency = "";
+    			if ("20%".equals(lendBookINs.get(i).getRecency())){
+					recency = "两成新";
+				}
+				if ("50%".equals(lendBookINs.get(i).getRecency())){
+					recency = "五成新";
+				}
+				if ("80%".equals(lendBookINs.get(i).getRecency())){
+					recency = "八成新";
+				}
+				if ("100%".equals(lendBookINs.get(i).getRecency())){
+					recency = "全新";
+				}
+				
+				String sendWay = "";
+				if ("mail".equals(lendBookINs.get(i).getSendWay())){
+					sendWay = "邮寄";
+				}
+				if ("face".equals(lendBookINs.get(i).getSendWay())){
+					sendWay = "当面";
+				}
+    		
+    	%>
     		<tr class="text-center"> 
-    			<td>zcx</td>
+    			<td><%=user.getUserName() %></td>
+				<%if (user.getCredit() >= 0 && user.getCredit() <= 20){ %>
 				<td>♥</td>
-   				<td>80%</td>
-   				<td>快递/上门</td>
-   				<td>上海 上海</td>
-   				<td>20</td>
-   				<td><a class="btn btn-success btn-sm -sm" role="button">买书</a></td>
+				<%} %>
+				<%if (user.getCredit() > 20 && user.getCredit() <= 40){ %>
+				<td>♥♥</td>
+				<%} %>
+				<%if (user.getCredit() > 40 && user.getCredit() <= 60){ %>
+				<td>♥♥♥</td>
+				<%} %>
+				<%if (user.getCredit() > 60 && user.getCredit() <= 80){ %>
+				<td>♥♥♥♥</td>
+				<%} %>
+				<%if (user.getCredit() > 80 && user.getCredit() <= 100){ %>
+				<td>♥♥♥♥♥</td>
+				<%} %>
+   				<td><%=recency %></td>
+   				<td><%=sendWay %></td>
+   				<td><%=sellBookINs.get(i).getProvince()+" "+sellBookINs.get(i).getCity() %></td>
+   				<td><%=sellBookINs.get(i).getCoinNumber() %></td>
+   				<td><a class="btn btn-success btn-sm -sm" role="button" href="order_buy.jsp?ID=<%=sellBookINs.get(i).getBookRecordID()%>">买书</a></td>
     		</tr>
+    		<%} %>
     	</tbody>
     </table>
     </div>

@@ -1,16 +1,32 @@
 package model;
 
 public class RequestBook {
-	int requestID;
-	int bookRecordID;
-	String userName;
-	String city;
-	String province;
-	String address;
-	String receiverName;
-	String requestStatus;
-	String returnWay;
-	String phone;
+	private int requestID;
+	private int bookRecordID;
+	private String userName;
+	private String city;
+	private String province;
+	private String address;
+	private String receiverName;
+	private String requestStatus;
+	private String returnWay;
+	private String phone;
+	
+	public RequestBook(){
+		
+	}
+	
+	public RequestBook(int bookRecordID, String userName,String city, String province, String address, String receiverName, String requestStatus, String returnWay, String phone){
+		this.bookRecordID = bookRecordID;
+		this.userName = userName;
+		this.city = city;
+		this.province = province;
+		this.address = address;
+		this.receiverName = receiverName;
+		this.requestStatus = requestStatus;
+		this.returnWay = returnWay;
+		this.phone = phone;
+	}
 	
 	public int getRequestID(){
 		return requestID;
