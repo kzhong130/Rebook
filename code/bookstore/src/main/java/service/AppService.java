@@ -10,6 +10,7 @@ import model.BookIN;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
 import model.LendOrder;
+import model.RequestBook;
 import model.User;
 
 public interface AppService {
@@ -81,4 +82,11 @@ public interface AppService {
 	public List<LendOrder> getAllLendOrders();
 	public LendOrder getLendOrderByLendID(int lendID);
 	public void updateLendOrder(LendOrder lendOrder);
+	
+	
+	/*
+	 * Request
+	 */
+	
+	public List<RequestBook> getProcessRequest(String userName);
 }
