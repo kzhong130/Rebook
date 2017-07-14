@@ -129,6 +129,7 @@ create table bookIN
    inStatus             enum("yes","no")               not null,
    note					text						   default null,
    province				varchar(20)					   not null,
+   town 				varchar(20)					   not null,
    primary key (bookRecordID)
 );
 

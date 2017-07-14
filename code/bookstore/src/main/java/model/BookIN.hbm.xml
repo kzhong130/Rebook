@@ -53,5 +53,8 @@
 		<property name="province" type="java.lang.String">
 			<column name="province"/>
 		</property>
+		<property name="town" type="java.lang.String">
+			<column name="town"/>
+		</property>
 	</class>
 </hibernate-mapping>
