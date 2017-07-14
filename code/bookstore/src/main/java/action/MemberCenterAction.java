@@ -217,9 +217,6 @@ public class MemberCenterAction extends BaseAction{
 			bookInList.add(bookIN);
 			bookList.add(book);
 		}
-		System.out.println(3222);
-		System.out.println(bookList.size());
-		System.out.println(bookInList.size());
 		System.out.println(requestBookList.size());
 		request().getSession().setAttribute("bookList", bookList);
 		request().getSession().setAttribute("bookInList", bookInList);
