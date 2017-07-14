@@ -169,19 +169,19 @@
                                 <p><span class="col-md-2">地址:</span><span class="col-md-10"><%=address %> </span></p>
                                 <p><span class="col-md-2">注册日期: </span><span class="col-md-10"><%=user.getRegisterDate().toString().substring(0, 19) %></span></p>
                                 <br>
-                                <!-- 这两个字体有点丑，等功能实现之后再统一改好了TvT -->
+                                
                                 <div class="form-group">
                                 <!-- 暴力方法解决的对齐 -->
                                 <p><span class="col-md-2">&nbsp;&nbsp;&nbsp;&nbsp;信用: </span></p>
 								<!-- <label for="信用" class="col-sm-1 control-label">信用: </label> -->
-    							<div class="col-md-10">
+    							<div class="col-md-10 style="margin: -5px 0 0 0">
       							<input type="text" class="form-control form-control-pad form-control-xs" id="credit" name="credit" value="<%=user.getCredit() %>">
 								</div></div>
-								<div style="margin:-25px 0 -5px 0">
+								<div style="margin:-25px 0 -5px 0px">
                                 <div class="form-group">
                                 <p><span class="col-md-2">&nbsp;&nbsp;&nbsp;&nbsp;书币: </span></p>
                                 <!--<label for="书币" class="col-sm-1 control-label">书币: </label> -->
-    							<div class="col-md-10">				
+    							<div class="col-md-10" style="margin: -5px 0 0 0">				
       							<input type="text" class="form-control form-control-pad form-control-xs" id="bookCoin" name="bookCoin" value="<%=user.getBookCoin() %>">
                                	</div></div></div>
                                	<br>
