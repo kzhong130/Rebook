@@ -131,10 +131,9 @@ session.setAttribute("prePage", url);
 	</div> 
 	<div class="col-sm-3">
 	  <div class="caption">
-        <br><br><br><p>豆瓣评分：<%=book.getDoubanRate() %></p>
+        <br><br><br><p>豆瓣评分：<span style="color:#efbb24"><font size="10"><%=book.getDoubanRate() %></font></span></p>
         <p>参评人数：<%=book.getRaterNumber() %></p>
         <hr>
-        <p><a href="#" class="btn btn-success" role="button">查看发布信息</a></p>
         <!-- 如果没登录，跳出信息显示请先登录 -->
         <p><a href="#" class="btn btn-success" role="button">出借/卖书</a></p>
       </div>
@@ -149,7 +148,9 @@ session.setAttribute("prePage", url);
   </li>
   <li><a href="#bookComment" data-toggle="tab">书籍评价</a>
   </li>
-  <li><a href="#bookOwnerInfo" data-toggle="tab">卖家信息</a>
+  <li><a href="#bookBorrowInfo" data-toggle="tab">有书借</a>
+  </li>
+  <li><a href="#bookBuyInfo" data-toggle="tab">有书买</a>
   </li>
 </ul>
 </div>
@@ -214,8 +215,8 @@ session.setAttribute("prePage", url);
 		</div><!-- /.modal -->
 	</div>
 	</div>
-	<!-- 卖家信息 -->
-    <div class="tab-pane fade" id="bookOwnerInfo">
+	<!-- 借书信息 -->
+    <div class="tab-pane fade" id="bookBorrowInfo">
     <hr>
     <div class="row">
     <div class="table-responsive">
@@ -223,214 +224,70 @@ session.setAttribute("prePage", url);
     <table class="table" background="images/index1_yellowbg.png">
     	<thead>
     		<tr bgcolor="#efbb24">
-    			<th style="text-align: center">卖家</th>
+    			<th style="text-align: center">书主</th>
     			<th style="text-align: center">信用</th>
 				<th style="text-align: center">新旧程度</th>
    				<th style="text-align: center">送书方式</th>
    				<th style="text-align: center">所在城市</th>
-   				<th style="text-align: center">书币</th>
-   				<th style="text-align: center">备注</th>
-   				<th style="text-align: center">下单</th>
+   				<th style="text-align: center">最长借阅时间</th>
+   				<th style="text-align: center">书币要求</th>
+   				<th style="text-align: center">申请</th>
     		</tr>
     	</thead>
     	<tbody>
     		<tr class="text-center"> 
     			<td>zcx</td>
 				<td>♥</td>
-   				<td>90%</td>
+   				<td>80%</td>
    				<td>快递/上门</td>
-   				<td>上海</td>
-   				<td>10</td>
-   				<td>哈哈哈哈坏</td>
+   				<td>上海 上海</td>
+   				<td>30天</td>
+   				<td>20</td>
    				<td><a class="btn btn-success btn-sm -sm" role="button">借书</a></td>
-    		</tr>
-    		<tr class="text-center">
-    			<td>zk</td>
-    			<td>♥♥♥</td>
-   				<td>90%</td>
-   				<td>快递</td>
-   				<td>上海</td>
-   				<td>10</td>
-   				<td>哈哈哈哈坏</td>
-				<td><a class="btn btn-success btn-sm" role="button">借书</a></td>
     		</tr>
     	</tbody>
     </table>
     </div>
-    <!--
-    <div class="col-lg-12 col-sm-6">
-      <div class="panel panel-default panel-success"> 
-        <div class="panel-heading">
-          <h5>Free</h5>
-        </div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Lorem ipsum dolor sit</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1 ......</th>
-            </tr>
-            <tr>
-              <th scope="row">2 ......</th>
-            </tr>
-            <tr>
-              <th scope="row">3 ......</th>
-            </tr>
-            <tr>
-              <th scope="row"><p class="text-center"><a href="" class="btn-success btn"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Buy Now</a></p></th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
     </div>
-    <div class="col-lg-12 col-sm-6">
-      <div class="panel panel-default panel-warning"> 
-        <div class="panel-heading">
-          <h3>Basic</h3>
-        </div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Lorem ipsum dolor sit</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1 ......</th>
-            </tr>
-            <tr>
-              <th scope="row">2 ......</th>
-            </tr>
-            <tr>
-              <th scope="row">3 ......</th>
-            </tr>
-            <tr>
-              <th scope="row"><p class="text-center"><a href="" class="btn-warning btn"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Buy Now</a></p>
-              </th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+	</div>
+	
+	<!-- 买书信息 -->
+    <div class="tab-pane fade" id="bookBuyInfo">
+    <hr>
+    <div class="row">
+    <div class="table-responsive">
+    <!-- class="table table-hover" -->
+    <table class="table" background="images/index1_yellowbg.png">
+    	<thead>
+    		<tr bgcolor="#efbb24">
+    			<th style="text-align: center">书主</th>
+    			<th style="text-align: center">信用</th>
+				<th style="text-align: center">新旧程度</th>
+   				<th style="text-align: center">送书方式</th>
+   				<th style="text-align: center">所在城市</th>
+   				<th style="text-align: center">书币要求</th>
+   				<th style="text-align: center">申请</th>
+    		</tr>
+    	</thead>
+    	<tbody>
+    		<tr class="text-center"> 
+    			<td>zcx</td>
+				<td>♥</td>
+   				<td>80%</td>
+   				<td>快递/上门</td>
+   				<td>上海 上海</td>
+   				<td>20</td>
+   				<td><a class="btn btn-success btn-sm -sm" role="button">买书</a></td>
+    		</tr>
+    	</tbody>
+    </table>
     </div>
-    
-    <div class="col-lg-12 col-sm-6">
-      <div class="panel panel-default panel-info"> 
-        <div class="panel-heading">
-          <h3>Professional</h3>
-        </div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Lorem ipsum dolor sit</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1 ......</th>
-            </tr>
-            <tr>
-              <th scope="row">2 ......</th>
-            </tr>
-            <tr>
-              <th scope="row">3 ......</th>
-            </tr>
-            <tr>
-              <th scope="row"><p class="text-center"><a href="" class="btn-info btn"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Buy Now</a></p></th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    <div class="col-lg-12 col-sm-6">
-      <div class="panel panel-default panel-danger"> 
-        <div class="panel-heading">
-          <h3>Enterprise</h3>
-        </div>
-        <table class="table">
-          <thead>
-            <tr>
-              <th>Lorem ipsum dolor sit</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">1 ......</th>
-            </tr>
-            <tr>
-              <th scope="row">2 ......</th>
-            </tr>
-            <tr>
-              <th scope="row">3 ......</th>
-            </tr>
-            <tr>
-              <th scope="row"><p class="text-center"><a href="" class="btn-danger btn"><span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span> Buy Now</a></p></th>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-    -->
     </div>
 	</div>
   </div>
 </div>
 <hr>
-<!-- 书籍评价 -->
-<!--
-<div class="container">
-  <div class="row">
-<div class="col-lg-4 col-md-6 col-sm-6">
-      <h2>Contact Us</h2>
-      <address>
-      <strong>MyCompany, Inc.</strong><br>
-      Sunny Autumn Plaza, Grand Coulee,<br>
-      CA, 91308-4075, US<br>
-      <abbr title="Phone">P:</abbr> (123) 456-7890
-      </address>
-      <h4>Social</h4>
-      <div class="row">
-      	<div class="col-xs-2"><img class="img-circle" src="images/32X32.gif" alt=""></div>
-      	<div class="col-xs-2"><img class="img-circle" src="images/32X32.gif" alt=""></div>
-      	<div class="col-xs-2"><img class="img-circle" src="images/32X32.gif" alt=""></div>
-      	<div class="col-xs-2"><img class="img-circle" src="images/32X32.gif" alt=""></div>        
-      </div>
-</div>
-    <div class="col-lg-4 col-md-6 col-sm-6">
-      <h2>Testimonials</h2>
-      <div class="media">
-        <div class="media-left"> <a href="#"> <img class="media-object" src="images/35X35.gif" alt="..."> </a> </div>
-        <div class="media-body">
-          <h4 class="media-heading">Media heading</h4>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. </div>
-      </div>
-      <div class="media">
-        <div class="media-left"> <a href="#"> <img class="media-object" src="images/35X35.gif" alt="..."> </a> </div>
-        <div class="media-body">
-          <h4 class="media-heading">Media heading</h4>
-          Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. </div>
-      </div>
-    </div>
-    <div class="col-lg-4 col-sm-12">
-      <h2>About Us</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, voluptates, soluta velit nostrum ut iste exercitationem vitae ipsum repellendus laudantium ab possimus nemo odio cumque illum nulla laborum blanditiis unde.</p>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quas, voluptates, soluta velit nostrum ut iste exercitationem vitae ipsum repellendus laudantium ab possimus nemo odio cumque illum nulla laborum blanditiis unde.</p>
-    </div>
-  </div>
-</div>
- 
-<footer class="text-center">
-  <div class="container">
-    <div class="row">
-      <div class="col-xs-12">
-        <p>Copyright © MyWebsite. All rights reserved.</p>
-      </div>
-    </div>
-  </div>
-</footer>
--->
+
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script src="js/jquery-1.11.3.min.js"></script> 
 <!-- Include all compiled plugins (below), or include individual files as needed --> 
