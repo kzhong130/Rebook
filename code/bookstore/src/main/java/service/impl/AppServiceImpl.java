@@ -394,8 +394,14 @@ public class AppServiceImpl implements AppService {
 		lendOrderDao.update(lendOrder);
 	}
 	
+	/*
+	 * RequestBook
+	 */
 	public List<RequestBook> getProcessRequest(String userName){
 		return requestBookDao.getProcessedRequest(userName);	
 	}
 	
+	public void addRequestBook(RequestBook requestBook){
+		requestBookDao.save(requestBook);
+	}
 }

@@ -244,6 +244,7 @@ public class AccountAction extends BaseAction{
 		else{
 			if (user.getPassword().equals(password)){		//用户密码正确
 				request().getSession().setAttribute("loginUserName", userName);
+				request().getSession().setAttribute("loginUserBookCoin",user.getBookCoin());
 				request().getSession().removeAttribute("login");
 				return "userlogin success";
 			}
@@ -259,6 +260,7 @@ public class AccountAction extends BaseAction{
 	public String logout() throws Exception{
 		if (request().getSession().getAttribute("admin") == null){
 			request().getSession().removeAttribute("loginUserName");
+			request().getSession().removeAttribute("loginUserBookCoin");
 			return "logout success";
 		}
 		else{

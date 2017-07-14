@@ -116,6 +116,10 @@ session.setAttribute("prePage", url);
     ArrayList<User> users = new ArrayList<User>();
     users = (ArrayList<User>)session.getAttribute("userByBookIN");
     
+    System.out.println(bookComments.size());
+    System.out.println(bookINs.size());
+    System.out.println(users.size());
+    
     ArrayList<BookIN> lendBookINs = new ArrayList<BookIN>();
     ArrayList<BookIN> sellBookINs = new ArrayList<BookIN>();
     for (int i=0; i<bookINs.size(); i++){
@@ -255,7 +259,8 @@ session.setAttribute("prePage", url);
     	</thead>
     	<tbody>
     		<%
-    			for (int i=0; i<lendBookINs.size(); i++){
+    		if (lendBookINs.size() > 0){	
+    		for (int i=0; i<lendBookINs.size(); i++){
     				User user = new User();
     				for (int j=0; j<users.size(); j++){
     					if (users.get(j).getUserName().equals(lendBookINs.get(i).getUserName())){
@@ -304,11 +309,12 @@ session.setAttribute("prePage", url);
 				<%} %>
    				<td><%=recency %></td>
    				<td><%=sendWay %></td>
-   				<td><%=lendBookINs.get(i).getProvince() + " " + lendBookINs.get(i).getCity() %></td>
+   				<td><%=lendBookINs.get(i).getProvince() + " " + lendBookINs.get(i).getCity() + " "+ lendBookINs.get(i).getTown() %></td>
    				<td><%=lendBookINs.get(i).getLongestDuration() + "天" %></td>
    				<td><%=lendBookINs.get(i).getCoinNumber() %></td>
-   				<td><a class="btn btn-success btn-sm -sm" role="button" href="order_lend.jsp?ID=<%=lendBookINs.get(i).getBookRecordID() %>">借书</a></td>
+   				<td><a class="btn btn-success btn-sm -sm" role="button" id="<%=lendBookINs.get(i).getBookRecordID()%>"  onclick="lendBook(this,<%=lendBookINs.get(i).getCoinNumber() %>)">借书</a></td>
     		</tr>
+    		<%} %>
     		<%} %>
     	</tbody>
     </table>
@@ -336,7 +342,8 @@ session.setAttribute("prePage", url);
     	</thead>
     	<tbody>
     	<%
-    		for (int i=0; i<sellBookINs.size(); i++){
+    	if (sellBookINs.size() > 0){	
+    	for (int i=0; i<sellBookINs.size(); i++){
     			User user = new User();
     			for (int j=0; j<users.size(); j++){
     				if (sellBookINs.get(i).getUserName().equals(users.get(j).getUserName())){
@@ -345,24 +352,24 @@ session.setAttribute("prePage", url);
     				}
     			}
     			String recency = "";
-    			if ("20%".equals(lendBookINs.get(i).getRecency())){
+    			if ("20%".equals(sellBookINs.get(i).getRecency())){
 					recency = "两成新";
 				}
-				if ("50%".equals(lendBookINs.get(i).getRecency())){
+				if ("50%".equals(sellBookINs.get(i).getRecency())){
 					recency = "五成新";
 				}
-				if ("80%".equals(lendBookINs.get(i).getRecency())){
+				if ("80%".equals(sellBookINs.get(i).getRecency())){
 					recency = "八成新";
 				}
-				if ("100%".equals(lendBookINs.get(i).getRecency())){
+				if ("100%".equals(sellBookINs.get(i).getRecency())){
 					recency = "全新";
 				}
 				
 				String sendWay = "";
-				if ("mail".equals(lendBookINs.get(i).getSendWay())){
+				if ("mail".equals(sellBookINs.get(i).getSendWay())){
 					sendWay = "邮寄";
 				}
-				if ("face".equals(lendBookINs.get(i).getSendWay())){
+				if ("face".equals(sellBookINs.get(i).getSendWay())){
 					sendWay = "当面";
 				}
     		
@@ -386,10 +393,11 @@ session.setAttribute("prePage", url);
 				<%} %>
    				<td><%=recency %></td>
    				<td><%=sendWay %></td>
-   				<td><%=sellBookINs.get(i).getProvince()+" "+sellBookINs.get(i).getCity() %></td>
+   				<td><%=sellBookINs.get(i).getProvince()+" "+sellBookINs.get(i).getCity()+" "+sellBookINs.get(i).getTown() %></td>
    				<td><%=sellBookINs.get(i).getCoinNumber() %></td>
-   				<td><a class="btn btn-success btn-sm -sm" role="button" href="order_buy.jsp?ID=<%=sellBookINs.get(i).getBookRecordID()%>">买书</a></td>
+   				<td><a class="btn btn-success btn-sm -sm" role="button" id="<%=sellBookINs.get(i).getBookRecordID()%>" onclick="buyBook(this)" >买书</a></td>
     		</tr>
+    		<%} %>
     		<%} %>
     	</tbody>
     </table>
@@ -539,6 +547,36 @@ function submitComment(){
 	}
 	
 }
+
+function buyBook(ob){
+	var ID = ob.id;
+	if (userName =="null"){
+		alert("请先登录");
+	}
+	else{
+		window.location.href="order_buy.jsp?ID="+ID;
+	}
+}
+
+function lendBook(ob,coinNumber){
+	var ID = ob.id;
+	coinNumber = parseInt(coinNumber);
+	
+	if (userName =="null"){
+		alert("请先登录");
+	}
+	else{
+		var myCoinNumber = "<%=session.getAttribute("loginUserBookCoin")%>";
+		myCoinNumber = parseInt(myCoinNumber);
+		if (myCoinNumber < coinNumber){
+			alert("您的书币不足");
+		}
+		else{
+			window.location.href="order_lend.jsp?ID="+ID;
+		}
+	}
+}
+
 </script>
 </body>
 </html>
