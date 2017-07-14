@@ -49,7 +49,6 @@
 			<result name="initialize success">member_center.jsp</result>
 		</action>
 		
-
 		<action name="LendSellAction" class="action.LendSellAction">
 			<result name="search">lendsellbook.jsp</result>
 			<result name="search fail">searchFail/searchFail.jsp</result>
@@ -70,6 +69,9 @@
 		
 		</action>
 
+		<action name="RequestAction" class="action.RequestAction">
+			<result name="process">crowdfunding.center/processed.jsp</result>
+		</action>
 
 		<action name="*">
 			<result>/{1}.jsp</result>

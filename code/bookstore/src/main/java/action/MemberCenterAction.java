@@ -11,10 +11,12 @@ import org.apache.struts2.ServletActionContext;
 
 import model.Book;
 import model.BookComment;
+import model.BookIN;
 import model.User;
 import net.sf.json.JSONObject;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
+import model.RequestBook;
 
 public class MemberCenterAction extends BaseAction{
 	private int userID;
@@ -204,6 +206,23 @@ public class MemberCenterAction extends BaseAction{
 		
 		List<Book> books = appService.getBookByBookComment(bookComments);
 		request().getSession().setAttribute("bookByBookComment", books);
+		
+		List<RequestBook> requestBookList=appService.getProcessRequest(userName);
+		request().getSession().setAttribute("requestBookList", requestBookList);
+		List<BookIN> bookInList=new ArrayList<BookIN>();
+		List<Book> bookList=new ArrayList<Book>();
+		for(int i=0;i<requestBookList.size();i++){
+			BookIN bookIN=appService.getBookINByBookRecordID(requestBookList.get(i).getRequestID());
+			Book book=appService.getBookByISBN(bookIN.getISBN());
+			bookInList.add(bookIN);
+			bookList.add(book);
+		}
+		System.out.println(3222);
+		System.out.println(bookList.size());
+		System.out.println(bookInList.size());
+		System.out.println(requestBookList.size());
+		request().getSession().setAttribute("bookList", bookList);
+		request().getSession().setAttribute("bookInList", bookInList);
 		
 		return "initialize success";
 	}

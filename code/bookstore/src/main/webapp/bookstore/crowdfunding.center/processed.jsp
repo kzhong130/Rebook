@@ -2,7 +2,10 @@
 	pageEncoding="utf-8"%>
 <%@page import="model.BookComment"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="model.RequestBook"%>
 <%@page import="model.Book"%>
+<%@page import="model.BookIN"%>
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -28,23 +31,111 @@
 </head>
 
 <%
-	ArrayList<Book> books = new ArrayList<Book>();
-	books = (ArrayList<Book>)session.getAttribute("bookByBookComment");
+	//ArrayList<Book> books = new ArrayList<Book>();
+	//books = (ArrayList<Book>)session.getAttribute("bookByBookComment");
+	String Username=(String) session.getAttribute("loginUserName");
+	ArrayList<RequestBook> requestList=(ArrayList<RequestBook>)session.getAttribute("requestBookList");
+	ArrayList<Book> bookList=(ArrayList<Book>)session.getAttribute("bookList");
+	ArrayList<BookIN> bookINList=(ArrayList<BookIN>)session.getAttribute("bookInList");
+	
 %>
 <body>
 
 	<!-- 开始 -->
 	<div class="my_info_title">
 		已被处理的申请
-		<!--<span><button type="button" class="but">签到</button>
-  <p>07月29日<br>
-    漏签1天</p></span>-->
+		
 	</div>
 	<hr>
 
 	<!-- 每本书 -->
 
 <!-- 借书申请  -->
+<%
+
+	for(int i=0;i<requestList.size();i++){
+		RequestBook requestBook=requestList.get(i);
+		Book book=bookList.get(i);
+		BookIN bookIn=bookINList.get(i);
+%>
+<div class="commentbox">
+     <table  style="width:828px;">
+     
+        <tr>
+
+          <td class="bookimage" style="vertical-align:text-top;">
+          <a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a><br>
+
+          
+          </td>
+          
+          <td class="bookcontent" style="vertical-align:top;">
+          <table class="allwidth" style="width:691px;">
+              <tr>
+              <td class="bookname">《<%=book.getBookName() %>》<span class="isbn"><%=book.getISBN() %></span></td>
+              <td>
+              <p class="time">书币要求：<span class="coin"><%=bookIn.getCoinNumber() %>&nbsp;&nbsp;</span></p>
+              </td>
+              </tr>
+              
+              
+              <tr>
+              <td>
+              <p class="comment">书主信息：<%=bookIn.getOwnerName() %>&nbsp;&nbsp;<%=bookIn.getOwnerPhone() %>&nbsp;&nbsp;<%=bookIn.getProvince()+bookIn.getCity()+bookIn.getTown() %></p>
+              <p class="comment">&emsp;&emsp;&emsp;&emsp;&emsp;<%=bookIn.getOwnerAddress() %></p>
+              </td>
+              <td>
+              <p class="time" title="" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">卖家：<%=session.getAttribute("loginUserName") %>&nbsp;&nbsp;</p>
+              <p class="time">可借天数：<%=bookIn.getLongestDuration() %>&nbsp;&nbsp;</p>
+              </td>
+              </tr>
+              
+              <tr>
+              <td colspan="2">
+			  <%
+			  String recency=bookIn.getRecency();
+			  String w1,w2,w3;
+			  w1="";
+			  w2="";
+			  w3="";
+			  if(recency=="20%") w1="两成新";
+			  if(recency=="50%") w1="五成新";
+			  if(recency=="80%") w1="八成新";
+			  if(recency=="100%") w1="全新";
+			  	
+			  String delivery=bookIn.getSendWay();
+			  if(delivery=="face") w2="面取";
+			  else w2="邮寄";
+			  w3=bookIn.getNote();
+			  if(w3==null) w3="无";
+			  %>            
+              <p class="comment">新旧程度：<%=w1 %>&emsp;&emsp;&emsp;&emsp;送书方式：<%=w2 %>邮寄</p>
+              <p class="comment">备注：<%=w3 %></p>
+              </td>
+              </tr>
+              
+              <tr><td colspan="2"><hr class="fortr"></td></tr>
+              <tr>
+              <td>
+              <p class="comment">收件人：<%=requestBook.getReceiverName() %>&nbsp;&nbsp;<%=requestBook.getPhone() %>&emsp;&emsp;还书方式：<%=requestBook.getReturnWay() %>邮寄</p>
+              <p class="comment">收货地址：<% %>福建省厦门市翔安区新店镇新兴街610号</p>
+              </td>
+              <td>
+              <p class="time"><span class="coin"><% %>借书&nbsp;&nbsp;已通过&nbsp;&nbsp;</span></p>
+              </td>
+              </tr>
+              
+           </table>
+           </td>
+        </tr>
+		</table>
+</div>
+<br>
+<%
+	}
+%>
+
+
 <div class="commentbox">
      <table  style="width:828px;">
      

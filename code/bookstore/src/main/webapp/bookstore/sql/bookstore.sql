@@ -141,6 +141,27 @@ alter table bookIN
 	add constraint FK_Reference_4 foreign key(ISBN)
 		references book(ISBN) on update cascade on delete cascade;
 
+create table requestBook(
+	requestID			int					not null auto_increment,
+    bookRecordID		int					not null,
+    userName			varchar(20)			not null,
+    city				varchar(20)			not null,
+    province			varchar(20)			not null,
+    address				varchar(50)			not null,
+    receiverName		varchar(20)			not null,
+	requestStatus		enum("waiting","accept","reject")	not null,
+    returnWay			text				default null,		/*仅在借书申请时需要*/
+    phone				varchar(20)			not null,
+    primary key(requestID)
+);
+
+alter table requestBook
+	add constraint FK_Reference_23 foreign key (bookRecordID)
+		references bookIN(bookRecordID) on update cascade on delete cascade;
+
+alter table requestBook
+	add constraint FK_Reference_24 foreign key (userName)
+		references user(userName) on update cascade on delete cascade;
 
 
 
@@ -376,24 +397,3 @@ alter table buyOrderCommentRecord
       references buyOrder (buyID) on update cascade on delete cascade;
 
 
-create table requestBook(
-	requestID			int					not null auto_increment,
-    bookRecordID		int					not null,
-    userName			varchar(20)			not null,
-    city				varchar(20)			not null,
-    province			varchar(20)			not null,
-    address				varchar(50)			not null,
-    receiverName		varchar(20)			not null,
-	requestStatus		enum("waiting","accept","reject")	not null,
-    returnWay			text				default null,		/*仅在借书申请时需要*/
-    phone				varchar(20)			not null,
-    primary key(requestID)
-);
-
-alter table requestBook
-	add constraint FK_Reference_23 foreign key (bookRecordID)
-		references bookIN(bookRecordID) on update cascade on delete cascade;
-
-alter table requestBook
-	add constraint FK_Reference_24 foreign key (userName)
-		references user(userName) on update cascade on delete cascade;
