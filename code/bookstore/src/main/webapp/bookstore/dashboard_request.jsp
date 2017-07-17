@@ -156,6 +156,7 @@
                                             		String ISBN = "";
                                             		String returnWay = "无";
                                             		String requestStatus = "";
+                                            		String cityInfo = "";
                                             		int bookRecordID = requestBooks.get(i).getBookRecordID();
                                             		for (int j=0; j<bookINs.size(); j++){
                                             			if (bookINs.get(j).getBookRecordID() == bookRecordID){
@@ -184,12 +185,18 @@
                                             		if ("reject".equals(requestBooks.get(i).getRequestStatus())){
                                             			requestStatus = "已拒绝";
                                             		}
+                                            		if (requestBooks.get(i).getCity() == ""){	//直辖市
+                                            			cityInfo = requestBooks.get(i).getProvince() + " " + requestBooks.get(i).getTown();
+                                            		}
+                                            		if (requestBooks.get(i).getCity() != ""){
+                                            			cityInfo = requestBooks.get(i).getProvince() + " "+ requestBooks.get(i).getCity();
+                                            		}
                                             %>
                                             <tr>
 												  <td><%=ISBN %></td>
                                                 <td><div title="<%=bookName %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookName %></div></td>
                                                 <td><%=requestBooks.get(i).getUserName() %></td>
-                                                <td><%=requestBooks.get(i).getProvince() + " " + requestBooks.get(i).getCity() %></td>
+                                                <td><%=cityInfo %></td>
                                                 <td><%=returnWay %></td>
                                                 <td><%=requestStatus %></td>
                                                 <td><a class="btn btn-success btn-xs" href="dashboard_requestInfo.jsp?ISBN=<%=ISBN%>&ID=<%=requestBooks.get(i).getRequestID()%>">查看</a></td>

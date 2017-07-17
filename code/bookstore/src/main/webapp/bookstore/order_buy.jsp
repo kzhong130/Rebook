@@ -260,22 +260,21 @@ if ("face".equals(bookIN.getSendWay())){
                 		var select = document.getElementsByName("province")[0];
                 		var province = select.options[select.selectedIndex].text;
                 		var city = "";
-                		var area = "";
+                		var town = "";
                 		if(document.getElementsByName("city")[0].value!=""){	//非直辖市
                 			 select=document.getElementsByName("city")[0];
                 			 city=select.options[select.selectedIndex].text;
                 			 select = document.getElementsByName("area")[0];
-                			 area = select.options[select.selectedIndex].text;
+                			 town = select.options[select.selectedIndex].text;
                 		}
                 		else{	//直辖市
                 			 select=document.getElementsByName("area")[0];
-                			 city=select.options[select.selectedIndex].text;
+                			 town=select.options[select.selectedIndex].text;
                 		}
                 		var bookRecordID = "<%=request.getParameter("ID")%>";
                 		bookRecordID = parseInt(bookRecordID);
                 		var userName = "<%=session.getAttribute("loginUserName")%>";
                 		var address = document.getElementById("address").value;
-                		address = area + address;
                 		var receiverName = document.getElementById("receiverName").value;
                 		var requestStatus = "waiting";
                 		var phone = document.getElementById("phone").value;
@@ -285,7 +284,7 @@ if ("face".equals(bookIN.getSendWay())){
                 			type:"POST",
                 			url:"RequestAction!addRequestBook",
                 			async:false,
-                			data:{bookRecordID:bookRecordID,userName:userName,city:city,province:province,address:address,receiverName:receiverName,requestStatus:requestStatus,phone:phone},
+                			data:{bookRecordID:bookRecordID,userName:userName,city:city,town:town,province:province,address:address,receiverName:receiverName,requestStatus:requestStatus,phone:phone},
                 			success:function(result){
                 				result = eval('('+result + ')');
                 				if (result.success){

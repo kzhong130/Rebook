@@ -231,7 +231,7 @@
                                 <p><span class="col-md-2">申请人联系方式: </span> 
                                 	<span class="col-md-10"><%=requestBook.getPhone() %></span></p>
                                 <p><span class="col-md-2">申请人地址: </span> 
-                                	<span class="col-md-10"><%=requestBook.getProvince()+requestBook.getCity()+requestBook.getAddress() %></span></p>
+                                	<span class="col-md-10"><%=requestBook.getProvince()+requestBook.getCity()+requestBook.getTown()+requestBook.getAddress() %></span></p>
                                 <div class="form-group form-group-pad">
                                 	<!-- 暴力方法解决的对齐 -->
 									<p><span class="col-md-2">&nbsp;&nbsp;&nbsp;&nbsp;状态: </span></p>
