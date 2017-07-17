@@ -404,4 +404,9 @@ public class AppServiceImpl implements AppService {
 	public void addRequestBook(RequestBook requestBook){
 		requestBookDao.save(requestBook);
 	}
+	
+	public List<RequestBook> getUnprocessRequest(String userName){
+		return requestBookDao.getUnprocessedRequest(userName);
+	}
+	
 }

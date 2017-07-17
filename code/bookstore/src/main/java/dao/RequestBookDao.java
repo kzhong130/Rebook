@@ -14,5 +14,5 @@ public interface RequestBookDao {
 	
 	public List<RequestBook> getProcessedRequest(String userName);
 	
-	
+	public List<RequestBook> getUnprocessedRequest(String userName);
 }
