@@ -18,10 +18,14 @@
    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
    <%@page import="model.Book"%>    
     <%@page import="java.util.ArrayList" %> 
+    <%@page import="model.RequestBook"%>    
+     <%@page import="model.BookIN"%>  
 </head>
 <body>
 <%
 	ArrayList<Book> books = (ArrayList<Book>)session.getAttribute("allBooks");
+	ArrayList<RequestBook> requestBooks = (ArrayList<RequestBook>)session.getAttribute("allRequestBooks");
+	ArrayList<BookIN> bookINs = (ArrayList<BookIN>)session.getAttribute("allBookINs");
 %>
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -132,33 +136,67 @@
                           
                             <div class="panel-body">
                                 <div class="table-responsive">
-                                    <table class="table table-striped table-bordered table-hover" style="table-layout:fixed">
+                                    <table class="table table-striped table-bordered table-hover" style="table-layout:fixed" id="myTable">
                                         <thead>
                                             <tr class="text-center">
-                                                <th class="text-center" width="15%">ISBN</th>
-                                                <th class="text-center" width="18%">书名</th>
-                                                <th class="text-center" width="15%">申请人ID</th>
-                                                <th class="text-center" width="16%">申请人</th>
-                                                <th class="text-center" width="12%">城市</th>
-                                                <th class="text-center" width="10%">还书方式</th>
-                                                <th class="text-center" width="8%">状态</th>
-                                                <th class="text-center" width="6%">详情</th>
+                                                <th class="text-center" width="17%">ISBN</th>
+                                                <th class="text-center" width="20%">书名</th>
+                                                <th class="text-center" width="18%">申请人</th>
+                                                <th class="text-center" width="14%">城市</th>
+                                                <th class="text-center" width="12%">还书方式</th>
+                                                <th class="text-center" width="10%">状态</th>
+                                                <th class="text-center" width="9%">详情</th>
                                             </tr>
                                         </thead>
                                         <tbody class="text-center">
-                                            <c:foreach items = ""  var ="" varStatus = "">
+                                            <%
+                                            if (requestBooks.size()>0){	
+                                            for (int i=0; i<requestBooks.size(); i++){
+                                            		String bookName = "";
+                                            		String ISBN = "";
+                                            		String returnWay = "无";
+                                            		String requestStatus = "";
+                                            		int bookRecordID = requestBooks.get(i).getBookRecordID();
+                                            		for (int j=0; j<bookINs.size(); j++){
+                                            			if (bookINs.get(j).getBookRecordID() == bookRecordID){
+                                            				ISBN = bookINs.get(j).getISBN();
+                                            				break;
+                                            			}
+                                            		}
+                                            		for (int k=0; k<books.size(); k++){
+                                            			if (books.get(k).getISBN().equals(ISBN)){
+                                            				bookName = books.get(k).getBookName();
+                                            				break;
+                                            			}
+                                            		}
+                                            		if ("mail".equals(requestBooks.get(i).getReturnWay())){
+                                            			returnWay = "邮寄";
+                                            		}
+                                            		if("face".equals(requestBooks.get(i).getReturnWay())){
+                                            			returnWay = "当面";
+                                            		}
+                                            		if ("waiting".equals(requestBooks.get(i).getRequestStatus())){
+                                            			requestStatus = "待确认";
+                                            		}
+                                            		if ("accept".equals(requestBooks.get(i).getRequestStatus())){
+                                            			requestStatus = "已确认";
+                                            		}
+                                            		if ("reject".equals(requestBooks.get(i).getRequestStatus())){
+                                            			requestStatus = "已拒绝";
+                                            		}
+                                            %>
                                             <tr>
-												  <td>9787201116693</td>
-                                                <td><div title="外婆的道歉信" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">外婆的道歉信</div></td>
-                                                <td>1</td>
-                                                <td>zcx</td>
-                                                <td>12000</td>
-                                                <td>面交</td>
-                                                <td>待确认</td>
-                                                <td><a class="btn btn-success btn-xs" href="dashboard_requestInfo.jsp">查看</a></td>
+												  <td><%=ISBN %></td>
+                                                <td><div title="<%=bookName %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookName %></div></td>
+                                                <td><%=requestBooks.get(i).getUserName() %></td>
+                                                <td><%=requestBooks.get(i).getProvince() + " " + requestBooks.get(i).getCity() %></td>
+                                                <td><%=returnWay %></td>
+                                                <td><%=requestStatus %></td>
+                                                <td><a class="btn btn-success btn-xs" href="dashboard_requestInfo.jsp?ISBN=<%=ISBN%>&ID=<%=requestBooks.get(i).getRequestID()%>">查看</a></td>
                                                 
                                             </tr>
-                                            </c:foreach>
+                                           <%} %>
+                                           <%} %>
                                         </tbody>
                                     </table>
                                 </div>
@@ -195,7 +233,7 @@
 		
 		for (var i=1; i<mytable.rows.length; i++){
 			mytable.rows[i].style.display="none";
-			for (var j=0; j<mytable.rows[i].cells.length-2; j++){
+			for (var j=0; j<mytable.rows[i].cells.length-1; j++){
 				tempText = mytable.rows[i].cells[j].innerText;
     			if (tempText.indexOf(keyword) >= 0){	//查到结果
     				mytable.rows[i].style.display="";
