@@ -408,4 +408,12 @@ public class AppServiceImpl implements AppService {
 	public List<RequestBook> getAllRequestBooks(){
 		return requestBookDao.getAllRequestBooks();
 	}
+	
+	public RequestBook getRequestBookByRequestID(int requestID){
+		return requestBookDao.getRequestBookByRequestID(requestID);
+	}
+	
+	public void updateRequestBook(RequestBook requestBook){
+		requestBookDao.update(requestBook);
+	}
 }

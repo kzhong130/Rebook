@@ -20,10 +20,9 @@
    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
        <!-- jQuery Js -->
     <script src="assets/js/jquery-1.10.2.js"></script>
-     <%@page import="model.LendOrder"%>    
+     <%@page import="model.RequestBook"%>    
     <%@page import="java.util.ArrayList" %>    
     <%@page import="model.Book" %>
-    <%@page import="model.User" %>
 
 	<!-- JS Scripts-->
     <script type="text/javascript">
@@ -37,6 +36,34 @@
 
 </head>
 <body>
+<%
+	String ISBN = request.getParameter("ISBN");
+	int requestID = Integer.parseInt(request.getParameter("ID"));
+	
+	ArrayList<RequestBook> requestBooks = (ArrayList<RequestBook>)session.getAttribute("allRequestBooks");
+	ArrayList<Book> books = (ArrayList<Book>)session.getAttribute("allBooks");
+	Book book = new Book();
+	for (int i=0; i<books.size(); i++){
+		if (books.get(i).getISBN().equals(ISBN)){
+			book = books.get(i);
+			break;
+		}
+	}
+	RequestBook requestBook = new RequestBook();
+	for (int i=0; i<requestBooks.size(); i++){
+		if (requestBooks.get(i).getRequestID() == requestID){
+			requestBook = requestBooks.get(i);
+			break;
+		}
+	}
+	String returnWay ="无";
+	if ("mail".equals(requestBook.getReturnWay())){
+		returnWay = "邮寄";
+	}
+	if ("face".equals(requestBook.getReturnWay())){
+		returnWay = "当面";
+	}
+%>
 <!-- java都先注释掉或者删掉了 -->
 <%-- <% 
 // 	String ISBN = request.getParameter("ISBN");
@@ -188,59 +215,54 @@
                             <div class="panel-body">
                             <form class="form-horizontal" role="form">
 								<p><span class="col-md-2">ISBN: </span>
-                               		<span class="col-md-10"></span></p>
-                                <p><span class="col-md-2">书名: </span>
-                                	<span class="col-md-10"></span></p>
+                               		<span class="col-md-10"><%=ISBN %></span></p>
+                                <p><span class="col-md-2">书名:</span>
+                                	<span class="col-md-10"> <%=book.getBookName() %></span></p>
                                 <p><span class="col-md-2">书籍发布编号: </span>
-                                	<span class="col-md-10"></span></p>
-								<p><span class="col-md-2">申请人ID: </span>
-                               		<span class="col-md-10"></span></p>  
+                                	<span class="col-md-10"><%=requestBook.getBookRecordID() %></span></p>
                                 <p><span class="col-md-2">申请人: </span> 
-                                	<span class="col-md-10"></span></p>
-                                <% %>
-                                <p><span class="col-md-2">还书方式: </span> 
-                                	<span class="col-md-10">邮寄</span></p>
-                                <% %>
-                                <% %>
-                                <p><span class="col-md-2">还书方式: </span> 
-                                	<span class="col-md-10">当面</span></p>
-                                <% %>
+                                	<span class="col-md-10"><%=requestBook.getUserName() %></span></p>
+
+                                <p><span class="col-md-2">还书方式:</span> 
+                                	<span class="col-md-10"> <%=returnWay %></span></p>
+
                                 <p><span class="col-md-2">收货人: </span> 
-                                	<span class="col-md-10"></span></p>
+                                	<span class="col-md-10"><%=requestBook.getReceiverName() %></span></p>
                                 <p><span class="col-md-2">申请人联系方式: </span> 
-                                	<span class="col-md-10"></span></p>
+                                	<span class="col-md-10"><%=requestBook.getPhone() %></span></p>
                                 <p><span class="col-md-2">申请人地址: </span> 
-                                	<span class="col-md-10"></span></p>
+                                	<span class="col-md-10"><%=requestBook.getProvince()+requestBook.getCity()+requestBook.getAddress() %></span></p>
                                 <div class="form-group form-group-pad">
                                 	<!-- 暴力方法解决的对齐 -->
 									<p><span class="col-md-2">&nbsp;&nbsp;&nbsp;&nbsp;状态: </span></p>
 									<!--<label for="状态" class="col-sm-2">状态: </label>-->
 									<div class="col-md-3 form-control-pad">
-									<% %>
+									<%if (requestBook.getRequestStatus().equals("waiting")){ %>
 									<select id="orderLendStatus" class="form-control">
-          								<option value="0" selected="selected">待确认</option>
-          								<option value="1">已通过</option>
-          								<option value="2">未通过</option>
+          								<option value="waiting" selected="selected">待确认</option>
+          								<option value="accept">已通过</option>
+          								<option value="reject">未通过</option>
         							</select>
-        							<% %>
-        							<% %>
+        							<%} %>
+        							<%if (requestBook.getRequestStatus().equals("accept")){ %>
         							<select id="orderLendStatus" class="form-control">
-          								<option value="0" >待确认</option>
-          								<option value="1" selected="selected">已通过</option>
-          								<option value="2">未通过</option>
+          								<option value="waiting" >待确认</option>
+          								<option value="accept" selected="selected">已通过</option>
+          								<option value="reject">未通过</option>
           							</select>
-        							<% %>
-        							<% %>
+        							<%} %>
+        							
+        							<%if (requestBook.getRequestStatus().equals("reject")){ %>
         							<select id="orderLendStatus" class="form-control">
-          								<option value="0" >待确认</option>
-          								<option value="1">已通过</option>
-          								<option value="2" selected="selected">未通过</option>
+          								<option value="waiting" >待确认</option>
+          								<option value="accept">已通过</option>
+          								<option value="reject" selected="selected">未通过</option>
         							</select>
-        							<% %>
+        							<%} %>
 									</div>
 								</div>
 												
-                          <input type="button" class="btn btn-success btn-submit-pad" value="确认修改" id=" " onclick = "updateLendOrder(this)">
+                          <input type="button" class="btn btn-success btn-submit-pad" value="确认修改" id="<%=requestID %> " onclick = "updateLendOrder(this)">
                            <a href="dashboard_request.jsp" class="btn btn-default btn-submit-pad">返回</a>
                                 
                            
@@ -273,13 +295,13 @@
     <script src="assets/js/custom-scripts.js"></script>
    <script type="text/javascript">
    function updateLendOrder(ob){
-	   var status = $("#orderLendStatus").val();
-	   var lendID = ob.id;
+	   var requestStatus = $("#orderLendStatus").val();
+	   var requestID = ob.id;
 	   $.ajax({
 		   type:"POST",
-		   url:"LendOrderAction!updateLendOrder",
+		   url:"RequestAction!updateRequestBook",
 		   async:false,
-		   data:{lendID:lendID,status:status},
+		   data:{requestID:requestID,requestStatus:requestStatus},
 		   success:function(result){
 			   result=eval('('+result+')');
 			   if (result.success){

@@ -35,5 +35,12 @@ public class RequestBookDaoImpl extends HibernateDaoSupport implements RequestBo
 	public List<RequestBook> getAllRequestBooks(){
 		return (List<RequestBook>)getHibernateTemplate().find("from RequestBook");
 	}
+	
+	public RequestBook getRequestBookByRequestID(int requestID){
+		@SuppressWarnings("unchecked")
+		List<RequestBook> requestBooks = (List<RequestBook>)getHibernateTemplate().find("from RequestBook as b where b.requestID = ?", requestID);
+		RequestBook requestBook = requestBooks.size() > 0 ? requestBooks.get(0) : null;
+		return requestBook;
+	}
 
 }

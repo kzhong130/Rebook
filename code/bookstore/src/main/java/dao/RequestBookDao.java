@@ -15,4 +15,6 @@ public interface RequestBookDao {
 	public List<RequestBook> getProcessedRequest(String userName);
 	
 	public List<RequestBook> getAllRequestBooks();
+	
+	public RequestBook getRequestBookByRequestID(int requestID);
 }
