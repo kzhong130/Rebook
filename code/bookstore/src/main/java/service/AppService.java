@@ -95,4 +95,7 @@ public interface AppService {
 
 	public List<RequestBook> getAllRequestBooks();
 
+	public RequestBook getRequestBookByRequestID(int requestID);
+	public void updateRequestBook(RequestBook requestBook);
+
 }

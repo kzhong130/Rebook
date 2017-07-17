@@ -414,4 +414,13 @@ public class AppServiceImpl implements AppService {
 		return requestBookDao.getAllRequestBooks();
 	}
 
+	
+	public RequestBook getRequestBookByRequestID(int requestID){
+		return requestBookDao.getRequestBookByRequestID(requestID);
+	}
+	
+	public void updateRequestBook(RequestBook requestBook){
+		requestBookDao.update(requestBook);
+	}
+
 }

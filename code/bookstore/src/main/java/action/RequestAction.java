@@ -173,6 +173,23 @@ public class RequestAction extends BaseAction{
 		return "add success";
 	}
 	
+	public String updateRequestBook() throws Exception{
+		RequestBook requestBook = appService.getRequestBookByRequestID(requestID);
+		requestBook.setRequestStatus(requestStatus);
+		appService.updateRequestBook(requestBook);
+		List<RequestBook> requestBooks = appService.getAllRequestBooks();
+		request().getSession().setAttribute("allRequestBooks", requestBooks);
+		
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject();
+		obj.put("success", true);
+		String str=obj.toString();
+		out.write(str);
+		out.close();
+		
+		return "update success";
+	}
+	
 	
 	
 }

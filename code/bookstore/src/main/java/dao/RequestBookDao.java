@@ -19,4 +19,9 @@ public interface RequestBookDao {
   
 	public List<RequestBook> getAllRequestBooks();
 
+	
+	public RequestBook getRequestBookByRequestID(int requestID);
+
+
+
 }
