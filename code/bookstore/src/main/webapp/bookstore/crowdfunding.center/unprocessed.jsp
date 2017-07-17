@@ -3,6 +3,9 @@
 <%@page import="model.BookComment"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Book"%>
+<%@page import="model.BookIN"%>
+<%@page import="model.RequestBook"%>
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -31,16 +34,102 @@
 	ArrayList<Book> books = new ArrayList<Book>();
 	books = (ArrayList<Book>)session.getAttribute("bookByBookComment");
 %>
+
+<%
+	
+	String Username=(String) session.getAttribute("loginUserName");
+	ArrayList<RequestBook> requestList=(ArrayList<RequestBook>)session.getAttribute("requestBookList");
+	ArrayList<Book> bookList=(ArrayList<Book>)session.getAttribute("bookList");
+	ArrayList<BookIN> bookINList=(ArrayList<BookIN>)session.getAttribute("bookInList");
+	
+%>
 <body>
 
 	<!-- 开始 -->
 	<div class="my_info_title">
 		未被处理的申请
-		<!--<span><button type="button" class="but">签到</button>
-  <p>07月29日<br>
-    漏签1天</p></span>-->
+	
 	</div>
 	<hr>
+<%
+
+	for(int i=0;i<requestList.size();i++){
+		RequestBook requestBook=requestList.get(i);
+		Book book=bookList.get(i);
+		BookIN bookIn=bookINList.get(i);
+		String type=bookIn.getType();
+		//System.out.println(bookIn.getRecency());
+		if(type.equals("lend")){
+			
+%>
+
+<!-- 借书申请  -->
+<div class="commentbox">
+     <table  style="width:828px;">
+     
+        <tr>
+
+          <td class="bookimage" style="vertical-align:text-top;">
+          <a href=<% %>><img class="listbook" src="https://img3.doubanio.com/mpic/s28397415.jpg<% %>"/></a><br>
+
+          
+          </td>
+          
+          <td class="bookcontent" style="vertical-align:top;">
+          <table class="allwidth" style="width:691px;">
+              <tr>
+              <td class="bookname">《<% %>二手时间》<span class="isbn"><% %>9787508658346</span></td>
+              <td>
+              <p class="time">书币要求：<span class="coin"><% %>10&nbsp;&nbsp;</span></p>
+              </td>
+              </tr>
+              
+              
+              <tr>
+              <td>
+              <p class="comment">书主信息：<% %>沈蓓蓓&nbsp;&nbsp;<% %>15821911839&nbsp;&nbsp;<% %>上海闵行</p>
+              <p class="comment">&emsp;&emsp;&emsp;&emsp;&emsp;<% %>上海市闵行区东川路800号上海交通大学</p>
+              </td>
+              <td>
+              <p class="time" title="" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">卖家：<% %>sbb2017&nbsp;&nbsp;</p>
+              <p class="time">可借天数：<% %>27&nbsp;&nbsp;</p>
+              </td>
+              </tr>
+              
+              <tr>
+              <td colspan="2">
+              <p class="comment">新旧程度：<% %>五成新&emsp;&emsp;&emsp;&emsp;送书方式：<% %>邮寄</p>
+              <p class="comment">备注：<% %>请小心的对待这本书（没有备注则写无）</p>
+              </td>
+              </tr>
+              
+              <tr><td colspan="2"><hr class="fortr"></td></tr>
+              <tr>
+              <td>
+              <p class="comment">收件人：<% %>洪晓雅&nbsp;&nbsp;<% %>15821123456&emsp;&emsp;还书方式：<% %>邮寄</p>
+              <p class="comment">收货地址：<% %>福建省厦门市翔安区新店镇新兴街610号</p>
+              </td>
+              <td class="deletebutton" style="vertical-align:bottom;">
+              <p class="time"><span class="coin"><% %>借书&nbsp;&nbsp;</span></p>
+              <button class="delete tc" name="" >修改</button>
+              <button class="delete" value="<% %>" onclick="" >取消</button>
+              </td>
+              </tr>
+              
+           </table>
+           </td>
+        </tr>
+		</table>
+</div>
+<br>
+
+<%
+		}
+%>
+
+<%
+	}
+%>
 
 	<!-- 每本书 -->
 

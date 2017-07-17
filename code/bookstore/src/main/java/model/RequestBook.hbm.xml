@@ -35,5 +35,8 @@
 		<property name="returnWay" type="java.lang.String" >
 			<column name="returnWay" />
 		</property>
+		<property name="town" type="java.lang.String" >
+			<column name="town" />
+		</property>
 	</class>
 </hibernate-mapping>

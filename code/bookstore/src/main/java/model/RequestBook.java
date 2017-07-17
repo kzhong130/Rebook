@@ -11,12 +11,13 @@ public class RequestBook {
 	private String requestStatus;
 	private String returnWay;
 	private String phone;
+	private String town;
 	
 	public RequestBook(){
 		
 	}
 	
-	public RequestBook(int bookRecordID, String userName,String city, String province, String address, String receiverName, String requestStatus, String returnWay, String phone){
+	public RequestBook(int bookRecordID, String userName,String city, String province, String address, String receiverName, String requestStatus, String returnWay, String phone,String town){
 		this.bookRecordID = bookRecordID;
 		this.userName = userName;
 		this.city = city;
@@ -26,6 +27,15 @@ public class RequestBook {
 		this.requestStatus = requestStatus;
 		this.returnWay = returnWay;
 		this.phone = phone;
+		this.town=town;
+	}
+	
+	public String getTown(){
+		return town;
+	}
+	
+	public void setString(String town){
+		this.town=town;
 	}
 	
 	public int getRequestID(){

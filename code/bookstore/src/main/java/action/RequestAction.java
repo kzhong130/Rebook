@@ -29,6 +29,17 @@ public class RequestAction extends BaseAction{
 	private String requestStatus;
 	private String returnWay;
 	private String phone;
+
+	private String town;
+	
+	public void setTown(String town){
+		this.town=town;
+	}
+	
+	public String getTown(){
+		return town;
+	}
+	
 	private AppService appService;
 	
 	public void setAppService(AppService appService){
@@ -133,7 +144,7 @@ public class RequestAction extends BaseAction{
 	}
 	
 	public String addRequestBook() throws Exception{
-		RequestBook requestBook = new RequestBook(bookRecordID,userName,city, province, address, receiverName,  requestStatus,  returnWay,  phone);
+		RequestBook requestBook = new RequestBook(bookRecordID,userName,city, province, address, receiverName,  requestStatus,  returnWay,  phone,town);
 		appService.addRequestBook(requestBook);
 		BookIN bookIN = appService.getBookINByBookRecordID(bookRecordID);
 		User user = appService.getUserByUserName(userName);

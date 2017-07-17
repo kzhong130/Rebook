@@ -217,9 +217,20 @@ public class MemberCenterAction extends BaseAction{
 			bookInList.add(bookIN);
 			bookList.add(book);
 		}
-		System.out.println(requestBookList.size());
+		List<RequestBook> UnrequestBookList=appService.getUnprocessRequest(userName);
+		request().getSession().setAttribute("UnrequestBookList", UnrequestBookList);
+		List<BookIN> UnbookInList=new ArrayList<BookIN>();
+		List<Book> UnbookList=new ArrayList<Book>();
+		for(int i=0;i<requestBookList.size();i++){
+			BookIN bookIN=appService.getBookINByBookRecordID(requestBookList.get(i).getRequestID());
+			Book book=appService.getBookByISBN(bookIN.getISBN());
+			UnbookInList.add(bookIN);
+			UnbookList.add(book);
+		}
 		request().getSession().setAttribute("bookList", bookList);
 		request().getSession().setAttribute("bookInList", bookInList);
+		request().getSession().setAttribute("UnbookList", UnbookList);
+		request().getSession().setAttribute("UnbookInList", UnbookInList);
 		
 		return "initialize success";
 	}
