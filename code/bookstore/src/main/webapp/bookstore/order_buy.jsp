@@ -132,12 +132,12 @@ if ("face".equals(bookIN.getSendWay())){
     <ul class="reg_ul">
       <li>
           <span>收货人：</span>
-          <input type="text" name="" value="" placeholder="收货人" class="reg_receiver">
+          <input type="text" name="" value="" placeholder="收货人" class="reg_receiver" id="receiverName">
           <span class="tip receiver_hint"></span>
       </li>
       <li>
           <span>联系方式：</span>
-          <input type="text" name="" value="" placeholder="联系方式" class="reg_buyphone">
+          <input type="text" name="" value="" placeholder="联系方式" class="reg_buyphone" id="phone">
           <span class="tip buyphone_hint"></span>
       </li>
       <li>
@@ -152,7 +152,7 @@ if ("face".equals(bookIN.getSendWay())){
       </li>
       <li>          
           <span>&nbsp;</span>
-          <input type="text" name="detail" value="" placeholder="详细地址" class="reg_buyaddress">
+          <input type="text" name="" value="" placeholder="详细地址" class="reg_buyaddress" id="address">
           <span class="tip buyaddress_hint"></span>      
       </li>
       </ul>
@@ -252,6 +252,56 @@ if ("face".equals(bookIN.getSendWay())){
                     buyaddress_Boolean = false;
                   }
         
+                });
+                
+                $('.pay').click(function(){
+                	if(receiver_Boolean && buyphone_Boolean && buyaddress_Boolean){
+                		
+                		var select = document.getElementsByName("province")[0];
+                		var province = select.options[select.selectedIndex].text;
+                		var city = "";
+                		var area = "";
+                		if(document.getElementsByName("city")[0].value!=""){	//非直辖市
+                			 select=document.getElementsByName("city")[0];
+                			 city=select.options[select.selectedIndex].text;
+                			 select = document.getElementsByName("area")[0];
+                			 area = select.options[select.selectedIndex].text;
+                		}
+                		else{	//直辖市
+                			 select=document.getElementsByName("area")[0];
+                			 city=select.options[select.selectedIndex].text;
+                		}
+                		var bookRecordID = "<%=request.getParameter("ID")%>";
+                		bookRecordID = parseInt(bookRecordID);
+                		var userName = "<%=session.getAttribute("loginUserName")%>";
+                		var address = document.getElementById("address").value;
+                		address = area + address;
+                		var receiverName = document.getElementById("receiverName").value;
+                		var requestStatus = "waiting";
+                		var phone = document.getElementById("phone").value;
+                		var ISBN = "<%=book.getISBN()%>";
+                		var returnHref = "bookAction!getBookInfo?ISBN="+ISBN;
+                		$.ajax({
+                			type:"POST",
+                			url:"RequestAction!addRequestBook",
+                			async:false,
+                			data:{bookRecordID:bookRecordID,userName:userName,city:city,province:province,address:address,receiverName:receiverName,requestStatus:requestStatus,phone:phone},
+                			success:function(result){
+                				result = eval('('+result + ')');
+                				if (result.success){
+                					alert("支付成功,请等待书主确认");
+                					window.location.href = returnHref;
+                				}
+                				else{
+                					alert("支付失败");
+                					}
+                				}
+                			})
+                	}
+                		
+                	else{
+                		alert("请完善信息");
+                	}
                 });
                 
 
