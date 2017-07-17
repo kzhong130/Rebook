@@ -135,9 +135,10 @@
                             </li>
 							</ul>
                     </li> 
-
-                    
-					 <li>
+					<li>
+                        <a href="dashboard_request.jsp"><i class="fa fa-list-alt"></i> 用户申请</a>
+                    </li>
+                    <li>
                         <a href="#" class="active-menu"><i class="fa fa-file-text"></i> 订单信息<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
@@ -151,6 +152,14 @@
 							
                     <li>
                         <a href="#"><i class="fa fa-edit"></i> 用户反馈</a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="dashboard_lendFeedback.jsp">有书借</a>
+                            </li>
+                            <li>
+                                <a href="dashboard_buyFeedback.jsp">有书买</a>
+                            </li>
+							</ul>
                     </li>
                     
 
