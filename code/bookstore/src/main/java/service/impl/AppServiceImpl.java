@@ -409,4 +409,9 @@ public class AppServiceImpl implements AppService {
 		return requestBookDao.getUnprocessedRequest(userName);
 	}
 	
+
+	public List<RequestBook> getAllRequestBooks(){
+		return requestBookDao.getAllRequestBooks();
+	}
+
 }

@@ -31,6 +31,10 @@ public class RequestBookDaoImpl extends HibernateDaoSupport implements RequestBo
 
 		return RequestBookList;
 	}
+	
+	public List<RequestBook> getAllRequestBooks(){
+		return (List<RequestBook>)getHibernateTemplate().find("from RequestBook");
+	}
 
 	@Override
 	public List<RequestBook> getUnprocessedRequest(String userName) {
