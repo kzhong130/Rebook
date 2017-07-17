@@ -34,7 +34,7 @@ public class RequestBook {
 		return town;
 	}
 	
-	public void setString(String town){
+	public void setTown(String town){
 		this.town=town;
 	}
 	
