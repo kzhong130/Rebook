@@ -31,8 +31,7 @@
 </head>
 
 <%
-	//ArrayList<Book> books = new ArrayList<Book>();
-	//books = (ArrayList<Book>)session.getAttribute("bookByBookComment");
+	
 	String Username=(String) session.getAttribute("loginUserName");
 	ArrayList<RequestBook> requestList=(ArrayList<RequestBook>)session.getAttribute("requestBookList");
 	ArrayList<Book> bookList=(ArrayList<Book>)session.getAttribute("bookList");
