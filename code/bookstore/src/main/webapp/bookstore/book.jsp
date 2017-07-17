@@ -395,7 +395,7 @@ session.setAttribute("prePage", url);
    				<td><%=sendWay %></td>
    				<td><%=sellBookINs.get(i).getProvince()+" "+sellBookINs.get(i).getCity()+" "+sellBookINs.get(i).getTown() %></td>
    				<td><%=sellBookINs.get(i).getCoinNumber() %></td>
-   				<td><a class="btn btn-success btn-sm -sm" role="button" id="<%=sellBookINs.get(i).getBookRecordID()%>" onclick="buyBook(this)" >买书</a></td>
+   				<td><a class="btn btn-success btn-sm -sm" role="button" id="<%=sellBookINs.get(i).getBookRecordID()%>" onclick="buyBook(this,<%=sellBookINs.get(i).getCoinNumber() %>)" >买书</a></td>
     		</tr>
     		<%} %>
     		<%} %>
@@ -573,6 +573,24 @@ function lendBook(ob,coinNumber){
 		}
 		else{
 			window.location.href="order_lend.jsp?ID="+ID;
+		}
+	}
+}
+
+function buyBook(ob,coinNumber){
+	var ID = ob.id;
+	coinNumber = parseInt(coinNumber);
+	if (userName =="null"){
+		alert("请先登录");
+	}
+	else{
+		var myCoinNumber = "<%=session.getAttribute("loginUserBookCoin")%>";
+		myCoinNumber = parseInt(myCoinNumber);
+		if (myCoinNumber < coinNumber){
+			alert("您的书币不足");
+		}
+		else{
+			window.location.href="order_buy.jsp?ID="+ID;
 		}
 	}
 }
