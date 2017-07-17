@@ -7,6 +7,7 @@ import model.Book;
 import model.BookComment;
 import model.BookIN;
 import model.LendOrder;
+import model.RequestBook;
 import model.User;
 import service.AppService;
 
@@ -193,6 +194,8 @@ private AppService appService;
 		request().getSession().setAttribute("allBookINs", bookINs);
 		List<LendOrder> lendOrders = appService.getAllLendOrders();
 		request().getSession().setAttribute("allLendOrders", lendOrders);
+		List<RequestBook> requestBooks = appService.getAllRequestBooks();
+		request().getSession().setAttribute("allRequestBooks", requestBooks);
 
 		return "initialize success";
 	}

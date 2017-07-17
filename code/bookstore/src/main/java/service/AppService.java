@@ -90,4 +90,5 @@ public interface AppService {
 	
 	public List<RequestBook> getProcessRequest(String userName);
 	public void addRequestBook(RequestBook requestBook);
+	public List<RequestBook> getAllRequestBooks();
 }
