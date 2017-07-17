@@ -152,6 +152,7 @@ create table requestBook(
 	requestStatus		enum("waiting","accept","reject")	not null,
     returnWay			text				default null,		/*仅在借书申请时需要*/
     phone				varchar(20)			not null,
+    town				varchar(20) 		not null,
     primary key(requestID)
 );
 

@@ -405,9 +405,15 @@ public class AppServiceImpl implements AppService {
 		requestBookDao.save(requestBook);
 	}
 	
+	public List<RequestBook> getUnprocessRequest(String userName){
+		return requestBookDao.getUnprocessedRequest(userName);
+	}
+	
+
 	public List<RequestBook> getAllRequestBooks(){
 		return requestBookDao.getAllRequestBooks();
 	}
+
 	
 	public RequestBook getRequestBookByRequestID(int requestID){
 		return requestBookDao.getRequestBookByRequestID(requestID);
@@ -416,4 +422,5 @@ public class AppServiceImpl implements AppService {
 	public void updateRequestBook(RequestBook requestBook){
 		requestBookDao.update(requestBook);
 	}
+
 }
