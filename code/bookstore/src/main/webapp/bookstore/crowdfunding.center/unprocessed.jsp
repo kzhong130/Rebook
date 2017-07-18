@@ -91,7 +91,7 @@
               <p class="comment">&emsp;&emsp;&emsp;&emsp;&emsp;<%=bookIn.getOwnerAddress() %></p>
               </td>
               <td>
-              <p class="time" title="" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">卖家：<%=session.getAttribute("loginUserName") %>sbb2017&nbsp;&nbsp;</p>
+              <p class="time" title="" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">卖家：<%=bookIn.getOwnerName() %>&nbsp;&nbsp;</p>
               <p class="time">可借天数：<%=bookIn.getLongestDuration() %>&nbsp;&nbsp;</p>
               </td>
               </tr>
@@ -111,7 +111,7 @@
 			  if(delivery.equals("face")) w2="面取";
 			  else w2="邮寄";
 			  w3=bookIn.getNote();
-			  if(w3==null) w3="无";
+			  if(w3=="") w3="无";
 			  %>            
               <tr>
               <td colspan="2">
