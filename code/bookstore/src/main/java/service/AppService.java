@@ -36,7 +36,7 @@ public interface AppService {
 	public ArrayList<Book> getAllBooks();
 	public List<Book> searchBookByName(String bookName);
 	public List<Book> getBookByBookComment(List<BookComment> bookComments);		//根据用户的评论得到某个用户的评论涉及到的所有书
-	
+	public void updateBook(Book book);
 	/*
 	 * BookComment
 	 */

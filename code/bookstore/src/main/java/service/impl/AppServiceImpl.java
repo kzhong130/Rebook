@@ -293,6 +293,9 @@ public class AppServiceImpl implements AppService {
 		return books;
 	}
 
+	public void updateBook(Book book){
+		bookDao.update(book);
+	}
 	
 	
 	/*
