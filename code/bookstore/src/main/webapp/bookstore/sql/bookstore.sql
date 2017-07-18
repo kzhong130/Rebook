@@ -126,7 +126,7 @@ create table bookIN
    longestDuration      int                       default null,	/*借书时才需要*/
    ownerPhone           varchar(20)                    not null,
    ownerAddress         varchar(50)                    default null,	/*借书时才需要*/
-   inStatus             enum("yes","no")               not null,
+   inStatus             enum("yes","no","delete")               not null,
    note					text						   default null,
    province				varchar(20)					   not null,
    town 				varchar(20)					   not null,
@@ -317,7 +317,7 @@ create table coinChangeRecord
    userName               varchar(20)                            not null,
    number               int                            not null,
    time                 datetime                       not null,
-   reason               enum("buy","sell","lendin","lendout","other") not null,
+   reason               enum("buy","sell","lendin","lendout","return","other") not null,
    primary key (ID)
 );
 

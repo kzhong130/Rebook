@@ -18,4 +18,6 @@ public interface BookINDao {
 	public List<BookIN> getBookINsByISBN(String ISBN);
 	
 	public List<BookIN> getBookINsByUserID(int userID);
+	
+	public List<BookIN> getBookINByUserName(String userName);
 }

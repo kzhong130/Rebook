@@ -232,6 +232,66 @@ public class MemberCenterAction extends BaseAction{
 		request().getSession().setAttribute("UnbookList", UnbookList);
 		request().getSession().setAttribute("UnbookInList", UnbookInList);
 		
+		/*
+		 * 我的书架部分
+		 */
+		List<BookIN> bookINs = appService.getBookINByUserName(userName);
+		List<BookIN> lendBookINs = new ArrayList<BookIN>();
+		List<BookIN> sellBookINs = new ArrayList<BookIN>();
+		if (bookINs.size() > 0){
+			for (int i=0; i<bookINs.size(); i++){
+				if ("sell".equals(bookINs.get(i).getType())){
+					sellBookINs.add(bookINs.get(i));
+				}
+				if ("lend".equals(bookINs.get(i).getType())){
+					lendBookINs.add(bookINs.get(i));
+				}
+			}
+		}
+		List<Book> booksByLendBookINs = new ArrayList<Book>();
+		List<Book> booksBySellBookINs = new ArrayList<Book>();
+		if (lendBookINs.size() > 0){
+			for (int i=0; i<lendBookINs.size(); i++){
+				Book book = appService.getBookByISBN(lendBookINs.get(i).getISBN());
+				booksByLendBookINs.add(book);
+			}
+		}
+		if (sellBookINs.size() > 0){
+			for (int i=0; i<sellBookINs.size(); i++){
+				Book book = appService.getBookByISBN(sellBookINs.get(i).getISBN());
+				booksBySellBookINs.add(book);
+			}
+		}
+		List<RequestBook> allRequestBooks = appService.getAllRequestBooks();
+		List<RequestBook> requestBooksByLendBookINs = new ArrayList<RequestBook>();
+		List<RequestBook> requestBooksBySellBookINs = new ArrayList<RequestBook>();
+		if (lendBookINs.size() > 0){
+			for (int i=0; i<lendBookINs.size(); i++){
+				int bookRecordID = lendBookINs.get(i).getBookRecordID();
+				for (int j=0; j<allRequestBooks.size(); j++){
+					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID){
+						requestBooksByLendBookINs.add(allRequestBooks.get(j));
+					}
+				}
+			}
+		}
+		if (sellBookINs.size() > 0){
+			for (int i=0; i<sellBookINs.size(); i++){
+				int bookRecordID = lendBookINs.get(i).getBookRecordID();
+				for (int j=0; j<allRequestBooks.size(); j++){
+					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID){
+						requestBooksBySellBookINs.add(allRequestBooks.get(j));
+					}
+				}
+			}
+		}
+		request().getSession().setAttribute("lendBookINs", lendBookINs);
+		request().getSession().setAttribute("sellBookINs", sellBookINs);
+		request().getSession().setAttribute("booksByLendBookINs", booksByLendBookINs);
+		request().getSession().setAttribute("booksBySellBookINs", booksBySellBookINs);
+		request().getSession().setAttribute("requestBooksBySellBookINs", requestBooksBySellBookINs);
+		request().getSession().setAttribute("requestBooksByLendBookINs", requestBooksByLendBookINs);
+		
 		return "initialize success";
 	}
 	

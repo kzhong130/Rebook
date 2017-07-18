@@ -12,6 +12,9 @@ import org.apache.struts2.ServletActionContext;
 
 import model.Book;
 import model.BookIN;
+import model.CoinChangeRecord;
+import model.RequestBook;
+import model.User;
 import net.sf.json.JSONObject;
 
 public class BookINAction extends BaseAction{
@@ -33,6 +36,7 @@ public class BookINAction extends BaseAction{
 	private String inStatus;
 	private String note;
 	private String province;
+	private String town;
 	
 	private AppService appService;
 	
@@ -169,7 +173,15 @@ public class BookINAction extends BaseAction{
 		this.appService = appService;
 	}
 	
-	public String updateBookIN() throws Exception{
+	public String getTown(){
+		return town;
+	}
+	
+	public void setTown(String town){
+		this.town = town;
+	}
+	
+	public String updateBookIN() throws Exception{	//管理员update
 		BookIN bookIN = appService.getBookINByBookRecordID(bookRecordID);
 		bookIN.setInStatus(inStatus);
 		appService.updateBookIN(bookIN);
@@ -183,5 +195,138 @@ public class BookINAction extends BaseAction{
 		out.close();
 		
 		return "update success";
+	}
+	
+	public String update() throws Exception{	//用户update
+		String userName = (String)request().getSession().getAttribute("loginUserName");
+		if (inStatus.equals("yes")){	//不用取消RequestBook
+			
+			BookIN bookIN = appService.getBookINByBookRecordID(bookRecordID);
+			bookIN.setProvince(province);
+			bookIN.setCity(city);
+			bookIN.setTown(town);
+			bookIN.setOwnerName(ownerName);
+			bookIN.setOwnerPhone(ownerPhone);
+			bookIN.setLongestDuration(longestDuration);
+			bookIN.setNote(note);
+			bookIN.setOwnerAddress(ownerAddress);
+			bookIN.setSendWay(sendWay);
+			bookIN.setRecency(recency);
+			bookIN.setInStatus(inStatus);
+			appService.updateBookIN(bookIN);
+			
+		
+		}
+		if (inStatus.equals("no")){	//需要取消相关的requestBook
+			
+			BookIN bookIN = appService.getBookINByBookRecordID(bookRecordID);
+			bookIN.setProvince(province);
+			bookIN.setCity(city);
+			bookIN.setTown(town);
+			bookIN.setOwnerName(ownerName);
+			bookIN.setOwnerPhone(ownerPhone);
+			bookIN.setLongestDuration(longestDuration);
+			bookIN.setNote(note);
+			bookIN.setOwnerAddress(ownerAddress);
+			bookIN.setSendWay(sendWay);
+			bookIN.setRecency(recency);
+			bookIN.setInStatus(inStatus);
+			appService.updateBookIN(bookIN);
+			List<RequestBook> requestBooks = appService.getAllRequestBooks();
+			List<RequestBook> myRequestBooks = new ArrayList<RequestBook>();
+			if (requestBooks.size() > 0){
+				for (int i=0; i<requestBooks.size(); i++){
+					if (requestBooks.get(i).getBookRecordID() == bookRecordID){
+						myRequestBooks.add(requestBooks.get(i));
+					}
+				}
+			}
+			if (myRequestBooks.size() > 0){
+				for (int i=0; i<myRequestBooks.size(); i++){
+					int coinNumber = bookIN.getCoinNumber();
+					User user = appService.getUserByUserName(myRequestBooks.get(i).getUserName());
+					int oldBookCoin = user.getBookCoin();
+					user.setBookCoin(oldBookCoin + coinNumber);
+					appService.updateUser(user);
+					CoinChangeRecord coinChangeRecord = new CoinChangeRecord();
+					coinChangeRecord.setUserName(myRequestBooks.get(i).getUserName());
+					coinChangeRecord.setNumber(coinNumber);
+					coinChangeRecord.setReason("return");
+					Date date = new Date();       
+					Timestamp nousedate = new Timestamp(date.getTime());
+					coinChangeRecord.setTime(nousedate);
+					appService.addCoinChangeRecord(coinChangeRecord);
+					RequestBook requestBook = myRequestBooks.get(i);
+					requestBook.setRequestStatus("reject");
+					appService.updateRequestBook(requestBook);
+				}
+			}
+		}
+		
+		/*刷新数据*/
+		List<BookIN> bookINs = appService.getBookINByUserName(userName);
+		List<BookIN> lendBookINs = new ArrayList<BookIN>();
+		List<BookIN> sellBookINs = new ArrayList<BookIN>();
+		if (bookINs.size() > 0){
+			for (int i=0; i<bookINs.size(); i++){
+				if ("sell".equals(bookINs.get(i).getType())){
+					sellBookINs.add(bookINs.get(i));
+				}
+				if ("lend".equals(bookINs.get(i).getType())){
+					lendBookINs.add(bookINs.get(i));
+				}
+			}
+		}
+		List<Book> booksByLendBookINs = new ArrayList<Book>();
+		List<Book> booksBySellBookINs = new ArrayList<Book>();
+		if (lendBookINs.size() > 0){
+			for (int i=0; i<lendBookINs.size(); i++){
+				Book book = appService.getBookByISBN(lendBookINs.get(i).getISBN());
+				booksByLendBookINs.add(book);
+			}
+		}
+		if (sellBookINs.size() > 0){
+			for (int i=0; i<sellBookINs.size(); i++){
+				Book book = appService.getBookByISBN(sellBookINs.get(i).getISBN());
+				booksBySellBookINs.add(book);
+			}
+		}
+		List<RequestBook> allRequestBooks = appService.getAllRequestBooks();
+		List<RequestBook> requestBooksByLendBookINs = new ArrayList<RequestBook>();
+		List<RequestBook> requestBooksBySellBookINs = new ArrayList<RequestBook>();
+		if (lendBookINs.size() > 0){
+			for (int i=0; i<lendBookINs.size(); i++){
+				int bookRecordID = lendBookINs.get(i).getBookRecordID();
+				for (int j=0; j<allRequestBooks.size(); j++){
+					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID){
+						requestBooksByLendBookINs.add(allRequestBooks.get(j));
+					}
+				}
+			}
+		}
+		if (sellBookINs.size() > 0){
+			for (int i=0; i<sellBookINs.size(); i++){
+				int bookRecordID = lendBookINs.get(i).getBookRecordID();
+				for (int j=0; j<allRequestBooks.size(); j++){
+					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID){
+						requestBooksBySellBookINs.add(allRequestBooks.get(j));
+					}
+				}
+			}
+		}
+		request().getSession().setAttribute("lendBookINs", lendBookINs);
+		request().getSession().setAttribute("sellBookINs", sellBookINs);
+		request().getSession().setAttribute("booksByLendBookINs", booksByLendBookINs);
+		request().getSession().setAttribute("booksBySellBookINs", booksBySellBookINs);
+		request().getSession().setAttribute("requestBooksBySellBookINs", requestBooksBySellBookINs);
+		request().getSession().setAttribute("requestBooksByLendBookINs", requestBooksByLendBookINs);
+		
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject();
+		obj.put("success", true);
+		String str=obj.toString();
+		out.write(str);
+		out.close();
+		return SUCCESS;
 	}
 }

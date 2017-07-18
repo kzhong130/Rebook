@@ -75,6 +75,7 @@ public interface AppService {
 	public BookIN getBookINByBookRecordID(int bookRecordID);
 	public void updateBookIN(BookIN bookIN);
 	public List<BookIN> getBookINByISBN(String ISBN);
+	public List<BookIN> getBookINByUserName(String userName);
 	
 	/*
 	 * LendOrder

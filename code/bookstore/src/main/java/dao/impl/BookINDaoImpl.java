@@ -34,13 +34,19 @@ public class BookINDaoImpl extends HibernateDaoSupport implements BookINDao{
 	
 	public List<BookIN> getBookINsByISBN(String ISBN){
 		@SuppressWarnings("unchecked")
-		List<BookIN> bookINs = (List<BookIN>)getHibernateTemplate().find("from BookIN as b where b.ISBN = ?",ISBN);
+		List<BookIN> bookINs = (List<BookIN>)getHibernateTemplate().find("from BookIN as b where b.ISBN = ? and b.inStatus = ?",ISBN,"yes");
 		return bookINs;
 	}
 	
 	public List<BookIN> getBookINsByUserID(int userID){
 		@SuppressWarnings("unchecked")
-		List<BookIN> bookINs = (List<BookIN>)getHibernateTemplate().find("from BookIN as b where b.userID = ?",userID);
+		List<BookIN> bookINs = (List<BookIN>)getHibernateTemplate().find("from BookIN as b where b.userID = ? and b.inStatus != ?",userID,"delete");
+		return bookINs;
+	}
+	
+	public List<BookIN> getBookINByUserName(String userName){
+		@SuppressWarnings("unchecked")
+		List<BookIN> bookINs = (List<BookIN>)getHibernateTemplate().find("from BookIN as b where b.userName = ?", userName);
 		return bookINs;
 	}
 }
