@@ -382,6 +382,10 @@ public class AppServiceImpl implements AppService {
 		return bookINDao.getBookINsByISBN(ISBN);
 	}
 	
+	public List<BookIN> getBookINByUserName(String userName){
+		return bookINDao.getBookINByUserName(userName);
+	}
+	
 	/*
 	 * LendOrder
 	 */

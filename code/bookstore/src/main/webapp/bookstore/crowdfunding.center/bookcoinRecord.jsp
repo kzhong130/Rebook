@@ -102,6 +102,9 @@
 					if("lendout".equals(coinChangeRecords.get(i).getReason())){
 						reason="借出图书";
 					}
+					if ("return".equals(coinChangeRecords.get(i).getReason())){
+						reason = "请求拒绝后返还书币";
+					}
 					if("other".equals(coinChangeRecords.get(i).getReason())){
 						reason="其他";
 					}
