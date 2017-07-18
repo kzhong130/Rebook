@@ -166,6 +166,9 @@ public class LendSellAction extends BaseAction{
 		bookIn.setUserName((String) request().getSession().getAttribute("loginUserName"));
 		bookIn.setInStatus("yes");
 		appService.addBookIN(bookIn);
+		Book book = appService.getBookByISBN(ISBN);
+		book.setLastUpdateTime(nousedate);
+		appService.updateBook(book);
 		return "sell";
 	}
 	
@@ -190,6 +193,9 @@ public class LendSellAction extends BaseAction{
 		bookIn.setOwnerAddress(ownerAddress);
 		bookIn.setInStatus("yes");
 		appService.addBookIN(bookIn);
+		Book book = appService.getBookByISBN(ISBN);
+		book.setLastUpdateTime(nousedate);
+		appService.updateBook(book);
 		return "lend";
 	}
 }
