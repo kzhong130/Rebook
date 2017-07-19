@@ -167,7 +167,7 @@ $('.red_button').click(function(){
         success:function(result){
         	try{
         		result=eval('('+result+')');
-        		alert("regiser success");
+        		alert("注册成功");
 				window.location.replace("test.jsp");	
         	}
         	catch(err){
