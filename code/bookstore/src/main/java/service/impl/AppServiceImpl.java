@@ -401,6 +401,9 @@ public class AppServiceImpl implements AppService {
 		lendOrderDao.update(lendOrder);
 	}
 	
+	public void addLendOrder(LendOrder lendOrder){
+		lendOrderDao.save(lendOrder);
+	}
 	/*
 	 * RequestBook
 	 */
