@@ -180,7 +180,50 @@ button.delete{
 botton.delete:hover{
 	background-color: #d19826;
 	}
-
+button.evaluate{
+	width:60px;
+	font-size:16px;
+	display: inline-block;
+	padding: 4px 8px;
+	margin-bottom: 0px;
+	font-weight: 400;
+	line-height: 1.42857;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-moz-user-select: none;
+	background-image: none;
+	border: 1px solid transparent;
+	border-color: #efbb24;
+	border-radius: 4px;
+	color: #efbb24;
+	background-color: #fff;
+	}
+botton.evaluate:hover{
+	background-color: #e5e5e5;
+	}
+button.nothing{
+	width:60px;
+	font-size:16px;
+	display: inline-block;
+	padding: 4px 8px;
+	margin-bottom: 0px;
+	font-weight: 400;
+	line-height: 1.42857;
+	white-space: nowrap;
+	vertical-align: middle;
+	cursor: pointer;
+	-moz-user-select: none;
+	background-image: none;
+	border: 0px solid transparent;
+	border-color: #efbb24;
+	border-radius: 4px;
+	color: #efbb24;
+	background-color: #fff;
+	}
+botton.nothing:hover{
+	background-color: #fff;
+	}
 button.pass{
 	width:52px;
 	font-size:14px;
@@ -522,3 +565,17 @@ fieldset[disabled] .btnb:focus {
 img.person_info{
 	height:20px;
 }
+
+.citys{
+    margin-bottom: 10px;
+}
+.citys p{
+    line-height: 28px;
+    text-align:left;
+    margin:0 0 0 120px;
+}
+.citys p select{
+    text-align:left;
+    float:!left;
+}
+
