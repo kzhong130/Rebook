@@ -193,7 +193,7 @@ public class RequestAction extends BaseAction{
 	}
 	
 	public String passLendRequest() throws Exception{
-		/*通过申请并下单并将对应的bookIN记录改为delete*/
+		/*通过申请并下单并将对应的bookIN记录改为delete并将书主的书币及书币记录更新*/
 		RequestBook requestBook = appService.getRequestBookByRequestID(requestID);
 		requestBook.setRequestStatus("accept");
 		appService.updateRequestBook(requestBook);
@@ -212,6 +212,18 @@ public class RequestAction extends BaseAction{
 		appService.addLendOrder(lendOrder);
 		bookIN.setInStatus("delete");
 		appService.updateBookIN(bookIN);
+		User ownerUser = appService.getUserByUserName((String)request().getSession().getAttribute("loginUserName"));
+		int ownerOldCoin = ownerUser.getBookCoin();
+		ownerUser.setBookCoin(ownerOldCoin+bookIN.getCoinNumber());
+		appService.updateUser(ownerUser);
+		CoinChangeRecord ownerCoinChangeRecord = new CoinChangeRecord();
+		ownerCoinChangeRecord.setNumber(bookIN.getCoinNumber());
+		ownerCoinChangeRecord.setReason("lendout");
+		Date date = new Date();       
+		Timestamp nousedate = new Timestamp(date.getTime());
+		ownerCoinChangeRecord.setTime(nousedate);
+		ownerCoinChangeRecord.setUserName(ownerUser.getUserName());
+		appService.addCoinChangeRecord(ownerCoinChangeRecord);
 		
 		/*拒绝其他等待中的请求*/
 		List<RequestBook> allRequestBooks = appService.getAllRequestBooks();
@@ -233,9 +245,9 @@ public class RequestAction extends BaseAction{
 					CoinChangeRecord coinChangeRecord = new CoinChangeRecord();
 					coinChangeRecord.setNumber(bookIN.getCoinNumber());
 					coinChangeRecord.setReason("return");
-					Date date = new Date();       
-					Timestamp nousedate = new Timestamp(date.getTime());
-					coinChangeRecord.setTime(nousedate);
+					Date date1 = new Date();       
+					Timestamp nousedate1 = new Timestamp(date.getTime());
+					coinChangeRecord.setTime(nousedate1);
 					coinChangeRecord.setUserName(myRequestBook.get(i).getUserName());
 					appService.addCoinChangeRecord(coinChangeRecord);
 				}
@@ -286,7 +298,7 @@ public class RequestAction extends BaseAction{
 		}
 		if (sellBookINs.size() > 0){
 			for (int i=0; i<sellBookINs.size(); i++){
-				int bookRecordID = lendBookINs.get(i).getBookRecordID();
+				int bookRecordID = sellBookINs.get(i).getBookRecordID();
 				for (int j=0; j<allRequestBooks.size(); j++){
 					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID && allRequestBooks.get(j).getRequestStatus().equals("waiting")){
 						requestBooksBySellBookINs.add(allRequestBooks.get(j));
@@ -374,7 +386,7 @@ public class RequestAction extends BaseAction{
 		}
 		if (sellBookINs.size() > 0){
 			for (int i=0; i<sellBookINs.size(); i++){
-				int bookRecordID = lendBookINs.get(i).getBookRecordID();
+				int bookRecordID = sellBookINs.get(i).getBookRecordID();
 				for (int j=0; j<allRequestBooks.size(); j++){
 					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID && allRequestBooks.get(j).getRequestStatus().equals("waiting")){
 						requestBooksBySellBookINs.add(allRequestBooks.get(j));
@@ -388,6 +400,11 @@ public class RequestAction extends BaseAction{
 		request().getSession().setAttribute("booksBySellBookINs", booksBySellBookINs);
 		request().getSession().setAttribute("requestBooksBySellBookINs", requestBooksBySellBookINs);
 		request().getSession().setAttribute("requestBooksByLendBookINs", requestBooksByLendBookINs);
+		
+		List<CoinChangeRecord> coinChangeRecords = appService.getCoinChangeRecordByUserName(userName);
+		request().getSession().setAttribute("coinChangeRecord", coinChangeRecords);
+		User refreshUser = appService.getUserByUserName(userName);
+		request().getSession().setAttribute("user", refreshUser);
 		
 		/*传输数据回前台*/
 		PrintWriter out = ServletActionContext.getResponse().getWriter();
