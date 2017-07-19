@@ -20,9 +20,6 @@
    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
        <!-- jQuery Js -->
     <script src="assets/js/jquery-1.10.2.js"></script>
-    <%@page import="model.BookComment"%>    
-    <%@page import="java.util.ArrayList" %>    
-    <%@page import="model.Book" %>
 
 	<!-- JS Scripts-->
     <script type="text/javascript">
@@ -86,7 +83,7 @@
                     </li>
                     
                     <li>
-                        <a href="#" class="active-menu"><i class="fa fa-book"></i> 书籍信息<span class="fa arrow"></span></a>
+                        <a href="#"><i class="fa fa-book"></i> 书籍信息<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                             <li>
                                 <a href="dashboard_book.jsp">基本信息</a>
@@ -115,10 +112,10 @@
 					</li>	
 							
                     <li>
-                        <a href="#" class="active-menu"><i class="fa fa-edit"></i> 用户反馈</a>
+                        <a href="#" class="active-menu"><i class="fa fa-edit"></i> 用户反馈<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="dashboard_lendFeedback.jsp" class="active-menu">有书借</a>
+                                <a href="dashboard_lendFeedback.jsp">有书借</a>
                             </li>
                             <li>
                                 <a href="dashboard_buyFeedback.jsp">有书买</a>
@@ -156,13 +153,13 @@
                                     <table class="table table-striped table-bordered table-hover" style="table-layout:fixed" id="myTable">
                                         <thead>
                                             <tr class="text-center">
-                                                <th class="text-center" width="6%">反馈号</th>
-                                                <th class="text-center" width="10%">订单号</th>
-                                                <th class="text-center" width="14%">用户名</th>
-                                                <th class="text-center" width="17%">反馈主题</th>
-                                                <th class="text-center" width="12%">反馈日期</th>
+                                                <th class="text-center" width="10%">反馈号</th>
+                                                <th class="text-center" width="11%">订单号</th>
+                                                <th class="text-center" width="13%">用户名</th>
+                                                <th class="text-center" width="23%">反馈主题</th>
+                                                <th class="text-center" width="17%">反馈日期</th>
                                                 <th class="text-center" width="8%">处理结果</th>
-                                                <th class="text-center" width="8%">处理者</th>
+                                                <th class="text-center" width="12%">处理者</th><!-- 如果未处理的话处理者为无 -->
                                                 <th class="text-center" width="6%">详情</th>
                                             </tr>
                                         </thead>
@@ -174,14 +171,14 @@
 												  <td><% %>1</td>
                                                 <td>1</td>
                                                 <td><% %>zcx</td>
-                                                <td><div title="<% %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><% %>哈哈哈</div></td>
-                                                <td>2017-07-05</td>
+                                                <td><div title="<% %>哈哈哈哈哈" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><% %>哈哈哈哈哈</div></td>
+                                                <td>2017-07-05 00:00:00</td>
                                                 <% %>
                                                 <% %>
-                                                <td>已通过</td>
+                                                <td>已处理</td>
                                                 <% %>
                                                 <td>root</td>
-                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookCommentInfo.jsp?ISBN=<% %>&ID=<% %>">查看</a></td>
+                                                <td><a class="btn btn-success btn-xs" href="dashboard_lendFeedbackInfo.jsp">查看</a></td>
                                                 
                                             </tr>
                                             <% %>
@@ -191,21 +188,15 @@
                                             <%	
                                             %>
                                              <tr>
-												  <td><% %></td>
-												  <%
-												  
-												  %>
-                                                <td><div title="<% %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><% %></div></td>
-                                                <td><% %></td>
-                                                <td><% %></td>
-                                                <td><div title="<% %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><% %></div></td>
+												  <td><% %>2</td>
+												  <td><% %>2</td>
+												  <td><% %>zk</td>
+                                                <td><div title="<% %>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><% %>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div></td>
+                                                <td><% %>2017-07-19</td>
+                                                <td><% %>未处理</td>
+                                                <td>无</td>
                                                 <% %>
-                                                <td>未通过</td>
-                                                <% %>
-                                                <% %>
-                                                <td>已通过</td>
-                                                <% %>
-                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookCommentInfo.jsp?ISBN=<% %>&ID=<% %>">查看</a></td>
+                                                <td><a class="btn btn-success btn-xs" href="dashboard_lendFeedbackInfo.jsp">查看</a></td>
                                                 
                                             </tr>
                                             <% %>
@@ -233,12 +224,6 @@
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
     <script src="assets/js/jquery.metisMenu.js"></script>
-    <!-- Chart Js -->
-    <script type="text/javascript" src="assets/js/chart.min.js"></script>  
-    <script type="text/javascript" src="assets/js/chartjs.js"></script> 
-     <!-- Morris Chart Js -->
-     <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
-    <script src="assets/js/morris/morris.js"></script>
      <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
    <script type="text/javascript">

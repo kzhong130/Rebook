@@ -12,14 +12,10 @@
     <link href="assets/css/bootstrap_book.css" rel="stylesheet" />
      <!-- FontAwesome Styles-->
     <link href="assets/css/font-awesome.css" rel="stylesheet" />
-     <!-- Morris Chart Styles-->
-    <link href="assets/js/morris/morris-0.4.3.min.css" rel="stylesheet" />
         <!-- Custom Styles-->
     <link href="assets/css/custom-styles.css" rel="stylesheet" />
      <!-- Google Fonts-->
    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css" />
-       <!-- jQuery Js -->
-    <script src="assets/js/jquery-1.10.2.js"></script>
      <%@page import="model.LendOrder"%>    
     <%@page import="java.util.ArrayList" %>    
     <%@page import="model.Book" %>
@@ -140,7 +136,7 @@
 					</li>	
 							
                     <li>
-                        <a href="#"><i class="fa fa-edit"></i> 用户反馈</a>
+                        <a href="#"><i class="fa fa-edit"></i> 用户反馈<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="dashboard_lendFeedback.jsp">有书借</a>
@@ -278,16 +274,12 @@
         </div>
      <!-- /. WRAPPER  -->
 
+       <!-- jQuery Js -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
       <!-- Bootstrap Js -->
     <script src="assets/js/bootstrap.min.js"></script>
     <!-- Metis Menu Js -->
     <script src="assets/js/jquery.metisMenu.js"></script>
-    <!-- Chart Js -->
-    <script type="text/javascript" src="assets/js/Chart.min.js"></script>  
-    <script type="text/javascript" src="assets/js/chartjs.js"></script> 
-     <!-- Morris Chart Js -->
-     <script src="assets/js/morris/raphael-2.1.0.min.js"></script>
-    <script src="assets/js/morris/morris.js"></script>
      <!-- Custom Js -->
     <script src="assets/js/custom-scripts.js"></script>
     <script type="text/javascript">
