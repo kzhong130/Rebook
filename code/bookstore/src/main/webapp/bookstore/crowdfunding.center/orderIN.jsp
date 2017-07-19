@@ -55,7 +55,151 @@
 
 	  <!-- 每个订单 -->
 	  <div class="boxtitle">2017-7-18<% %>&emsp;&emsp;订单号：1<% %>&emsp;&emsp;&emsp;&emsp;hongxiaoya
-      <button type="button" class="btn btn-link tc" data-target="#feedbackcontent<% %>" style="padding:3px 5px 0 0;color:#333333;float:right;" id="feedback<% %>">反馈</button>
+      <button type="button" class="btn btn-link" data-toggle="modal"  data-target="#feedbackcontent<% %>" style="padding:3px 5px 0 0;color:#333333;float:right;" id="feedback">反馈</button>
+      </div>
+      <div class="commentbox">
+      <table  style="width:828px;">
+     
+        <tr>
+
+          <td class="bookimage" style="vertical-align:text-top;">
+          <a href=<% %>><img class="listbook" src="https://img3.doubanio.com/mpic/s28332051.jpg<% %>"/></a><br>         
+          </td>
+          
+          <td class="bookcontent" style="vertical-align:top;">
+          <table class="allwidth" style="width:691px;">
+              <tr>
+              <td>
+              <p class="bookname">《<% %>斯通纳》</p>
+              <p class="comment" style="color:#b7b7b7">[美]约翰·威廉斯<% %></p>
+              <p class="comment" style="font-size:1px;">&nbsp;</p>
+              <p class="comment">书主信息：<% %>洪晓雅&nbsp;&nbsp;<% %>15821911839&nbsp;&nbsp;</p>
+              <p class="comment">&emsp;&emsp;&emsp;&emsp;&emsp;<% %>新疆维吾尔自治区克孜勒苏柯尔克孜自治州</p>
+              <p class="comment">新旧程度：<% %>五成新&emsp;&emsp;&emsp;&emsp;送书方式：<% %>邮寄</p>
+              <p class="comment">备注：<% %>请小心的对待这本书（没有备注则写无）</p>
+              </td>
+
+              
+              <td style="vertical-align:top;height:181px;" >
+              <p class="time">收货人：<% %>沈蓓蓓
+              <img style="height:20px;width:20px;margin:0 -1px 3px -2px;" src="../images/person_info.png" title="沈蓓蓓   13918111111 上海市闵行区东川路800号上海交通大学<% %>">
+              </p>
+              <p class="time">书币：<span class="coin"><% %>30</span></p>
+              <div class="deletebutton" style="padding-top:85px;">
+              <!-- 对方已发货时 -->
+              <button class="delete" style="width:90px" id="application" >确认收货</button> 
+              <!-- 对方未发货时
+              <button class="nothing" style="width:90px" id="application" >尚未发货</button>
+              <!-- 我已收到货时
+              <button class="evaluate" style="width:90px" id="evaluate"  data-toggle="modal"  data-target="#evaluate<% %>">评价</button>
+               PS：评价按钮（会有弹窗）的class为evaluate，能够点击的按钮的class为delete，class为nothing的按钮仅用于显示状态-->
+              
+              </div>
+              </td>
+              
+              </tr>
+              </table>
+              
+            </td>
+            </tr>
+		    </table>
+		 </div>   
+		<!-- 反馈模态框（Modal） -->
+		<div class="modal fade" id="feedbackcontent<% %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel" >
+					反馈
+					</h4>
+				</div>
+				<form id="feedbackForm" class="STYLE-NAME" method="POST" action="">
+				
+				
+				<div style="padding:5px 0 0 10px;">
+				<table style="width:598px;resize:none;margin: 10px;text-align:left;">
+				<tr>
+				<td style="width:50px;"><span>主题：</span></td>
+                <td><input type="text" name="topic" id="topic" value="" placeholder="请输入反馈主题" class="" style="width:90%"> </td>  
+                </tr>
+                <tr>
+                <td style="vertical-align:top;padding-top:10px;"><span>内容：</span></td>
+				<td><textarea id="content" name="content" placeholder="请输入具体内容" style="height: 120px; width:90%;resize:none;margin:10px 0;text-align:left;"></textarea>
+				</td></tr>
+				</table></div>
+				<input type="hidden" name="" value="<% %>" >
+				<input type="hidden" name="" value="<% %>">
+				</form>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+					</button>
+					<button type="button" class="btn btn-success" onClick="submitFeedback();" data-dismiss="modal">
+					提交
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		    </div><!-- /.modal -->
+	     </div>
+         <!-- 评价模态框（Modal） -->
+		<div class="modal fade" id="evaluate<% %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel" >
+					评价
+					</h4>
+				</div>
+				<form id="evaluateForm" class="STYLE-NAME" method="POST" action="">
+				
+				
+				<div style="padding:5px 0 0 10px;">
+				<table style="width:598px;resize:none;margin: 10px;text-align:left;">
+				<tr>
+				<td style="width:50px;"><span>请对对方信用进行评价：</span></td>
+                <td><div class="citys"><p>
+                     <select name="" class="">
+                     <option value ="good">好评</option>
+                     <option value ="normal">中评</option>
+                     <option value ="bad">差评</option>
+                     </select></p></div>  </td>  
+                </tr>
+                <tr>
+                <td style="vertical-align:top;padding-top:10px;"><span>评价内容：</span></td>
+				<td><textarea id="evaluatecontent" name="content" placeholder="请输入具体内容" style="height: 120px; width:90%;resize:none;margin:10px 0;text-align:left;"></textarea>
+				</td></tr>
+				</table></div>
+				<input type="hidden" name="" value="<% %>" >
+				<input type="hidden" name="" value="<% %>">
+				</form>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+					</button>
+					<button type="button" class="btn btn-success" onClick="submitEvaluate();" data-dismiss="modal">
+					提交
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		    </div><!-- /.modal -->
+	     </div>   
+        
+        
+  </div>
+  <!-- buyINend -->    
+  
+  <!-- 我的借入 -->
+  <div class="tab-pane fade" id="lendIN">
+
+	  <!-- 每个订单 -->
+	  <div class="boxtitle">2017-7-18<% %>&emsp;&emsp;订单号：1<% %>&emsp;&emsp;&emsp;&emsp;hongxiaoya
+      <button type="button" class="btn btn-link" data-toggle="modal"  data-target="#feedbackcontent2<% %>" style="padding:3px 5px 0 0;color:#333333;float:right;" id="feedback">反馈</button>
       </div>
       <div class="commentbox">
       <table  style="width:828px;">
@@ -89,7 +233,15 @@
               <p class="time">还书方式：<% %>邮寄</p>
               <p class="time">书币：<span class="coin"><% %>30</span></p>
               <div class="deletebutton">
+              <!-- 对方已发货时 -->
               <button class="delete" style="width:90px" id="application" >确认收货</button> 
+              <!-- 对方未发货时
+              <button class="nothing" style="width:90px" id="application" >尚未发货</button>
+              <!-- 我已归还时
+              <button class="delete" style="width:90px" id="application" >确认归还</button>
+              <!-- 对方确认收到时
+              <button class="evaluate" style="width:90px" id="evaluate"  data-toggle="modal"  data-target="#evaluate2<% %>">评价</button>
+               -->
               </div>
               </td>
               
@@ -99,9 +251,9 @@
             </td>
             </tr>
 		    </table>
-		    
-		<!-- 模态框（Modal） -->
-		<div class="modal fade" id="feedbackcontent<% %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		 </div>   
+		<!-- 反馈模态框（Modal） -->
+		<div class="modal fade" id="feedbackcontent2<% %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -112,11 +264,20 @@
 					反馈
 					</h4>
 				</div>
-				<form id="commentForm" class="STYLE-NAME" method="POST" action="">
+				<form id="feedbackForm" class="STYLE-NAME" method="POST" action="">
 				
-				<label>
-				<textarea id="content" name="content" placeholder="请输入具体内容" style="height: 120px; width:580px;resize:none;margin: 10px"></textarea>
-				</label>
+				
+				<div style="padding:5px 0 0 10px;">
+				<table style="width:598px;resize:none;margin: 10px;text-align:left;">
+				<tr>
+				<td style="width:50px;"><span>主题：</span></td>
+                <td><input type="text" name="topic" id="topic" value="" placeholder="请输入反馈主题" class="" style="width:90%"> </td>  
+                </tr>
+                <tr>
+                <td style="vertical-align:top;padding-top:10px;"><span>内容：</span></td>
+				<td><textarea id="content" name="content" placeholder="请输入具体内容" style="height: 120px; width:90%;resize:none;margin:10px 0;text-align:left;"></textarea>
+				</td></tr>
+				</table></div>
 				<input type="hidden" name="" value="<% %>" >
 				<input type="hidden" name="" value="<% %>">
 				</form>
@@ -124,73 +285,58 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 					</button>
-					<button type="button" class="btn btn-success" onClick="submitComment();" data-dismiss="modal">
+					<button type="button" class="btn btn-success" onClick="submitFeedback();" data-dismiss="modal">
 					提交
 					</button>
 				</div>
 			</div><!-- /.modal-content -->
 		    </div><!-- /.modal -->
 	     </div>
-    </div>
-        
-        
-  </div>
-  <!-- buyINend -->    
-  
-  <!-- 我的借入 -->
-  <div class="tab-pane fade" id="lendIN">
-
-	  <!-- 每个订单 -->
-	  <div class="boxtitle">2017-7-18<% %>&emsp;&emsp;订单号：1<% %>&emsp;&emsp;&emsp;&emsp;hongxiaoya
-      <button type="button" class="btn btn-link tc" style="padding:3px 5px 0 0;color:#333333;float:right;">反馈</button>
-      </div>
-      <div class="commentbox">
-      <table  style="width:828px;">
-     
-        <tr>
-
-          <td class="bookimage" style="vertical-align:text-top;">
-          <a href=<% %>><img class="listbook" src="https://img3.doubanio.com/mpic/s28332051.jpg<% %>"/></a><br>         
-          </td>
-          
-          <td class="bookcontent" style="vertical-align:top;">
-          <table class="allwidth" style="width:691px;">
-              <tr>
-              <td>
-              <p class="bookname">《<% %>斯通纳》</p>
-              <p class="comment" style="color:#b7b7b7">[美]约翰·威廉斯<% %></p>
-              <p class="comment" style="font-size:1px;">&nbsp;</p>
-              <p class="comment">书主信息：<% %>洪晓雅&nbsp;&nbsp;<% %>15821911839&nbsp;&nbsp;</p>
-              <p class="comment">&emsp;&emsp;&emsp;&emsp;&emsp;<% %>新疆维吾尔自治区克孜勒苏柯尔克孜自治州</p>
-              <p class="comment">&emsp;&emsp;&emsp;&emsp;&emsp;<% %>翔安区新店镇新兴街610号</p>
-              <p class="comment">新旧程度：<% %>五成新&emsp;&emsp;&emsp;&emsp;送书方式：<% %>邮寄</p>
-              <p class="comment">备注：<% %>请小心的对待这本书（没有备注则写无）</p>
-              </td>
-              
-              <td style="vertical-align:top;">
-              <p class="comment">收货人信息：<% %>沈蓓蓓
-              <img style="height:20px;width:30px;margin:0;" src="../images/person_info.png" title="沈蓓蓓   13918111111 上海市闵行区东川路800号上海交通大学<% %>">
-              </p>
-              <p class="comment" style="font-size:8px;">&nbsp;</p>
-              <p class="comment">还书时间：<% %>2017-09-01</p>
-              <p class="comment">还书方式：<% %>邮寄</p>
-              </td>
-              
-              <td style="vertical-align:top;height:164px;" >
-              <p class="time">30<% %>书币</p>
-              <div class="deletebutton">
-              <button class="delete" style="width:90px" id="application" >确认收货</button> 
-              </div>
-              </td>
-              
-              </tr>
-              </table>
-              
-            </td>
-            </tr>
-		    </table>
-        </div>
-        
+          <!-- 评价模态框（Modal） -->
+		<div class="modal fade" id="evaluate2<% %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+					&times;
+					</button>
+					<h4 class="modal-title" id="myModalLabel" >
+					评价
+					</h4>
+				</div>
+				<form id="evaluateForm" class="STYLE-NAME" method="POST" action="">
+				
+				
+				<div style="padding:5px 0 0 10px;">
+				<table style="width:598px;resize:none;margin: 10px;text-align:left;">
+				<tr>
+				<td style="width:50px;"><span>请对对方信用进行评价：</span></td>
+                <td><div class="citys"><p>
+                     <select name="" class="">
+                     <option value ="good">好评</option>
+                     <option value ="normal">中评</option>
+                     <option value ="bad">差评</option>
+                     </select></p></div>  </td>  
+                </tr>
+                <tr>
+                <td style="vertical-align:top;padding-top:10px;"><span>评价内容：</span></td>
+				<td><textarea id="evaluatecontent" name="content" placeholder="请输入具体内容" style="height: 120px; width:90%;resize:none;margin:10px 0;text-align:left;"></textarea>
+				</td></tr>
+				</table></div>
+				<input type="hidden" name="" value="<% %>" >
+				<input type="hidden" name="" value="<% %>">
+				</form>
+				
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
+					</button>
+					<button type="button" class="btn btn-success" onClick="submitEvaluate();" data-dismiss="modal">
+					提交
+					</button>
+				</div>
+			</div><!-- /.modal-content -->
+		    </div><!-- /.modal -->
+	     </div>         
         
   </div>
   <!-- lendINend --> 
@@ -235,14 +381,26 @@ function change(value){
 	}
 }
 
-function submitComment(){
+function submitFeedback(){
 	var comment=document.getElementById("content").value;
-	if (comment==""){
+	var topic=document.getElementById("topic").value;
+	if (comment==""||topic==""){
+		alert("主题或具体内容不能为空");
+	}
+	else{
+		document.getElementById("feedbackForm").submit();
+		location='#buyIN';
+	}
+	
+}
+function submitEvaluate(){
+	var evaluate=document.getElementById("evaluatecontent").value;
+	if (evaluate==""){
 		alert("具体内容不能为空");
 	}
 	else{
-		document.getElementById("commentForm").submit();
-		location='#bookComment';
+		document.getElementById("evaluateForm").submit();
+		location='#buyIN';
 	}
 	
 }
