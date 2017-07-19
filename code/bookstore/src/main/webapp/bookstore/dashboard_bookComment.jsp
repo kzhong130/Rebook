@@ -78,7 +78,7 @@
                         </li>
                     </ul>
                 </li>
-                          <form class="navbar-form navbar-right" role="search" style="margin:13px 20px 0 0">
+            <form class="navbar-form navbar-right" role="search" style="margin:13px 20px 0 0">
         <div class="form-group">
           <input type="text" class="form-control" placeholder="Search" id="searchInput">
         </div>

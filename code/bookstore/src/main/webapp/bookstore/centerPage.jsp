@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="css/index_style.css">
 <link rel="stylesheet" href="css/login.css">
-
+<link href="assets/css/font-awesome.css" rel="stylesheet" />
    
 <%@page import="model.Book"%>    
 <%@page import="java.util.ArrayList" %>    
@@ -49,7 +49,7 @@ session.setAttribute("prePage",url);
         <button type="submit" class="btn btn-default" >搜索</button>
       </form>
       <ul class="nav navbar-nav navbar-right hidden-sm" id="personalInfo">
-        <li><a href="register.jsp">注册</a> </li>
+        <li><a href="register.jsp">注册<i class="fa fa-address-card" aria-hidden="true"></i></a> </li>
         <li><a href="#" class="tc">登录</a> </li>
       </ul>
        <ul class="nav navbar-nav navbar-right hidden-sm">
