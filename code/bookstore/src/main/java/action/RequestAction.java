@@ -190,6 +190,45 @@ public class RequestAction extends BaseAction{
 		return "update success";
 	}
 	
+	public String searchRequestInfo() throws Exception{
+		response().setCharacterEncoding("UTF-8"); 
+		//response().setContentType("application/json;charset=utf-8"); 
+		PrintWriter out=response().getWriter();
+		JSONObject obj = new JSONObject(); 
+		RequestBook requestBook=appService.getRequestBookByRequestID(requestID);
+		obj.put("name", requestBook.getReceiverName());
+		obj.put("phone", requestBook.getPhone());
+		obj.put("province", requestBook.getProvince());
+		obj.put("city", requestBook.getCity());
+		obj.put("area", requestBook.getTown());
+		obj.put("address", requestBook.getAddress());
+		obj.put("returnWay", requestBook.getReturnWay());
+        String str = obj.toString();  
+       
+		out.write(str);
+		out.close();
+		return SUCCESS;
+	}
 	
+	public String changeInfo() throws Exception{
+		RequestBook request=appService.getRequestBookByRequestID(requestID);
+		request.setAddress(address);
+		request.setCity(city);
+		request.setTown(town);
+		request.setReturnWay(returnWay);
+		request.setPhone(phone);
+		request.setProvince(province);
+		request.setReceiverName(receiverName);
+		appService.updateRequestBook(request);
+		
+		return SUCCESS;
+	}
 	
+	public String cancle() throws Exception{
+		
+		RequestBook request=appService.getRequestBookByRequestID(requestID);
+		
+		appService.deleteRequestBook(request);
+		return SUCCESS;
+	}
 }

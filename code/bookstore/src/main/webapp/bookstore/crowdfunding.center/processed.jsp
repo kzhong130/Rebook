@@ -88,7 +88,7 @@
               <p class="comment">&emsp;&emsp;&emsp;&emsp;&emsp;<%=bookIn.getOwnerAddress() %></p>
               </td>
               <td>
-              <p class="time" title="" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">卖家：<%=bookIn.getOwnerName() %>&nbsp;&nbsp;</p>
+              <p class="time" title="" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">卖家：<%=bookIn.getUserName() %>&nbsp;&nbsp;</p>
               <p class="time">可借天数：<%=bookIn.getLongestDuration() %>&nbsp;&nbsp;</p>
               </td>
               </tr>
@@ -174,7 +174,7 @@
               <p class="comment">书主信息：<%=bookIn.getOwnerName() %>&nbsp;&nbsp;<%=bookIn.getOwnerPhone() %>&nbsp;&nbsp;<%=bookIn.getProvince()+bookIn.getCity()+bookIn.getTown() %></p>
               </td>
               <td>
-              <p class="time" title="" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">卖家：<%=Username %>&nbsp;&nbsp;</p>
+              <p class="time" title="" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">卖家：<%=bookIn.getUserName() %>>&nbsp;&nbsp;</p>
               </td>
               </tr>
               

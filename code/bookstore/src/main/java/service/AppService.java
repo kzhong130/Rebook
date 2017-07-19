@@ -98,5 +98,7 @@ public interface AppService {
 
 	public RequestBook getRequestBookByRequestID(int requestID);
 	public void updateRequestBook(RequestBook requestBook);
+	
+	public void deleteRequestBook(RequestBook requestBook);
 
 }

@@ -23,6 +23,9 @@
 <!-- Bootstrap -->
 <link href="../css/bootstrap.min.css" rel="stylesheet">
 <link href="../css/crowdfunding.center/sell_book.css" rel="stylesheet">
+<script type="text/javascript" src="../js/jquery.min.js"></script>
+<script type="text/javascript" src="../js/jquery.citys.js"></script>          
+ 
 
 <!--[if lt IE 9]>
       <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -91,7 +94,7 @@
               <p class="comment">&emsp;&emsp;&emsp;&emsp;&emsp;<%=bookIn.getOwnerAddress() %></p>
               </td>
               <td>
-              <p class="time" title="" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">卖家：<%=bookIn.getOwnerName() %>&nbsp;&nbsp;</p>
+              <p class="time" title="" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">卖家：<%=bookIn.getUserName() %>&nbsp;&nbsp;</p>
               <p class="time">可借天数：<%=bookIn.getLongestDuration() %>&nbsp;&nbsp;</p>
               </td>
               </tr>
@@ -123,14 +126,14 @@
               <tr><td colspan="2"><hr class="fortr"></td></tr>
               <tr>
               <td>
-             <p class="comment">收件人：<%=requestBook.getReceiverName() %>&nbsp;&nbsp;<%=requestBook.getPhone() %>&emsp;&emsp;还书方式：<%=requestBook.getReturnWay() %></p>
-              <p class="comment">收货地址：<%=requestBook.getProvince()+requestBook.getCity()+requestBook.getTown()+requestBook.getAddress() %></p>
+             <p class="comment" id="<%=i %>lendInfo">收件人：<%=requestBook.getReceiverName() %>&nbsp;&nbsp;<%=requestBook.getPhone() %>&emsp;&emsp;还书方式：<%=requestBook.getReturnWay() %></p>
+              <p class="comment" id="<%=i%>lendAddress">收货地址：<%=requestBook.getProvince()+requestBook.getCity()+requestBook.getTown()+requestBook.getAddress() %></p>
 
               </td>
               <td class="deletebutton" style="vertical-align:bottom;">
               <p class="time"><span class="coin"><% %>借书&nbsp;&nbsp;</span></p>
-              <button class="delete tc" name="" >修改</button>
-              <button class="delete" value="<% %>" onclick="" >取消</button>
+              <button class="delete tc" name="" id=<%=requestBook.getRequestID() %> onclick="modifyLend(this.id)">修改</button>
+              <button class="delete" value="<%=requestBook.getRequestID() %>"  onclick="cancel(this.value)"  >取消</button>
               </td>
               </tr>
               
@@ -171,7 +174,7 @@
               <p class="comment">书主信息：<%=bookIn.getOwnerName() %>&nbsp;&nbsp;<%=bookIn.getOwnerPhone() %>&nbsp;&nbsp;<%=bookIn.getProvince()+bookIn.getCity()+bookIn.getTown() %></p>
               </td>
               <td>
-              <p class="time" title="" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">卖家：<%=Username %>&nbsp;&nbsp;</p>
+              <p class="time" title="" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis">卖家：<%=bookIn.getUserName() %>&nbsp;&nbsp;</p>
               </td>
               </tr>
               
@@ -209,8 +212,8 @@
               
               <td class="deletebutton" style="vertical-align:bottom;">
               <p class="time"><span class="coin"><% %>购书&nbsp;&nbsp;</span></p>
-              <button class="delete td" name="" >修改</button>
-              <button class="delete" value="<% %>" onclick="" >取消</button>
+              <button class="delete td" name="" id=<%=requestBook.getRequestID() %> onclick="modifySell(this.id)">修改</button>
+              <button class="delete" value="<%=requestBook.getRequestID() %>" onclick="cancel(this.value)" >取消</button>
               </td>
               </tr>
               
@@ -249,14 +252,14 @@
 						      <tr>
  						       <td align="right" class="color555">收件人：</td>
 						        <td class="color555 td2" >
- 						       <input class="reg_ownername" name="ownerName" type="text" value=<% %>> <!-- 从数据库取 -->
+ 						       <input class="reg_ownername" name="ownerName" id="lend_ownerName" type="text" value=<% %>> <!-- 从数据库取 -->
  						       <span class="tip ownername_hint"></span>
  						     </td>
  						     </tr>
 						      <tr>
 						        <td align="right" class="color555">联系方式：</td>
 						        <td class="color555 td2" >
-						        <input class="reg_ownerphone" name="ownerPhone" type="text" value=<% %>> <!-- 从数据库取 -->
+						        <input class="reg_ownerphone" name="ownerPhone" id="lend_ownerPhone"type="text" value=<% %>> <!-- 从数据库取 -->
 						         <span class="tip ownerphone_hint"></span>
 						        </td>
 						      </tr>  						    
@@ -265,19 +268,21 @@
    						     <td class="color555 td2"><div id="demo3">
   						                    <select name="province"></select>
   						                    <select name="city"></select>
+  						                    <br>
+  						                    <select name="area"></select>
  						                    </div></td>
  						     </tr> 						     
 						      <tr>
   						      <td align="right" class="color555">&nbsp;</td>
   						      <td class="color555  td2">
-  						      <input class="reg_address" name="address" type="text" value=<% %>>   <!-- 从数据库取 -->
+  						      <input class="reg_address" name="address" id="lend_address" type="text" value=<% %>>   <!-- 从数据库取 -->
   						      <span class="tip address_hint"></span></td>  
      
   						     </tr>
  						     <tr>
    						     <td align="right" class="color555">还书方式：</td>
    						     <td><div><p>
-        						          <select name="sendway" class="reg_sendway">
+        						          <select name="sendway" id="sendway" class="reg_sendway">
        						             <option value ="face">当面</option>
        						             <option value ="mail">邮寄</option>
       						            </select></p></div> </td>
@@ -313,28 +318,30 @@
 						      <tr>
  						       <td align="right" class="color555">收件人：</td>
 						        <td class="color555 td2" >
- 						       <input class="reg_ownername" name="ownerName" type="text" value=<% %>> <!-- 从数据库取 -->
+ 						       <input class="reg_ownername" name="ownerName" id="sell_ownerName" type="text" value=<% %>> <!-- 从数据库取 -->
  						       <span class="tip ownername_hint"></span>
  						     </td>
  						     </tr>
 						      <tr>
 						        <td align="right" class="color555">联系方式：</td>
 						        <td class="color555 td2" >
-						        <input class="reg_ownerphone" name="ownerPhone" type="text" value=<% %>> <!-- 从数据库取 -->
+						        <input class="reg_ownerphone" name="ownerPhone" id="sell_ownerPhone" type="text" value=<% %>> <!-- 从数据库取 -->
 						         <span class="tip ownerphone_hint"></span>
 						        </td>
 						      </tr>  						    
    						    <tr>
    						     <td align="right" class="color555">收货地址：</td>
-   						     <td class="color555 td2"><div id="demo3">
+   						     <td class="color555 td2"><div id="demo4">
   						                    <select name="province"></select>
   						                    <select name="city"></select>
+  						                    <br>
+  						                    <select name="area"></select>
  						                    </div></td>
  						     </tr> 						     
 						      <tr>
   						      <td align="right" class="color555">&nbsp;</td>
   						      <td class="color555  td2">
-  						      <input class="reg_address" name="address" type="text" value=<% %>>   <!-- 从数据库取 -->
+  						      <input class="reg_address" name="address" id="sell_address" type="text" value=<% %>>   <!-- 从数据库取 -->
   						      <span class="tip address_hint"></span></td>  
      
   						     </tr>
@@ -353,26 +360,173 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-	<!-- 结束 -->
-	<script src="../js/jquery-2.1.1.min.js"></script>
-	<script src="../js/bootstrap.min.js"></script>
+	<!--<script src="../js/jquery-2.1.1.min.js"></script>
+	<script src="../js/bootstrap.min.js"></script>  -->
 
 <script type="text/javascript">
+
+
+
+var requestID;
+
+var $town = $('#demo3 select[name="town"]');
+var townFormat = function(info){
+	$town.hide().empty();
+	if(info['code']%1e4&&info['code']<7e5){	//是否为“区”且不是港澳台地区
+		$.ajax({
+			url:'http://passer-by.com/data_location/town/'+info['code']+'.json',
+			dataType:'json',
+			success:function(town){
+				$town.show();
+				for(i in town){
+						$town.append('<option value="'+i+'">'+town[i]+'</option>');
+				}
+			}
+		});
+	}
+};
+
+var $town = $('#demo4 select[name="town"]');
+var townFormat = function(info){
+	$town.hide().empty();
+	if(info['code']%1e4&&info['code']<7e5){	//是否为“区”且不是港澳台地区
+		$.ajax({
+			url:'http://passer-by.com/data_location/town/'+info['code']+'.json',
+			dataType:'json',
+			success:function(town){
+				$town.show();
+				for(i in town){
+						$town.append('<option value="'+i+'">'+town[i]+'</option>');
+				}
+			}
+		});
+	}
+};
+
+
+	function modifyLend(id){
+		var province;
+		var city;
+		var area;
+		var address;
+		var gender;
+		var returnWay;
+		var name;
+		var phone;
+		requestID=id;
+		$.ajax({  
+		        type:"POST",  
+		        url:"RequestAction!searchRequestInfo",  
+		        async:false,
+		        data:{requestID:id} ,
+		        
+		        success:function(msg){ 
+		        	//alert(msg);
+		        	msg=eval('('+msg+')');
+		        	
+		        	city=msg.city;
+		        	province=msg.province;
+		        	area=msg.area;
+		        	name=msg.name;
+		        	phone=msg.phone;
+		        	address=msg.address;
+		        	returnWay=msg.returnWay;	        	
+		        }  
+		});
+		
+		//alert(province);
+        $('#demo3').citys({
+			province:province,
+			city:city,
+			area:area,
+			
+
+			onChange:function(info){
+				townFormat(info);
+			}
+		},function(api){
+			var info = api.getInfo();
+			townFormat(info);
+		});
+        
+        document.getElementById("lend_address").value=address;
+        document.getElementById("lend_ownerName").value=name;
+        document.getElementById("lend_ownerPhone").value=phone;
+       	var options=document.getElementById("sendway").options;
+       	for(var i=0;i<options.length;i++){
+       		if(options[i].value==returnWay){
+       			
+       			options[i].selected=true;
+       		}
+       	}
+	}
+	
+	function modifySell(id){
+		var province;
+		var city;
+		var area;
+		var address;
+		var name;
+		var phone;
+		requestID=id;
+		$.ajax({  
+		        type:"POST",  
+		        url:"RequestAction!searchRequestInfo",  
+		        async:false,
+		        data:{requestID:id} ,
+		        
+		        success:function(msg){ 
+		        	//alert(msg);
+		        	msg=eval('('+msg+')');
+		        	
+		        	city=msg.city;
+		        	province=msg.province;
+		        	area=msg.area;
+		        	name=msg.name;
+		        	phone=msg.phone;
+		        	address=msg.address;
+		        	       	
+		        }  
+		});
+		
+		//alert(province);
+        $('#demo4').citys({
+			province:province,
+			city:city,
+			area:area,
+			
+
+			onChange:function(info){
+				townFormat(info);
+			}
+		},function(api){
+			var info = api.getInfo();
+			townFormat(info);
+		});
+        
+        document.getElementById("sell_address").value=address;
+        document.getElementById("sell_ownerName").value=name;
+        document.getElementById("sell_ownerPhone").value=phone;
+       	
+	}
+
+function cancel(id){
+	alert(id);
+	$.ajax({  
+	        type:"POST",  
+	        url:"RequestAction!cancle",  
+	        async:false,
+	        data:{requestID:id} ,
+	        
+	    });
+}
+
 //窗口效果
 //点击登录class为tc 显示
 $(".tc").click(function(){
+
 	$("#gray").show();
+	
 	$("#lend").show();//查找ID为popup的DIV show()显示#gray
 	tc_center();
 });
@@ -439,37 +593,9 @@ $(document).ready(function(){
 	})
 })
 
-</script>
-<script type="text/javascript">
-        		var $town = $('#demo3 select[name="town"]');
-        		var townFormat = function(info){
-        			$town.hide().empty();
-        			if(info['code']%1e4&&info['code']<7e5){	//是否为“区”且不是港澳台地区
-        				$.ajax({
-        					url:'http://passer-by.com/data_location/town/'+info['code']+'.json',
-        					dataType:'json',
-        					success:function(town){
-        						$town.show();
-        						for(i in town){
-        								$town.append('<option value="'+i+'">'+town[i]+'</option>');
-        						}
-        					}
-        				});
-        			}
-        		};
-                $('#demo3').citys({
-        			province:'<% %>',
-        			city:'<% %>',
-        			
-            /*这2个值应从数据库取*/
-        			onChange:function(info){
-        				townFormat(info);
-        			}
-        		},function(api){
-        			var info = api.getInfo();
-        			townFormat(info);
-        		});
 
+
+        	
                 var buyreceiver_Boolean=true;
                 var buyphone_Boolean=true;
                 var buyaddress_Boolean=true;
@@ -552,11 +678,32 @@ $(document).ready(function(){
       		
       		if(buyreceiver_Boolean && buyaddress_Boolean && buyphone_Boolean){
       		 
+        		  var select = document.getElementsByName("province")[1];
+          		  var province=select.options[select.selectedIndex].text;
+          		  //alert(document.getElementsByName("city")[0].value);
+          		  alert(province);
+          		  if(document.getElementsByName("city")[1].value!=""){
+          			  select=document.getElementsByName("city")[1];
+          			  var city=select.options[select.selectedIndex].text;
+          		  }
+          		  else {
+          			  var city="";
+          			  //alert(2);
+          		  }
+          		  //alert(2333);
+          		  alert(city);
+          		  if(document.getElementsByName("area")[1].value!=""){
+          			  select=document.getElementsByName("area")[1];
+          			  var area=select.options[select.selectedIndex].text;
+          		  }
+          		  else var area="";
+          		  alert(area);
+          		alert(document.getElementById("sell_address").value);  
       			$.ajax({  
       		        type:"POST",  
-      		        url:"",  
+      		        url:"RequestAction!changeInfo",  
       		        async:false,
-      		        data:{} ,
+      		        data:{province:province,town:area,city:city,receiverName:document.getElementById("sell_ownerName").value,address:document.getElementById("sell_address").value,phone:document.getElementById("sell_ownerPhone").value,requestID:requestID} ,
       		        
       		    });
       			
@@ -569,16 +716,48 @@ $(document).ready(function(){
       	function lendupdate(){
       		
       		if(lendreceiver_Boolean && lendaddress_Boolean && lendphone_Boolean){
-      		 
-      			$.ajax({  
-      		        type:"POST",  
-      		        url:"",  
-      		        async:false,
-      		        data:{} ,
-      		        
-      		    });
+      			var select = document.getElementsByName("province")[0];
+        		  var province=select.options[select.selectedIndex].text;
+        		  //alert(document.getElementsByName("city")[0].value);
+        		  if(document.getElementsByName("city")[0].value!=""){
+        			  select=document.getElementsByName("city")[0];
+        			  var city=select.options[select.selectedIndex].text;
+        		  }
+        		  else {
+        			  var city="";
+        			  //alert(2);
+        		  }
+        		  //alert(2333);
+        		  
+        		  if(document.getElementsByName("area")[0].value!=""){
+        			  select=document.getElementsByName("area")[0];
+        			  var area=select.options[select.selectedIndex].text;
+        		  }
+        		  else var area="";
+        		  var a;
+        		  var options=document.getElementById("sendway").options;
+        	       	for(var i=0;i<options.length;i++){
+        	       		if(options[i].selected==true){
+        	       			
+        	       			a=options[i].value;
+        	       		}
+        	       	}
+        		//alert(a);
+    			$.ajax({  
+    		        type:"POST",  
+    		        url:"RequestAction!changeInfo",  
+    		        async:false,
+    		        data:{returnWay:a,province:province,town:area,city:city,receiverName:document.getElementById("lend_ownerName").value,address:document.getElementById("lend_address").value,phone:document.getElementById("lend_ownerPhone").value,requestID:requestID} ,
+    		        
+    		    });
+    			
+      			
+      		    
       			
       			alert("修改成功");
+      			//window.location.assign("MemberCenterAction!initialize");
+      			
+      			
       		}
       		else{
       			alert("请完善信息");

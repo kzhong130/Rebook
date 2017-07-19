@@ -430,4 +430,13 @@ public class AppServiceImpl implements AppService {
 		requestBookDao.update(requestBook);
 	}
 
+
+
+	@Override
+	public void deleteRequestBook(RequestBook requestBook) {
+		
+		requestBookDao.delete(requestBook);
+		
+	}
+
 }
