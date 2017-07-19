@@ -269,7 +269,7 @@ public class MemberCenterAction extends BaseAction{
 			for (int i=0; i<lendBookINs.size(); i++){
 				int bookRecordID = lendBookINs.get(i).getBookRecordID();
 				for (int j=0; j<allRequestBooks.size(); j++){
-					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID){
+					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID && allRequestBooks.get(j).getRequestStatus().equals("waiting")){
 						requestBooksByLendBookINs.add(allRequestBooks.get(j));
 					}
 				}
@@ -277,21 +277,22 @@ public class MemberCenterAction extends BaseAction{
 		}
 		if (sellBookINs.size() > 0){
 			for (int i=0; i<sellBookINs.size(); i++){
-				int bookRecordID = lendBookINs.get(i).getBookRecordID();
+				int bookRecordID = sellBookINs.get(i).getBookRecordID();
 				for (int j=0; j<allRequestBooks.size(); j++){
-					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID){
+					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID && allRequestBooks.get(j).getRequestStatus().equals("waiting")){
 						requestBooksBySellBookINs.add(allRequestBooks.get(j));
 					}
 				}
 			}
 		}
+		
 		request().getSession().setAttribute("lendBookINs", lendBookINs);
 		request().getSession().setAttribute("sellBookINs", sellBookINs);
 		request().getSession().setAttribute("booksByLendBookINs", booksByLendBookINs);
 		request().getSession().setAttribute("booksBySellBookINs", booksBySellBookINs);
 		request().getSession().setAttribute("requestBooksBySellBookINs", requestBooksBySellBookINs);
 		request().getSession().setAttribute("requestBooksByLendBookINs", requestBooksByLendBookINs);
-		
+		System.out.println(555);
 		return "initialize success";
 	}
 	

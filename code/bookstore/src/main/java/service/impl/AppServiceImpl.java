@@ -11,6 +11,7 @@ import model.Admin;
 import model.Book;
 import model.BookComment;
 import model.BookIN;
+import model.BuyOrder;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
 import model.LendOrder;
@@ -20,6 +21,7 @@ import dao.AdminDao;
 import dao.BookCommentDao;
 import dao.BookDao;
 import dao.BookINDao;
+import dao.BuyOrderDao;
 import dao.CoinChangeRecordDao;
 import dao.CreditChangeRecordDao;
 import dao.LendOrderDao;
@@ -49,9 +51,14 @@ public class AppServiceImpl implements AppService {
 	private BookINDao bookINDao;
 	private LendOrderDao lendOrderDao;
 	private RequestBookDao requestBookDao;
+	private BuyOrderDao buyOrderDao;
 	
 	public void setRequestBookDao(RequestBookDao requestBookDao){
 		this.requestBookDao=requestBookDao;
+	}
+	
+	public void setBuyOrderDao(BuyOrderDao buyOrderDao){
+		this.buyOrderDao = buyOrderDao;
 	}
 
 
@@ -401,6 +408,9 @@ public class AppServiceImpl implements AppService {
 		lendOrderDao.update(lendOrder);
 	}
 	
+	public void addLendOrder(LendOrder lendOrder){
+		lendOrderDao.save(lendOrder);
+	}
 	/*
 	 * RequestBook
 	 */
@@ -432,11 +442,20 @@ public class AppServiceImpl implements AppService {
 
 
 
+
 	@Override
 	public void deleteRequestBook(RequestBook requestBook) {
 		
 		requestBookDao.delete(requestBook);
 		
+	}
+
+	
+	/*
+	 * BuyOrder
+	 */
+	public void addBuyOrder(BuyOrder buyOrder){
+		buyOrderDao.save(buyOrder);
 	}
 
 }

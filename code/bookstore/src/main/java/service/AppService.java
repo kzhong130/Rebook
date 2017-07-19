@@ -7,6 +7,7 @@ import model.Admin;
 import model.Book;
 import model.BookComment;
 import model.BookIN;
+import model.BuyOrder;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
 import model.LendOrder;
@@ -83,7 +84,7 @@ public interface AppService {
 	public List<LendOrder> getAllLendOrders();
 	public LendOrder getLendOrderByLendID(int lendID);
 	public void updateLendOrder(LendOrder lendOrder);
-	
+	public void addLendOrder(LendOrder lendOrder);
 	
 	/*
 	 * Request
@@ -99,6 +100,13 @@ public interface AppService {
 	public RequestBook getRequestBookByRequestID(int requestID);
 	public void updateRequestBook(RequestBook requestBook);
 	
+
 	public void deleteRequestBook(RequestBook requestBook);
+
+	/*
+	 * BuyOrder
+	 */
+	public void addBuyOrder(BuyOrder buyOrder);
+
 
 }

@@ -236,7 +236,7 @@ public class BookINAction extends BaseAction{
 			List<RequestBook> myRequestBooks = new ArrayList<RequestBook>();
 			if (requestBooks.size() > 0){
 				for (int i=0; i<requestBooks.size(); i++){
-					if (requestBooks.get(i).getBookRecordID() == bookRecordID){
+					if (requestBooks.get(i).getBookRecordID() == bookRecordID && requestBooks.get(i).getRequestStatus().equals("waiting")){
 						myRequestBooks.add(requestBooks.get(i));
 					}
 				}
@@ -298,7 +298,7 @@ public class BookINAction extends BaseAction{
 			for (int i=0; i<lendBookINs.size(); i++){
 				int bookRecordID = lendBookINs.get(i).getBookRecordID();
 				for (int j=0; j<allRequestBooks.size(); j++){
-					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID){
+					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID && allRequestBooks.get(j).getRequestStatus().equals("waiting")){
 						requestBooksByLendBookINs.add(allRequestBooks.get(j));
 					}
 				}
@@ -306,9 +306,9 @@ public class BookINAction extends BaseAction{
 		}
 		if (sellBookINs.size() > 0){
 			for (int i=0; i<sellBookINs.size(); i++){
-				int bookRecordID = lendBookINs.get(i).getBookRecordID();
+				int bookRecordID = sellBookINs.get(i).getBookRecordID();
 				for (int j=0; j<allRequestBooks.size(); j++){
-					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID){
+					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID && allRequestBooks.get(j).getRequestStatus().equals("waiting")){
 						requestBooksBySellBookINs.add(allRequestBooks.get(j));
 					}
 				}
@@ -328,5 +328,107 @@ public class BookINAction extends BaseAction{
 		out.write(str);
 		out.close();
 		return SUCCESS;
+	}
+	
+	public String deleteBookIN() throws Exception{
+		BookIN bookIN = appService.getBookINByBookRecordID(bookRecordID);
+		bookIN.setInStatus("delete");
+		appService.updateBookIN(bookIN);
+		/*拒绝其他等待中的请求*/
+		List<RequestBook> allRequestBooks = appService.getAllRequestBooks();
+		List<RequestBook> myRequestBook = new ArrayList<RequestBook>();
+		if (allRequestBooks.size() > 0){
+			for (int i=0; i<allRequestBooks.size(); i++){
+				if (allRequestBooks.get(i).getBookRecordID() == bookIN.getBookRecordID() && allRequestBooks.get(i).getRequestStatus().equals("waiting")){
+					myRequestBook.add(allRequestBooks.get(i));
+				}
+			}
+			if (myRequestBook.size() > 0){
+				for (int i=0; i<myRequestBook.size(); i++){
+					myRequestBook.get(i).setRequestStatus("reject");
+					appService.updateRequestBook(myRequestBook.get(i));
+					User user = appService.getUserByUserName(myRequestBook.get(i).getUserName());
+					int oldCoinNum = user.getBookCoin();
+					user.setBookCoin(oldCoinNum + bookIN.getCoinNumber());
+					appService.updateUser(user);
+					CoinChangeRecord coinChangeRecord = new CoinChangeRecord();
+					coinChangeRecord.setNumber(bookIN.getCoinNumber());
+					coinChangeRecord.setReason("return");
+					Date date = new Date();       
+					Timestamp nousedate = new Timestamp(date.getTime());
+					coinChangeRecord.setTime(nousedate);
+					coinChangeRecord.setUserName(myRequestBook.get(i).getUserName());
+					appService.addCoinChangeRecord(coinChangeRecord);
+				}
+			}
+		}
+		
+		/*刷新数据*/
+		List<BookIN> bookINs = appService.getBookINByUserName(userName);
+		List<BookIN> lendBookINs = new ArrayList<BookIN>();
+		List<BookIN> sellBookINs = new ArrayList<BookIN>();
+		if (bookINs.size() > 0){
+			for (int i=0; i<bookINs.size(); i++){
+				if ("sell".equals(bookINs.get(i).getType())){
+					sellBookINs.add(bookINs.get(i));
+				}
+				if ("lend".equals(bookINs.get(i).getType())){
+					lendBookINs.add(bookINs.get(i));
+				}
+			}
+		}
+		List<Book> booksByLendBookINs = new ArrayList<Book>();
+		List<Book> booksBySellBookINs = new ArrayList<Book>();
+		if (lendBookINs.size() > 0){
+			for (int i=0; i<lendBookINs.size(); i++){
+				Book book = appService.getBookByISBN(lendBookINs.get(i).getISBN());
+				booksByLendBookINs.add(book);
+			}
+		}
+		if (sellBookINs.size() > 0){
+			for (int i=0; i<sellBookINs.size(); i++){
+				Book book = appService.getBookByISBN(sellBookINs.get(i).getISBN());
+				booksBySellBookINs.add(book);
+			}
+		}
+		allRequestBooks = appService.getAllRequestBooks();
+		List<RequestBook> requestBooksByLendBookINs = new ArrayList<RequestBook>();
+		List<RequestBook> requestBooksBySellBookINs = new ArrayList<RequestBook>();
+		if (lendBookINs.size() > 0){
+			for (int i=0; i<lendBookINs.size(); i++){
+				int bookRecordID = lendBookINs.get(i).getBookRecordID();
+				for (int j=0; j<allRequestBooks.size(); j++){
+					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID && allRequestBooks.get(j).getRequestStatus().equals("waiting")){
+						requestBooksByLendBookINs.add(allRequestBooks.get(j));
+					}
+				}
+			}
+		}
+		if (sellBookINs.size() > 0){
+			for (int i=0; i<sellBookINs.size(); i++){
+				int bookRecordID = sellBookINs.get(i).getBookRecordID();
+				for (int j=0; j<allRequestBooks.size(); j++){
+					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID && allRequestBooks.get(j).getRequestStatus().equals("waiting")){
+						requestBooksBySellBookINs.add(allRequestBooks.get(j));
+					}
+				}
+			}
+		}
+		request().getSession().setAttribute("lendBookINs", lendBookINs);
+		request().getSession().setAttribute("sellBookINs", sellBookINs);
+		request().getSession().setAttribute("booksByLendBookINs", booksByLendBookINs);
+		request().getSession().setAttribute("booksBySellBookINs", booksBySellBookINs);
+		request().getSession().setAttribute("requestBooksBySellBookINs", requestBooksBySellBookINs);
+		request().getSession().setAttribute("requestBooksByLendBookINs", requestBooksByLendBookINs);
+		
+		/*传输数据回前台*/
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject();
+		obj.put("success", true);
+		String str=obj.toString();
+		out.write(str);
+		out.close();
+		return SUCCESS;
+		
 	}
 }

@@ -133,7 +133,7 @@
               <tr>
               <td class="bookname">《<%=book.getBookName() %>》<span class="isbn"><%=book.getISBN() %></span></td>
               <td style="vertical-align:top;">
-              <button class="btn btn-link" value="<% %>" onclick="" style="padding:3px 10px 0 0;color:#efbb24;float:right;">删除</button>
+              <button class="btn btn-link" value="<%=bookIN.getBookRecordID() %>" onclick="deleteBookIN(this)" style="padding:3px 10px 0 0;color:#efbb24;float:right;">删除</button>
               <button type="button" class="btn btn-link tc" style="padding:3px 5px 0 0;color:#efbb24;float:right;" id="<%=i%>" value="<%=editValue%>">编辑</button>
               </td>
               </tr>
@@ -201,8 +201,8 @@
               </td>
 
               <td class="deletebutton">
-              <button class="pass" value="<% %>" onclick="">通过</button>
-              <button class="reject" value="<% %>" onclick="">拒绝</button>
+              <button class="pass" value="<%=myRequestBooks.get(j).getRequestID() %>" onclick="passRequest(this)">通过</button>
+              <button class="reject" value="<%=myRequestBooks.get(j).getRequestID() %>" onclick="rejectRequest(this)">拒绝</button>
               </td>
 
 
@@ -653,6 +653,66 @@ $(document).ready(function(){
       			alert("请完善信息");
       		}
       	}  
+      	
+      	function passRequest(ob){
+      		var requestID = ob.value;
+      		$.ajax({
+      			type:'POST',
+      			url:"RequestAction!passLendRequest",
+      			async:false,
+      			data:{requestID:requestID},
+      			success:function(result){
+      				result=eval('('+result+')');
+      				if (result.success){
+      					location.reload();
+      					alert("已通过此请求，并成功下单，请至我的订单处查询详情（其他请求已被自动拒绝）");
+      				}
+      				else{
+      					alert("操作失败");
+      				}
+      			}
+      		})
+      	}
+      	
+      	function deleteBookIN(ob){
+      		var bookRecordID = ob.value;
+      		$.ajax({
+      			type:"POST",
+      			url:"BookINAction!deleteBookIN",
+      			async:false,
+      			data:{bookRecordID:bookRecordID},
+      			success:function(result){
+      				result=eval('('+result+')');
+      				if (result.success){
+      					location.reload();
+      					alert("已删除此申请，所有书籍请求已被自动拒绝");
+      				}
+      				else{
+      					alert("操作失败");
+      				}
+      			}
+      		})
+      	}
+      	
+      	function rejectRequest(ob){
+      		var requestID = ob.value;
+      		$.ajax({
+      			type:"POST",
+      			url:"RequestAction!rejectLendRequest",
+      			async:false,
+      			data:{requestID:requestID},
+      			success:function(result){
+      				result=eval('('+result+')');
+      				if (result.success){
+      					location.reload();
+      					alert("已拒绝此请求");
+      				}
+      				else{
+      					alert("操作失败");
+      				}
+      			}
+      		})
+      	}
 </script>
 
 <script type="text/javascript"> 

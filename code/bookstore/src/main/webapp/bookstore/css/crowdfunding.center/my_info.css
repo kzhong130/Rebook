@@ -78,7 +78,6 @@ hr{
 	}
 .my_info_title_3 a{
 	text-decoration:none;
-	color:#666;
 	}
 .my_info_title_3 ul{
 	margin:0px;
@@ -101,6 +100,10 @@ hr{
 	border-bottom: 1px solid #d19826;
 	color: #d19826;
 	}
+.inthepage{
+	border-bottom: 1px solid #d19826; 
+	color: #d19826;
+}
 .my_info_content_care{
 	font-size:14px;
 	color:#CA1E37;
@@ -281,4 +284,3 @@ input[placeholder], [placeholder], *[placeholder] {
     text-align:left;
     float:!left;
 }
-

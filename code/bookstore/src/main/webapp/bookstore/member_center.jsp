@@ -180,9 +180,9 @@
 		<div class="menu_list">
 			<ul class="list-unstyled">
 				<li id="listClick6" class="" onClick="listClick(6)"><img
-					src="img/member_center/left_icon_6.png"> 我买的书</li>
+					src="img/member_center/left_icon_6.png"> 买入/借入</li>
 				<li id="listClick7" class="" onClick="listClick(7)"><img
-					src="img/member_center/left_icon_6.png"> 我借的书</li>
+					src="img/member_center/left_icon_6.png"> 卖出/借出</li>
 			</ul>
 		</div>
 	</div>
@@ -295,9 +295,7 @@ var GG = {
     }
 }
 
-var books = $('#bookISBNs').val().split("$");
-var listCount = parseInt(books.length);
-$("#page").initPage(listCount,1,GG.kk);
+
 
 $(document).ready(function(){ 
 

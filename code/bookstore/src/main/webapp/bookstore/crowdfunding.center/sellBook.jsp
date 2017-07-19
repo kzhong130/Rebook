@@ -1,8 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@page import="model.BookComment"%>
+<%@page import="model.BookIN"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Book"%>
+<%@page import="model.RequestBook"%>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -29,8 +30,9 @@
 </head>
 
 <%
-	ArrayList<Book> books = new ArrayList<Book>();
-	books = (ArrayList<Book>)session.getAttribute("bookByBookComment");
+	ArrayList<BookIN> sellBookINs = (ArrayList<BookIN>)session.getAttribute("sellBookINs");
+	ArrayList<Book> booksBySellBookINs = (ArrayList<Book>)session.getAttribute("booksBySellBookINs");
+	ArrayList<RequestBook> requestBooksBySellBookINs = (ArrayList<RequestBook>)session.getAttribute("requestBooksBySellBookINs");
 %>
 <body>
 
@@ -44,7 +46,71 @@
 	<hr>
 
 	<!-- 每本书 -->
-
+<%
+	if (sellBookINs.size() > 0){
+		for (int i=0; i<sellBookINs.size(); i++){
+			Book book = booksBySellBookINs.get(i);
+   			BookIN bookIN = sellBookINs.get(i);
+   			String cityInfo ="";
+   			if (bookIN.getCity() == ""){	//直辖市
+   				cityInfo = bookIN.getProvince() + " " + bookIN.getTown();
+   			}
+   			if (bookIN.getCity() != ""){	//非直辖市
+   				cityInfo = bookIN.getProvince() + " " + bookIN.getCity();
+   			}
+   			
+   			String editValue = "";
+   			if (bookIN.getCity() == ""){	//直辖市
+   				editValue = bookIN.getProvince() + " " + bookIN.getTown();
+   			}
+   			if (bookIN.getCity() != ""){
+   				editValue = bookIN.getProvince() + " " + bookIN.getCity() + " " + bookIN.getTown();
+   			}
+   			
+   			String recency = "";
+   			if ("20%".equals(bookIN.getRecency())){
+   				recency = "两成新";
+   			}
+   			if ("50%".equals(bookIN.getRecency())){
+   				recency = "五成新";
+   			}
+   			if ("80%".equals(bookIN.getRecency())){
+   				recency = "八成新";
+   			}
+   			if ("100%".equals(bookIN.getRecency())){
+   				recency = "全新";
+   			}
+   			
+   			String sendWay = "";
+   			if ("mail".equals(bookIN.getSendWay())){
+   				sendWay = "邮寄";
+   			}
+   			if ("face".equals(bookIN.getSendWay())){
+   				sendWay = "当面";
+   			}
+   			
+   			String status = "";
+   			if ("yes".equals(bookIN.getInStatus())){
+   				status = "在架上";
+   			}
+   			if ("no".equals(bookIN.getInStatus())){
+   				status = "已下架";
+   			}
+   			
+   			String note = "无";
+   			if (bookIN.getNote() != ""){
+   				note = bookIN.getNote();
+   			}
+   			
+   			ArrayList<RequestBook> myRequestBooks = new ArrayList<RequestBook>();
+   			if (requestBooksBySellBookINs.size() > 0){
+   				for (int j=0; j<requestBooksBySellBookINs.size(); j++){
+   					if (requestBooksBySellBookINs.get(j).getBookRecordID() == bookIN.getBookRecordID()){
+   						myRequestBooks.add(requestBooksBySellBookINs.get(j));
+   					}
+   				}
+   			}
+%>
 
 <div class="commentbox">
      <table  style="width:828px;">
@@ -52,42 +118,42 @@
         <tr>
 
           <td class="bookimage" style="vertical-align:text-top;">
-          <a href=<% %>><img class="listbook" src="https://img3.doubanio.com/mpic/s28332051.jpg<% %>"/></a><br>         
+          <a href=<% %>><img class="listbook" src="<%=book.getImage()%>"/></a><br>         
           </td>
           
           <td class="bookcontent" style="vertical-align:top;">
           <table class="allwidth" style="width:691px;">
               <tr>
-              <td class="bookname">《<% %>斯通纳》<span class="isbn"><% %>9787208130500</span></td>
+              <td class="bookname">《<%=book.getBookName() %>》<span class="isbn"><%=book.getISBN() %></span></td>
               <td style="vertical-align:top;">
-              <button class="btn btn-link" value="<% %>" onclick="" style="padding:3px 10px 0 0;color:#efbb24;float:right;">删除</button>
-              <button type="button" class="btn btn-link tc" style="padding:3px 5px 0 0;color:#efbb24;float:right;">编辑</button>
+              <button class="btn btn-link" value="<%=bookIN.getBookRecordID() %>" onclick="deleteBookIN(this)" style="padding:3px 10px 0 0;color:#efbb24;float:right;">删除</button>
+              <button type="button" class="btn btn-link tc" style="padding:3px 5px 0 0;color:#efbb24;float:right;" id="<%=i%>" value="<%=editValue%>">编辑</button>
               </td>
               </tr>
                         
               <tr>
               <td>
-              <p class="comment">书主信息：<% %>洪晓雅&nbsp;&nbsp;<% %>15821911839&nbsp;&nbsp;<% %>福建厦门</p>
-              <p class="comment">新旧程度：<% %>五成新&emsp;&emsp;&emsp;&emsp;送书方式：<% %>邮寄</p>
+              <p class="comment">书主信息：<%=bookIN.getOwnerName() %>&nbsp;&nbsp;<%=bookIN.getOwnerPhone() %>&nbsp;&nbsp;<%=cityInfo %></p>
+              <p class="comment">新旧程度：<%=recency %>&emsp;&emsp;&emsp;&emsp;送书方式：<%=sendWay %></p>
               </td>
               
               <td>
-              <p class="time">书币要求：<span class="coin"><% %>30&nbsp;&nbsp;</span></p>
-              <p class="time">状态：<% %>在架上&nbsp;&nbsp;</p>
+              <p class="time">书币要求：<span class="coin"><%=bookIN.getCoinNumber() %>&nbsp;&nbsp;</span></p>
+              <p class="time">状态：<%=status %>&nbsp;&nbsp;</p>
               </td>
               </tr>
               
               <tr>
               <td>
-              <p class="comment">备注：<% %>请小心的对待这本书（没有备注则写无）</p>
-              <p class="comment">录入时间：<% %>2017.7.11 13:52:12</p>
+              <p class="comment">备注：<%=note %></p>
+              <p class="comment">录入时间：<%=bookIN.getInTime().toString().substring(0, 19) %></p>
               </td>
               
               
               
               <td class="deletebutton" style="vertical-align:bottom;padding-left:10px;">
 
-              <button class="delete" style="width:110px" id="application" >查看申请</button> 
+              <button class="delete" style="width:110px" id="application<%=bookIN.getBookRecordID() %>" >查看申请</button> 
               </td>
               </tr>
            </table>
@@ -96,32 +162,44 @@
 		</table>
 </div>
 
-<!-- 每个申请细节 -->	
-<div class="commentbox" id="appDetail" style="display:none;">
+<!-- 申请细节 -->	
+<div id="appDetail<%=bookIN.getBookRecordID() %>" style="display:none;">
+<!-- 每个申请细节 -->
+<%
+	if (myRequestBooks.size() > 0){
+		for (int j=0; j<myRequestBooks.size(); j++){
+			
+%>	
+<div class="commentbox" >
      <table  style="width:828px;">
         <tr>
-              <td class="numberlist">1<% %></td>
+              <td class="numberlist"><%=j+1 %></td>
 
               <td>
-              <p class="comment">申请者：<% %><span><% %></span>&emsp;&emsp;&emsp;&emsp;送书方式：<% %>邮寄</p>
-              <p class="comment">书主信息：<% %>洪晓雅&nbsp;&nbsp;<% %>15821911839&nbsp;&nbsp;<% %>福建省厦门市翔安区新店镇新兴街610号</p>
+              <p class="comment">申请者：<%=myRequestBooks.get(j).getUserName() %><span><% %></span></p>
+              <p class="comment">收货人：<%=myRequestBooks.get(j).getReceiverName() %>&nbsp;&nbsp;<%=myRequestBooks.get(j).getPhone() %>&nbsp;&nbsp;<%=myRequestBooks.get(j).getProvince()+myRequestBooks.get(j).getCity()+myRequestBooks.get(j).getTown()+myRequestBooks.get(j).getAddress() %></p>
               </td>
 
               <td class="deletebutton">
-              <button class="pass" value="<% %>" onclick="">通过</button>
-              <button class="reject" value="<% %>" onclick="">拒绝</button>
+              <button class="pass" value="<%=myRequestBooks.get(j).getRequestID() %>" onclick="passRequest(this)">通过</button>
+              <button class="reject" value="<%=myRequestBooks.get(j).getRequestID() %>" onclick="rejectRequest(this)">拒绝</button>
               </td>
 
 
         </tr>
 		</table>
 </div>
+
+<%} %>
+<%} %>
+
+</div>
 <br>	
 	
 
 <!-- 修改的按钮 -->
-<div id="gray"></div>
-<div class="popup" id="popup">
+<div id="gray<%=i%>"></div>
+<div class="popup" id="popup<%=i%>">
 
 	<div class="top_nav" id='top_nav'>
 		<div align="center">
@@ -139,70 +217,114 @@
 						      <tr>
  						       <td align="right" class="color555">书主姓名：</td>
 						        <td class="color555 td2" >
- 						       <input class="reg_ownername" name="ownerName" type="text" value=<% %>> <!-- 从数据库取 -->
+ 						       <input class="reg_ownername" name="ownerName" type="text" value=<%=bookIN.getOwnerName() %>> <!-- 从数据库取 -->
  						       <span class="tip ownername_hint"></span>
  						     </td>
  						     </tr>
 						      <tr>
 						        <td align="right" class="color555">书主手机：</td>
 						        <td class="color555 td2" >
-						        <input class="reg_ownerphone" name="ownerPhone" type="text" value=<% %>> <!-- 从数据库取 -->
+						        <input class="reg_ownerphone" name="ownerPhone" type="text" value=<%=bookIN.getOwnerPhone() %>> <!-- 从数据库取 -->
 						         <span class="tip ownerphone_hint"></span>
 						        </td>
 						      </tr>
- 						    <tr>
-    						    <td align="right" class="color555">所需书币：</td>
-   						     <td class="color555 td2" >
-   						     <input class="reg_sellcoinnumber" name="sellcoinnumber" type="text" value=<% %>>    <!-- 从数据库取 -->
-    						    <span class="tip sellcoinnumber_hint"></span></td>
-   						   </tr>
   						    <tr>
     						    <td align="right" class="color555">备注：</td>
    						     <td class="color555 td2" >
-   						     <input class="reg_sellnote" name="sellnote" type="text" value=<% %>>    <!-- 从数据库取 -->
+   						     <input class="reg_sellnote" name="sellnote" type="text" value=<%=bookIN.getNote() %>>    <!-- 从数据库取 -->
     						    <span class="tip sellnote_hint"></span></td>
    						   </tr>
   						    
   						    
    						    <tr>
    						     <td align="right" class="color555">书主地址：</td>
-   						     <td class="color555 td2"><div id="demo3">
+   						     <td class="color555 td2"><div id="demo<%=i%>">
   						                    <select name="province"></select>
   						                    <select name="city"></select>
+  						                    <select name="area" ></select>
  						                    </div></td>
  						     </tr>
  						     <tr>
    						     <td align="right" class="color555">送书方式：</td>
+   						     <%
+   						    	if ("mail".equals(bookIN.getSendWay())){
+   						    %>
    						     <td><div><p>
         						          <select name="sendway" class="reg_sendway">
        						             <option value ="face">当面</option>
-       						             <option value ="mail">邮寄</option>
+       						             <option value ="mail" selected = "selected">邮寄</option>
       						            </select></p></div> </td>
+      						            <%} %>
+      						 <%if("face".equals(bookIN.getSendWay())){ %>
+      						 <td><div><p>
+        						          <select name="sendway" class="reg_sendway" >
+       						             <option value ="face" selected = "selected">当面</option>
+       						             <option value ="mail" >邮寄</option>
+      						            </select></p></div> </td>
+      						            <%} %>
  						     </tr>
  						     <tr>
    						     <td align="right" class="color555">新旧程度：</td>
+   						     <%if ("20%".equals(bookIN.getRecency())){ %>
    						     <td><div><p>
-   						               <select name="recency" class="reg_recency">
-   						                 <option value ="20%">两成新</option>
+   						               <select name="recency" class="reg_recency" >
+   						                 <option value ="20%" selected="selected">两成新</option>
    						                 <option value ="50%">五成新</option>
       						              <option value ="80%">八成新</option>
      						               <option value ="100%">全新</option>
      						             </select></p></div></td>
-            
+     						             <%} %>
+     						  <%if ("50%".equals(bookIN.getRecency())){ %>
+            				  <td><div><p>
+   						               <select name="recency" class="reg_recency">
+   						                 <option value ="20%" >两成新</option>
+   						                 <option value ="50%" selected="selected">五成新</option>
+      						              <option value ="80%">八成新</option>
+     						               <option value ="100%">全新</option>
+     						             </select></p></div></td>
+     						             <%} %>
+     						    <%if ("80%".equals(bookIN.getRecency())){ %>
+            				  <td><div><p>
+   						               <select name="recency" class="reg_recency">
+   						                 <option value ="20%" >两成新</option>
+   						                 <option value ="50%" >五成新</option>
+      						              <option value ="80%" selected="selected">八成新</option>
+     						               <option value ="100%">全新</option>
+     						             </select></p></div></td>
+     						             <%} %>
+     						   <%if ("100%".equals(bookIN.getRecency())){ %>
+            				  <td><div><p>
+   						               <select name="recency" class="reg_recency">
+   						                 <option value ="20%" >两成新</option>
+   						                 <option value ="50%" >五成新</option>
+      						              <option value ="80%" >八成新</option>
+     						               <option value ="100%" selected="selected">全新</option>
+     						             </select></p></div></td>
+     						             <%} %>
  						     </tr>
- 						     <!--
-						      <tr>
-  						      <td align="right" class="color555">&nbsp;</td>
-  						      <td class="color555  td2">
-  						      <input class="reg_address" name="address" type="text" value=<% %>>   <!-- 从数据库取 
-  						      <span class="tip address_hint"></span></td>  
-     
-  						    </tr>-->
+ 						     <tr>
+     						   <td align="right" class="color555">上架状态：</td>
+     						   <%if ("yes".equals(bookIN.getInStatus())){ %>
+            				  <td><div><p>
+   						               <select name="inStatus" class="reg_recency" >
+   						                 <option value ="yes" selected="selected">已上架</option>
+   						                 <option value ="no" >未上架</option>
+     						             </select></p></div></td>
+     						             <%} %>
+     						     <%if ("no".equals(bookIN.getInStatus())){ %>
+            				  <td><div><p>
+   						               <select name="inStatus" class="reg_recency" >
+   						                 <option value ="yes" >已上架</option>
+   						                 <option value ="no" selected="selected">未上架</option>
+     						             </select></p></div></td>
+     						             <%} %>
+ 						     </tr>
+
   						    
   						   
   						    <tr>
   						      <td align="center" class="color555" colspan="2">
-  						      <button class="my_info_content_care_table_submit" name="" type="onclick" onclick="update()" >保    存</button></td>
+  						      <button class="my_info_content_care_table_submit" name="" type="onclick" onclick="update(this,<%=bookIN.getBookRecordID() %>)" value=<%=i %> >保    存</button></td>
    						     
   						    </tr>
   						  </tbody>
@@ -216,6 +338,9 @@
 	</div>
 
 </div>
+ <%} %>
+ <%} %>
+
 
 
 
@@ -244,17 +369,52 @@
 //窗口效果
 //点击登录class为tc 显示
 $(".tc").click(function(){
-	$("#gray").show();
-	$("#popup").show();//查找ID为popup的DIV show()显示#gray
+	var index = $(this).attr('id');
+	var editValue = $(this).val();
+	var cityInfo = editValue.split(" ");
+	if (cityInfo.length == "2"){
+		 $("#demo"+index).citys({
+ 			province:cityInfo[0],
+ 			city:'',
+ 			area:cityInfo[1],
+ 			
+
+ 			onChange:function(info){
+ 				townFormat(info);
+ 			}
+ 		},function(api){
+ 			var info = api.getInfo();
+ 			townFormat(info);
+ 		});
+	}
+	if(cityInfo.length == "3"){
+		 $("#demo"+index).citys({
+	 			province:cityInfo[0],
+	 			city:cityInfo[1],
+	 			area:cityInfo[2],
+	 			
+
+	 			onChange:function(info){
+	 				townFormat(info);
+	 			}
+	 		},function(api){
+	 			var info = api.getInfo();
+	 			townFormat(info);
+	 		});
+	}
+	$("#gray"+index).show();
+	$("#popup"+index).show();//查找ID为popup的DIV show()显示#gray
 	tc_center();
 });
 
 //点击关闭按钮
+<%for (int i=0; i<sellBookINs.size(); i++){%>
 $("a.guanbi").click(function(){
-	$("#gray").hide();
-	$("#popup").hide();//查找ID为popup的DIV hide()隐藏
+	$("#gray"+<%=i%>).hide();
+	$("#popup"+<%=i%>).hide();//查找ID为popup的DIV hide()隐藏
 
 })
+<%}%>
 
 //窗口水平居中
 $(window).resize(function(){
@@ -303,9 +463,12 @@ $(document).ready(function(){
 		$(this).unbind("mousemove");
 	})
 	
-	$("#application").click(function(){
-        $("#appDetail").slideToggle("slow");
+	<%for (int i=0; i<sellBookINs.size(); i++){ %>
+	
+	$("#"+"application"+<%=sellBookINs.get(i).getBookRecordID()%>).click(function(){
+        $("#"+"appDetail"+<%=sellBookINs.get(i).getBookRecordID()%>).slideToggle("slow");
     });
+<%}%>
 })
 
 </script>
@@ -326,38 +489,22 @@ $(document).ready(function(){
         				});
         			}
         		};
-                $('#demo3').citys({
-        			province:'<% %>',
-        			city:'<% %>',
+               /* $('#demo3').citys({
+        			province:'',
+        			city:'',
         			
-            /*这2个值应从数据库取*/
+
         			onChange:function(info){
         				townFormat(info);
         			}
         		},function(api){
         			var info = api.getInfo();
         			townFormat(info);
-        		});
+        		});*/
 
                 var ownername_Boolean=true;
                 var ownerphone_Boolean=true;
-                var sellcoinnumber_Boolean=true;
-                var sellnote_Boolean=true;
-                
-
-              //sellcoinnumber
-              $('.reg_sellcoinnumber').blur(function(){
-                if ($(".reg_sellcoinnumber").val()>= 0){
-                  $('.sellcoinnumber_hint').html("✔").css("color","green");
-                  sellcoinnumber_Boolean = true;
-                }else {
-                  $('.sellcoinnumber_hint').html("×").css("color","red");
-                  sellcoinnumber_Boolean = false;
-                }
-      
-              });
-       
-             // ownerphone
+                // ownerphone
                 $('.reg_ownerphone').blur(function(){
                   if ((/^1[34578]\d{9}$/).test($(".reg_ownerphone").val())){
                     $('.ownerphone_hint').html("✔").css("color","green");
@@ -381,51 +528,127 @@ $(document).ready(function(){
                 
                      
     
-      	function update(){
-      		
-      		if(ownername_Boolean && ownername_Boolean && sellcoinnumber_Boolean){
-      			/* 以下为my_info.jsp中的函数，需要修改*/
-      		  var select = document.getElementsByName("province")[0];
-      		  var province=select.options[select.selectedIndex].text;
-      		  //alert(document.getElementsByName("city")[0].value);
-      		  if(document.getElementsByName("city")[0].value!=""){
-      			  select=document.getElementsByName("city")[0];
-      			  var city=select.options[select.selectedIndex].text;
-      		  }
-      		  else {
-      			  var city="";
-      			  //alert(2);
-      		  }
-      		  //alert(2333);
-      		  //alert(city);
-      		  if(document.getElementsByName("area")[0].value!=""){
-      			  select=document.getElementsByName("area")[0];
-      			  var area=select.options[select.selectedIndex].text;
-      		  }
-      		  else var area="";
-      		  //alert(area);
-      		  if(document.getElementsByName("town")[0].value!=""){
-      			  select=document.getElementsByName("town")[0];
-      			  var town=select.options[select.selectedIndex].text;
-      		  }
-      		  else var town="";
-      		  //alert(town);
-      		  var detail=$(".reg_address").val();
-      		 
-      			$.ajax({  
-      		        type:"POST",  
-      		        url:"MemberCenterAction!update",  
-      		        async:false,
-      		        data:{province:province,city:city,area:area,town:town,realName:$(".reg_realname").val(),phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:detail} ,
-      		        
-      		    });
-      			
-      			alert("修改成功");
-      		}
-      		else{
-      			alert("请完善信息");
-      		}
-      	}  
+                function update(ob,bookRecordID){
+              		
+              		if(ownername_Boolean && ownerphone_Boolean){
+              			/* 以下为my_info.jsp中的函数，需要修改*/
+              		  var bookRecordID = bookRecordID;
+              		  var index = ob.value;
+             		  index = parseInt(index);
+              		  var select = document.getElementsByName("province")[index];
+              		  var province=select.options[select.selectedIndex].text;
+              		  //alert(document.getElementsByName("city")[0].value);
+              		  if(document.getElementsByName("city")[index].value!=""){
+              			  select=document.getElementsByName("city")[index];
+              			  var city=select.options[select.selectedIndex].text;
+              		  }
+              		  else {
+              			  var city="";
+              			  //alert(2);
+              		  }
+              		  //alert(2333);
+              		  //alert(city);
+              		  if(document.getElementsByName("area")[index].value!=""){
+              			  select=document.getElementsByName("area")[index];
+              			  var town=select.options[select.selectedIndex].text;
+              		  }
+              		  else var town="";
+              		  //alert(area);
+              		  //alert(town);
+              		  var ownerName = document.getElementsByName("ownerName")[index].value;
+              		  var ownerPhone = document.getElementsByName("ownerPhone")[index].value;
+              		  var note = document.getElementsByName("sellnote")[index].value;
+              		  var sendWaySelect = document.getElementsByName("sendway")[index];
+              		  var sendWay = sendWaySelect.options[sendWaySelect.selectedIndex].value;
+              		  var recencySelect = document.getElementsByName("recency")[index];
+              		  var recency = recencySelect.options[recencySelect.selectedIndex].value;
+              		  var inStatusSelect = document.getElementsByName("inStatus")[index];
+              		  var inStatus = inStatusSelect.options[inStatusSelect.selectedIndex].value;
+
+              		 
+              			$.ajax({  
+              		        type:"POST",  
+              		        url:"BookINAction!update",  
+              		        async:false,
+              		        data:{bookRecordID:bookRecordID,province:province,city:city,town:town,ownerName:ownerName,ownerPhone:ownerPhone,note:note,sendWay:sendWay,recency:recency,inStatus:inStatus},
+              		      success:function(result){
+                 				result=eval('('+result+')');
+                 				if(result.success){
+                 					location.reload();
+                 					alert("修改成功");
+                 				}
+                 				else{
+                 					alert("修改失败");
+                 				}
+                 			}
+              		    });
+              			
+              		}
+              		else{
+              			alert("请完善信息");
+              		}
+              	}  
+                
+                
+                function passRequest(ob){
+              		var requestID = ob.value;
+              		$.ajax({
+              			type:'POST',
+              			url:"RequestAction!passSellRequest",
+              			async:false,
+              			data:{requestID:requestID},
+              			success:function(result){
+              				result=eval('('+result+')');
+              				if (result.success){
+              					location.reload();
+              					alert("已通过此请求，并成功下单，请至我的订单处查询详情（其他请求已被自动拒绝）");
+              				}
+              				else{
+              					alert("操作失败");
+              				}
+              			}
+              		})
+              	}
+                
+                function deleteBookIN(ob){
+              		var bookRecordID = ob.value;
+              		$.ajax({
+              			type:"POST",
+              			url:"BookINAction!deleteBookIN",
+              			async:false,
+              			data:{bookRecordID:bookRecordID},
+              			success:function(result){
+              				result=eval('('+result+')');
+              				if (result.success){
+              					location.reload();
+              					alert("已删除此申请，所有书籍请求已被自动拒绝");
+              				}
+              				else{
+              					alert("操作失败");
+              				}
+              			}
+              		})
+              	}
+                
+                function rejectRequest(ob){
+              		var requestID = ob.value;
+              		$.ajax({
+              			type:"POST",
+              			url:"RequestAction!rejectSellRequest",
+              			async:false,
+              			data:{requestID:requestID},
+              			success:function(result){
+              				result=eval('('+result+')');
+              				if (result.success){
+              					location.reload();
+              					alert("已拒绝此请求");
+              				}
+              				else{
+              					alert("操作失败");
+              				}
+              			}
+              		})
+              	}
 </script>
 
 </body>
