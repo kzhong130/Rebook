@@ -37,18 +37,7 @@
 </head>
 <body>
 <%
-	String ISBN = request.getParameter("ISBN");
-	String bookName="";
-	ArrayList<BookComment> bookComments = (ArrayList<BookComment>)session.getAttribute("allBookComments");
-	ArrayList<Book> books = (ArrayList<Book>)session.getAttribute("allBooks");
-	if (ISBN != null){
-		for (int i=0; i<books.size(); i++){
-			if (books.get(i).getISBN().equals(ISBN)){
-				bookName = books.get(i).getBookName();
-				break;
-			}
-		}
-	}
+
 %>
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -136,7 +125,6 @@
                             </li>
 							</ul>
                     </li>
-                    
 
                 </ul>
 
@@ -147,9 +135,13 @@
 		<div id="page-wrapper">
 		  <div class="header"> 
                         <h2 class="page-header">
-                            书籍评论 <small>
-                            comment</small>
+                            用户反馈 <small>
+                            feedback</small>
                         </h2>
+                    <ol class="breadcrumb">
+					  <li class="color-ylw">用户反馈</li>
+					  <li class="active">有书借</li>
+					</ol>
 
 		</div>
             <div id="page-inner">
@@ -164,72 +156,61 @@
                                     <table class="table table-striped table-bordered table-hover" style="table-layout:fixed" id="myTable">
                                         <thead>
                                             <tr class="text-center">
-                                                <th class="text-center" width="15%">ISBN</th>
-                                                <th class="text-center" width="14%">书名</th>
+                                                <th class="text-center" width="6%">反馈号</th>
+                                                <th class="text-center" width="10%">订单号</th>
                                                 <th class="text-center" width="14%">用户名</th>
-                                                <th class="text-center" width="17%">时间</th>
-                                                <th class="text-center" width="25%">内容</th>
-                                                <th class="text-center" width="8%">状态</th>
+                                                <th class="text-center" width="17%">反馈主题</th>
+                                                <th class="text-center" width="12%">反馈日期</th>
+                                                <th class="text-center" width="8%">处理结果</th>
+                                                <th class="text-center" width="8%">处理者</th>
                                                 <th class="text-center" width="6%">详情</th>
                                             </tr>
                                         </thead>
                                         <tbody class="text-center">
                                             <%
-                                            	if (ISBN != null){
-                                            		if (bookComments.size()>0){
-                                            			for (int i=0; i<bookComments.size(); i++){
-                                            				if (bookComments.get(i).getISBN().equals(ISBN)){
+                                            	
                                             %>
                                             <tr>
-												  <td><%=bookComments.get(i).getISBN() %></td>
-                                                <td><div title="<%=bookName %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookName %></div></td>
-                                                <td><%=bookComments.get(i).getUserName() %></td>
-                                                <td><%=bookComments.get(i).getCommentTime().toString().substring(0, 19) %></td>
-                                                <td><div title="<%=bookComments.get(i).getContent() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookComments.get(i).getContent() %></div></td>
-                                                <%if ("reject".equals(bookComments.get(i).getCheckResult())){ %>
-                                                <td>未通过</td>
-                                                <%} %>
-                                                <%if("pass".equals(bookComments.get(i).getCheckResult())  || bookComments.get(i).getCheckResult() == null){ %>
+												  <td><% %>1</td>
+                                                <td>1</td>
+                                                <td><% %>zcx</td>
+                                                <td><div title="<% %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><% %>哈哈哈</div></td>
+                                                <td>2017-07-05</td>
+                                                <% %>
+                                                <% %>
                                                 <td>已通过</td>
-                                                <%} %>
-                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookCommentInfo.jsp?ISBN=<%=bookComments.get(i).getISBN()%>&ID=<%=bookComments.get(i).getID()%>">查看</a></td>
+                                                <% %>
+                                                <td>root</td>
+                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookCommentInfo.jsp?ISBN=<% %>&ID=<% %>">查看</a></td>
                                                 
                                             </tr>
-                                            <%} %>
-                                            <%} %>
-                                            <%} %>
-                                            <%} %>
-                                            <%
-                                            	if (ISBN == null){
-                                            		if (bookComments.size()>0){
-                                            			for (int i=0; i<bookComments.size(); i++){	 		
+                                            <% %>
+                                            <% %>
+                                            <% %>
+                                            <% %>
+                                            <%	
                                             %>
                                              <tr>
-												  <td><%=bookComments.get(i).getISBN() %></td>
+												  <td><% %></td>
 												  <%
-												  for (int j=0; j<books.size(); j++){
-                                              		if (books.get(j).getISBN().equals(bookComments.get(i).getISBN())){
-                                              			bookName = books.get(j).getBookName();
-                                              			break;
-                                              		}
-                                              	}
+												  
 												  %>
-                                                <td><div title="<%=bookName %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookName %></div></td>
-                                                <td><%=bookComments.get(i).getUserName() %></td>
-                                                <td><%=bookComments.get(i).getCommentTime().toString().substring(0, 19) %></td>
-                                                <td><div title="<%=bookComments.get(i).getContent() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=bookComments.get(i).getContent() %></div></td>
-                                                <%if ("reject".equals(bookComments.get(i).getCheckResult())){ %>
+                                                <td><div title="<% %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><% %></div></td>
+                                                <td><% %></td>
+                                                <td><% %></td>
+                                                <td><div title="<% %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><% %></div></td>
+                                                <% %>
                                                 <td>未通过</td>
-                                                <%} %>
-                                                <%if("pass".equals(bookComments.get(i).getCheckResult())  || bookComments.get(i).getCheckResult() == null){ %>
+                                                <% %>
+                                                <% %>
                                                 <td>已通过</td>
-                                                <%} %>
-                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookCommentInfo.jsp?ISBN=<%=bookComments.get(i).getISBN()%>&ID=<%=bookComments.get(i).getID()%>">查看</a></td>
+                                                <% %>
+                                                <td><a class="btn btn-success btn-xs" href="dashboard_bookCommentInfo.jsp?ISBN=<% %>&ID=<% %>">查看</a></td>
                                                 
                                             </tr>
-                                            <%} %>
-                                            <%} %>
-                                            <%} %>
+                                            <% %>
+                                            <% %>
+                                            <% %>
                                         </tbody>
                                     </table>
                                 </div>
