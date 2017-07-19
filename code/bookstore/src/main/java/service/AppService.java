@@ -83,7 +83,7 @@ public interface AppService {
 	public List<LendOrder> getAllLendOrders();
 	public LendOrder getLendOrderByLendID(int lendID);
 	public void updateLendOrder(LendOrder lendOrder);
-	
+	public void addLendOrder(LendOrder lendOrder);
 	
 	/*
 	 * Request

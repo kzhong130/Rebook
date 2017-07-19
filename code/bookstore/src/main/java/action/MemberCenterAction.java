@@ -269,7 +269,7 @@ public class MemberCenterAction extends BaseAction{
 			for (int i=0; i<lendBookINs.size(); i++){
 				int bookRecordID = lendBookINs.get(i).getBookRecordID();
 				for (int j=0; j<allRequestBooks.size(); j++){
-					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID){
+					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID && allRequestBooks.get(j).getRequestStatus().equals("waiting")){
 						requestBooksByLendBookINs.add(allRequestBooks.get(j));
 					}
 				}
@@ -279,7 +279,7 @@ public class MemberCenterAction extends BaseAction{
 			for (int i=0; i<sellBookINs.size(); i++){
 				int bookRecordID = lendBookINs.get(i).getBookRecordID();
 				for (int j=0; j<allRequestBooks.size(); j++){
-					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID){
+					if (allRequestBooks.get(j).getBookRecordID() == bookRecordID && allRequestBooks.get(j).getRequestStatus().equals("waiting")){
 						requestBooksBySellBookINs.add(allRequestBooks.get(j));
 					}
 				}
