@@ -46,7 +46,7 @@ public class BookINDaoImpl extends HibernateDaoSupport implements BookINDao{
 	
 	public List<BookIN> getBookINByUserName(String userName){
 		@SuppressWarnings("unchecked")
-		List<BookIN> bookINs = (List<BookIN>)getHibernateTemplate().find("from BookIN as b where b.userName = ?", userName);
+		List<BookIN> bookINs = (List<BookIN>)getHibernateTemplate().find("from BookIN as b where b.userName = ? and b.inStatus != ?", userName,"delete");
 		return bookINs;
 	}
 }
