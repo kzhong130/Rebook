@@ -208,6 +208,10 @@ public class RequestAction extends BaseAction{
 		obj.put("address", requestBook.getAddress());
 		obj.put("returnWay", requestBook.getReturnWay());
         String str = obj.toString();  
+        out.write(str);
+        out.close();
+        return SUCCESS;
+	}
        
 
 	public String passLendRequest() throws Exception{
