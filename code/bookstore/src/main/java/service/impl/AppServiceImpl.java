@@ -439,6 +439,17 @@ public class AppServiceImpl implements AppService {
 	public void updateRequestBook(RequestBook requestBook){
 		requestBookDao.update(requestBook);
 	}
+
+
+
+
+	@Override
+	public void deleteRequestBook(RequestBook requestBook) {
+		
+		requestBookDao.delete(requestBook);
+		
+	}
+
 	
 	/*
 	 * BuyOrder
@@ -446,4 +457,5 @@ public class AppServiceImpl implements AppService {
 	public void addBuyOrder(BuyOrder buyOrder){
 		buyOrderDao.save(buyOrder);
 	}
+
 }
