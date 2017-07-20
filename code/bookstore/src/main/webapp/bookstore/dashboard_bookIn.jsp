@@ -209,6 +209,9 @@
                                                 if ("no".equals(bookINs.get(i).getInStatus())){
                                                 	status="下架";
                                                 }
+                                                if ("delete".equals(bookINs.get(i).getInStatus())){
+                                                	status="已交易";
+                                                }
                                                 %>
                                                 <td><%=status %></td>
                                                 <td><a class="btn btn-success btn-xs" href="dashboard_bookInInfo.jsp?ISBN=<%=bookINs.get(i).getISBN()%>&ID=<%=bookINs.get(i).getBookRecordID()%>">查看</a></td>

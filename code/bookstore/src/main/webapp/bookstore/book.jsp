@@ -16,6 +16,7 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="css/bootstrap_book.css">
 <link rel="stylesheet" href="css/login.css">
+<link rel="stylesheet" href="css/book_style.css">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -142,7 +143,7 @@ session.setAttribute("prePage", url);
 	</div>
 	<div class="col-sm-4">
 	  <div class="caption">
-        <h3><%=book.getBookName() %></h3>
+        <h3 class="h3-1"><%=book.getBookName() %></h3>
         <p>作者：<%=book.getAuthor() %></p>
         <p>出版社：<%=book.getPublisher() %></p>
         <p>出版日期：<%=book.getPubdate() %></p>
@@ -201,9 +202,10 @@ session.setAttribute("prePage", url);
     		for (int i=0;i<bookComments.size();i++){
     			
     	%>
-    	<hr>
+    	
     	<p><%=bookComments.get(i).getUserName() %>    <%=bookComments.get(i).getCommentTime().toString().substring(0, 19) %></p>
     	<p><%=bookComments.get(i).getContent() %>
+    	<hr>
     	<%} %>
     	<%} %>
     	
@@ -544,6 +546,7 @@ function submitComment(){
 	else{
 		document.getElementById("commentForm").submit();
 		location='#bookComment';
+		alert("评论成功");
 	}
 	
 }

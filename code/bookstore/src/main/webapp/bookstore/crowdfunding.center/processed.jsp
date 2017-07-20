@@ -124,7 +124,16 @@
               <%
               System.out.println(requestBook.getReturnWay());
               %>
-              <p class="comment">收件人：<%=requestBook.getReceiverName() %>&nbsp;&nbsp;<%=requestBook.getPhone() %>&emsp;&emsp;还书方式：<%=requestBook.getReturnWay() %></p>
+              <p class="comment">收件人：<%=requestBook.getReceiverName() %>&nbsp;&nbsp;<%=requestBook.getPhone() %>&emsp;&emsp;还书方式：
+              <%
+              	if("mail".equals(requestBook.getReturnWay())){
+              %>邮寄
+              <%} %>
+              <%
+              	if("face".equals(requestBook.getReturnWay())){
+              %>当面
+              <%} %>
+              </p>
               <p class="comment">收货地址：<%=requestBook.getProvince()+requestBook.getCity()+requestBook.getTown()+requestBook.getAddress() %></p>
               </td>
               <td>

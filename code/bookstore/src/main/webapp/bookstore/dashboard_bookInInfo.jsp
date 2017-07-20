@@ -227,8 +227,13 @@
                                 <p><span class="col-md-2">最长借书时间: </span><span class="col-md-10"><%=longestDuration %> </span></p>
                                 <p><span class="col-md-2">书主地址: </span><span class="col-md-10"><%=bookIN.getProvince() + bookIN.getCity() + bookIN.getOwnerAddress() %> </span></p>
                                 <p><span class="col-md-2">新旧程度: </span><span class="col-md-10"><%=recency %></span></p>
+                                <%
+                                	if("".equals(bookIN.getNote())){
+                                %>
+                                <p><span class="col-md-2">备注: </span><span class="col-md-10">无</span></p>
+                                <%}else{%>
                                 <p><span class="col-md-2">备注: </span><span class="col-md-10"><%=note %></span></p>
-
+								<%} %>
                                 <%
                                 	if("yes".equals(bookIN.getInStatus())){
                                 %>

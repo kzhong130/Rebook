@@ -71,12 +71,18 @@
           <table class="allwidth" style="width:691px;">
               <tr>
               <td class="bookname">《<%=book.getBookName() %>》</td>
-              <td class="deletebutton"><button class="delete" name="" type="onclick" >删 除</button></td>
+              <td class="deletebutton"><button class="delete" name="" value="<%=bookComment.getID() %>" onclick="deleteBookComment(this)">删 除</button></td>
               </tr>
               <tr>
               <td colspan="2">
               <p class="comment"><%=bookComment.getContent() %></p>
-              <p class="time"><%=bookComment.getCommentTime().toString().substring(0, 19) %></p></td>
+              <p class="time">
+              <%
+              	if("reject".equals(bookComment.getCheckResult())){
+              %>
+              <span class="reject">未通过&nbsp;</span>
+              <%} %> 
+              <%=bookComment.getCommentTime().toString().substring(0, 19) %></p></td>
               </tr>
            </table>
            </td>
