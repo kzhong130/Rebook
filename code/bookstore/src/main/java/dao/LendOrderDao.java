@@ -18,4 +18,6 @@ public interface LendOrderDao {
 	public List<LendOrder> getLendOrderByOwnerID(int ownerID);
 	
 	public List<LendOrder> getAllLendOrders();
+	
+	public List<LendOrder> getLendOrdersByLenderName(String lenderName);
 }

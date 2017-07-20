@@ -72,6 +72,14 @@
 		<action name="RequestAction" class="action.RequestAction">
 			<result name="process">crowdfunding.center/processed.jsp</result>
 		</action>
+		
+		<action name="BuyOrderFeedbackAction" class="action.BuyOrderFeedbackAction">
+		
+		</action>
+		
+		<action name="LendOrderFeedbackAction" class="action.LendOrderFeedbackAction">
+		
+		</action>
 
 		<action name="*">
 			<result>/{1}.jsp</result>

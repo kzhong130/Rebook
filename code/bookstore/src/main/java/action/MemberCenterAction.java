@@ -12,10 +12,12 @@ import org.apache.struts2.ServletActionContext;
 import model.Book;
 import model.BookComment;
 import model.BookIN;
+import model.BuyOrder;
 import model.User;
 import net.sf.json.JSONObject;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
+import model.LendOrder;
 import model.RequestBook;
 
 public class MemberCenterAction extends BaseAction{
@@ -292,7 +294,22 @@ public class MemberCenterAction extends BaseAction{
 		request().getSession().setAttribute("booksBySellBookINs", booksBySellBookINs);
 		request().getSession().setAttribute("requestBooksBySellBookINs", requestBooksBySellBookINs);
 		request().getSession().setAttribute("requestBooksByLendBookINs", requestBooksByLendBookINs);
-		System.out.println(555);
+		
+		/*我的订单部分 */
+		/*orderIN.jsp中我的买入部分*/
+		List<BuyOrder> buyOrders = appService.getBuyOrderByBuyerName(userName);
+		List<BookIN> bookINsByBuyOrders = appService.getBookINByBuyOrders(buyOrders);
+		List<Book> booksByBuyOrders = appService.getBooksByBookINs(bookINsByBuyOrders);
+		request().getSession().setAttribute("buyOrders", buyOrders);
+		request().getSession().setAttribute("bookINsByBuyOrders", bookINsByBuyOrders);
+		request().getSession().setAttribute("booksByBuyOrders", booksByBuyOrders);
+		/*orderIN.jsp中我的借入部分*/
+		List<LendOrder> lendinOrders = appService.getLendOrdersByLenderName(userName);
+		List<BookIN> bookINsByLendinOrders = appService.getBookINByLendOrders(lendinOrders);
+		List<Book> booksByLendinOrders = appService.getBooksByBookINs(bookINsByLendinOrders);
+		request().getSession().setAttribute("lendinOrders", lendinOrders);
+		request().getSession().setAttribute("bookINsByLendinOrders", bookINsByLendinOrders);
+		request().getSession().setAttribute("booksByLendinOrders", booksByLendinOrders);
 		return "initialize success";
 	}
 	

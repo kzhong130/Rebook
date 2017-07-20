@@ -183,6 +183,7 @@ create table lendOrder
    returnTime           datetime                       default null,
    status               enum("0","1","2","3","4","5","6","7","8","9")  not null,	/*0~9各自有不同含义*/
    ownerName			varchar(20) 					not null,
+   createTime			datetime						not null,
    primary key (lendID)
 );
 
@@ -221,6 +222,7 @@ create table buyOrder
    arrivalTime          datetime                       default null,
    status               enum("0","1","2","3","4","5")  not null,	/*0~5各有不同含义*/
    ownerName              varchar(20)                            not null,
+   createTime			datetime						not null,
    primary key (buyID)
 );
 

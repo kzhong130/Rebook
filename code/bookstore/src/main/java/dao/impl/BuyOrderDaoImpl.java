@@ -42,4 +42,10 @@ public class BuyOrderDaoImpl  extends HibernateDaoSupport implements BuyOrderDao
 		List<BuyOrder> buyOrders = (List<BuyOrder>)getHibernateTemplate().find("from BuyOrder as b where b.ownerID = ?",ownerID);
 		return buyOrders;
 	}
+	
+	public List<BuyOrder> getBuyOrderByBuyerName(String buyerName){
+		@SuppressWarnings("unchecked")
+		List<BuyOrder> buyOrders = (List<BuyOrder>)getHibernateTemplate().find("from BuyOrder as b where b.buyerName = ?", buyerName);
+		return buyOrders;
+	}
 }

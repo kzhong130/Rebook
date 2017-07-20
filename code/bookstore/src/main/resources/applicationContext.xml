@@ -107,6 +107,8 @@
 		<property name="lendOrderDao" ref="lendOrderDao" />
 		<property name="requestBookDao" ref="requestBookDao" />
 		<property name="buyOrderDao" ref="buyOrderDao" />
+		<property name="buyOrderFeedbackDao" ref="buyOrderFeedbackDao" />
+		<property name="lendOrderFeedbackDao" ref="lendOrderFeedbackDao" />
 		
 	</bean>
 	

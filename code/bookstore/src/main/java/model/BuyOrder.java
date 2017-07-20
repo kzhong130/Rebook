@@ -13,12 +13,13 @@ public class BuyOrder {
 	private Timestamp arrivalTime;
 	private String status;
 	private String ownerName;
+	private Timestamp createTime;
 	
 	public BuyOrder(){
 		
 	}
 	
-	public BuyOrder(int bookRecordID,int requestID,String buyerName,String buyAddress,String buyPhone,String receiver,Timestamp arrivalTime,String status,String ownerName){
+	public BuyOrder(int bookRecordID,int requestID,String buyerName,String buyAddress,String buyPhone,String receiver,Timestamp arrivalTime,String status,String ownerName,Timestamp createTime){
 		this.bookRecordID = bookRecordID;
 		this.requestID = requestID;
 		this.buyerName = buyerName;
@@ -28,6 +29,15 @@ public class BuyOrder {
 		this.arrivalTime = arrivalTime;
 		this.status = status;
 		this.ownerName = ownerName;
+		this.createTime = createTime;
+	}
+	
+	public Timestamp getCreateTime(){
+		return createTime;
+	}
+	
+	public void setCreateTime(Timestamp createTime){
+		this.createTime = createTime;
 	}
 	
 	public int getBuyID(){
