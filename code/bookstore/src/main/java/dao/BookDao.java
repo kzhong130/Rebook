@@ -16,4 +16,8 @@ public interface BookDao {
 	public List<Book> getAllBooks();
 	
 	public List<Book> searchBookByName(String bookName);
+	
+	public List<Book> searchBookByAuthor(String bookAuthor);
+	
+	public List<Book> searchBookByISBN(String ISBN);
 }

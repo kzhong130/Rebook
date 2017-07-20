@@ -53,8 +53,9 @@
 			<!-- Collect the nav links, forms, and other content for toggling -->
 			<div class="collapse navbar-collapse">
 				<ul class="nav navbar-nav navbar-right hidden-sm">
-					<li><a href="#" class="td" style="color:#707070">出借/卖书</a> </li>
+					<li><a href="#" class="title td">出借/卖书</a> </li>
 					<li><a href="test.jsp" class="title">返回首页</a></li>
+					<li><a href='AccountAction!logout' class="title">登出</a>
 				</ul>
 			</div>
 			<!-- /.navbar-collapse -->

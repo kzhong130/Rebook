@@ -42,4 +42,20 @@ public class BookDaoImpl extends HibernateDaoSupport implements BookDao{
 		books = (List<Book>)getHibernateTemplate().find(hql);
 		return books;
 	}
+	
+	public List<Book> searchBookByAuthor(String bookAuthor){
+		@SuppressWarnings("unchecked")
+		List<Book> books = new ArrayList<Book>();
+		String hql = "from Book as b where b.author like '%"+bookAuthor+"%'";
+		books = (List<Book>)getHibernateTemplate().find(hql);
+		return books;
+	}
+	
+	public List<Book> searchBookByISBN(String ISBN){
+		@SuppressWarnings("unchecked")
+		List<Book> books = new ArrayList<Book>();
+		String hql = "from Book as b where b.ISBN like '%"+ISBN+"%'";
+		books = (List<Book>)getHibernateTemplate().find(hql);
+		return books;
+	}
 }

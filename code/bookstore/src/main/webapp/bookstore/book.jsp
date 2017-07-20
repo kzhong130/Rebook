@@ -158,7 +158,7 @@ session.setAttribute("prePage", url);
         <p>参评人数：<%=book.getRaterNumber() %></p>
         <hr>
         <!-- 如果没登录，跳出信息显示请先登录 -->
-        <p><a href="LendSellAction!searchBook?ISBN=<%=book.getISBN() %>" class="btn btn-success" role="button">出借/卖书</a></p>
+        <p><button class="btn btn-success" role="button" id="lend_sell">出借/卖书</button></p>
       </div>
 	</div> 
   </div>
@@ -312,7 +312,7 @@ session.setAttribute("prePage", url);
    				<td><%=lendBookINs.get(i).getProvince() + " " + lendBookINs.get(i).getCity() + " "+ lendBookINs.get(i).getTown() %></td>
    				<td><%=lendBookINs.get(i).getLongestDuration() + "天" %></td>
    				<td><%=lendBookINs.get(i).getCoinNumber() %></td>
-   				<td><a class="btn btn-success btn-sm -sm" role="button" id="<%=lendBookINs.get(i).getBookRecordID()%>"  onclick="lendBook(this,<%=lendBookINs.get(i).getCoinNumber() %>)">借书</a></td>
+   				<td><a class="btn btn-success btn-sm -sm" role="button" id="<%=lendBookINs.get(i).getBookRecordID()%>"  onclick="lendBook(this,<%=lendBookINs.get(i).getCoinNumber() %>,'<%=user.getUserName() %>')">借书</a></td>
     		</tr>
     		<%} %>
     		<%} %>
@@ -395,7 +395,7 @@ session.setAttribute("prePage", url);
    				<td><%=sendWay %></td>
    				<td><%=sellBookINs.get(i).getProvince()+" "+sellBookINs.get(i).getCity()+" "+sellBookINs.get(i).getTown() %></td>
    				<td><%=sellBookINs.get(i).getCoinNumber() %></td>
-   				<td><a class="btn btn-success btn-sm -sm" role="button" id="<%=sellBookINs.get(i).getBookRecordID()%>" onclick="buyBook(this,<%=sellBookINs.get(i).getCoinNumber() %>)" >买书</a></td>
+   				<td><a class="btn btn-success btn-sm -sm" role="button" id="<%=sellBookINs.get(i).getBookRecordID()%>" onclick="buyBook(this,<%=sellBookINs.get(i).getCoinNumber()%>,'<%=user.getUserName()%>')" >买书</a></td>
     		</tr>
     		<%} %>
     		<%} %>
@@ -528,6 +528,14 @@ var userName = '<%=session.getAttribute("loginUserName")%>'
 		}
 }
 
+$("#lend_sell").click(function(){
+		if (userName=="null"){
+			alert("请先登录！");
+		}
+		else{
+		    window.location.href="LendSellAction!searchBook?ISBN="+"<%=book.getISBN() %>";
+		}
+	})
 
 $("#commentButton").click(function(){
 	if (userName=="null"){
@@ -547,7 +555,7 @@ function submitComment(){
 	}
 	
 }
-
+/*
 function buyBook(ob){
 	var ID = ob.id;
 	if (userName =="null"){
@@ -556,14 +564,17 @@ function buyBook(ob){
 	else{
 		window.location.href="order_buy.jsp?ID="+ID;
 	}
-}
+}*/
 
-function lendBook(ob,coinNumber){
+function lendBook(ob,coinNumber,bookOwnerName){
 	var ID = ob.id;
 	coinNumber = parseInt(coinNumber);
-	
+	var name = String(bookOwnerName);
 	if (userName =="null"){
 		alert("请先登录");
+	}
+	else if( userName == name){
+		alert("不能借自己的书");
 	}
 	else{
 		var myCoinNumber = "<%=session.getAttribute("loginUserBookCoin")%>";
@@ -577,11 +588,15 @@ function lendBook(ob,coinNumber){
 	}
 }
 
-function buyBook(ob,coinNumber){
+function buyBook(ob,coinNumber,bookOwnerName){
 	var ID = ob.id;
 	coinNumber = parseInt(coinNumber);
+	var name = String(bookOwnerName);
 	if (userName =="null"){
 		alert("请先登录");
+	}
+	else if( userName == name){
+		alert("不能买自己的书");
 	}
 	else{
 		var myCoinNumber = "<%=session.getAttribute("loginUserBookCoin")%>";

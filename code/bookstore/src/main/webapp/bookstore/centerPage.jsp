@@ -401,7 +401,11 @@ $(document).ready(function(){
 <script>
 var login_status='<%=session.getAttribute("login")%>';
 if (login_status=="error"){
-	alert("登录失败");
+	alert("密码错误");
+	<% session.removeAttribute("login"); %>
+}
+else if (login_status=="nobody"){
+	alert("该用户不存在");
 	<% session.removeAttribute("login"); %>
 }
 
