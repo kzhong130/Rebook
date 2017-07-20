@@ -98,7 +98,7 @@
 					</li>	
 							
                     <li>
-                        <a href="#"><i class="fa fa-edit"></i> 用户反馈</a>
+                        <a href="#"><i class="fa fa-edit"></i> 用户反馈<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="dashboard_lendFeedback.jsp">有书借</a>
@@ -186,7 +186,8 @@
     <!-- jQuery Js -->
     <script src="assets/js/jquery-1.10.2.js"></script>
       <!-- Bootstrap Js -->
-    <script src="assets/js/bootstrap.min.js"></script>
+<!--     <script src="assets/js/bootstrap.min.js"></script> -->
+    <script src="js/bootstrap.js"></script>
     <!-- Metis Menu Js -->
     <script src="assets/js/jquery.metisMenu.js"></script>
       <!-- Custom Js -->

@@ -114,7 +114,7 @@
 					</li>	
 							
                     <li>
-                        <a href="#"><i class="fa fa-edit"></i> 用户反馈</a>
+                        <a href="#"><i class="fa fa-edit"></i> 用户反馈<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
                                 <a href="dashboard_lendFeedback.jsp">有书借</a>
