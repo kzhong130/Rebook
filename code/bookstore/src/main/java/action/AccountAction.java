@@ -331,4 +331,21 @@ public class AccountAction extends BaseAction{
 		return "update success";
 	}
 	
+	public String checkUserName() throws Exception{
+		User user=appService.getUserByUserName(userName);
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject();
+		if(user==null) {
+			obj.put("success", true);
+		}
+		else{
+			obj.put("success", false);
+		}
+		String str = obj.toString();
+		out.write(str);
+		out.close();
+		
+		return SUCCESS;
+	}
+	
 }

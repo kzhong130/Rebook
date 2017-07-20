@@ -63,8 +63,8 @@
     <ul class="reg_ul">
       <li>
           <span>用户名：</span>
-          <input type="text" name="" value="" placeholder="6-12位用户名" class="reg_user">
-          <span class="tip user_hint"></span>
+          <input type="text" id="username" name="" value="" placeholder="6-12位用户名" class="reg_user">
+          <span class="tip user_hint" id="test"></span>
       </li>
       <li>
           <span>密码：</span>
