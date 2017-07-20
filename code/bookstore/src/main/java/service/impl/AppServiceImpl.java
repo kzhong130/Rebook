@@ -284,6 +284,14 @@ public class AppServiceImpl implements AppService {
 		return bookDao.searchBookByName(bookName);
 	}
 	
+	public List<Book> searchBookByAuthor(String bookAuthor){
+		return bookDao.searchBookByAuthor(bookAuthor);
+	}
+	
+	public List<Book> searchBookByISBN(String ISBN){
+		return bookDao.searchBookByISBN(ISBN);
+	}
+	
 	public List<Book> getBookByBookComment(List<BookComment> bookComments){
 		List<String> searchedISBN = new ArrayList<String>();
 		String ISBN = new String();

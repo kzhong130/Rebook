@@ -171,7 +171,7 @@ session.setAttribute("prePage", url);
       </li>
       <li id="checksell1">
           <span>书币要求：</span>
-          <input type="text" name="" value="" placeholder="书币要求" class="reg_sellcoinnumber">
+          <input type="text" name="" value="" placeholder="要求为正整值" class="reg_sellcoinnumber">
           <span class="tip sellcoinnumber_hint"></span>
       </li>
       <li id="checksell2">
@@ -189,12 +189,12 @@ session.setAttribute("prePage", url);
       </li>
       <li id="checklend2">
           <span>最长出借天数：</span>
-          <input type="text" name="" value="" placeholder="最长出借天数" class="reg_lenddaynumber">
+          <input type="text" name="" value="" placeholder="最低天数为10" class="reg_lenddaynumber">
           <span class="tip lenddaynumber_hint"></span>
       </li>
       <li id="checklend1">
           <span>书币要求：</span>
-          <input type="text" name="" value="" placeholder="书币要求" class="reg_lendcoinnumber">
+          <input type="text" name="" value="" placeholder="要求为正整值" class="reg_lendcoinnumber">
           <span class="tip lendcoinnumber_hint"></span>
       </li>
       <li id="checklend3">
@@ -281,7 +281,7 @@ session.setAttribute("prePage", url);
 	var lendday_Boolean=false;
 	
 	$('.reg_lenddaynumber').blur(function(){
-		  if ((/^[0-9]*[1-9][0-9]*$/).test($(".reg_lenddaynumber").val())){
+		  if ((/^[0-9]*[1-9][0-9]*$/).test($(".reg_lenddaynumber").val())&&($(".reg_lenddaynumber").val()>= 10)){
 		    $('.lenddaynumber_hint').html("✔").css("color","green");
 		    lendday_Boolean = true;
 		  }else {
@@ -310,6 +310,7 @@ session.setAttribute("prePage", url);
 				data:{town:town,ISBN:<%=book.getISBN()%>,province:province,city:city,ownerName:$(".reg_ownername").val(),ownerPhone:$(".reg_ownerphone").val(),coinNumber:$(".reg_sellcoinnumber").val(),note:$(".reg_sellnote").val(),recency:document.getElementsByName("recency")[0].value,sendWay:document.getElementsByName("sendway")[0].value},
 		        
 		    });
+		  	
 		}
 		else{
 			alert("请完善信息");

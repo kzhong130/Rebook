@@ -226,7 +226,7 @@ public class AccountAction extends BaseAction{
 		if (user == null){	//是管理员
 			Admin admin = appService.getAdminByAdminName(userName);
 			if (admin == null){		//根据名字查不到此人是用户或管理员
-				request().getSession().setAttribute("login","error");
+				request().getSession().setAttribute("login","nobody");
 				return "login fail";
 			}
 			if (admin.getPassword().equals(password)){		//管理员密码正确

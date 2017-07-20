@@ -186,6 +186,12 @@ public class BookAction extends BaseAction{
 	
 	public String frontPageSearch(){
 		List<Book> books = appService.searchBookByName(bookName);
+		List<Book> books2 = appService.searchBookByAuthor(bookName);
+		books2.removeAll(books);
+		books.addAll(books2);
+		List<Book> books3 = appService.searchBookByISBN(bookName);
+		books3.removeAll(books);
+		books.addAll(books3);
 		request().getSession().setAttribute("books", books);
 		String bookISBNs = new String();
 		String bookAuthors = new String();
