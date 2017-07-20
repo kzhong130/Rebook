@@ -221,6 +221,8 @@ public class RequestAction extends BaseAction{
 		appService.updateRequestBook(requestBook);
 		BookIN bookIN = appService.getBookINByBookRecordID(requestBook.getBookRecordID());
 		String ownerName = bookIN.getUserName();
+		Date date = new Date();       
+		Timestamp nousedate = new Timestamp(date.getTime());
 		LendOrder lendOrder = new LendOrder();
 		lendOrder.setBookRecordID(requestBook.getBookRecordID());
 		lendOrder.setRequestID(requestBook.getRequestID());
@@ -231,6 +233,7 @@ public class RequestAction extends BaseAction{
 		lendOrder.setReceiver(requestBook.getReceiverName());
 		lendOrder.setStatus("1");
 		lendOrder.setOwnerName(ownerName);
+		lendOrder.setCreateTime(nousedate);
 		appService.addLendOrder(lendOrder);
 		bookIN.setInStatus("delete");
 		appService.updateBookIN(bookIN);
@@ -241,8 +244,6 @@ public class RequestAction extends BaseAction{
 		CoinChangeRecord ownerCoinChangeRecord = new CoinChangeRecord();
 		ownerCoinChangeRecord.setNumber(bookIN.getCoinNumber());
 		ownerCoinChangeRecord.setReason("lendout");
-		Date date = new Date();       
-		Timestamp nousedate = new Timestamp(date.getTime());
 		ownerCoinChangeRecord.setTime(nousedate);
 		ownerCoinChangeRecord.setUserName(ownerUser.getUserName());
 		appService.addCoinChangeRecord(ownerCoinChangeRecord);
@@ -469,6 +470,8 @@ public class RequestAction extends BaseAction{
 		appService.updateRequestBook(requestBook);
 		BookIN bookIN = appService.getBookINByBookRecordID(requestBook.getBookRecordID());
 		String ownerName = bookIN.getUserName();
+		Date date = new Date();       
+		Timestamp nousedate = new Timestamp(date.getTime());
 		BuyOrder buyOrder = new BuyOrder();
 		buyOrder.setBookRecordID(requestBook.getBookRecordID());
 		buyOrder.setRequestID(requestBook.getRequestID());
@@ -478,6 +481,7 @@ public class RequestAction extends BaseAction{
 		buyOrder.setReceiver(requestBook.getReceiverName());
 		buyOrder.setStatus("1");
 		buyOrder.setOwnerName(ownerName);
+		buyOrder.setCreateTime(nousedate);
 		appService.addBuyOrder(buyOrder);
 		bookIN.setInStatus("delete");
 		appService.updateBookIN(bookIN);
@@ -488,8 +492,6 @@ public class RequestAction extends BaseAction{
 		CoinChangeRecord ownerCoinChangeRecord = new CoinChangeRecord();
 		ownerCoinChangeRecord.setNumber(bookIN.getCoinNumber());
 		ownerCoinChangeRecord.setReason("sell");
-		Date date = new Date();       
-		Timestamp nousedate = new Timestamp(date.getTime());
 		ownerCoinChangeRecord.setTime(nousedate);
 		ownerCoinChangeRecord.setUserName(ownerUser.getUserName());
 		appService.addCoinChangeRecord(ownerCoinChangeRecord);

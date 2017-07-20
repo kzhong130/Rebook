@@ -15,12 +15,13 @@ public class LendOrder {
 	private Timestamp returnTime;
 	private String status;
 	private String ownerName;
+	private Timestamp createTime;
 	
 	public LendOrder(){
 		
 	}
 	
-	public LendOrder(int bookRecordID,int requestID,String lenderName,String returnWay,String lendAddress,String lendPhone,String receiver,Timestamp arrivalTime,Timestamp returnTime,String status,String ownerName){
+	public LendOrder(int bookRecordID,int requestID,String lenderName,String returnWay,String lendAddress,String lendPhone,String receiver,Timestamp arrivalTime,Timestamp returnTime,String status,String ownerName,Timestamp createTime){
 		this.bookRecordID = bookRecordID;
 		this.requestID = requestID;
 		this.lenderName = lenderName;
@@ -32,6 +33,15 @@ public class LendOrder {
 		this.returnTime = returnTime;
 		this.status = status;
 		this.ownerName = ownerName;
+		this.createTime = createTime;
+	}
+	
+	public Timestamp getCreateTime(){
+		return createTime;
+	}
+	
+	public void setCreateTime(Timestamp createTime){
+		this.createTime = createTime;
 	}
 	
 	public int getLendID(){

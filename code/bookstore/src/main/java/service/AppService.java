@@ -8,9 +8,11 @@ import model.Book;
 import model.BookComment;
 import model.BookIN;
 import model.BuyOrder;
+import model.BuyOrderFeedback;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
 import model.LendOrder;
+import model.LendOrderFeedback;
 import model.RequestBook;
 import model.User;
 
@@ -40,6 +42,7 @@ public interface AppService {
 	public List<Book> searchBookByISBN(String ISBN);
 	public List<Book> getBookByBookComment(List<BookComment> bookComments);		//根据用户的评论得到某个用户的评论涉及到的所有书
 	public void updateBook(Book book);
+	public List<Book> getBooksByBookINs(List<BookIN> bookINs);
 	/*
 	 * BookComment
 	 */
@@ -79,7 +82,8 @@ public interface AppService {
 	public void updateBookIN(BookIN bookIN);
 	public List<BookIN> getBookINByISBN(String ISBN);
 	public List<BookIN> getBookINByUserName(String userName);
-	
+	public List<BookIN> getBookINByBuyOrders(List<BuyOrder> buyOrders);	/*根据购买订单，得到相对应的bookIN记录，其中，两个list的每个元素在index方面都一一对应*/
+	public List<BookIN> getBookINByLendOrders(List<LendOrder> lendOrders);
 	/*
 	 * LendOrder
 	 */
@@ -87,6 +91,7 @@ public interface AppService {
 	public LendOrder getLendOrderByLendID(int lendID);
 	public void updateLendOrder(LendOrder lendOrder);
 	public void addLendOrder(LendOrder lendOrder);
+	public List<LendOrder> getLendOrdersByLenderName(String lenderName);
 	
 	/*
 	 * Request
@@ -109,6 +114,15 @@ public interface AppService {
 	 * BuyOrder
 	 */
 	public void addBuyOrder(BuyOrder buyOrder);
+	public List<BuyOrder> getBuyOrderByBuyerName(String buyerName);
 
-
+	/*
+	 * BuyOrderFeedback
+	 */
+	public void addBuyOrderFeedback(BuyOrderFeedback buyOrderFeedback);
+	
+	/*
+	 * LendOrderFeedback
+	 */
+	public void addLendOrderFeedback(LendOrderFeedback lendOrderFeedback);
 }

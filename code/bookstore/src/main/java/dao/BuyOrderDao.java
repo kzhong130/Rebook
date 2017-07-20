@@ -18,4 +18,6 @@ public interface BuyOrderDao {
 	public List<BuyOrder> getBuyOrdersByBuyerID(int buyerID);
 	
 	public List<BuyOrder> getBuyOrdersByOwnerID(int ownerID);
+	
+	public List<BuyOrder> getBuyOrderByBuyerName(String buyerName);
 }

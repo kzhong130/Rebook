@@ -12,9 +12,11 @@ import model.Book;
 import model.BookComment;
 import model.BookIN;
 import model.BuyOrder;
+import model.BuyOrderFeedback;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
 import model.LendOrder;
+import model.LendOrderFeedback;
 import model.RequestBook;
 import dao.UserDao;
 import dao.AdminDao;
@@ -22,9 +24,11 @@ import dao.BookCommentDao;
 import dao.BookDao;
 import dao.BookINDao;
 import dao.BuyOrderDao;
+import dao.BuyOrderFeedbackDao;
 import dao.CoinChangeRecordDao;
 import dao.CreditChangeRecordDao;
 import dao.LendOrderDao;
+import dao.LendOrderFeedbackDao;
 import dao.RequestBookDao;
 
 import org.apache.http.HttpEntity;  
@@ -52,6 +56,16 @@ public class AppServiceImpl implements AppService {
 	private LendOrderDao lendOrderDao;
 	private RequestBookDao requestBookDao;
 	private BuyOrderDao buyOrderDao;
+	private BuyOrderFeedbackDao buyOrderFeedbackDao;
+	private LendOrderFeedbackDao lendOrderFeedbackDao;
+	
+	public void setLendOrderFeedbackDao(LendOrderFeedbackDao lendOrderFeedbackDao){
+		this.lendOrderFeedbackDao = lendOrderFeedbackDao;
+	}
+	
+	public void setBuyOrderFeedbackDao(BuyOrderFeedbackDao buyOrderFeedbackDao){
+		this.buyOrderFeedbackDao = buyOrderFeedbackDao;
+	}
 	
 	public void setRequestBookDao(RequestBookDao requestBookDao){
 		this.requestBookDao=requestBookDao;
@@ -312,6 +326,17 @@ public class AppServiceImpl implements AppService {
 		bookDao.update(book);
 	}
 	
+	public List<Book> getBooksByBookINs(List<BookIN> bookINs){
+		List<Book> books = new ArrayList<Book>();
+		if (bookINs.size() > 0){
+			for (int i=0; i<bookINs.size(); i++){
+				Book book = bookDao.getBookByISBN(bookINs.get(i).getISBN());
+				books.add(book);
+			}
+		}
+		return books;
+	}
+	
 	
 	/*
 	 * BookComment
@@ -401,6 +426,28 @@ public class AppServiceImpl implements AppService {
 		return bookINDao.getBookINByUserName(userName);
 	}
 	
+	public List<BookIN> getBookINByBuyOrders(List<BuyOrder> buyOrders){
+		List<BookIN> bookINs = new ArrayList<BookIN>();
+		if (buyOrders.size() > 0){
+			for (int i=0; i<buyOrders.size(); i++){
+				BookIN bookIN = bookINDao.getBookINByBookRecordID(buyOrders.get(i).getBookRecordID());
+				bookINs.add(bookIN);
+			}
+		}
+		return bookINs;
+	}
+	
+	public List<BookIN> getBookINByLendOrders(List<LendOrder> lendOrders){
+		List<BookIN> bookINs = new ArrayList<BookIN>();
+		if (lendOrders.size() > 0){
+			for (int i =0; i<lendOrders.size(); i++){
+				BookIN bookIN = bookINDao.getBookINByBookRecordID(lendOrders.get(i).getBookRecordID());
+				bookINs.add(bookIN);
+			}
+		}
+		return bookINs;
+	}
+	
 	/*
 	 * LendOrder
 	 */
@@ -418,6 +465,10 @@ public class AppServiceImpl implements AppService {
 	
 	public void addLendOrder(LendOrder lendOrder){
 		lendOrderDao.save(lendOrder);
+	}
+	
+	public List<LendOrder> getLendOrdersByLenderName(String lenderName){
+		return lendOrderDao.getLendOrdersByLenderName(lenderName);
 	}
 	/*
 	 * RequestBook
@@ -465,5 +516,22 @@ public class AppServiceImpl implements AppService {
 	public void addBuyOrder(BuyOrder buyOrder){
 		buyOrderDao.save(buyOrder);
 	}
+	
+	public List<BuyOrder> getBuyOrderByBuyerName(String buyerName){
+		return buyOrderDao.getBuyOrderByBuyerName(buyerName);
+	}
+	
+	/*
+	 * BuyOrderFeedback
+	 */
+	public void addBuyOrderFeedback(BuyOrderFeedback buyOrderFeedback){
+		buyOrderFeedbackDao.save(buyOrderFeedback);
+	}
 
+	/*
+	 * LendOrderFeedback
+	 */
+	public void addLendOrderFeedback(LendOrderFeedback lendOrderFeedback){
+		lendOrderFeedbackDao.save(lendOrderFeedback);
+	}
 }

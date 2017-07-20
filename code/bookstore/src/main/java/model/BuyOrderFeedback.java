@@ -9,14 +9,14 @@ public class BuyOrderFeedback {
 	private String content;
 	private Timestamp time;
 	private String handleResult;
-	private int adminID;
+	private Integer adminID;
 	private int userID;
 	
 	public BuyOrderFeedback(){
 		
 	}
 	
-	public BuyOrderFeedback(int buyID,String topic,String content,Timestamp time,String handleResult,int adminID,int userID){
+	public BuyOrderFeedback(int buyID,String topic,String content,Timestamp time,String handleResult,Integer adminID,int userID){
 		this.buyID = buyID;
 		this.topic = topic;
 		this.content = content;
@@ -74,11 +74,11 @@ public class BuyOrderFeedback {
 		this.handleResult = handleResult;
 	}
 	
-	public int getAdminID(){
+	public Integer getAdminID(){
 		return adminID;
 	}
 	
-	public void setAdminID(int adminID){
+	public void setAdminID(Integer adminID){
 		this.adminID = adminID;
 	}
 	

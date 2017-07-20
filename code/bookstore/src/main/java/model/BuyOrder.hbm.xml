@@ -35,5 +35,8 @@
 		<property name="ownerName" type="java.lang.String">
 			<column name="ownerName"/>
 		</property>
+		<property name="createTime" type="java.sql.Timestamp">
+			<column name="createTime"/>
+		</property>
 	</class>
 </hibernate-mapping>

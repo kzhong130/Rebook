@@ -23,7 +23,7 @@
 		<property name="handleResult" type="java.lang.String">
 			<column name="handleResult"/>
 		</property>
-		<property name="adminID" type="int">
+		<property name="adminID" type="java.lang.Integer">
 			<column name="adminID"/>
 		</property>
 		<property name="userID" type="int">
