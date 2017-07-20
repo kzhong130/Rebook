@@ -103,7 +103,7 @@ session.setAttribute("prePage", url);
 </div>
 
 <div class="container">
-  <div class="bookinfobox">
+  <div class="bookinfobox" style="background-image: url(images/orderBorrow_bg.png);">
      <table  style="width:100%;">
         <tr>
           <td class="bookimage" style="vertical-align:text-top;"><a href="bookAction!getBookInfo?ISBN=<%=book.getISBN()%> "><img class="listbook" src="<%=book.getImage() %>"/></a></td>
