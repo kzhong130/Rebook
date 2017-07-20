@@ -310,7 +310,8 @@ session.setAttribute("prePage", url);
 				data:{town:town,ISBN:<%=book.getISBN()%>,province:province,city:city,ownerName:$(".reg_ownername").val(),ownerPhone:$(".reg_ownerphone").val(),coinNumber:$(".reg_sellcoinnumber").val(),note:$(".reg_sellnote").val(),recency:document.getElementsByName("recency")[0].value,sendWay:document.getElementsByName("sendway")[0].value},
 		        
 		    });
-		  	
+		  	window.location.assign("MemberCenterAction!initialize");
+
 		}
 		else{
 			alert("请完善信息");
@@ -338,6 +339,8 @@ session.setAttribute("prePage", url);
 				data:{town:town,ownerAddress:$(".reg_owneraddress").val(),longestDuration:$(".reg_lenddaynumber").val(),ISBN:<%=book.getISBN()%>,province:province,city:city,ownerName:$(".reg_ownername").val(),ownerPhone:$(".reg_ownerphone").val(),coinNumber:$(".reg_lendcoinnumber").val(),note:$(".reg_lendnote").val(),recency:document.getElementsByName("recency")[0].value,sendWay:document.getElementsByName("sendway")[0].value},
 		        
 		    });
+		  	
+		  	window.location.assign("MemberCenterAction!initialize");
 		}
 		else{
 			alert("请完善信息");

@@ -12,6 +12,7 @@ var address_Boolean = false;
 
 //user
 $('.reg_user').blur(function(){
+	
   if ((/^[a-z0-9_-]{6,12}$/).test($(".reg_user").val())){
     $('.user_hint').html("✔").css("color","green");
     user_Boolean = true;
@@ -19,6 +20,26 @@ $('.reg_user').blur(function(){
     $('.user_hint').html("×").css("color","red");
     user_Boolean = false;
   }
+  $.ajax({  
+      type:"POST",  
+      url:"AccountAction!checkUserName",  
+      async:false,
+      data:{userName:$(".reg_user").val()} ,
+      success:function(result){
+      	result=eval('('+result+')');
+      	
+      	if(!result.success){
+      		$('.user_hint').html("×").css("color","red");
+      	    user_Boolean = false;
+      	    var test = document.getElementById("test");
+      	    var temp = "<p>用户名已存在</p>";
+      	    test.innerHTML += temp;
+      	   
+      	}
+      },
+      
+  });
+  
 });
 // password
 $('.reg_password').blur(function(){
