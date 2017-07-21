@@ -364,8 +364,18 @@ public class RequestAction extends BaseAction{
 	public String cancle() throws Exception{
 		
 		RequestBook request=appService.getRequestBookByRequestID(requestID);
-		
+		User user = appService.getUserByUserName(request.getUserName());
+		BookIN bookIn = appService.getBookINByBookRecordID(request.getBookRecordID());
+		int coin = user.getBookCoin();
+		coin += bookIn.getCoinNumber();
+		user.setBookCoin(coin);
+		appService.updateUser(user);
 		appService.deleteRequestBook(request);
+		String userName=request.getUserName();
+		Date date = new Date();       
+		Timestamp nousedate = new Timestamp(date.getTime());
+		CoinChangeRecord coinChangeRecord=new CoinChangeRecord(userName,coin,nousedate,"return");
+		appService.addCoinChangeRecord(coinChangeRecord);
 		return SUCCESS;
 	}
 
