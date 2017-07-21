@@ -108,7 +108,7 @@
                                 <a href="dashboard_lendFeedback.jsp">有书借</a>
                             </li>
                             <li>
-                                <a href="dashboard_buyFeedback.jsp">有书买</a>
+                                <a href="BuyOrderFeedbackAction!initialize">有书买</a>
                             </li>
 							</ul>
                     </li>
