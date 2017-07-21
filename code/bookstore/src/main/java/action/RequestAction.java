@@ -364,18 +364,51 @@ public class RequestAction extends BaseAction{
 	public String cancle() throws Exception{
 		
 		RequestBook request=appService.getRequestBookByRequestID(requestID);
-		User user = appService.getUserByUserName(request.getUserName());
+		User nuser = appService.getUserByUserName(request.getUserName());
 		BookIN bookIn = appService.getBookINByBookRecordID(request.getBookRecordID());
-		int coin = user.getBookCoin();
+		int coin = nuser.getBookCoin();
 		coin += bookIn.getCoinNumber();
-		user.setBookCoin(coin);
-		appService.updateUser(user);
+		nuser.setBookCoin(coin);
+		appService.updateUser(nuser);
 		appService.deleteRequestBook(request);
-		String userName=request.getUserName();
+		String nuserName=request.getUserName();
 		Date date = new Date();       
 		Timestamp nousedate = new Timestamp(date.getTime());
-		CoinChangeRecord coinChangeRecord=new CoinChangeRecord(userName,coin,nousedate,"return");
+		CoinChangeRecord coinChangeRecord=new CoinChangeRecord(nuserName,bookIn.getCoinNumber(),nousedate,"return");
 		appService.addCoinChangeRecord(coinChangeRecord);
+		
+		List<CoinChangeRecord> coinChangeRecords = appService.getCoinChangeRecordByUserName(nuserName);
+		request().getSession().setAttribute("coinChangeRecord", coinChangeRecords);
+		
+		String userName = (String)request().getSession().getAttribute("loginUserName");
+		User user = appService.getUserByUserName(userName);
+		request().getSession().setAttribute("user", user);
+		
+		List<RequestBook> requestBookList=appService.getProcessRequest(userName);
+		request().getSession().setAttribute("requestBookList", requestBookList);
+		List<BookIN> bookInList=new ArrayList<BookIN>();
+		List<Book> bookList=new ArrayList<Book>();
+		for(int i=0;i<requestBookList.size();i++){
+			BookIN bookIN=appService.getBookINByBookRecordID(requestBookList.get(i).getBookRecordID());
+			Book book=appService.getBookByISBN(bookIN.getISBN());
+			bookInList.add(bookIN);
+			bookList.add(book);
+		}
+		List<RequestBook> UnrequestBookList=appService.getUnprocessRequest(userName);
+		request().getSession().setAttribute("UnrequestBookList", UnrequestBookList);
+		List<BookIN> UnbookInList=new ArrayList<BookIN>();
+		List<Book> UnbookList=new ArrayList<Book>();
+		for(int i=0;i<UnrequestBookList.size();i++){
+			BookIN bookIN=appService.getBookINByBookRecordID(UnrequestBookList.get(i).getBookRecordID());
+			Book book=appService.getBookByISBN(bookIN.getISBN());
+			UnbookInList.add(bookIN);
+			UnbookList.add(book);
+		}
+		request().getSession().setAttribute("bookList", bookList);
+		request().getSession().setAttribute("bookInList", bookInList);
+		request().getSession().setAttribute("UnbookList", UnbookList);
+		request().getSession().setAttribute("UnbookInList", UnbookInList);
+		
 		return SUCCESS;
 	}
 

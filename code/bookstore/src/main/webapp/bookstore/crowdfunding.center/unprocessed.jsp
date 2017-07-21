@@ -527,6 +527,7 @@ function cancel(id){
 	        async:false,
 	        data:{requestID:id}
 	    });
+	window.location.assign("unprocessed.jsp");
 }
 
 //窗口效果
