@@ -94,6 +94,17 @@ public class BuyOrderFeedbackAction extends BaseAction{
 		this.appService = appService;
 	}
 	
+	private String adminName;
+	
+	public void setAdminName(String adminName){
+		this.adminName=adminName;
+	}
+	
+	public String getAdminName(){
+		return adminName;
+	}
+	
+	
 	public String addBuyOrderFeedback() throws Exception{
 		System.out.println("here");
 		BuyOrderFeedback buyOrderFeedback = new BuyOrderFeedback();
@@ -115,5 +126,41 @@ public class BuyOrderFeedbackAction extends BaseAction{
 		out.write(str);
 		out.close();
 		return "add success";
+	}
+	
+	public String viewDetail() throws Exception{
+		BuyOrderFeedback bf=appService.getBuyOrderFeedbackByID(ID);
+		User user=appService.getUserByUserID(bf.getUserID());
+		request().setAttribute("feedback", bf);
+		request().setAttribute("feedbackUser", user);
+		return "view";
+	}
+	
+	public String handle() throws Exception{
+		BuyOrderFeedback bf=appService.getBuyOrderFeedbackByID(ID);
+		bf.setHandleResult(handleResult);
+		bf.setAdminID(appService.getAdminByAdminName(adminName).getAdminID());
+		appService.updateBuyOrderFeedback(bf);
+		
+		return "handle";
+	}
+	
+	public String initialize() throws Exception{
+		List<BuyOrderFeedback> buyOrderFeedback=appService.getAllBuyOrderFeedback();
+		request().setAttribute("allBuyOrderFeedback", buyOrderFeedback);
+		List<String> userNames=new ArrayList<String>();
+		List<String> adminNames=new ArrayList<String>();
+		int size=buyOrderFeedback.size();
+		for(int i=0;i<size;i++){
+			userNames.add(appService.getUserByUserID(buyOrderFeedback.get(i).getUserID()).getUserName());
+			Integer adminID=buyOrderFeedback.get(i).getAdminID();
+			if(adminID==null) adminNames.add("无");
+			else{
+				adminNames.add(appService.getAdminByAdminID(adminID).getAdminName());
+			}
+		}
+		request().setAttribute("FeedbackAdminNames", adminNames);
+		request().setAttribute("FeedbackUserNames", userNames);
+		return "initialize";
 	}
 }

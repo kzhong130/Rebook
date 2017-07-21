@@ -74,7 +74,8 @@
 		</action>
 		
 		<action name="BuyOrderFeedbackAction" class="action.BuyOrderFeedbackAction">
-		
+			<result name="view">dashboard_buyFeedbackInfo.jsp</result>
+			<result name="initialize">dashboard_buyFeedback.jsp</result>
 		</action>
 		
 		<action name="LendOrderFeedbackAction" class="action.LendOrderFeedbackAction">
