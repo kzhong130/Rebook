@@ -8,7 +8,6 @@ import model.Book;
 import model.BookComment;
 import model.BookIN;
 import model.BuyOrder;
-import model.BuyOrderCommentRecord;
 import model.BuyOrderFeedback;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
@@ -116,8 +115,6 @@ public interface AppService {
 	 */
 	public void addBuyOrder(BuyOrder buyOrder);
 	public List<BuyOrder> getBuyOrderByBuyerName(String buyerName);
-	public BuyOrder getBuyOrderByBuyID(int buyID);
-	public void updateBuyOrder(BuyOrder buyOrder);
 
 	/*
 	 * BuyOrderFeedback
@@ -128,9 +125,4 @@ public interface AppService {
 	 * LendOrderFeedback
 	 */
 	public void addLendOrderFeedback(LendOrderFeedback lendOrderFeedback);
-	
-	/*
-	 * BuyOrderCommentRecord
-	 */
-	public void addBuyOrderCommentRecord(BuyOrderCommentRecord buyOrderCommentRecord);
 }
