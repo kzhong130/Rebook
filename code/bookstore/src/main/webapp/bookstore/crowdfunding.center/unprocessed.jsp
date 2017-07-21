@@ -111,7 +111,7 @@
 			  if(recency.equals("100%")) w1="全新";
 			  	
 			  String delivery=bookIn.getSendWay();
-			  if(delivery.equals("face")) w2="面取";
+			  if(delivery.equals("face")) w2="当面";
 			  else w2="邮寄";
 			  w3=bookIn.getNote();
 			  if(w3=="") w3="无";
@@ -202,7 +202,7 @@
 			  if(recency.equals("100%")) w1="全新";
 			  	
 			  String delivery=bookIn.getSendWay();
-			  if(delivery.equals("face")) w2="面取";
+			  if(delivery.equals("face")) w2="当面";
 			  else w2="邮寄";
 			  w3=bookIn.getNote();
 			  if(w3==null) w3="无";
@@ -520,13 +520,12 @@ var townFormat = function(info){
 	}
 
 function cancel(id){
-	alert(id);
+	alert("取消成功");
 	$.ajax({  
 	        type:"POST",  
 	        url:"RequestAction!cancle",  
 	        async:false,
-	        data:{requestID:id} ,
-	        
+	        data:{requestID:id}
 	    });
 }
 
