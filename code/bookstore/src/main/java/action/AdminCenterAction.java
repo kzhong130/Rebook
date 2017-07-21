@@ -1,11 +1,14 @@
 package action;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import model.Book;
 import model.BookComment;
 import model.BookIN;
+import model.BuyOrder;
+import model.BuyOrderFeedback;
 import model.LendOrder;
 import model.RequestBook;
 import model.User;
@@ -196,7 +199,21 @@ private AppService appService;
 		request().getSession().setAttribute("allLendOrders", lendOrders);
 		List<RequestBook> requestBooks = appService.getAllRequestBooks();
 		request().getSession().setAttribute("allRequestBooks", requestBooks);
-
+		List<BuyOrderFeedback> buyOrderFeedback=appService.getAllBuyOrderFeedback();
+		request().getSession().setAttribute("allBuyOrderFeedback", buyOrderFeedback);
+		List<String> userNames=new ArrayList<String>();
+		List<String> adminNames=new ArrayList<String>();
+		int size=buyOrderFeedback.size();
+		for(int i=0;i<size;i++){
+			userNames.add(appService.getUserByUserID(buyOrderFeedback.get(i).getUserID()).getUserName());
+			Integer adminID=buyOrderFeedback.get(i).getAdminID();
+			if(adminID==null) adminNames.add("无");
+			else{
+				adminNames.add(appService.getAdminByAdminID(adminID).getAdminName());
+			}
+		}
+		request().getSession().setAttribute("FeedbackAdminNames", adminNames);
+		request().getSession().setAttribute("FeedbackUserNames", userNames);
 		return "initialize success";
 	}
 }

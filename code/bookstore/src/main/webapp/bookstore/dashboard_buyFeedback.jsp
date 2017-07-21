@@ -23,6 +23,8 @@
     <%@page import="model.BookComment"%>    
     <%@page import="java.util.ArrayList" %>    
     <%@page import="model.Book" %>
+    <%@page import="model.BuyOrderFeedback" %>
+    <%@page import="model.BuyOrder" %>
 
 	<!-- JS Scripts-->
     <script type="text/javascript">
@@ -37,7 +39,9 @@
 </head>
 <body>
 <%
-
+	ArrayList<BuyOrderFeedback> buyOrderFeedbacks = (ArrayList<BuyOrderFeedback>)request.getAttribute("allBuyOrderFeedback");
+	ArrayList<String> userNames=(ArrayList<String>)request.getAttribute("FeedbackUserNames");
+	ArrayList<String> adminNames=(ArrayList<String>)request.getAttribute("FeedbackAdminNames");
 %>
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -168,43 +172,35 @@
                                         </thead>
                                         <tbody class="text-center">
                                             <%
+                                            	int size=buyOrderFeedbacks.size();
+                                            	for(int i=0;i<size;i++){
+                                            		BuyOrderFeedback buyOrderFeedback=buyOrderFeedbacks.get(i);
+                                            		String userName=userNames.get(i);
                                             	
                                             %>
                                             <tr>
-												  <td><% %>1</td>
-                                                <td>1</td>
-                                                <td><% %>zcx</td>
-                                                <td><div title="<% %>哈哈哈哈哈" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><% %>哈哈哈哈哈</div></td>
-                                                <td>2017-07-05 00:00:00</td>
-                                                <% %>
-                                                <% %>
-                                                <td>已处理</td>
-                                                <% %>
-                                                <td>root</td>
-                                                <td><a class="btn btn-success btn-xs" href="dashboard_buyFeedbackInfo.jsp">查看</a></td>
+												  <td><%=buyOrderFeedback.getID() %></td>
+                                                <td><%=buyOrderFeedback.getBuyID() %></td>
+                                                <td><%=userName %></td>
+                                                <td><div title="<%=buyOrderFeedback.getTopic() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=buyOrderFeedback.getTopic() %></div></td>
+                                                <td><%=buyOrderFeedback.getTime().toString().substring(0, 10) %></td>
+                                                <%
+                                                	String a;
+                                                	if(buyOrderFeedback.getHandleResult()==null) a="未处理";
+                                                	else a="已处理";
+                                                %>
+                                                <td><%=a %></td>
+                                                
+                                                <td><%=adminNames.get(i) %></td>
+                                                <td><a class="btn btn-success btn-xs" href="BuyOrderFeedbackAction!viewDetail?ID=<%=buyOrderFeedback.getID()%>">查看</a></td>
                                                 
                                             </tr>
-                                            <% %>
-                                            <% %>
-                                            <% %>
-                                            <% %>
-                                            <%	
+                                            
+                                            <%
+                                            }
                                             %>
-                                             <tr>
-												  <td><% %>2</td>
-												  <td><% %>2</td>
-												  <td><% %>zk</td>
-                                                <td><div title="<% %>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><% %>哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈</div></td>
-                                                <td><% %>2017-07-19</td>
-                                                <td><% %>未处理</td>
-                                                <td>无</td>
-                                                <% %>
-                                                <td><a class="btn btn-success btn-xs" href="dashboard_buyFeedbackInfo.jsp">查看</a></td>
-                                                
-                                            </tr>
-                                            <% %>
-                                            <% %>
-                                            <% %>
+                                           
+                                           
                                         </tbody>
                                     </table>
                                 </div>

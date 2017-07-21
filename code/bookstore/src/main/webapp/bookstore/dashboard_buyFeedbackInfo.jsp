@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
+    <%@page import="model.BuyOrderFeedback" %>
+    <%@page import="model.User" %>
+    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -37,8 +40,8 @@
 </head>
 <body>
 <%
-
-	
+	BuyOrderFeedback buyOrderFeedback=(BuyOrderFeedback)request.getAttribute("feedback");
+	User user=(User)request.getAttribute("feedbackUser");
 %>
     <div id="wrapper">
         <nav class="navbar navbar-default top-navbar" role="navigation">
@@ -152,41 +155,38 @@
                         <div class="panel panel-default">
                           
                             <div class="panel-body">
-								<p><span class="col-md-2">反馈号: </span><span class="col-md-10"><% %></span></p>
-                                <p><span class="col-md-2">订单号: </span><span class="col-md-10"><% %></span></p>
-                                <p><span class="col-md-2">用户邮箱:</span><span class="col-md-10"><% %> </span></p>
-                                <p><span class="col-md-2">反馈主题: </span><span class="col-md-10"><% %></span></p><br>
-                                <p><span class="col-md-2">反馈内容: </span><span class="col-md-10"><% %></span></p><br>
-                                <p><span class="col-md-2">反馈日期: </span><span class="col-md-10"><% %></span></p><br>
+								<p><span class="col-md-2">反馈号: </span><span class="col-md-10"><%=buyOrderFeedback.getID() %></span></p>
+                                <p><span class="col-md-2">订单号: </span><span class="col-md-10"><%=buyOrderFeedback.getBuyID() %></span></p>
+                                <p><span class="col-md-2">用户邮箱:</span><span class="col-md-10"><%=user.getEmail() %> </span></p>
+                                <p><span class="col-md-2">反馈主题: </span><span class="col-md-10"><%=buyOrderFeedback.getTopic() %></span></p><br>
+                                <p><span class="col-md-2">反馈内容: </span><span class="col-md-10"><%=buyOrderFeedback.getContent() %></span></p><br>
+                                <p><span class="col-md-2">反馈日期: </span><span class="col-md-10"><%=buyOrderFeedback.getTime().toString().substring(0,19) %></span></p><br>
                                 <form role="form">
                                 <%
                                 	
                                 %>
-												<div class="form-group" style="margin:-20px 0 0 0">
-													<p><span class="col-md-2">处理结果: </span></p>
- 													<div class="col-md-10" style="margin:-5px 0 0 -20px">
-													<label class="checkbox-inline">
-													<input type="radio" name="lendFeedbackCheck" id="lendFeedbackCheck1" value="已处理" > 已处理
+                                <div class="form-group" style="margin:-20px 0 0 0">
+													<p><span class="col-md-2">反馈结果: </span></p>
+ 													<div class="col-md-10" style="margin:-10px 0 0 -20px">
+													<label>
+													<%
+														String a=buyOrderFeedback.getHandleResult();
+														if(a==null) a="";
+														
+													%>
+													
+													
+													<textarea id="buyFeedbackResult" name="content" placeholder="请输入反馈结果" style="height: 80px; width:580px;resize:none;margin: 10px" ><%=a %></textarea>
 													</label>
 													<label class="checkbox-inline">
-													<input type="radio" name="lendFeedbackCheck" id="lendFeedbackCheck0" value="未处理" checked="true"> 未处理
 													</label></div>
 												</div>
-								<% %>
-								<% %>
-								<div class="form-group" >
-													<p><span class="col-md-2">处理结果: </span></p>
- 													<div class="col-md-10" style="margin:-5px 0 0 -20px">
-													<label class="checkbox-inline">
-													<input type="radio" name="lendFeedbackCheck" id="lendFeedbackCheck1" value="已通过" checked="true"> 已处理
-													</label>
-													<label class="checkbox-inline">
-													<input type="radio" name="lendFeedbackCheck" id="lendFeedbackCheck0" value="未通过" > 未处理
-													</label></div>
-												</div>
+                                <label>
+								</label>
+				
 								<% %>
 								<br><br>&nbsp;&nbsp;&nbsp;				
-                          <input type="button" class="btn btn-success" value="确认修改" id="<% %>" onclick="updateBookComment(this)">&nbsp;&nbsp;
+                          <input type="button" class="btn btn-success" value="确认修改" id="<% %>" onclick="updateBookComment()">&nbsp;&nbsp;
                            <a href="dashboard_lendFeedback.jsp" class="btn btn-default">返回</a>
                            </form>
                             </div>
@@ -212,32 +212,16 @@
     <script src="assets/js/custom-scripts.js"></script>
    <script type="text/javascript">
    	function updateBookComment(ob){
-   		var ID = ob.id;
-   		var checkResult;
-   		if (document.getElementById("bookCommentCheck1").checked){
-   			checkResult = "pass";
-   		}
-   		else{
-   			checkResult = "reject";
-   		}
+   		
    		$.ajax({
    			type:"POST",
-   			url:"BookCommentAction!updateBookComment",
+   			url:"BuyOrderFeedbackAction!handle",
    			async:false,
-   			data:{ID:ID,checkResult:checkResult},
-   			success:function(result){
-   				result=eval('('+result+')');
-   				if(result.success){
-   					location.reload();
-   					alert("修改成功");
-   					
-   				}
-   				else{
-   					alert("修改失败");
-   				}
-   			}
+   			data:{ID:<%=buyOrderFeedback.getID()%>,handleResult:document.getElementById("buyFeedbackResult").value,adminName:<%=session.getAttribute("loginUserName")%>},
+   			
+   			
    		})
-   		
+   		alert("反馈成功");
    	}
    </script>
 

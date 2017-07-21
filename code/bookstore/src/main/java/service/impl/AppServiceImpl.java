@@ -534,4 +534,38 @@ public class AppServiceImpl implements AppService {
 	public void addLendOrderFeedback(LendOrderFeedback lendOrderFeedback){
 		lendOrderFeedbackDao.save(lendOrderFeedback);
 	}
+
+	@Override
+	public List<BuyOrderFeedback> getAllBuyOrderFeedback() {
+		return buyOrderFeedbackDao.getAllBuyOrderFeedbacks();		
+	}
+
+	@Override
+	public BuyOrder getBuyOrderByBuyID(int buyID) {
+		
+		return buyOrderDao.getBuyOrderByBuyID(buyID);
+	}
+
+	@Override
+	public Admin getAdminByAdminID(int adminID) {
+		
+		return adminDao.getAdminByAdminID(adminID);
+	}
+
+	@Override
+	public BuyOrder getBuyOrderByID(int ID) {
+		return null;
+	}
+
+	@Override
+	public BuyOrderFeedback getBuyOrderFeedbackByID(int ID) {
+		
+		return buyOrderFeedbackDao.getBuyOrderFeedbackByID(ID);
+	}
+
+	@Override
+	public void updateBuyOrderFeedback(BuyOrderFeedback buyOrderFeedback) {
+		buyOrderFeedbackDao.update(buyOrderFeedback);
+		
+	}
 }
