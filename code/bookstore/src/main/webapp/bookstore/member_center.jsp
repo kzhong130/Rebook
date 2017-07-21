@@ -78,7 +78,7 @@
 		<div class="tc_login">
 		
 			<div class="right">
-				<form method="POST" name="form_login" target="_top" action=<% %>>
+				<form method="POST" name="form_login" target="_top" action="LendSellAction!searchBook">
 					<div align="center">
 					    <p style="font-size:14px;color:#707070;float:left;">请输入您出借/卖的书对应的ISBN </p>
 						<input type="text" name="ISBN" id="ISBN" required="required" placeholder="ISBN" autocomplete="off" class="input_yh">
