@@ -1,12 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>BookStore</title>
+
+<%
+	String ISBN = request.getParameter("ISBN");
+	response.sendRedirect("bookAction!getBookInfo?ISBN="+ISBN);
+%>
+
 </head>
 <body>
-	<a href="bookAction!getBookInfo?cnt=1" >test</a>
 </body>
 </html>

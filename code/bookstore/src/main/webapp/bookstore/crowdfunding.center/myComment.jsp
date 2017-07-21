@@ -66,17 +66,19 @@
      
         <tr>
 
-          <td class="bookimage" style="vertical-align:text-top;"><a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a></td>
+          <td class="bookimage" style="vertical-align:text-top;"><a target="view_parent" href="../aa.jsp?ISBN=<%=book.getISBN()%>"><img class="listbook" src="<%=book.getImage() %>"/></a></td>
           <td class="bookcontent" style="vertical-align:top;">
-          <table class="allwidth" style="width:691px;">
+          <table class="allwidth" style="width:691px;height:142px;">
               <tr>
               <td class="bookname">《<%=book.getBookName() %>》</td>
               <td class="deletebutton"><button class="delete" name="" value="<%=bookComment.getID() %>" onclick="deleteBookComment(this)">删 除</button></td>
               </tr>
               <tr>
-              <td colspan="2">
-              <p class="comment"><%=bookComment.getContent() %></p>
-              <p class="time">
+              <td colspan="2" style="vertical-align:top;">
+              <p class="comment"><%=bookComment.getContent() %></p></td></tr></table>
+           <table class="allwidth" style="width:691px;vertical-align:bottom;">
+           <tr><td>
+              <p class="time"  style="vertical-align:bottom;">
               <%
               	if("reject".equals(bookComment.getCheckResult())){
               %>
