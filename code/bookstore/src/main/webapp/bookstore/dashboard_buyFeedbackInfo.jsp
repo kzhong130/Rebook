@@ -221,7 +221,8 @@
    			
    			
    		})
-   		alert("反馈成功");
+   		alert("处理成功");
+   		window.location.assign("BuyOrderFeedbackAction!initialize");
    	}
    </script>
 
