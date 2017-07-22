@@ -55,9 +55,12 @@ float:left;
 text-align:center;
 padding:15px 8px 3px 8px;
 }
+.beautiful{
+	width:40%;
+}
 
 img.listbook{
-	weight:55%;
+	/*width:40%;*/
 	height:55%;
 }
 

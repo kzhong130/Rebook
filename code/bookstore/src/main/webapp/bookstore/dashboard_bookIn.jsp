@@ -128,7 +128,7 @@
                                 <a href="dashboard_lendFeedback.jsp">有书借</a>
                             </li>
                             <li>
-                                <a href="dashboard_buyFeedback.jsp">有书买</a>
+                                <a href="BuyOrderFeedbackAction!initialize">有书买</a>
                             </li>
 							</ul>
                     </li>
@@ -208,6 +208,9 @@
                                                 }
                                                 if ("no".equals(bookINs.get(i).getInStatus())){
                                                 	status="下架";
+                                                }
+                                                if ("delete".equals(bookINs.get(i).getInStatus())){
+                                                	status="已交易";
                                                 }
                                                 %>
                                                 <td><%=status %></td>

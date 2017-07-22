@@ -67,7 +67,7 @@
         <tr>
 
           <td class="bookimage" style="vertical-align:text-top;">
-          <a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a><br>
+          <a  target="view_parent" href="../aa.jsp?ISBN=<%=book.getISBN()%>"><img class="listbook" src="<%=book.getImage() %>"/></a><br>
 
           
           </td>
@@ -108,7 +108,7 @@
 			  if(recency.equals("100%")) w1="全新";
 			  	
 			  String delivery=bookIn.getSendWay();
-			  if(delivery.equals("face")) w2="面取";
+			  if(delivery.equals("face")) w2="当面";
 			  else w2="邮寄";
 			  w3=bookIn.getNote();
 			  if(w3==null) w3="无";
@@ -124,7 +124,16 @@
               <%
               System.out.println(requestBook.getReturnWay());
               %>
-              <p class="comment">收件人：<%=requestBook.getReceiverName() %>&nbsp;&nbsp;<%=requestBook.getPhone() %>&emsp;&emsp;还书方式：<%=requestBook.getReturnWay() %></p>
+              <p class="comment">收件人：<%=requestBook.getReceiverName() %>&nbsp;&nbsp;<%=requestBook.getPhone() %>&emsp;&emsp;还书方式：
+              <%
+              	if("mail".equals(requestBook.getReturnWay())){
+              %>邮寄
+              <%} %>
+              <%
+              	if("face".equals(requestBook.getReturnWay())){
+              %>当面
+              <%} %>
+              </p>
               <p class="comment">收货地址：<%=requestBook.getProvince()+requestBook.getCity()+requestBook.getTown()+requestBook.getAddress() %></p>
               </td>
               <td>
@@ -157,7 +166,7 @@
         <tr>
 
           <td class="bookimage" style="vertical-align:text-top;">
-          <a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a><br>
+          <a  target="view_parent" href="../aa.jsp?ISBN=<%=book.getISBN()%>"><img class="listbook" src="<%=book.getImage() %>"/></a><br>
 
           
           </td>
@@ -193,7 +202,7 @@
 			  if(recency.equals("100%")) w1="全新";
 			  	
 			  String delivery=bookIn.getSendWay();
-			  if(delivery.equals("face")) w2="面取";
+			  if(delivery.equals("face")) w2="当面";
 			  else w2="邮寄";
 			  w3=bookIn.getNote();
 			  if(w3=="") w3="无";

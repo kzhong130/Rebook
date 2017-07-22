@@ -152,8 +152,8 @@ session.setAttribute("prePage",url);
           <a class="left carousel-control" href="#carousel1" data-slide="prev"><span class="icon-prev"></span></a> <a class="right carousel-control" href="#carousel1" data-slide="next"><span class="icon-next"></span></a></div>
      
      </div>
-    <hr>
   </div>
+  <!-- 
 <div class="container" >
     
     <div class="center-block" style="width:100px;">
@@ -169,7 +169,7 @@ session.setAttribute("prePage",url);
     </ul>
     </div>
     
-</div>
+</div>-->
 
 	<%
 		int pageNum=0;

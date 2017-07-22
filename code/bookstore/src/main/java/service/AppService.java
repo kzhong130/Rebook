@@ -73,6 +73,7 @@ public interface AppService {
 	 * Admin
 	 */
 	public Admin getAdminByAdminName(String adminName);
+	public Admin getAdminByAdminID(int adminID);
 	
 	/*
 	 * BookIN
@@ -119,19 +120,28 @@ public interface AppService {
 	public void addBuyOrder(BuyOrder buyOrder);
 	public List<BuyOrder> getBuyOrderByBuyerName(String buyerName);
 	public BuyOrder getBuyOrderByBuyID(int buyID);
+
 	public void updateBuyOrder(BuyOrder buyOrder);
 	public List<BuyOrder> getBuyOrderByOwnerName(String ownerName);
+
+
+	public BuyOrder getBuyOrderByID(int ID);
+	
 
 	/*
 	 * BuyOrderFeedback
 	 */
 	public void addBuyOrderFeedback(BuyOrderFeedback buyOrderFeedback);
 	
+	public List<BuyOrderFeedback> getAllBuyOrderFeedback();
+	public BuyOrderFeedback getBuyOrderFeedbackByID(int ID);
+	public void updateBuyOrderFeedback(BuyOrderFeedback buyOrderFeedback);
+	
 	/*
 	 * LendOrderFeedback
 	 */
 	public void addLendOrderFeedback(LendOrderFeedback lendOrderFeedback);
-	
+
 	/*
 	 * BuyOrderCommentRecord
 	 */
@@ -141,4 +151,5 @@ public interface AppService {
 	 * LendOrderCommentRecord
 	 */
 	public void addLendOrderCommentRecord(LendOrderCommentRecord lendOrderCommentRecord);
+
 }

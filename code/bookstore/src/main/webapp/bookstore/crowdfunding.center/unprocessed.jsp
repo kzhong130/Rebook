@@ -73,7 +73,7 @@
         <tr>
 
           <td class="bookimage" style="vertical-align:text-top;">
-          <a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a><br>
+          <a  target="view_parent" href="../aa.jsp?ISBN=<%=book.getISBN()%>"><img class="listbook" src="<%=book.getImage() %>"/></a><br>
 
           
           </td>
@@ -111,7 +111,7 @@
 			  if(recency.equals("100%")) w1="全新";
 			  	
 			  String delivery=bookIn.getSendWay();
-			  if(delivery.equals("face")) w2="面取";
+			  if(delivery.equals("face")) w2="当面";
 			  else w2="邮寄";
 			  w3=bookIn.getNote();
 			  if(w3=="") w3="无";
@@ -126,7 +126,16 @@
               <tr><td colspan="2"><hr class="fortr"></td></tr>
               <tr>
               <td>
-             <p class="comment" id="<%=i %>lendInfo">收件人：<%=requestBook.getReceiverName() %>&nbsp;&nbsp;<%=requestBook.getPhone() %>&emsp;&emsp;还书方式：<%=requestBook.getReturnWay() %></p>
+              <p class="comment" id="<%=i %>lendInfo">收件人：<%=requestBook.getReceiverName() %>&nbsp;&nbsp;<%=requestBook.getPhone() %>&emsp;&emsp;还书方式：
+			  <%
+              	if("mail".equals(requestBook.getReturnWay())){
+              %>邮寄
+              <%} %>
+              <%
+              	if("face".equals(requestBook.getReturnWay())){
+              %>当面
+              <%} %>
+             </p>
               <p class="comment" id="<%=i%>lendAddress">收货地址：<%=requestBook.getProvince()+requestBook.getCity()+requestBook.getTown()+requestBook.getAddress() %></p>
 
               </td>
@@ -157,7 +166,7 @@
         <tr>
 
           <td class="bookimage" style="vertical-align:text-top;">
-          <a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a><br>
+          <a  target="view_parent" href="../aa.jsp?ISBN=<%=book.getISBN()%>"><img class="listbook" src="<%=book.getImage() %>"/></a><br>
 
           
           </td>
@@ -193,7 +202,7 @@
 			  if(recency.equals("100%")) w1="全新";
 			  	
 			  String delivery=bookIn.getSendWay();
-			  if(delivery.equals("face")) w2="面取";
+			  if(delivery.equals("face")) w2="当面";
 			  else w2="邮寄";
 			  w3=bookIn.getNote();
 			  if(w3==null) w3="无";
@@ -511,14 +520,14 @@ var townFormat = function(info){
 	}
 
 function cancel(id){
-	alert(id);
+	alert("取消成功");
 	$.ajax({  
 	        type:"POST",  
 	        url:"RequestAction!cancle",  
 	        async:false,
-	        data:{requestID:id} ,
-	        
+	        data:{requestID:id}
 	    });
+	window.location.assign("unprocessed.jsp");
 }
 
 //窗口效果
