@@ -2,10 +2,13 @@ package action;
 
 import java.io.PrintWriter;
 import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
 
+import model.Book;
+import model.BookIN;
 import model.LendOrder;
 import net.sf.json.JSONObject;
 import service.AppService;
@@ -142,5 +145,101 @@ public class LendOrderAction extends BaseAction{
 		out.close();
 		
 		return "update success";
+	}
+	
+	public String confirmBook() throws Exception{
+		LendOrder lendOrder = appService.getLendOrderByLendID(lendID);
+		lendOrder.setStatus("4");
+		Date date = new Date();       
+		Timestamp nousedate = new Timestamp(date.getTime());
+		lendOrder.setArrivalTime(nousedate);
+		appService.updateLendOrder(lendOrder);
+		
+		
+		String userName = (String)request().getSession().getAttribute("loginUserName");
+		List<LendOrder> lendinOrders = appService.getLendOrdersByLenderName(userName);
+		List<BookIN> bookINsByLendinOrders = appService.getBookINByLendOrders(lendinOrders);
+		List<Book> booksByLendinOrders = appService.getBooksByBookINs(bookINsByLendinOrders);
+		request().getSession().setAttribute("lendinOrders", lendinOrders);
+		request().getSession().setAttribute("bookINsByLendinOrders", bookINsByLendinOrders);
+		request().getSession().setAttribute("booksByLendinOrders", booksByLendinOrders);
+		
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject();
+		obj.put("success", true);
+		String str=obj.toString();
+		out.write(str);
+		out.close();
+		
+		return "confirm success";
+	}
+	
+	public String returnLend() throws Exception{	//借书用户确认还书
+		LendOrder lendOrder = appService.getLendOrderByLendID(lendID);
+		lendOrder.setStatus("5");
+		appService.updateLendOrder(lendOrder);
+		
+		String userName = (String)request().getSession().getAttribute("loginUserName");
+		List<LendOrder> lendinOrders = appService.getLendOrdersByLenderName(userName);
+		List<BookIN> bookINsByLendinOrders = appService.getBookINByLendOrders(lendinOrders);
+		List<Book> booksByLendinOrders = appService.getBooksByBookINs(bookINsByLendinOrders);
+		request().getSession().setAttribute("lendinOrders", lendinOrders);
+		request().getSession().setAttribute("bookINsByLendinOrders", bookINsByLendinOrders);
+		request().getSession().setAttribute("booksByLendinOrders", booksByLendinOrders);
+		
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject();
+		obj.put("success", true);
+		String str=obj.toString();
+		out.write(str);
+		out.close();
+		
+		return "return success";
+	}
+	
+	public String confirmSend() throws Exception{
+		LendOrder lendOrder = appService.getLendOrderByLendID(lendID);
+		lendOrder.setStatus("3");
+		appService.updateLendOrder(lendOrder);
+		
+		String userName = (String)request().getSession().getAttribute("loginUserName");
+		List<LendOrder> lendoutOrders = appService.getLendOrdersByOwnerName(userName);
+		List<BookIN> bookINsByLendoutOrders = appService.getBookINByLendOrders(lendoutOrders);
+		List<Book> booksByLendoutOrders = appService.getBooksByBookINs(bookINsByLendoutOrders);
+		request().getSession().setAttribute("lendoutOrders", lendoutOrders);
+		request().getSession().setAttribute("bookINsByLendoutOrders", bookINsByLendoutOrders);
+		request().getSession().setAttribute("booksByLendoutOrders", booksByLendoutOrders);
+		
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject();
+		obj.put("success", true);
+		String str=obj.toString();
+		out.write(str);
+		out.close();
+		
+		return "confirm success";
+	}
+	
+	public String confirmReturn() throws Exception{
+		LendOrder lendOrder = appService.getLendOrderByLendID(lendID);
+		lendOrder.setStatus("6");
+		appService.updateLendOrder(lendOrder);
+		
+		String userName = (String)request().getSession().getAttribute("loginUserName");
+		List<LendOrder> lendoutOrders = appService.getLendOrdersByOwnerName(userName);
+		List<BookIN> bookINsByLendoutOrders = appService.getBookINByLendOrders(lendoutOrders);
+		List<Book> booksByLendoutOrders = appService.getBooksByBookINs(bookINsByLendoutOrders);
+		request().getSession().setAttribute("lendoutOrders", lendoutOrders);
+		request().getSession().setAttribute("bookINsByLendoutOrders", bookINsByLendoutOrders);
+		request().getSession().setAttribute("booksByLendoutOrders", booksByLendoutOrders);
+		
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+		JSONObject obj = new JSONObject();
+		obj.put("success", true);
+		String str=obj.toString();
+		out.write(str);
+		out.close();
+		
+		return "confirm success";
 	}
 }

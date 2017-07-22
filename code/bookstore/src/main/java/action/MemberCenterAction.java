@@ -310,6 +310,20 @@ public class MemberCenterAction extends BaseAction{
 		request().getSession().setAttribute("lendinOrders", lendinOrders);
 		request().getSession().setAttribute("bookINsByLendinOrders", bookINsByLendinOrders);
 		request().getSession().setAttribute("booksByLendinOrders", booksByLendinOrders);
+		/*orderOUT.jsp中我的卖出部分*/
+		List<BuyOrder> sellOrders = appService.getBuyOrderByOwnerName(userName);
+		List<BookIN> bookINsBySellOrders = appService.getBookINByBuyOrders(sellOrders);
+		List<Book> booksBySellOrders = appService.getBooksByBookINs(bookINsBySellOrders);
+		request().getSession().setAttribute("sellOrders", sellOrders);
+		request().getSession().setAttribute("bookINsBySellOrders", bookINsBySellOrders);
+		request().getSession().setAttribute("booksBySellOrders", booksBySellOrders);
+		/*orderOUT.jsp中我的借出部分*/
+		List<LendOrder> lendoutOrders = appService.getLendOrdersByOwnerName(userName);
+		List<BookIN> bookINsByLendoutOrders = appService.getBookINByLendOrders(lendoutOrders);
+		List<Book> booksByLendoutOrders = appService.getBooksByBookINs(bookINsByLendoutOrders);
+		request().getSession().setAttribute("lendoutOrders", lendoutOrders);
+		request().getSession().setAttribute("bookINsByLendoutOrders", bookINsByLendoutOrders);
+		request().getSession().setAttribute("booksByLendoutOrders", booksByLendoutOrders);
 		return "initialize success";
 	}
 	

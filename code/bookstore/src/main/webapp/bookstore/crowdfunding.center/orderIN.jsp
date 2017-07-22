@@ -137,16 +137,16 @@
               <p class="time">书币：<span class="coin"><%=bookIN.getCoinNumber() %></span></p>
               <div class="deletebutton" style="padding-top:85px;">
               <%if (buyOrder.getStatus().equals("1")){ %>
-               <button class="nothing" style="width:90px" id="application" >尚未发货</button>
+               <button class="nothing" style="width:90px" id="application" onclick="alert('书主尚未发货，请耐心等待')">尚未发货</button>
                <%} %>
                <%if (buyOrder.getStatus().equals("3")){ %>
-               <button class="delete" style="width:90px" id="application" >确认收货</button> 
+               <button class="delete" style="width:90px" id="application" value="<%=buyOrder.getBuyID()%>" onclick="confirmBuy(this)">确认收货</button> 
                <%} %>
                <%if (buyOrder.getStatus().equals("4")){ %>
-               <button class="evaluate" style="width:90px" id="evaluateButton"  data-toggle="modal"  data-target="#evaluate<% %>">评价</button>
+               <button class="evaluate" style="width:90px" id="evaluateButton"  data-toggle="modal"  data-target="#evaluate<%=i %>">评价</button>
                <%} %>
                <%if (buyOrder.getStatus().equals("5")){ %>
-               <button class="nothing" style="width:90px" id="evaluateButton" >已评价</button>
+               <button class="nothing" style="width:90px" id="evaluateButton" onclick="alert('您已经评价，不能再次评价')">已评价</button>
               <%} %>
               </div>
               </td>
@@ -199,7 +199,7 @@
 		    </div><!-- /.modal -->
 	     </div>
          <!-- 评价模态框（Modal） -->
-		<div class="modal fade" id="evaluate<% %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="evaluate<%=i %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -218,7 +218,7 @@
 				<tr>
 				<td style="width:50px;"><span>请对对方信用进行评价：</span></td>
                 <td><div class="citys"><p>
-                     <select name="" class="">
+                     <select name="buyCommentType" class="">
                      <option value ="good">好评</option>
                      <option value ="normal">中评</option>
                      <option value ="bad">差评</option>
@@ -226,7 +226,7 @@
                 </tr>
                 <tr>
                 <td style="vertical-align:top;padding-top:10px;"><span>评价内容：</span></td>
-				<td><textarea id="evaluatecontent" name="content" placeholder="请输入具体内容" style="height: 120px; width:90%;resize:none;margin:10px 0;text-align:left;"></textarea>
+				<td><textarea id="evaluatecontent" name="buyCommentContent" placeholder="请输入具体内容" style="height: 120px; width:90%;resize:none;margin:10px 0;text-align:left;"></textarea>
 				</td></tr>
 				</table></div>
 				<input type="hidden" name="" value="<% %>" >
@@ -236,7 +236,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 					</button>
-					<button type="button" class="btn btn-success" onClick="submitEvaluate();" data-dismiss="modal">
+					<button type="button" class="btn btn-success" onClick="submitBuyOrderEvaluate(this,<%=i %>);" data-dismiss="modal" id="<%=buyOrder.getBuyID() %>">
 					提交
 					</button>
 				</div>
@@ -350,22 +350,22 @@
               <p class="time">书币：<span class="coin"><%=bookIN.getCoinNumber() %></span></p>
               <div class="deletebutton">
               <%if (lendOrder.getStatus().equals("1")){ %>
-              <button class="nothing" style="width:90px" id="application" >尚未发货</button>
+              <button class="nothing" style="width:90px" id="application" onclick="alert('书主尚未发货，请耐心等待')">尚未发货</button>
               <%} %>
               <%if (lendOrder.getStatus().equals("3")){ %>
-              <button class="delete" style="width:90px" id="application" >确认收货</button> 
+              <button class="delete" style="width:90px" id="application" value="<%=lendOrder.getLendID()%>" onclick="confirmLend(this)">确认收货</button> 
               <%} %>
               <%if (lendOrder.getStatus().equals("4")){ %>
-              <button class="delete" style="width:90px" id="application" >我已还书</button>
+              <button class="delete" style="width:90px" id="application" value="<%=lendOrder.getLendID() %>" onclick="returnLend(this)">我已还书</button>
               <%} %>
               <%if (lendOrder.getStatus().equals("5")){ %>
-              <button class="nothing" style="width:90px" id="application" >书主暂未收货</button>
+              <button class="nothing" style="width:90px" id="application" onclick="alert('书主尚未收到书籍，请耐心等待')">书主暂未收货</button>
               <%} %>
               <%if (lendOrder.getStatus().equals("6") || lendOrder.getStatus().equals("7")){%>
-              <button class="evaluate" style="width:90px" id="evaluateButton2"  data-toggle="modal"  data-target="#evaluate2<% %>">评价</button>
+              <button class="evaluate" style="width:90px" id="evaluateButton2"  data-toggle="modal"  data-target="#evaluate2<%=i %>">评价</button>
               <%} %>
               <%if (lendOrder.getStatus().equals("8") || lendOrder.getStatus().equals("9")){ %>
-               <button class="nothing" style="width:90px" id="application" >已评价</button>
+               <button class="nothing" style="width:90px" id="application" onclick="alert('您已经评价，不能再次评价')">已评价</button>
                <%} %>
        
               </div>
@@ -419,7 +419,7 @@
 		    </div><!-- /.modal -->
 	     </div>
           <!-- 评价模态框（Modal） -->
-		<div class="modal fade" id="evaluate2<% %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="evaluate2<%=i %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -438,7 +438,7 @@
 				<tr>
 				<td style="width:50px;"><span>请对对方信用进行评价：</span></td>
                 <td><div class="citys"><p>
-                     <select name="" class="">
+                     <select name="lendCommentType" class="">
                      <option value ="good">好评</option>
                      <option value ="normal">中评</option>
                      <option value ="bad">差评</option>
@@ -446,7 +446,7 @@
                 </tr>
                 <tr>
                 <td style="vertical-align:top;padding-top:10px;"><span>评价内容：</span></td>
-				<td><textarea id="evaluatecontent" name="content" placeholder="请输入具体内容" style="height: 120px; width:90%;resize:none;margin:10px 0;text-align:left;"></textarea>
+				<td><textarea id="evaluatecontent" name="lendCommentContent" placeholder="请输入具体内容" style="height: 120px; width:90%;resize:none;margin:10px 0;text-align:left;"></textarea>
 				</td></tr>
 				</table></div>
 				<input type="hidden" name="" value="<% %>" >
@@ -456,7 +456,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 					</button>
-					<button type="button" class="btn btn-success" onClick="submitEvaluate();" data-dismiss="modal">
+					<button type="button" class="btn btn-success"  onClick="submitLendOrderEvaluate(this,<%=i %>);" data-dismiss="modal" id=<%=lendOrder.getLendID() %>>
 					提交
 					</button>
 				</div>
@@ -506,6 +506,74 @@ function change(value){
 		$("#mybuyin").attr("style","");
 		$("#mylendin").attr("style","border-bottom: 1px solid #d19826; color: #d19826;");
 	}
+}
+
+function confirmBuy(ob){	//买书订单确认收货
+	var buyID = ob.value;
+	buyID = parseInt(buyID);
+	
+	$.ajax({
+		type:"POST",
+		url:"BuyOrderAction!confirmBook",
+		async:false,
+		data:{buyID:buyID},
+		success:function(result){
+			result=eval('('+result + ')');
+			if (result.success){
+				alert("您已确认收货，请对对方作出评价")
+				location.reload();
+			}
+			else{
+				alert("操作失败");
+				location.reload();
+			}
+		}
+	})
+}
+
+function confirmLend(ob){		//借书订单确认收货
+	var lendID = ob.value;
+	lendID = parseInt(lendID);
+	
+	$.ajax({
+		type:"POST",
+		url:"LendOrderAction!confirmBook",
+		async:false,
+		data:{lendID:lendID},
+		success:function(result){
+			result=eval('('+result+')');
+			if (result.success){
+				alert("您已确认收货，请在规定时间内还书");
+				location.reload();
+			}
+			else{
+				alert("操作失败");
+				location.reload();
+			}
+		}
+	})
+}
+
+function returnLend(ob){		//借书订单“我已还书”
+	var lendID = ob.value;
+	lendID = parseInt(lendID);
+	$.ajax({
+		type:"POST",
+		url:"LendOrderAction!returnLend",
+		async:false,
+		data:{lendID:lendID},
+		success:function(result){
+			result = eval('('+result+')');
+			if (result.success){
+				alert("您已还书，请等待书主确认");
+				location.reload();
+			}
+			else{
+				alert("操作失败");
+				location.reload();
+			}
+		}
+	})
 }
 
 function submitBuyOrderFeedback(ob,index){
@@ -573,16 +641,53 @@ function submitLendOrderFeedback(ob,index){
 }
 
 
-function submitEvaluate(){
-	var evaluate=document.getElementById("evaluatecontent").value;
-	if (evaluate==""){
-		alert("具体内容不能为空");
-	}
-	else{
-		document.getElementById("evaluateForm").submit();
-		location='#buyIN';
-	}
-	
+function submitBuyOrderEvaluate(ob,index){
+	var buyID = ob.id;
+	var commentTypeSelect = document.getElementsByName("buyCommentType")[index];
+	var commentType = commentTypeSelect.options[commentTypeSelect.selectedIndex].value;
+	var content = document.getElementsByName("buyCommentContent")[index].value;
+	$.ajax({
+		type:"POST",
+		url:"BuyOrderCommentRecordAction!addBuyOrderCommentRecord",
+		async:false,
+		data:{buyID:buyID,commentType:commentType,content:content},
+		success:function(result){
+			result=eval('('+result+')');
+			if (result.success){
+				alert("您已评价成功，祝您生活愉快");
+				location.reload();
+			}
+			else{
+				alert("操作失败");
+				location.reload();
+			}
+		}
+	})
+}
+
+function submitLendOrderEvaluate(ob,index){
+	var lendID = ob.id;
+	var commentTypeSelect = document.getElementsByName("lendCommentType")[index];
+	var commentType = commentTypeSelect.options[commentTypeSelect.selectedIndex].value;
+	var content = document.getElementsByName("lendCommentContent")[index].value;
+	$.ajax({
+		type:"POST",
+		url:"LendOrderCommentRecordAction!addLendOrderCommentRecord",
+		async:false,
+		data:{lendID:lendID,commentType:commentType,content:content},
+		success:function(result){
+			alert(result);
+			result=eval('('+result+')');
+			if (result.success){
+				alert("您已评论成功，祝您生活愉快");
+				location.reload();
+			}
+			else{
+				alert("操作失败");
+				location.reload();
+			}
+		}
+	})
 }
 </script>
 
