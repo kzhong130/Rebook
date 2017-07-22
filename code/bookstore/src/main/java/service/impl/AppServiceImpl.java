@@ -12,10 +12,12 @@ import model.Book;
 import model.BookComment;
 import model.BookIN;
 import model.BuyOrder;
+import model.BuyOrderCommentRecord;
 import model.BuyOrderFeedback;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
 import model.LendOrder;
+import model.LendOrderCommentRecord;
 import model.LendOrderFeedback;
 import model.RequestBook;
 import dao.UserDao;
@@ -23,10 +25,12 @@ import dao.AdminDao;
 import dao.BookCommentDao;
 import dao.BookDao;
 import dao.BookINDao;
+import dao.BuyOrderCommentRecordDao;
 import dao.BuyOrderDao;
 import dao.BuyOrderFeedbackDao;
 import dao.CoinChangeRecordDao;
 import dao.CreditChangeRecordDao;
+import dao.LendOrderCommentRecordDao;
 import dao.LendOrderDao;
 import dao.LendOrderFeedbackDao;
 import dao.RequestBookDao;
@@ -58,6 +62,16 @@ public class AppServiceImpl implements AppService {
 	private BuyOrderDao buyOrderDao;
 	private BuyOrderFeedbackDao buyOrderFeedbackDao;
 	private LendOrderFeedbackDao lendOrderFeedbackDao;
+	private BuyOrderCommentRecordDao buyOrderCommentRecordDao;
+	private LendOrderCommentRecordDao lendOrderCommentRecordDao;
+	
+	public void setLendOrderCommentRecordDao(LendOrderCommentRecordDao lendOrderCommentRecordDao){
+		this.lendOrderCommentRecordDao = lendOrderCommentRecordDao;
+	}
+	
+	public void setBuyOrderCommentRecordDao(BuyOrderCommentRecordDao buyOrderCommentRecordDao){
+		this.buyOrderCommentRecordDao = buyOrderCommentRecordDao;
+	}
 	
 	public void setLendOrderFeedbackDao(LendOrderFeedbackDao lendOrderFeedbackDao){
 		this.lendOrderFeedbackDao = lendOrderFeedbackDao;
@@ -470,6 +484,10 @@ public class AppServiceImpl implements AppService {
 	public List<LendOrder> getLendOrdersByLenderName(String lenderName){
 		return lendOrderDao.getLendOrdersByLenderName(lenderName);
 	}
+	
+	public List<LendOrder> getLendOrdersByOwnerName(String ownerName){
+		return lendOrderDao.getLendOrdersByOwnerName(ownerName);
+	}
 	/*
 	 * RequestBook
 	 */
@@ -521,6 +539,18 @@ public class AppServiceImpl implements AppService {
 		return buyOrderDao.getBuyOrderByBuyerName(buyerName);
 	}
 	
+	public BuyOrder getBuyOrderByBuyID(int buyID){
+		return buyOrderDao.getBuyOrderByBuyID(buyID);
+	}
+	
+	public void updateBuyOrder(BuyOrder buyOrder){
+		buyOrderDao.update(buyOrder);
+	}
+	
+	public List<BuyOrder> getBuyOrderByOwnerName(String ownerName){
+		return buyOrderDao.getBuyOrderByOwnerName(ownerName);
+	}
+	
 	/*
 	 * BuyOrderFeedback
 	 */
@@ -534,6 +564,21 @@ public class AppServiceImpl implements AppService {
 	public void addLendOrderFeedback(LendOrderFeedback lendOrderFeedback){
 		lendOrderFeedbackDao.save(lendOrderFeedback);
 	}
+
+	
+	/*
+	 * BuyOrderCommentRecord
+	 */
+	public void addBuyOrderCommentRecord(BuyOrderCommentRecord buyOrderCommentRecord){
+		buyOrderCommentRecordDao.save(buyOrderCommentRecord);
+	}
+	
+	/*
+	 * LendOrderCommentRecord
+	 */
+	public void addLendOrderCommentRecord(LendOrderCommentRecord lendOrderCommentRecord){
+		lendOrderCommentRecordDao.save(lendOrderCommentRecord);
+
 
 	@Override
 	public List<BuyOrderFeedback> getAllBuyOrderFeedback() {
@@ -567,5 +612,6 @@ public class AppServiceImpl implements AppService {
 	public void updateBuyOrderFeedback(BuyOrderFeedback buyOrderFeedback) {
 		buyOrderFeedbackDao.update(buyOrderFeedback);
 		
+
 	}
 }

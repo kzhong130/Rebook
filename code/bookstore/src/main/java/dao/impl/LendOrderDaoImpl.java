@@ -48,4 +48,10 @@ public class LendOrderDaoImpl extends HibernateDaoSupport implements LendOrderDa
 		List<LendOrder> lendOrders = (List<LendOrder>)getHibernateTemplate().find("from LendOrder as b where b.lenderName = ?", lenderName);
 		return lendOrders;
 	}
+	
+	public List<LendOrder> getLendOrdersByOwnerName(String ownerName){
+		@SuppressWarnings("unchecked")
+		List<LendOrder> lendOrders = (List<LendOrder>)getHibernateTemplate().find("from LendOrder as b where b.ownerName = ?", ownerName);
+		return lendOrders;
+	}
 }

@@ -81,6 +81,18 @@
 		<action name="LendOrderFeedbackAction" class="action.LendOrderFeedbackAction">
 		
 		</action>
+		
+		<action name="BuyOrderAction" class="action.BuyOrderAction">
+		
+		</action>
+		
+		<action name="BuyOrderCommentRecordAction" class="action.BuyOrderCommentRecordAction">
+		
+		</action>
+		
+		<action name="LendOrderCommentRecordAction" class="action.LendOrderCommentRecordAction">
+		
+		</action>
 
 		<action name="*">
 			<result>/{1}.jsp</result>

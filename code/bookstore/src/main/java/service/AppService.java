@@ -8,10 +8,12 @@ import model.Book;
 import model.BookComment;
 import model.BookIN;
 import model.BuyOrder;
+import model.BuyOrderCommentRecord;
 import model.BuyOrderFeedback;
 import model.CoinChangeRecord;
 import model.CreditChangeRecord;
 import model.LendOrder;
+import model.LendOrderCommentRecord;
 import model.LendOrderFeedback;
 import model.RequestBook;
 import model.User;
@@ -93,6 +95,7 @@ public interface AppService {
 	public void updateLendOrder(LendOrder lendOrder);
 	public void addLendOrder(LendOrder lendOrder);
 	public List<LendOrder> getLendOrdersByLenderName(String lenderName);
+	public List<LendOrder> getLendOrdersByOwnerName(String ownerName);
 	
 	/*
 	 * Request
@@ -117,8 +120,14 @@ public interface AppService {
 	public void addBuyOrder(BuyOrder buyOrder);
 	public List<BuyOrder> getBuyOrderByBuyerName(String buyerName);
 	public BuyOrder getBuyOrderByBuyID(int buyID);
+
+	public void updateBuyOrder(BuyOrder buyOrder);
+	public List<BuyOrder> getBuyOrderByOwnerName(String ownerName);
+
+
 	public BuyOrder getBuyOrderByID(int ID);
 	
+
 	/*
 	 * BuyOrderFeedback
 	 */
@@ -132,6 +141,15 @@ public interface AppService {
 	 * LendOrderFeedback
 	 */
 	public void addLendOrderFeedback(LendOrderFeedback lendOrderFeedback);
+
+	/*
+	 * BuyOrderCommentRecord
+	 */
+	public void addBuyOrderCommentRecord(BuyOrderCommentRecord buyOrderCommentRecord);
 	
-	
+	/*
+	 * LendOrderCommentRecord
+	 */
+	public void addLendOrderCommentRecord(LendOrderCommentRecord lendOrderCommentRecord);
+
 }
