@@ -578,6 +578,7 @@ public class AppServiceImpl implements AppService {
 	 */
 	public void addLendOrderCommentRecord(LendOrderCommentRecord lendOrderCommentRecord){
 		lendOrderCommentRecordDao.save(lendOrderCommentRecord);
+	}
 
 
 	@Override
@@ -585,11 +586,7 @@ public class AppServiceImpl implements AppService {
 		return buyOrderFeedbackDao.getAllBuyOrderFeedbacks();		
 	}
 
-	@Override
-	public BuyOrder getBuyOrderByBuyID(int buyID) {
-		
-		return buyOrderDao.getBuyOrderByBuyID(buyID);
-	}
+	
 
 	@Override
 	public Admin getAdminByAdminID(int adminID) {
