@@ -74,10 +74,23 @@
 		</action>
 		
 		<action name="BuyOrderFeedbackAction" class="action.BuyOrderFeedbackAction">
-		
+			<result name="view">dashboard_buyFeedbackInfo.jsp</result>
+			<result name="initialize">dashboard_buyFeedback.jsp</result>
 		</action>
 		
 		<action name="LendOrderFeedbackAction" class="action.LendOrderFeedbackAction">
+		
+		</action>
+		
+		<action name="BuyOrderAction" class="action.BuyOrderAction">
+		
+		</action>
+		
+		<action name="BuyOrderCommentRecordAction" class="action.BuyOrderCommentRecordAction">
+		
+		</action>
+		
+		<action name="LendOrderCommentRecordAction" class="action.LendOrderCommentRecordAction">
 		
 		</action>
 

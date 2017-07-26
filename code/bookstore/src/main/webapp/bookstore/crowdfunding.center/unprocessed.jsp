@@ -73,7 +73,7 @@
         <tr>
 
           <td class="bookimage" style="vertical-align:text-top;">
-          <a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a><br>
+          <a  target="view_parent" href="../aa.jsp?ISBN=<%=book.getISBN()%>"><img class="listbook" src="<%=book.getImage() %>"/></a><br>
 
           
           </td>
@@ -166,7 +166,7 @@
         <tr>
 
           <td class="bookimage" style="vertical-align:text-top;">
-          <a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a><br>
+          <a  target="view_parent" href="../aa.jsp?ISBN=<%=book.getISBN()%>"><img class="listbook" src="<%=book.getImage() %>"/></a><br>
 
           
           </td>
@@ -527,6 +527,7 @@ function cancel(id){
 	        async:false,
 	        data:{requestID:id}
 	    });
+	window.location.assign("unprocessed.jsp");
 }
 
 //窗口效果

@@ -1,8 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@page import="model.BookComment"%>
+<%@page import="model.BookIN"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.Book"%>
+<%@page import="model.BuyOrder"%>
+<%@page import="model.LendOrder"%>
+<%@page import="java.text.SimpleDateFormat" %>
+<%@page import="java.util.Date" %>
+<%@page import="java.text.ParsePosition" %>
+<%@page import="java.util.Calendar" %>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -30,7 +36,12 @@
 </head>
 
 <%
-
+	ArrayList<BuyOrder> sellOrders = (ArrayList<BuyOrder>)session.getAttribute("sellOrders");
+	ArrayList<BookIN> bookINsBySellOrders = (ArrayList<BookIN>)session.getAttribute("bookINsBySellOrders");
+	ArrayList<Book> booksBySellOrders = (ArrayList<Book>)session.getAttribute("booksBySellOrders");
+	ArrayList<LendOrder> lendoutOrders = (ArrayList<LendOrder>)session.getAttribute("lendoutOrders");
+	ArrayList<BookIN> bookINsByLendoutOrders = (ArrayList<BookIN>)session.getAttribute("bookINsByLendoutOrders");
+	ArrayList<Book> booksByLendoutOrders = (ArrayList<Book>)session.getAttribute("booksByLendoutOrders");
 %>
 <body>
 
@@ -52,10 +63,51 @@
   
    <!-- 我的卖出 -->
    <div class="tab-pane fade in active" id="sellOUT">
-
+	<%
+		if (sellOrders.size() > 0){
+			for (int i=0; i<sellOrders.size(); i++){
+				BuyOrder sellOrder = sellOrders.get(i);
+				BookIN bookIN = bookINsBySellOrders.get(i);
+				Book book = booksBySellOrders.get(i);
+				String recency = "";
+				if (bookIN.getRecency().equals("20%")){
+					recency = "两成新";
+				}
+				if (bookIN.getRecency().equals("50%")){
+					recency = "五成新";
+				}
+				if (bookIN.getRecency().equals("80%")){
+					recency = "八成新";
+				}
+				if (bookIN.getRecency().equals("100%")){
+					recency = "全新";
+				}
+				
+				String sendWay = "";
+				if (bookIN.getSendWay().equals("mail")){
+					sendWay = "邮寄";
+				}
+				if (bookIN.getSendWay().equals("face")){
+					sendWay = "当面";	
+				}
+				
+				String note = bookIN.getNote();
+				if ("".equals(note)){
+					note = "无";
+				}
+				
+				String cityInfo = "";
+				if (bookIN.getCity().equals("")){	//直辖市
+					cityInfo = bookIN.getProvince() + bookIN.getTown();
+				}
+				if (!bookIN.getCity().equals("")){
+					cityInfo = bookIN.getProvince() + bookIN.getCity();
+				}
+				
+	%>
 	  <!-- 每个订单 -->
-	  <div class="boxtitle">2017-7-18<% %>&emsp;&emsp;订单号：1<% %>&emsp;&emsp;&emsp;&emsp;shenbeibei
-      <button type="button" class="btn btn-link" data-toggle="modal"  data-target="#feedbackcontent<% %>" style="padding:3px 5px 0 0;color:#333333;float:right;" id="feedback">反馈</button>
+	  <div class="boxtitle"><%=sellOrder.getCreateTime().toString().substring(0, 10) %>&emsp;&emsp;订单号：<%=sellOrder.getBuyID() %>&emsp;&emsp;&emsp;&emsp;<%=sellOrder.getBuyerName() %>
+      <button type="button" class="btn btn-link" data-toggle="modal"  data-target="#feedbackcontent<%=i %>" style="padding:3px 5px 0 0;color:#333333;float:right;" id="feedback">反馈</button>
       </div>
       <div class="commentbox">
       <table  style="width:828px;">
@@ -63,37 +115,41 @@
         <tr>
 
           <td class="bookimage" style="vertical-align:text-top;">
-          <a href=<% %>><img class="listbook" src="https://img3.doubanio.com/mpic/s28332051.jpg<% %>"/></a><br>         
+          <a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a><br>         
           </td>
           
           <td class="bookcontent" style="vertical-align:top;">
           <table class="allwidth" style="width:691px;">
               <tr>
               <td>
-              <p class="bookname">《<% %>斯通纳》</p>
-              <p class="comment" style="color:#b7b7b7">[美]约翰·威廉斯<% %></p>
+              <p class="bookname">《<%=book.getBookName() %>》</p>
+              <p class="comment" style="color:#b7b7b7"><%=book.getAuthor() %></p>
               <p class="comment" style="font-size:1px;">&nbsp;</p>
-              <p class="comment">收货人信息：<% %>沈蓓蓓&nbsp;&nbsp;<% %>15821911839&nbsp;&nbsp;</p>
-              <p class="comment">&emsp;&emsp;&emsp;&emsp;&emsp;<% %>上海市闵行区</p>
-              <p class="comment">&emsp;&emsp;&emsp;&emsp;&emsp;<% %>东川路800号上海交通大学</p>
-              <p class="comment">新旧程度：<% %>五成新&emsp;&emsp;&emsp;&emsp;送书方式：<% %>邮寄</p>
-              <p class="comment">备注：<% %>请小心的对待这本书（没有备注则写无）</p>
+              <p class="comment">收货人信息：<%=sellOrder.getReceiver() %>&nbsp;&nbsp;<%=sellOrder.getBuyPhone() %>&nbsp;&nbsp;</p>
+              <p class="comment">&emsp;&emsp;&emsp;&emsp;&emsp;<%=sellOrder.getBuyAddress() %></p>
+              <p class="comment">新旧程度：<%=recency %>&emsp;&emsp;&emsp;&emsp;送书方式：<%=sendWay %></p>
+              <p class="comment">备注：<%=note %></p>
               </td>
 
               
               <td style="vertical-align:top;height:181px;" >
-              <p class="time">收货人：<% %>洪晓雅
-              <img style="height:20px;width:20px;margin:0 -1px 3px -2px;" src="../images/person_info.png" title="洪晓雅   13918111111 福建省厦门市<% %>">
+              <p class="time">书主：<%=bookIN.getOwnerName() %>
+              <img style="height:20px;width:20px;margin:0 -1px 3px -2px;" src="../images/person_info.png" title="<%=bookIN.getOwnerName() + " " + bookIN.getOwnerPhone() + " " + cityInfo%>">
               </p>
-              <p class="time">书币：<span class="coin"><% %>30</span></p>
+              <p class="time">书币：<span class="coin"><%=bookIN.getCoinNumber() %></span></p>
               <div class="deletebutton" style="padding-top:85px;">
-              <!-- 我未发货时 -->
-              <button class="delete" style="width:90px" id="application" >我已发货</button> 
-              <!-- 我已发货时
-              <button class="nothing" style="width:90px" id="application" >已发货</button>
-              <!-- 对方确认收到时
-              <button class="evaluate" style="width:90px" id="evaluate"  data-toggle="modal"  data-target="#evaluate<% %>">评价</button>
-               -->
+              <%if (sellOrder.getStatus().equals("1")){ %>
+              <button class="delete" style="width:90px" id="application" value=<%=sellOrder.getBuyID() %> onclick="confirmSend(this)">我已发货</button> 
+              <%} %>
+              <%if (sellOrder.getStatus().equals("3")){ %>
+              <button class="nothing" style="width:90px" id="application" onclick="alert('您已发货，请耐心等待用户收货')">已发货</button>
+              <%} %>
+              <%if (sellOrder.getStatus().equals("4")){ %>
+              <button class="nothing" style="width:90px" id="application" onclick="alert('买家已收货，但暂未评价‘)")>买家已收货</button>
+              <%} %>
+              <%if (sellOrder.getStatus().equals("5")){ %>
+              <button class="nothing" style="width:90px" id="application" onclick="alert('买家已对您作出评价，祝您生活愉快')">买家已评价</button>
+              <%} %>
               </div>
               </td>
               
@@ -105,7 +161,7 @@
 		    </table>
 		 </div>   
 		<!-- 模态框（Modal） -->
-		<div class="modal fade" id="feedbackcontent<% %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="feedbackcontent<%=i %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -123,11 +179,11 @@
 				<table style="width:598px;resize:none;margin: 10px;text-align:left;">
 				<tr>
 				<td style="width:50px;"><span>主题：</span></td>
-                <td><input type="text" name="topic" id="topic" value="" placeholder="请输入反馈主题" class="" style="width:90%"> </td>  
+                <td><input type="text" name="sellFeedbackTopic" id="topic" value="" placeholder="请输入反馈主题" class="" style="width:90%"> </td>  
                 </tr>
                 <tr>
                 <td style="vertical-align:top;padding-top:10px;"><span>内容：</span></td>
-				<td><textarea id="content" name="content" placeholder="请输入具体内容" style="height: 120px; width:90%;resize:none;margin:10px 0;text-align:left;"></textarea>
+				<td><textarea id="content" name="sellFeedbackContent" placeholder="请输入具体内容" style="height: 120px; width:90%;resize:none;margin:10px 0;text-align:left;"></textarea>
 				</td></tr>
 				</table></div>
 				<input type="hidden" name="" value="<% %>" >
@@ -137,7 +193,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 					</button>
-					<button type="button" class="btn btn-success" onClick="submitFeedback();" data-dismiss="modal">
+					<button type="button" class="btn btn-success" onClick="submitSellOrderFeedback(this,<%=i %>);" data-dismiss="modal" id="<%=sellOrder.getBuyID() %>">
 					提交
 					</button>
 				</div>
@@ -189,17 +245,68 @@
 			</div><!-- /.modal-content -->
 		    </div><!-- /.modal -->
 	     </div>   
-        
-        
+ <%} %>       
+ <%} %>       
   </div>
   <!-- sellOUTend -->    
   
   <!-- 我的借出 -->
   <div class="tab-pane fade" id="lendOUT">
-
+<%
+	if (lendoutOrders.size() > 0){
+		for (int i=0; i<lendoutOrders.size(); i++){
+			LendOrder lendoutOrder = lendoutOrders.get(i);
+			BookIN bookIN = bookINsByLendoutOrders.get(i);
+			Book book = booksByLendoutOrders.get(i);
+			String recency = "";
+			if (bookIN.getRecency().equals("20%")){
+				recency = "两成新";
+			}
+			if (bookIN.getRecency().equals("50%")){
+				recency = "五成新";
+			}
+			if (bookIN.getRecency().equals("80%")){
+				recency = "八成新";
+			}
+			if (bookIN.getRecency().equals("100%")){
+				recency = "全新";
+			}
+			
+			String sendWay = "";
+			if (bookIN.getSendWay().equals("mail")){
+				sendWay = "邮寄";
+			}
+			if (bookIN.getSendWay().equals("face")){
+				sendWay = "当面";	
+			}
+			
+			String note = bookIN.getNote();
+			if ("".equals(note)){
+				note = "无";
+			}
+			
+			String returnDate = "";
+			int longestDuration = bookIN.getLongestDuration();
+			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+			String str = lendoutOrder.getCreateTime().toString().substring(0, 10);
+			Date date = sdf.parse(str,new ParsePosition(0));
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+			calendar.add(Calendar.DATE,longestDuration);
+			Date date1 = calendar.getTime();
+			returnDate = sdf.format(date1);
+			
+			String returnWay = "";
+			if ("mail".equals(lendoutOrder.getReturnWay())){
+				returnWay = "邮寄";
+			}
+			if ("face".equals(lendoutOrder.getReturnWay())){
+				returnWay = "当面";
+			}
+%>
 	  <!-- 每个订单 -->
-	  <div class="boxtitle">2017-7-18<% %>&emsp;&emsp;订单号：1<% %>&emsp;&emsp;&emsp;&emsp;shenbeibei
-      <button type="button" class="btn btn-link" data-toggle="modal"  data-target="#feedbackcontent2<% %>" style="padding:3px 5px 0 0;color:#333333;float:right;" id="feedback">反馈</button>
+	  <div class="boxtitle"><%=lendoutOrder.getCreateTime().toString().substring(0, 19) %>&emsp;&emsp;订单号：<%=lendoutOrder.getLendID() %>&emsp;&emsp;&emsp;&emsp;<%=lendoutOrder.getLenderName() %>
+      <button type="button" class="btn btn-link" data-toggle="modal"  data-target="#feedbackcontent2<%=i %>" style="padding:3px 5px 0 0;color:#333333;float:right;" id="feedback">反馈</button>
       </div>
       <div class="commentbox">
       <table  style="width:828px;">
@@ -207,43 +314,49 @@
         <tr>
 
           <td class="bookimage" style="vertical-align:text-top;">
-          <a href=<% %>><img class="listbook" src="https://img3.doubanio.com/mpic/s28332051.jpg<% %>"/></a><br>         
+          <a href=<% %>><img class="listbook" src="<%=book.getImage() %>"/></a><br>         
           </td>
           
           <td class="bookcontent" style="vertical-align:top;">
           <table class="allwidth" style="width:691px;">
               <tr>
               <td>
-              <p class="bookname">《<% %>斯通纳》</p>
-              <p class="comment" style="color:#b7b7b7">[美]约翰·威廉斯<% %></p>
+              <p class="bookname">《<%=book.getBookName() %>》</p>
+              <p class="comment" style="color:#b7b7b7"><%=book.getAuthor() %></p>
               <p class="comment" style="font-size:1px;">&nbsp;</p>
-              <p class="comment">收货人信息：<% %>沈蓓蓓&nbsp;&nbsp;<% %>15821911839&nbsp;&nbsp;</p>
-              <p class="comment">&emsp;&emsp;&emsp;&emsp;&emsp;<% %>上海市闵行区</p>
-              <p class="comment">&emsp;&emsp;&emsp;&emsp;&emsp;<% %>东川路800号上海交通大学</p>
-              <p class="comment">新旧程度：<% %>五成新&emsp;&emsp;&emsp;&emsp;送书方式：<% %>邮寄</p>
-              <p class="comment">备注：<% %>请小心的对待这本书（没有备注则写无）</p>
+              <p class="comment">收货人信息：<%=lendoutOrder.getReceiver() %>&nbsp;&nbsp;<%=lendoutOrder.getLendPhone() %>&nbsp;&nbsp;</p>
+              <p class="comment">&emsp;&emsp;&emsp;&emsp;&emsp;<%=lendoutOrder.getLendAddress() %></p>
+              <p class="comment">新旧程度：<%=recency %>&emsp;&emsp;&emsp;&emsp;送书方式：<%=sendWay %></p>
+              <p class="comment">备注：<%=note %></p>
               </td>
 
               
               <td style="vertical-align:top;height:181px;" >
-              <p class="time">收货人：<% %>洪晓雅
-              <img style="height:20px;width:20px;margin:0 -1px 3px -2px;" src="../images/person_info.png" title="洪晓雅   13918111111 福建省厦门市翔安区新店镇新兴街610号<% %>">
+              <p class="time">书主：<%=bookIN.getOwnerName() %>
+              <img style="height:20px;width:20px;margin:0 -1px 3px -2px;" src="../images/person_info.png" title="<%=bookIN.getOwnerName() + " " + bookIN.getOwnerPhone() + " " + bookIN.getProvince()+bookIN.getCity()+bookIN.getTown()+bookIN.getOwnerAddress() %>">
               </p>
-              <p class="time">还书时间：<% %>2017-09-01</p>
-              <p class="time">还书方式：<% %>邮寄</p>
-              <p class="time">书币：<span class="coin"><% %>30</span></p>
+              <p class="time">还书时间：<%=returnDate %></p>
+              <p class="time">还书方式：<%=returnWay %></p>
+              <p class="time">书币：<span class="coin"><%=bookIN.getCoinNumber() %></span></p>
               <div class="deletebutton">
-              <!-- 我未发货时 -->
-              <button class="delete" style="width:90px" id="application" >我已发货</button> 
-              <!-- 我已发货时
-              <button class="nothing" style="width:90px" id="application" >已发货</button>
-              <!-- 对方确认收货时
-              <button class="nothing" style="width:90px" id="application" >对方已收货</button>
-              <!-- 对方已归还时
-              <button class="delete" style="width:90px" id="application" >确认归还</button>
-              <!-- 我确认收到归还时
-              <button class="evaluate" style="width:90px" id="evaluate"  data-toggle="modal"  data-target="#evaluate<% %>">评价</button>
-               -->
+              <%if (lendoutOrder.getStatus().equals("1")){ %>
+              <button class="delete" style="width:90px" id="application" value=<%=lendoutOrder.getLendID() %> onclick="confirmLendSend(this)">我已发货</button> 
+              <%} %>
+              <%if (lendoutOrder.getStatus().equals("3")){ %>
+              <button class="nothing" style="width:90px" id="application" onclick="alert('您已发货，请等待用户收货')">已发货</button>
+              <%} %>
+              <%if (lendoutOrder.getStatus().equals("4")){ %>
+              <button class="nothing" style="width:90px" id="application" onclick="alert('对方已收货，请耐心等待归还')">对方已收货</button>
+              <%} %>
+              <%if (lendoutOrder.getStatus().equals("5")){ %>
+              <button class="delete" style="width:90px" id="application" value=<%=lendoutOrder.getLendID() %> onclick="confirmReturn(this)">确认归还</button>
+              <%} %>
+              <%if(lendoutOrder.getStatus().equals("6") || lendoutOrder.getStatus().equals("8")){ %>
+              <button class="evaluate" style="width:90px" id="evaluate"  data-toggle="modal"  data-target="#evaluate2<%=i %>" >评价</button>
+              <%} %>
+              <%if(lendoutOrder.getStatus().equals("7") || lendoutOrder.getStatus().equals("9")){ %>
+              <button class="nothing" style="width:90px" id="application" onclick="alert('您已经评价，不能再次评价')">已评价</button>
+              <%} %>
               </div>
               </td>
               
@@ -255,7 +368,7 @@
 		    </table>
 		 </div>   
 		<!-- 模态框（Modal） -->
-		<div class="modal fade" id="feedbackcontent2<% %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="feedbackcontent2<%=i %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -273,11 +386,11 @@
 				<table style="width:598px;resize:none;margin: 10px;text-align:left;">
 				<tr>
 				<td style="width:50px;"><span>主题：</span></td>
-                <td><input type="text" name="topic" id="topic" value="" placeholder="请输入反馈主题" class="" style="width:90%"> </td>  
+                <td><input type="text" name="lendoutFeedbackTopic" id="topic" value="" placeholder="请输入反馈主题" class="" style="width:90%"> </td>  
                 </tr>
                 <tr>
                 <td style="vertical-align:top;padding-top:10px;"><span>内容：</span></td>
-				<td><textarea id="content" name="content" placeholder="请输入具体内容" style="height: 120px; width:90%;resize:none;margin:10px 0;text-align:left;"></textarea>
+				<td><textarea id="content" name="lendoutFeedbackContent" placeholder="请输入具体内容" style="height: 120px; width:90%;resize:none;margin:10px 0;text-align:left;"></textarea>
 				</td></tr>
 				</table></div>
 				<input type="hidden" name="" value="<% %>" >
@@ -287,7 +400,7 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 					</button>
-					<button type="button" class="btn btn-success" onClick="submitFeedback();" data-dismiss="modal">
+					<button type="button" class="btn btn-success" onClick="submitLendOrderFeedback(this,<%=i %>);" data-dismiss="modal" id="<%=lendoutOrder.getLendID() %>">
 					提交
 					</button>
 				</div>
@@ -295,7 +408,7 @@
 		    </div><!-- /.modal -->
 	     </div>
        <!-- 评价模态框（Modal） -->
-		<div class="modal fade" id="evaluate2<% %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal fade" id="evaluate2<%=i %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -314,7 +427,7 @@
 				<tr>
 				<td style="width:50px;"><span>请对对方信用进行评价：</span></td>
                 <td><div class="citys"><p>
-                     <select name="" class="">
+                     <select name="lendCommentType" class="">
                      <option value ="good">好评</option>
                      <option value ="normal">中评</option>
                      <option value ="bad">差评</option>
@@ -322,7 +435,7 @@
                 </tr>
                 <tr>
                 <td style="vertical-align:top;padding-top:10px;"><span>评价内容：</span></td>
-				<td><textarea id="evaluatecontent" name="content" placeholder="请输入具体内容" style="height: 120px; width:90%;resize:none;margin:10px 0;text-align:left;"></textarea>
+				<td><textarea id="evaluatecontent" name="lendCommentContent" placeholder="请输入具体内容" style="height: 120px; width:90%;resize:none;margin:10px 0;text-align:left;"></textarea>
 				</td></tr>
 				</table></div>
 				<input type="hidden" name="" value="<% %>" >
@@ -332,15 +445,15 @@
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭
 					</button>
-					<button type="button" class="btn btn-success" onClick="submitEvaluate();" data-dismiss="modal">
+					<button type="button" class="btn btn-success" onClick="submitLendOrderEvaluate(this,<%=i %>);" data-dismiss="modal" id=<%=lendoutOrder.getLendID() %>>
 					提交
 					</button>
 				</div>
 			</div><!-- /.modal-content -->
 		    </div><!-- /.modal -->
 	     </div>         
-           
-        
+ <%} %>          
+ <%} %>       
   </div>
   <!-- lendOUTend --> 
 
@@ -384,28 +497,160 @@ function change(value){
 	}
 }
 
-function submitFeedback(){
-	var comment=document.getElementById("content").value;
-	var topic=document.getElementById("topic").value;
-	if (comment==""||topic==""){
-		alert("主题或具体内容不能为空");
+function submitSellOrderFeedback(ob,index){
+	var buyID = ob.id;
+	buyID = parseInt(buyID);
+	var topic = document.getElementsByName("sellFeedbackTopic")[index].value;
+	var content = document.getElementsByName("sellFeedbackContent")[index].value;
+	if (topic == ""){
+		alert("主题不能为空");
+		return;
 	}
-	else{
-		document.getElementById("feedbackForm").submit();
-		location='#buyIN';
+	if (content == ""){
+		alert("内容不能为空");
+		return;
 	}
-	
+	$.ajax({
+		type:"POST",
+		url:"BuyOrderFeedbackAction!addBuyOrderFeedback",
+		async:false,
+		data:{buyID:buyID,topic:topic,content:content},
+		success:function(result){
+			result = eval('('+result+')');
+			if (result.success){
+				alert("我们已收到您的反馈，会在处理完的第一时间与您联系")
+				location.reload();
+			}
+			else{
+				alert("操作失败");
+				location.reload();
+			}
+		}
+	})
 }
-function submitEvaluate(){
-	var evaluate=document.getElementById("evaluatecontent").value;
-	if (evaluate==""){
-		alert("具体内容不能为空");
-	}
-	else{
-		document.getElementById("evaluateForm").submit();
-		location='#buyIN';
-	}
+
+function confirmSend(ob){
+	var buyID = ob.value;
+	buyID = parseInt(buyID);
 	
+	$.ajax({
+		type:"POST",
+		url:"BuyOrderAction!confirmSend",
+		async:false,
+		data:{buyID:buyID},
+		success:function(result){
+			result=eval('('+result + ')');
+			if (result.success){
+				alert("您已确认发货，请等待对方收货")
+				location.reload();
+			}
+			else{
+				alert("操作失败");
+				location.reload();
+			}
+		}
+	})
+}
+
+function submitLendOrderFeedback(ob,index){
+	var lendID = ob.id;
+	lendID = parseInt(lendID);
+	var topic = document.getElementsByName("lendoutFeedbackTopic")[index].value;
+	var content = document.getElementsByName("lendoutFeedbackContent")[index].value;
+	if (topic == ""){
+		alert("主题不能为空");
+		return;
+	}
+	if (content == ""){
+		alert("内容不能为空");
+		return;
+	}
+	$.ajax({
+		type:"POST",
+		url:"LendOrderFeedbackAction!addLendOrderFeedback",
+		async:false,
+		data:{lendID:lendID,topic:topic,content:content},
+		success:function(result){
+			result = eval('('+result+')');
+			if (result.success){
+				alert("我们已收到您的反馈，会在处理完的第一时间与您联系")
+				location.reload();
+			}
+			else{
+				alert("操作失败");
+				location.reload();
+			}
+		}
+	})
+}
+
+function confirmLendSend(ob){
+	var lendID = ob.value;
+	lendID = parseInt(lendID);
+	$.ajax({
+		type:"POST",
+		url:"LendOrderAction!confirmSend",
+		async:false,
+		data:{lendID:lendID},
+		success:function(result){
+			result=eval('('+result + ')');
+			if (result.success){
+				alert("您已确认发货，请等待对方收货")
+				location.reload();
+			}
+			else{
+				alert("操作失败");
+				location.reload();
+			}
+		}
+	})
+}
+
+function confirmReturn(ob){
+	var lendID = ob.value;
+	lendID = parseInt(lendID);
+	$.ajax({
+		type:"POST",
+		url:"LendOrderAction!confirmReturn",
+		async:false,
+		data:{lendID:lendID},
+		success:function(result){
+			result=eval('('+result + ')');
+			if (result.success){
+				alert("您已确认收货，请为对方作出评价")
+				location.reload();
+			}
+			else{
+				alert("操作失败");
+				location.reload();
+			}
+		}
+	})
+}
+
+function submitLendOrderEvaluate(ob,index){
+	var lendID = ob.id;
+	var commentTypeSelect = document.getElementsByName("lendCommentType")[index];
+	var commentType = commentTypeSelect.options[commentTypeSelect.selectedIndex].value;
+	var content = document.getElementsByName("lendCommentContent")[index].value;
+	$.ajax({
+		type:"POST",
+		url:"LendOrderCommentRecordAction!addLendOrderCommentRecord",
+		async:false,
+		data:{lendID:lendID,commentType:commentType,content:content},
+		success:function(result){
+			alert(result);
+			result=eval('('+result+')');
+			if (result.success){
+				alert("您已评论成功，祝您生活愉快");
+				location.reload();
+			}
+			else{
+				alert("操作失败");
+				location.reload();
+			}
+		}
+	})
 }
 </script>
 
