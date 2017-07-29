@@ -141,6 +141,9 @@ public interface AppService {
 	 * LendOrderFeedback
 	 */
 	public void addLendOrderFeedback(LendOrderFeedback lendOrderFeedback);
+	public List<LendOrderFeedback> getAllLendOrderFeedback();
+	public LendOrderFeedback getLendOrderFeedbackByID(int ID);
+	public void updateLendOrderFeedback(LendOrderFeedback lendOrderFeedback);
 
 	/*
 	 * BuyOrderCommentRecord
