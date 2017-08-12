@@ -137,7 +137,7 @@
                         <a href="#"><i class="fa fa-edit"></i> 用户反馈<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="dashboard_lendFeedback.jsp">有书借</a>
+                                <a href="LendOrderFeedbackAction!initialize">有书借</a>
                             </li>
                             <li>
                                 <a href="BuyOrderFeedbackAction!initialize">有书买</a>
