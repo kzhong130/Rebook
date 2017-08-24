@@ -9,6 +9,8 @@ var realname_Boolean = false;
 var validationProblem_Boolean = false;
 var validationAnswer_Boolean = false;
 var address_Boolean = false;
+var verification_Boolean = false;
+
 
 //user
 $('.reg_user').blur(function(){
@@ -132,11 +134,19 @@ $('.reg_address').blur(function(){
   }
 });
 
-
+$('.reg_verification').blur(function(){
+	  if ($(".reg_verification").val()!=""){
+	    $('.verification_hint').html("✔").css("color","green");
+	    verification_Boolean = true;
+	  }else {
+	    $('.verification_hint').html("×").css("color","red");
+	    verification_Boolean = false;
+	  }
+	});
 
 // click
 $('.red_button').click(function(){
-  if(user_Boolean && password_Boolean && varconfirm_Boolean && email_Boolean && Mobile_Boolean && validationAnswer_Boolean && validationProblem_Boolean &&  realname_Boolean &&  address_Boolean == true){
+  if(verification_Boolean && user_Boolean && password_Boolean && varconfirm_Boolean && email_Boolean && Mobile_Boolean && validationAnswer_Boolean && validationProblem_Boolean &&  realname_Boolean &&  address_Boolean == true){
 	//alter(document.getElementsByName("province"));
 	  var select = document.getElementsByName("province")[0];
 	  var province=select.options[select.selectedIndex].text;
@@ -184,7 +194,7 @@ $('.red_button').click(function(){
         type:"POST",  
         url:"AccountAction!register",  
         async:false,
-        data:{province:province,city:city,area:area,town:town,userName:$(".reg_user").val(),password:$(".reg_password").val(),realName:$(".reg_realname").val(),sex:sex,phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:detail,validationProblem:$(".reg_validationProblem").val(),validationAnswer:$(".reg_validationAnswer").val()} ,
+        data:{verification:$(".reg_verification").val() ,province:province,city:city,area:area,town:town,userName:$(".reg_user").val(),password:$(".reg_password").val(),realName:$(".reg_realname").val(),sex:sex,phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:detail,validationProblem:$(".reg_validationProblem").val(),validationAnswer:$(".reg_validationAnswer").val()} ,
         success:function(result){
         	try{
         		result=eval('('+result+')');
@@ -192,11 +202,11 @@ $('.red_button').click(function(){
 				window.location.replace("test.jsp");	
         	}
         	catch(err){
-        		alert("用户已存在，请更换用户名");
+        		alert("验证码不正确");
         	}
         },
         error:function(){
-        	alert("用户已存在，请更换用户名");
+        	alert("验证码不正确");
         }
     });
 		/*$.post("AccountAction!register",{userName:$(".reg_user").val(),password:$(".reg_password").val(),realName:$(".reg_realname").val(),sex:$(".reg_sex").val(),phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:maddress,validationProblem:$(".reg_validationProblem").val(),validationAnswer:$(".reg_validationAnswer").val()},function(result){

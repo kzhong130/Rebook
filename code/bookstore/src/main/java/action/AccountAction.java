@@ -194,8 +194,29 @@ public class AccountAction extends BaseAction{
 		this.prePage = prePage;
 	}
 	
+	private String verification;
+	
+	public void setVerification(String verification){
+		this.verification = verification;
+	}
+	
+	public String getVerification(){
+		return verification;
+	}
+	
+	
 	public String register() throws Exception{
 		System.out.println("aaa");
+		System.out.println(verification);
+		String temp = (String) request().getSession().getAttribute("verification");
+		System.out.println(temp);
+		//System.out.println(verification);
+		if(temp == null || !temp.equals(verification)) {
+			JSONObject obj = new JSONObject(); 
+			obj.put("success",false);
+			return "success";
+		}
+		
 		Date date = new Date();       
 		Timestamp nousedate = new Timestamp(date.getTime());
 		User user=new User(userName,password,realName,sex,phone,email,address,nousedate,validationProblem,validationAnswer,50,50,province,city,area,town);

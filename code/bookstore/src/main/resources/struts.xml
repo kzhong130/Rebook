@@ -95,6 +95,11 @@
 		
 		</action>
 
+		<action name="sendTextMail" class="Mail.SendTestAction">
+			<result name="success">translate.html</result>
+			<result name="input">register.jsp</result>
+		</action>
+
 		<action name="*">
 			<result>/{1}.jsp</result>
 		</action>
