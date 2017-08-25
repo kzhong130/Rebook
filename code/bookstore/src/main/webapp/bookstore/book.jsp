@@ -415,7 +415,7 @@ session.setAttribute("prePage", url);
 	</div>
 	
 	<!-- 书籍推荐 -->
-	<div class="center" id="recommendBooks">
+	<div class="tab-pane fade" id="recommendBooks">
 	<hr>
 	<%
 		ArrayList<Book> recommendBooks = (ArrayList<Book>)session.getAttribute("recommendBooks");
