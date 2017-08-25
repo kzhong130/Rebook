@@ -16,6 +16,9 @@ public class Book {
 	private String image;
 	private Timestamp lastUpdateTime;
 	private String pubdate;
+	private String recommend1;
+	private String recommend2;
+	private String recommend3;
 	
 	public Book(){
 		
@@ -130,5 +133,29 @@ public class Book {
 	
 	public void setPubdate(String pubdate){
 		this.pubdate = pubdate;
+	}
+	
+	public String getRecommend1(){
+		return recommend1;
+	}
+	
+	public void setRecommend1(String recommend1){
+		this.recommend1 = recommend1;
+	}
+	
+	public String getRecommend2(){
+		return recommend2;
+	}
+	
+	public void setRecommend2(String recommend2){
+		this.recommend2 = recommend2;
+	}
+	
+	public String getRecommend3(){
+		return recommend3;
+	}
+	
+	public void setRecommend3(String recommend3){
+		this.recommend3 = recommend3;
 	}
 }

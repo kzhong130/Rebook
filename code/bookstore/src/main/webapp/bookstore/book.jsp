@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="css/bootstrap_book.css">
 <link rel="stylesheet" href="css/login.css">
 <link rel="stylesheet" href="css/book_style.css">
+<link rel="stylesheet" href="css/index_style.css">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -179,6 +180,8 @@ session.setAttribute("prePage", url);
   <li><a href="#bookBorrowInfo" data-toggle="tab">有书借</a>
   </li>
   <li><a href="#bookBuyInfo" data-toggle="tab">有书买</a>
+  </li>
+  <li><a href="#recommendBooks" data-toggle="tab">买过这本书的用户也买了</a>
   </li>
 </ul>
 </div>
@@ -409,6 +412,30 @@ session.setAttribute("prePage", url);
     </table>
     </div>
     </div>
+	</div>
+	
+	<!-- 书籍推荐 -->
+	<div class="center" id="recommendBooks">
+	<hr>
+	<%
+		ArrayList<Book> recommendBooks = (ArrayList<Book>)session.getAttribute("recommendBooks");
+	%>
+	<%if (recommendBooks.size() <= 0){ %>
+	<p>暂无用户购买/借阅本书</p>
+	<%} %>
+	<%if(recommendBooks.size() > 0){ %>
+	<%for (int i=0;i<recommendBooks.size();i++){ %>
+	<div class="background">
+		<a href="bookAction!getBookInfo?ISBN=<%=recommendBooks.get(i).getISBN()%>">
+			<img class='listbook' src="<%=recommendBooks.get(i).getImage() %>"/>
+			<br>
+			<br>
+			<div title="<%=recommendBooks.get(i).getBookName() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=recommendBooks.get(i).getBookName() %></div>
+			<div title="<%=recommendBooks.get(i).getAuthor() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=recommendBooks.get(i).getAuthor() %></div>
+		</a>
+	</div>
+	<%} %>
+	<%} %>
 	</div>
   </div>
 </div>
