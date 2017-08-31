@@ -58,7 +58,7 @@ public class SendTestAction extends BaseAction {
     public String execute() throws Exception {
         MailSenderInfo mailInfo = new MailSenderInfo();
         mailInfo.setMailServerHost("smtp.163.com");
-        mailInfo.setMailServerPort("25");
+        mailInfo.setMailServerPort("465");
         mailInfo.setValidate(true);
         mailInfo.setFromAddress("se_rebook@163.com");//自己邮箱
         mailInfo.setToAddress(to);//目标邮箱
@@ -87,7 +87,7 @@ public class SendTestAction extends BaseAction {
     	//System.out.println(to);
         MailSenderInfo mailInfo = new MailSenderInfo();
         mailInfo.setMailServerHost("smtp.163.com");
-        mailInfo.setMailServerPort("25");
+        mailInfo.setMailServerPort("465");
         mailInfo.setValidate(true);
         mailInfo.setFromAddress("se_rebook@163.com");//自己邮箱
         mailInfo.setToAddress(to);//目标邮箱
