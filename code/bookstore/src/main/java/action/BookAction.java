@@ -180,6 +180,18 @@ public class BookAction extends BaseAction{
 		
 		List<User> users = appService.getUserByBookINs(bookINs);
 		request().getSession().setAttribute("userByBookIN", users);
+		
+		List<Book> recommendBooks = new ArrayList<Book>();
+		if (book.getRecommend1() != null){
+			recommendBooks.add(appService.getBookByISBN(book.getRecommend1()));
+		}
+		if (book.getRecommend2() != null){
+			recommendBooks.add(appService.getBookByISBN(book.getRecommend2()));
+		}
+		if (book.getRecommend3() != null){
+			recommendBooks.add(appService.getBookByISBN(book.getRecommend3()));
+		}
+		request().getSession().setAttribute("recommendBooks", recommendBooks);
 
 		return "bookInfo";
 	}

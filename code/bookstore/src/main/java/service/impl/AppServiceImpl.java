@@ -611,4 +611,21 @@ public class AppServiceImpl implements AppService {
 		
 
 	}
+
+	@Override
+	public List<LendOrderFeedback> getAllLendOrderFeedback() {
+		return lendOrderFeedbackDao.getAllLendOrderFeedbacks();
+	}
+
+	@Override
+	public LendOrderFeedback getLendOrderFeedbackByID(int ID) {
+		
+		return lendOrderFeedbackDao.getLendOrderFeedbackByID(ID);
+	}
+
+	@Override
+	public void updateLendOrderFeedback(LendOrderFeedback lendOrderFeedback) {
+		lendOrderFeedbackDao.update(lendOrderFeedback);
+		
+	}
 }

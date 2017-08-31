@@ -16,6 +16,11 @@
   <script type="text/javascript" src="js/jquery.citys.js"></script>          
  
 <body>
+
+<div id='MicrosoftTranslatorWidget' class='Dark' style='color:white;background-color:#555555'></div>
+<script type='text/javascript'>setTimeout(function(){{var s=document.createElement('script');s.type='text/javascript';s.charset='UTF-8';s.src=((location && location.href && location.href.indexOf('https') == 0)?'https://ssl.microsofttranslator.com':'http://www.microsofttranslator.com')+'/ajax/v3/WidgetV3.ashx?siteData=ueOIGRSKkd965FeEGM5JtQ**&ctf=False&ui=true&settings=Manual&from=';var p=document.getElementsByTagName('head')[0]||document.documentElement;p.insertBefore(s,p.firstChild); }},0);</script>
+
+
 <nav>
   <div class="container"> 
     
@@ -126,6 +131,67 @@
           <span class="tip validationAnswer_hint"></span>
       </li>      
       
+       <li>
+          <span>邮箱验证：</span>
+          <input type="text" name="" value="" placeholder="邮箱验证码，如果没有收到可在垃圾邮件中查找" class="reg_verification">
+          <span class="tip verification_hint"></span>
+      </li>   
+
+<input type="button" id="btn" value="免费获取验证码" onclick="settime(this)" /> 
+<script type="text/javascript"> 
+	var wait=60; 
+	var flag = 1;
+	function settime(btn) { 
+		//alert(countdown);
+		/*
+		if(countdown == 60 && flag == 1){
+			$.ajax({  
+	        	type:"POST",  
+	        	url:"sendTextMail!verify",  
+	        	async:false,
+	        	data:{to:$(".reg_email").val()},
+	    	});
+		}
+		//alert($(".reg_email").val());
+		if (countdown == 0) { 
+			val.removeAttribute("disabled");    
+			val.value="免费获取验证码"; 
+			countdown = 60; 
+		} 
+		else { 
+			val.setAttribute("disabled", true); 
+			val.value="重新发送(" + countdown + ")"; 
+			countdown--; 
+		} 
+		setTimeout(function() { 
+			settime(val) 
+		},1000)
+		*/
+		 if (wait == 0) {
+			 
+             btn.removeAttribute("disabled");
+             btn.value = "免费获取验证码";
+             wait = 60;
+         } else {
+        	 if(wait == 60){
+        		 $.ajax({  
+ 		        	type:"POST",  
+ 		        	url:"sendTextMail!verify",  
+ 		        	async:false,
+ 		        	data:{to:$(".reg_email").val()},
+ 		     	});
+        	 }
+             btn.setAttribute("disabled", true);
+             btn.value = wait + "秒后重新获取验证码";
+             wait--;
+             setTimeout(function () {
+                 settime(btn);
+             },
+             1000)
+         }
+	} 
+</script> 
+     
 
       <li>
         <button type="button" name="button" class="red_button">注册</button>

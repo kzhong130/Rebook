@@ -41,5 +41,14 @@
 		<property name="pubdate" type="java.lang.String">
 			<column name="pubdate" />
 		</property>
+		<property name="recommend1" type="java.lang.String">
+			<column name="recommend1"/>
+		</property>
+		<property name="recommend2" type="java.lang.String">
+			<column name="recommend2"/>
+		</property>
+		<property name="recommend3" type="java.lang.String">
+			<column name="recommend3"/>
+		</property>
 	</class>
 </hibernate-mapping>

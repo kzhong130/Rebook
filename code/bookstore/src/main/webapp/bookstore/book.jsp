@@ -17,6 +17,7 @@
 <link rel="stylesheet" href="css/bootstrap_book.css">
 <link rel="stylesheet" href="css/login.css">
 <link rel="stylesheet" href="css/book_style.css">
+<link rel="stylesheet" href="css/index_style.css">
 
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -26,6 +27,10 @@
     <![endif]-->
 </head>
 <body>
+<div id='MicrosoftTranslatorWidget' class='Dark' style='color:white;background-color:#555555'></div>
+<script type='text/javascript'>setTimeout(function(){{var s=document.createElement('script');s.type='text/javascript';s.charset='UTF-8';s.src=((location && location.href && location.href.indexOf('https') == 0)?'https://ssl.microsofttranslator.com':'http://www.microsofttranslator.com')+'/ajax/v3/WidgetV3.ashx?siteData=ueOIGRSKkd965FeEGM5JtQ**&ctf=False&ui=true&settings=Manual&from=';var p=document.getElementsByTagName('head')[0]||document.documentElement;p.insertBefore(s,p.firstChild); }},0);</script>
+
+
 <%
 String url;
 if (request.getQueryString()!=null){
@@ -176,6 +181,8 @@ session.setAttribute("prePage", url);
   </li>
   <li><a href="#bookBuyInfo" data-toggle="tab">有书买</a>
   </li>
+  <li><a href="#recommendBooks" data-toggle="tab">买过这本书的用户也买了</a>
+  </li>
 </ul>
 </div>
 
@@ -311,7 +318,7 @@ session.setAttribute("prePage", url);
 				<%} %>
    				<td><%=recency %></td>
    				<td><%=sendWay %></td>
-   				<td><%=lendBookINs.get(i).getProvince() + " " + lendBookINs.get(i).getCity() + " "+ lendBookINs.get(i).getTown() %></td>
+   				<td onclick="haha('<%=lendBookINs.get(i).getProvince()  + lendBookINs.get(i).getCity()+ lendBookINs.get(i).getTown() %>')"><%=lendBookINs.get(i).getProvince() + " " + lendBookINs.get(i).getCity() + " "+ lendBookINs.get(i).getTown() %></td>
    				<td><%=lendBookINs.get(i).getLongestDuration() + "天" %></td>
    				<td><%=lendBookINs.get(i).getCoinNumber() %></td>
    				<td><a class="btn btn-success btn-sm -sm" role="button" id="<%=lendBookINs.get(i).getBookRecordID()%>"  onclick="lendBook(this,<%=lendBookINs.get(i).getCoinNumber() %>,'<%=user.getUserName() %>')">借书</a></td>
@@ -325,12 +332,12 @@ session.setAttribute("prePage", url);
 	</div>
 	
 	<!-- 买书信息 -->
-    <div class="tab-pane fade" id="bookBuyInfo">
+    <div class="tab-pane fade" id="bookBuyInfo" >
     <hr>
     <div class="row">
     <div class="table-responsive">
     <!-- class="table table-hover" -->
-    <table class="table" background="images/index1_yellowbg.png">
+    <table class="table" background="images/index1_yellowbg.png" id="buyTable">
     	<thead>
     		<tr bgcolor="#efbb24">
     			<th style="text-align: center">书主</th>
@@ -395,7 +402,7 @@ session.setAttribute("prePage", url);
 				<%} %>
    				<td><%=recency %></td>
    				<td><%=sendWay %></td>
-   				<td><%=sellBookINs.get(i).getProvince()+" "+sellBookINs.get(i).getCity()+" "+sellBookINs.get(i).getTown() %></td>
+   				<td onclick='haha("<%=sellBookINs.get(i).getProvince()+sellBookINs.get(i).getCity()+sellBookINs.get(i).getTown()%>")'><%=sellBookINs.get(i).getProvince()+" "+sellBookINs.get(i).getCity()+" "+sellBookINs.get(i).getTown() %></td>
    				<td><%=sellBookINs.get(i).getCoinNumber() %></td>
    				<td><a class="btn btn-success btn-sm -sm" role="button" id="<%=sellBookINs.get(i).getBookRecordID()%>" onclick="buyBook(this,<%=sellBookINs.get(i).getCoinNumber()%>,'<%=user.getUserName()%>')" >买书</a></td>
     		</tr>
@@ -405,6 +412,30 @@ session.setAttribute("prePage", url);
     </table>
     </div>
     </div>
+	</div>
+	
+	<!-- 书籍推荐 -->
+	<div class="tab-pane fade" id="recommendBooks">
+	<hr>
+	<%
+		ArrayList<Book> recommendBooks = (ArrayList<Book>)session.getAttribute("recommendBooks");
+	%>
+	<%if (recommendBooks.size() <= 0){ %>
+	<p>暂无用户购买/借阅本书</p>
+	<%} %>
+	<%if(recommendBooks.size() > 0){ %>
+	<%for (int i=0;i<recommendBooks.size();i++){ %>
+	<div class="background">
+		<a href="bookAction!getBookInfo?ISBN=<%=recommendBooks.get(i).getISBN()%>">
+			<img class='listbook' src="<%=recommendBooks.get(i).getImage() %>"/>
+			<br>
+			<br>
+			<div title="<%=recommendBooks.get(i).getBookName() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=recommendBooks.get(i).getBookName() %></div>
+			<div title="<%=recommendBooks.get(i).getAuthor() %>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=recommendBooks.get(i).getAuthor() %></div>
+		</a>
+	</div>
+	<%} %>
+	<%} %>
 	</div>
   </div>
 </div>
@@ -416,6 +447,7 @@ session.setAttribute("prePage", url);
 <script src="js/bootstrap.js"></script>
 <script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=YW0cDwFXMyVq69FVGoOzgDCc8tjmi7ap"></script>
 <script type="text/javascript">
 
 //窗口效果
@@ -435,6 +467,38 @@ $("a.guanbi").click(function(){
 $(window).resize(function(){
 	tc_center();
 });
+
+
+
+function haha(keyword){
+	var map = new BMap.Map();
+	var local = new BMap.LocalSearch(map,{onSearchComplete:myFun});
+    local.search(keyword);
+
+	function myFun(results){
+	    var cityPoint = results.getPoi(0).point;
+	    var geolocation = new BMap.Geolocation();
+	    var distance;
+		  geolocation.getCurrentPosition(function(r){
+			if(this.getStatus() == BMAP_STATUS_SUCCESS){
+				distance = (map.getDistance(r.point,cityPoint)/1000).toFixed(2);
+				if (distance > 500){
+					alert("您与"+keyword+"相距"+distance+"千米。距离较远运输成本较高，请慎重下单！")
+				}
+				if (distance <= 500){
+					alert("您与"+keyword+"相距"+distance+"千米");
+				}
+			}
+			else {
+				alert("定位功能出错，请检查定位功能");
+			}        
+		},{enableHighAccuracy: true})
+	}
+}
+
+
+
+
 
 function tc_center(){
 	var _top=($(window).height()-$(".popup").height())/2;
@@ -599,7 +663,7 @@ function buyBook(ob,coinNumber,bookOwnerName){
 		alert("请先登录");
 	}
 	else if( userName == name){
-		alert("不能买自己的书");
+			alert("不能买自己的书");
 	}
 	else{
 		var myCoinNumber = "<%=session.getAttribute("loginUserBookCoin")%>";

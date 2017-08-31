@@ -30,7 +30,16 @@
 			 });
 		 });
 	</script>
+    <%@page import="java.util.ArrayList" %>    
+    <%@page import="model.Book" %>
+    <%@page import="model.LendOrderFeedback" %>
+    <%@page import="model.BuyOrder" %>
 
+<%
+	ArrayList<LendOrderFeedback> lendOrderFeedbacks = (ArrayList<LendOrderFeedback>)request.getAttribute("allLendOrderFeedback");
+	ArrayList<String> userNames=(ArrayList<String>)request.getAttribute("FeedbackUserNames");
+	ArrayList<String> adminNames=(ArrayList<String>)request.getAttribute("FeedbackAdminNames");
+%>
 </head>
 <body>
 <%
@@ -115,7 +124,7 @@
                         <a href="#" class="active-menu"><i class="fa fa-edit"></i> 用户反馈<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="dashboard_lendFeedback.jsp">有书借</a>
+                                <a href="LendOrderFeedbackAction!initialize">有书借</a>
                             </li>
                             <li>
                                 <a href="BuyOrderFeedbackAction!initialize">有书买</a>
@@ -165,28 +174,31 @@
                                         </thead>
                                         <tbody class="text-center">
                                             <%
+                                            	int size=lendOrderFeedbacks.size();
+                                            	for(int i=0;i<size;i++){
+                                            		LendOrderFeedback lendOrderFeedback=lendOrderFeedbacks.get(i);
+                                            		String userName=userNames.get(i);
                                             	
                                             %>
                                             <tr>
-												  <td><% %>1</td>
-                                                <td>1</td>
-                                                <td><% %>zcx</td>
-                                                <td><div title="<% %>哈哈哈哈哈" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><% %>哈哈哈哈哈</div></td>
-                                                <td>2017-07-05 00:00:00</td>
-                                                <% %>
-                                                <% %>
-                                                <td>已处理</td>
-                                                <% %>
-                                                <td>root</td>
-                                                <td><a class="btn btn-success btn-xs" href="dashboard_lendFeedbackInfo.jsp">查看</a></td>
+												  <td><%=lendOrderFeedback.getID() %></td>
+                                                <td><%=lendOrderFeedback.getLendID() %></td>
+                                                <td><%=userName %></td>
+                                                <td><div title="<%=lendOrderFeedback.getTopic()%>" style="overflow:hidden;white-space:nowrap;text-overflow:ellipsis"><%=lendOrderFeedback.getTopic() %></div></td>
+                                                <td><%=lendOrderFeedback.getTime().toString().substring(0, 10) %></td>
+                                                 <%
+                                                	String a;
+                                                	if(lendOrderFeedback.getHandleResult()==null) a="未处理";
+                                                	else a="已处理";
+                                                %>
+                                                <td><%=a %></td>
+                                              
+                                                <td><%=adminNames.get(i)%></td>
+                                                <td><a class="btn btn-success btn-xs" href="LendOrderFeedbackAction!viewDetail?ID=<%=lendOrderFeedback.getID()%>">查看</a></td>
                                                 
                                             </tr>
-                                            <% %>
-                                            <% %>
-                                            <% %>
-                                            <% %>
-                                            <%	
-                                            %>
+                                            <% }%>
+                                           <!--  
                                              <tr>
 												  <td><% %>2</td>
 												  <td><% %>2</td>
@@ -199,6 +211,7 @@
                                                 <td><a class="btn btn-success btn-xs" href="dashboard_lendFeedbackInfo.jsp">查看</a></td>
                                                 
                                             </tr>
+                                            -->
                                             <% %>
                                             <% %>
                                             <% %>
