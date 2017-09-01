@@ -38,7 +38,7 @@ session.setAttribute("prePage", url);
       <a class="navbar-brand" href="centerPage.jsp"><img src="images/index1_logo.png"/></a> </div>
     
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse">
+    <div class="navbar-collapse">
       
       <!--<form class="navbar-form navbar-right" role="search">
         <div class="form-group">
@@ -47,7 +47,7 @@ session.setAttribute("prePage", url);
         <button type="submit" class="btn btn-default">搜索</button>
       </form>  -->
       
-      <ul class="nav navbar-nav navbar-right hidden-sm" id="personalInfo">
+      <ul class="nav navbar-nav navbar-right" id="personalInfo">
         <li><a href='MemberCenterAction!initialize'>个人中心</a></li>
         <li><a href='test.jsp'>返回首页</a></li>
       </ul>
