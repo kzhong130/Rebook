@@ -46,18 +46,18 @@ session.setAttribute("prePage",url);
       <a class="navbar-brand" href="test.jsp"><img src="images/index1_logo.png"/></a> </div>
     
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse">
+    <div class="navbar-collapse">
       <form class="navbar-form navbar-right" role="search" action="bookAction!frontPageSearch" method="post">
         <div class="form-group">
           <input type="text" name="bookName" class="form-control" placeholder="Search">
         </div>
         <button type="submit" class="btn btn-default" >搜索</button>
       </form>
-      <ul class="nav navbar-nav navbar-right hidden-sm" id="personalInfo">
+      <ul class="nav navbar-nav navbar-right" id="personalInfo">
         <li><a href="register.jsp">注册<i class="fa fa-address-card" aria-hidden="true"></i></a> </li>
         <li><a href="#" class="tc">登录</a> </li>
       </ul>
-       <ul class="nav navbar-nav navbar-right hidden-sm">
+       <ul class="nav navbar-nav navbar-right">
           <li><a href="#" class="td">出借/卖书</a> </li>
        </ul>
     </div>
@@ -140,7 +140,7 @@ session.setAttribute("prePage",url);
 <div class="container">
     <div class="row">
       <!-- <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">-->
-        <div id="carousel1" class="carousel slide" weight=1920px>
+        <div id="carousel1" class="carousel slide">
           <ol class="carousel-indicators">
             <li data-target="#carousel1" data-slide-to="0" class="active"> </li>
             <li data-target="#carousel1" data-slide-to="1" class=""> </li>
