@@ -53,8 +53,8 @@
 			</div>
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav navbar-right hidden-sm">
+			<div class="navbar-collapse">
+				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#" class="title td">出借/卖书</a> </li>
 					<li><a href="test.jsp" class="title">返回首页</a></li>
 					<li><a href='AccountAction!logout' class="title">登出</a>
@@ -118,7 +118,6 @@
 				<img style="margin-right: 0px;" src="img/member_center/star.png"></img>
 				<img style="margin-right: 0px;" src="img/member_center/star.png"></img>
 				<img style="margin-right: 0px;" src="img/member_center/star.png"></img>
-			</div>
 			<%} %>
 			<%
         	if (user.getCredit() > 60 && user.getCredit() <= 80){
@@ -128,7 +127,6 @@
 			<img style="margin-right: 0px;" src="img/member_center/star.png"></img>
 			<img style="margin-right: 0px;" src="img/member_center/star.png"></img>
 			<img style="margin-right: 0px;" src="img/member_center/xx2.png"></img>
-		</div>
 		<%} %>
 		<%
         	if (user.getCredit() > 40 && user.getCredit() <= 60){
@@ -138,7 +136,6 @@
 		<img style="margin-right: 0px;" src="img/member_center/star.png"></img>
 		<img style="margin-right: 0px;" src="img/member_center/xx2.png"></img>
 		<img style="margin-right: 0px;" src="img/member_center/xx2.png"></img>
-	</div>
 	<%} %>
 	<%
         	if (user.getCredit() > 20 && user.getCredit() <= 40 ){
@@ -148,7 +145,6 @@
 	<img style="margin-right: 0px;" src="img/member_center/xx2.png"></img>
 	<img style="margin-right: 0px;" src="img/member_center/xx2.png"></img>
 	<img style="margin-right: 0px;" src="img/member_center/xx2.png"></img>
-	</div>
 	<%} %>
 	<%
         	if (user.getCredit() >= 0 && user.getCredit() <= 20){
@@ -159,8 +155,9 @@
 	<img style="margin-right: 0px;" src="img/member_center/xx2.png"></img>
 	<img style="margin-right: 0px;" src="img/member_center/xx2.png"></img>
 	<img style="margin-right: 0px;" src="img/member_center/xx2.png"></img>
-	</div>
 	<%} %>
+	</div>
+
 	<div class="menu">
 		<div class="menu_title">我的信息</div>
 		<div class="menu_list">
