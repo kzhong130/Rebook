@@ -5,7 +5,8 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
+import Mail.MailSenderInfo;
+import Mail.SimpleMailSender;
 import org.apache.struts2.ServletActionContext;
 
 
@@ -166,6 +167,26 @@ public class RequestAction extends BaseAction{
 			CoinChangeRecord coinChangeRecord = new CoinChangeRecord(userName,bookIN.getCoinNumber()*-1,nousedate,"lendin");
 			appService.addCoinChangeRecord(coinChangeRecord);
 		}
+		
+		//send notification email
+		BookIN record = appService.getBookINByBookRecordID(bookRecordID);
+		String to = appService.getUserByUserName(record.getUserName()).getEmail();
+        MailSenderInfo mailInfo = new MailSenderInfo();
+        mailInfo.setMailServerHost("smtp.163.com");
+        mailInfo.setMailServerPort("465");
+        mailInfo.setValidate(true);
+        mailInfo.setFromAddress("se_rebook@163.com");//自己邮箱
+        mailInfo.setToAddress(to);//目标邮箱
+        mailInfo.setUserName("se_rebook@163.com");//自己邮箱
+        //需要开启此邮箱的POP3/SMTP/IMAP服务，具体设置进入邮箱以后在“设置”里进行开启
+        mailInfo.setPassword("rebook123");//自己邮箱密码
+        //System.out.println("password="+password);
+        mailInfo.setSubject("Rebook：图书申请通知");
+        String content = "  您好！\n  您的单号为"+record.getBookRecordID()+"的图书正在被用户"+userName+"发起申请，请尽快登录网站处理请求\n\n祝好！\n爱书网";
+        mailInfo.setContent(content);
+        boolean isSend = SimpleMailSender.sendTextMail(mailInfo);
+        
+        
 		PrintWriter out = ServletActionContext.getResponse().getWriter();
 		JSONObject obj = new JSONObject();
 		obj.put("success", true);
@@ -248,6 +269,25 @@ public class RequestAction extends BaseAction{
 		ownerCoinChangeRecord.setUserName(ownerUser.getUserName());
 		appService.addCoinChangeRecord(ownerCoinChangeRecord);
 		
+		
+		//TODO
+		
+		String to = appService.getUserByUserName(requestBook.getUserName()).getEmail();
+        MailSenderInfo mailInfo = new MailSenderInfo();
+        mailInfo.setMailServerHost("smtp.163.com");
+        mailInfo.setMailServerPort("465");
+        mailInfo.setValidate(true);
+        mailInfo.setFromAddress("se_rebook@163.com");//自己邮箱
+        mailInfo.setToAddress(to);//目标邮箱
+        mailInfo.setUserName("se_rebook@163.com");//自己邮箱
+        //需要开启此邮箱的POP3/SMTP/IMAP服务，具体设置进入邮箱以后在“设置”里进行开启
+        mailInfo.setPassword("rebook123");//自己邮箱密码
+        //System.out.println("password="+password);
+        mailInfo.setSubject("Rebook：图书申请通过通知");
+        String content = "您好！\n  您的申请单号为"+requestBook.getBookRecordID()+"的申请已经通过！请尽快登录网站查看相关信息！\n\n祝好！\nRebook爱书网";
+        mailInfo.setContent(content);
+        boolean isSend = SimpleMailSender.sendTextMail(mailInfo);
+		
 		/*拒绝其他等待中的请求*/
 		List<RequestBook> allRequestBooks = appService.getAllRequestBooks();
 		List<RequestBook> myRequestBook = new ArrayList<RequestBook>();
@@ -273,6 +313,10 @@ public class RequestAction extends BaseAction{
 					coinChangeRecord.setTime(nousedate1);
 					coinChangeRecord.setUserName(myRequestBook.get(i).getUserName());
 					appService.addCoinChangeRecord(coinChangeRecord);
+			        mailInfo.setSubject("Rebook：图书申请未通过通知");
+			        content = "您好！\n  您的申请单号为"+myRequestBook.get(i).getBookRecordID()+"的申请已被书主拒绝，请尽快登录网站查看其他相关图书借阅信息！\n\n祝好！\nRebook爱书网";
+			        mailInfo.setContent(content);
+			        SimpleMailSender.sendTextMail(mailInfo);
 				}
 			}
 		}
@@ -431,6 +475,28 @@ public class RequestAction extends BaseAction{
 		coinChangeRecord.setUserName(requestBook.getUserName());
 		appService.addCoinChangeRecord(coinChangeRecord);
 		
+		//TODO
+		String to = appService.getUserByUserName(requestBook.getUserName()).getEmail();
+		System.out.println(to);
+        MailSenderInfo mailInfo = new MailSenderInfo();
+        mailInfo.setMailServerHost("smtp.163.com");
+        mailInfo.setMailServerPort("465");
+        mailInfo.setValidate(true);
+        mailInfo.setFromAddress("se_rebook@163.com");//自己邮箱
+        mailInfo.setToAddress(to);//目标邮箱
+        mailInfo.setUserName("se_rebook@163.com");//自己邮箱
+        //需要开启此邮箱的POP3/SMTP/IMAP服务，具体设置进入邮箱以后在“设置”里进行开启
+        mailInfo.setPassword("rebook123");//自己邮箱密码
+        //System.out.println("password="+password);
+        mailInfo.setSubject("Rebook：图书申请未通过通知");
+        String content = "您好！\n  您的申请单号为"+requestBook.getRequestID()+"的申请已被书主拒绝，请尽快登录网站查看其他相关图书借阅信息！\n\n祝好！\nRebook爱书网";
+
+        mailInfo.setContent(content);
+
+        boolean isSend = SimpleMailSender.sendTextMail(mailInfo);
+
+		
+		
 		/*刷新数据*/
 		String userName = (String)request().getSession().getAttribute("loginUserName");
 		List<BookIN> bookINs = appService.getBookINByUserName(userName);
@@ -539,6 +605,22 @@ public class RequestAction extends BaseAction{
 		ownerCoinChangeRecord.setUserName(ownerUser.getUserName());
 		appService.addCoinChangeRecord(ownerCoinChangeRecord);
 		
+		String to = appService.getUserByUserName(requestBook.getUserName()).getEmail();
+        MailSenderInfo mailInfo = new MailSenderInfo();
+        mailInfo.setMailServerHost("smtp.163.com");
+        mailInfo.setMailServerPort("465");
+        mailInfo.setValidate(true);
+        mailInfo.setFromAddress("se_rebook@163.com");//自己邮箱
+        mailInfo.setToAddress(to);//目标邮箱
+        mailInfo.setUserName("se_rebook@163.com");//自己邮箱
+        //需要开启此邮箱的POP3/SMTP/IMAP服务，具体设置进入邮箱以后在“设置”里进行开启
+        mailInfo.setPassword("rebook123");//自己邮箱密码
+        //System.out.println("password="+password);
+        mailInfo.setSubject("图书申请通过通知");
+        String content = "您好！\n  您的申请单号为"+requestBook.getBookRecordID()+"的申请已经通过！请尽快登录网站查看相关信息！\n\n祝好！\nRebook爱书网";
+        mailInfo.setContent(content);
+        boolean isSend = SimpleMailSender.sendTextMail(mailInfo);
+		
 		/*拒绝其他等待中的请求*/
 		List<RequestBook> allRequestBooks = appService.getAllRequestBooks();
 		List<RequestBook> myRequestBook = new ArrayList<RequestBook>();
@@ -564,6 +646,10 @@ public class RequestAction extends BaseAction{
 					coinChangeRecord.setTime(nousedate1);
 					coinChangeRecord.setUserName(myRequestBook.get(i).getUserName());
 					appService.addCoinChangeRecord(coinChangeRecord);
+					mailInfo.setSubject("Rebook：图书申请未通过通知");
+				    content = "您好！\n  您的申请单号为"+myRequestBook.get(i).getBookRecordID()+"的申请已被书主拒绝，请尽快登录网站查看其他相关图书借阅信息！\n\n祝好！\nRebook爱书网";
+				    mailInfo.setContent(content);
+				    SimpleMailSender.sendTextMail(mailInfo);
 				}
 			}
 		}
@@ -655,6 +741,27 @@ public class RequestAction extends BaseAction{
 		coinChangeRecord.setTime(nousedate);
 		coinChangeRecord.setUserName(requestBook.getUserName());
 		appService.addCoinChangeRecord(coinChangeRecord);
+		
+		String to = appService.getUserByUserName(requestBook.getUserName()).getEmail();
+		System.out.println(to);
+        MailSenderInfo mailInfo = new MailSenderInfo();
+        mailInfo.setMailServerHost("smtp.163.com");
+        mailInfo.setMailServerPort("465");
+        mailInfo.setValidate(true);
+        mailInfo.setFromAddress("se_rebook@163.com");//自己邮箱
+        mailInfo.setToAddress(to);//目标邮箱
+        mailInfo.setUserName("se_rebook@163.com");//自己邮箱
+        //需要开启此邮箱的POP3/SMTP/IMAP服务，具体设置进入邮箱以后在“设置”里进行开启
+        mailInfo.setPassword("rebook123");//自己邮箱密码
+        //System.out.println("password="+password);
+        mailInfo.setSubject("Rebook：图书申请未通过通知");
+        String content = "您好！\n  您的申请单号为"+requestBook.getRequestID()+"的申请已被书主拒绝，请尽快登录网站查看其他相关图书借阅信息！\n\n祝好！\nRebook爱书网";
+
+        mailInfo.setContent(content);
+
+        boolean isSend = SimpleMailSender.sendTextMail(mailInfo);
+
+		
 		
 		/*刷新数据*/
 		String userName = (String)request().getSession().getAttribute("loginUserName");
