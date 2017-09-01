@@ -4,8 +4,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- 重置文件 -->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/register.css">
@@ -31,8 +31,8 @@
       </div>
     
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav navbar-right hidden-sm">
+    <div class="navbar-collapse">
+      <ul class="nav navbar-nav navbar-right">
         <li><a href="test.jsp">我已注册，回首页登录</a> </li>
       </ul>
     </div>
