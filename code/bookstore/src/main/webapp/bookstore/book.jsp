@@ -11,7 +11,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap Product Page Template</title>
+<title>Rebook</title>
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="css/bootstrap_book.css">
@@ -42,32 +42,25 @@ else{
 session.setAttribute("prePage", url);
 
 %>
-<nav>
-  <div class="container"> 
-    
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-      <a class="navbar-brand" href="centerPage.jsp"><img src="images/index1_logo.png"/></a> </div>
-    
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse">
-      
-      <!--<form class="navbar-form navbar-right" role="search">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Search">
-        </div>
-        <button type="submit" class="btn btn-default">搜索</button>
-      </form>  -->
-      
-      <ul class="nav navbar-nav navbar-right hidden-sm" id="personalInfo">
-        <li><a href="register.jsp">注册</a> </li>
-        <li><a href="#" class="tc" >登录</a> </li>
-      </ul>
-    </div>
-    <!-- /.navbar-collapse --> 
-  </div>
-  <!-- /.container-fluid --> 
+<nav class="navbar navbar-default" role="navigation">
+	<div class="container-fluid"> 
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#example-navbar-collapse">
+			<span class="sr-only">切换导航</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<a class="navbar-brand" href="centerPage.jsp"><img src="images/index1_logo.png" class="logo"/></a>
+	</div>
+	<div class="collapse navbar-collapse" id="example-navbar-collapse">
+		<ul class="nav navbar-nav navbar-right" id="personalInfo">
+			<li><a href="register.jsp">注册</a></li>
+			<li><a href="#" class="tc">登录</a></li>
+		</ul>
+	</div>
+	</div>
 </nav>
 
 <div class="popup" id="popup">
@@ -140,35 +133,43 @@ session.setAttribute("prePage", url);
 <br>
 <!-- 书籍封面&基本信息 -->
 <div class="container">
-  <div class="row">
-    <div class="col-sm-2">
-      <div class="thumbnail"> <img src=<%=book.getImage() %> alt="Thumbnail Image 1" class="img-responsive">
-        
+    <div class="col-xs-4 col-sm-2">
+      <div class="thumbnail thumbnail-margin"> <img src=<%=book.getImage() %> alt="Thumbnail Image 1" class="img-responsive">
       </div>
+	    <div class="pc-hide">
+	    <span class="thick dbScore-font-size">豆瓣评分：</span><span class="dbScore-score dbScore-font-size"><%=book.getDoubanRate() %></span><br>
+        <span class="dbScoreNumber-font-size">（<%=book.getRaterNumber() %>人评）</span>
+        </div>
 	</div>
-	<div class="col-sm-4">
+	<div class="col-xs-8 col-sm-4">
 	  <div class="caption">
         <h3 class="h3-1"><%=book.getBookName() %></h3>
-        <p>作者：<%=book.getAuthor() %></p>
-        <p>出版社：<%=book.getPublisher() %></p>
-        <p>出版日期：<%=book.getPubdate() %></p>
-        <p>页数：<%=book.getPageNumber() %></p>
-        <p>定价：<%=book.getPrice()%></p>
-        <p>ISBN：<%=book.getISBN() %></p>
-
+        	<span class="thick">作者：</span><%=book.getAuthor() %><br>
+       	 	<span class="thick">出版社：</span><%=book.getPublisher() %><br>
+       		<span class="thick">出版日期：</span><%=book.getPubdate() %><br>
+        	<span class="thick">页数：</span><%=book.getPageNumber() %></br>
+        	<span class="thick">定价：</span><%=book.getPrice()%><br>
+   			<span class="thick">ISBN：</span><%=book.getISBN() %>
       </div>
 	</div> 
-	<div class="col-sm-3">
+	<div class="col-sm-3 mobile-hide">
 	  <div class="caption">
-        <br><br><br><p>豆瓣评分：<span style="color:#efbb24"><font size="10"><%=book.getDoubanRate() %></font></span></p>
-        <p>参评人数：<%=book.getRaterNumber() %></p>
+	    <span class="thick">豆瓣评分：</span><span class="dbScore-score"><%=book.getDoubanRate() %></span><br>
+        <span class="dbScoreNumber-font-size">（<%=book.getRaterNumber() %>人&nbsp;参与评价）</span>
         <hr>
         <!-- 如果没登录，跳出信息显示请先登录 -->
-        <p><button class="btn btn-success" role="button" id="lend_sell">出借/卖书</button></p>
+        <button class="btn btn-success" role="button" id="lend_sell">出借/卖书</button>
       </div>
-	</div> 
-  </div>
+	</div>
+	<div class="col-xs-12">
+	 <hr style="margin:10px 0">
+	 <div class="pc-hide" style="text-align:center">
+	<!-- 如果没登录，跳出信息显示请先登录 -->
+        <button class="btn btn-success" role="button" id="lend_sell">出借/卖书</button>
+	 </div>
+	</div>
 </div>
+<br><br>
 <!-- 标签页 -->
 <div class="container">
 <ul class="nav nav-tabs" style="text-align: center">
@@ -230,7 +231,7 @@ session.setAttribute("prePage", url);
 				</div>
 				<form id="commentForm" class="STYLE-NAME" method="POST" action="BookCommentAction!addBookComment">
 				<label>
-				<textarea id="content" name="content" placeholder="请输入评论" style="height: 120px; width:580px;resize:none;margin: 10px"></textarea>
+				<textarea id="content" name="content" placeholder="请输入评论" class="commentContent"></textarea>
 				</label>
 				<input type="hidden" name="ISBN" value="<%=book.getISBN() %>" >
 				<input type="hidden" name="userName" value="<%=session.getAttribute("loginUserName") %>">
@@ -440,6 +441,22 @@ session.setAttribute("prePage", url);
   </div>
 </div>
 <hr>
+
+<footer class="text-center">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <p>
+        Rebook, Inc. | SJTU SE Link | ZCX, China, 15021085292 | <abbr title="Phone">Phone:</abbr> 15021085292
+       </p>
+        <p>
+        Full Name:<a href="mailto:#">zhichenxi@sjtu.edu.cn</a>
+        </p>
+        <p>Copyright © Rebook. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
 <script src="js/jquery-1.11.3.min.js"></script> 

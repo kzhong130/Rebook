@@ -75,6 +75,9 @@ input[placeholder], [placeholder], *[placeholder] {
     background: #d19826;
 }
 
+.reg_ul{
+	padding-left:5px;
+}
 
 
 .citys{
@@ -89,14 +92,6 @@ input[placeholder], [placeholder], *[placeholder] {
     text-align:left;
     float:!left;
 }
-
-
-
-
-
-
-
-
 
 
 

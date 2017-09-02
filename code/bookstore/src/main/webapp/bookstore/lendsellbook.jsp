@@ -9,14 +9,15 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap Product Page Template</title>
+<title>Rebook</title>
 
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="css/login.css">
 <link rel="stylesheet" href="css/register2.css">
 <link rel="sytlesheet" href="css/lendsellbook.css">
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/bootstrap_book.css">
+<link rel="stylesheet" href="css/book_style.css">
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.citys.js"></script>
@@ -78,96 +79,92 @@ session.setAttribute("prePage", url);
 <br>
 <!-- 书籍封面&基本信息 -->
 <div class="container">
-  <div class="row">
-    <div class="col-sm-2">
-      <div class="thumbnail"> <img src=<%=book.getImage() %> alt="Thumbnail Image 1" class="img-responsive">
-        
+    <div class="col-xs-4 col-sm-2">
+      <div class="thumbnail thumbnail-margin"> <img src=<%=book.getImage() %> alt="Thumbnail Image 1" class="img-responsive">
+      </div>
+	    <div class="pc-hide">
+	    <span class="thick dbScore-font-size">豆瓣评分：</span><span class="dbScore-score dbScore-font-size"><%=book.getDoubanRate() %></span><br>
+        <span class="dbScoreNumber-font-size">（<%=book.getRaterNumber() %>人评）</span>
+        </div>
+	</div>
+	<div class="col-xs-8 col-sm-4">
+	  <div class="caption">
+        <h3 class="h3-1"><%=book.getBookName() %></h3>
+        	<span class="thick">作者：</span><%=book.getAuthor() %><br>
+       	 	<span class="thick">出版社：</span><%=book.getPublisher() %><br>
+       		<span class="thick">出版日期：</span><%=book.getPubdate() %><br>
+        	<span class="thick">页数：</span><%=book.getPageNumber() %></br>
+        	<span class="thick">定价：</span><%=book.getPrice()%><br>
+   			<span class="thick">ISBN：</span><%=book.getISBN() %>
+      </div>
+	</div> 
+	<div class="col-sm-3 mobile-hide">
+	  <div class="caption">
+	    <span class="thick">豆瓣评分：</span><span class="dbScore-score"><%=book.getDoubanRate() %></span><br>
+        <span class="dbScoreNumber-font-size">（<%=book.getRaterNumber() %>人&nbsp;参与评价）</span>
       </div>
 	</div>
-	<div class="col-sm-4">
-	  <div class="caption">
-        <h3><%=book.getBookName() %></h3>
-        <p>作者：<%=book.getAuthor() %></p>
-        <p>出版社：<%=book.getPublisher() %></p>
-        <p>出版日期：<%=book.getPubdate() %></p>
-        <p>页数：<%=book.getPageNumber() %></p>
-        <p>定价：<%=book.getPrice()%></p>
-        <p>ISBN：<%=book.getISBN() %></p>
-
-      </div>
-	</div> 
-	<div class="col-sm-3">
-	  <div class="caption">
-        <br><br><br><p>豆瓣评分：<%=book.getDoubanRate() %></p>
-        <p>参评人数：<%=book.getRaterNumber() %></p>
-      </div>
-	</div> 
-  </div>
 </div>
 
 
 <div class="container">
-    <hr>    
-    <div class="reg_div">
-    <table>
-    <tr style="position: top center;">
-    <td width="570px" height="300px" >
-    
-
-    <h2 style="float:left;padding:0 0 0 75px;">书主信息</h2>
-    <ul class="reg_ul">
-      <li>
-          <span>书主姓名：</span>
-          <input type="text" name="" value="" placeholder="书主姓名" class="reg_ownername">
-          <span class="tip ownername_hint"></span>
-      </li>
-      <li>
-          <span>书主手机：</span>
-          <input type="text" name="" value="" placeholder="书主手机" class="reg_ownerphone">
-          <span class="tip ownerphone_hint"></span>
-      </li>
-      <li>
-          <span>所在城市：</span>
+    <hr>
+    <div class="col-xs-12 col-md-5 form-group" style="padding-left:0;padding-right:0;">
+    <h3 class="col-xs-12 col-md-12" style="float:left;padding:0 0 0 15px;">书主信息</h3>
+      	<div class="form-group">
+      	<label for="firstname" class="col-xs-3 col-md-3 control-label">书主姓名</label>
+      	<div class="col-xs-9 col-md-9">
+      	<input type="text" name="" value="" placeholder="书主姓名" class="form-control">
+      	<br>
+      	</div>
+      	</div>
+      	<div class="form-group">
+      	<label for="firstname" class="col-xs-3 col-md-3 control-label">书主手机</label>
+        <div class="col-xs-9 col-md-9">
+        <input type="text" name="" value="" placeholder="书主手机" class="form-control">
+        <span class="tip ownerphone_hint"></span>
+        <br>
+        </div>
+        </div>
+          <label for="firstname" class="col-xs-3 col-md-3 control-label">所在城市</label>
           
-            <div id="demo3" class="citys">
+            <div id="demo3" class="form-group citys" style="margin-left:-20px;margin-right:15px;">
                 <p>
-                    <select name="province"></select>
-                    <select name="city"></select>
-                    <select name="area"></select>
+                    <select name="province" class="form-control"></select>
+                    <select name="city" class="form-control"></select>
+                    <select name="area" class="form-control"></select>
                 </p>
             </div>
 
-      </li>
-      </ul>
       
-      <h2 style="float:left;padding:0 0 0 75px;">书籍信息</h2>
-      <ul class="reg_ul">
-      <li>
-          <span>新旧程度：</span>
-          <div class="citys"><p>
-          <select name="recency" class="reg_recency">
+      <h3 class="col-xs-12 col-md-12" style="float:left;padding:0 0 0 15px;">书籍信息</h3>
+      <div class="col-xs-12 col-md-12 form-group" style="padding-left:0;padding-right:0;">
+      
+          <label for="firstname" class="col-xs-3 col-md-3 control-label">新旧程度</label>
+          <div class="form-group col-xs-9 col-md-9">
+          <select name="recency" class="form-control">
             <option value ="20%">两成新</option>
             <option value ="50%">五成新</option>
             <option value ="80%">八成新</option>
             <option value ="100%">全新</option>
-          </select></p></div>          
-      </li>
-      <li>
-          <span>送书方式：</span>
-          <div class="citys"><p>
-          <select name="sendway" class="reg_sendway">
+          </select></div>          
+      
+      
+          <label for="firstname" class="col-xs-3 col-md-3 control-label">送书方式</label>
+          <div class="form-group col-xs-9 col-md-9"><p>
+          <select name="sendway" class="form-control">
             <option value ="face">当面</option>
             <option value ="mail">邮寄</option>
           </select></p></div>          
-      </li>
-      </ul>
-      </td>
-      <td  width="570px" height="350px">
+      
+      </div>
+      </div>
+      <div class="col-md-2"></div>
+      <div class="col-xs-12 col-md-5">
       <ul class="reg_ul">
       <li>
-          <span>出借/卖书：</span>
-          <button type="button" id="lend" style="padding:5px 20px;float:left;margin:0 0 0 8px;">我要出借</button>
-          <button type="button" id="sell" style="padding:5px 20px;float:left;margin:0 0 0 8px;">我要卖书</button>
+          <button type="button" id="lend" class="btn btn-success" style="padding:5px 20px;float:left;margin:0 0 0 8px;">我要出借</button>
+          <button type="button" id="sell" class="btn btn-success" style="padding:5px 20px;float:left;margin:0 0 0 8px;">我要卖书</button>
       </li>
       <li id="checksell1">
           <span>书币要求：</span>
@@ -180,7 +177,7 @@ session.setAttribute("prePage", url);
           <span class="tip sellnote_hint"></span>
       </li>
       <li id="checksell3" style="margin:0 20px 0 0;">
-          <button type="button" onclick="sell()" name="button" class="red_sellbutton" >确认卖书</button>
+          <button type="button" onclick="sell()" class="btn btn-success" name="button" class="red_sellbutton" >确认卖书</button>
       </li>
       <li id="checklend4">          
           <span>书主详细地址：</span>
@@ -203,12 +200,10 @@ session.setAttribute("prePage", url);
           <span class="tip lendnote_hint"></span>
       </li>
       <li id="checklend5" style="margin:0 20px 0 0;">
-          <button type="button" onclick="borrow()" name="button" class="red_lendbutton" >确认出借</button>
+          <button type="button" onclick="borrow()" class="btn btn-success" name="button" class="red_lendbutton" >确认出借</button>
       </li>
       </ul>
-      </td></tr>
-    </table>
-    </div>
+      </div>
 </div>
 <hr>
 
