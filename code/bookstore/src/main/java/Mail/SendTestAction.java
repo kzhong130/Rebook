@@ -95,7 +95,7 @@ public class SendTestAction extends BaseAction {
         //需要开启此邮箱的POP3/SMTP/IMAP服务，具体设置进入邮箱以后在“设置”里进行开启
         mailInfo.setPassword("rebook123");//自己邮箱密码
         //System.out.println("password="+password);
-        mailInfo.setSubject("欢迎注册换书网");
+        mailInfo.setSubject("欢迎注册Rebook爱书网");
         int min=0;
         int max=999999;
         int randNum = min + (int)(Math.random() * ((max - min) + 1));
