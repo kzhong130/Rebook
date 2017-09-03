@@ -39,6 +39,15 @@ public class MemberCenterAction extends BaseAction{
 	private String area;
 	private String town;
 	private String oldpassword;
+	private String verify;
+	
+	public void setVerify(String verify){
+		this.verify=verify;
+	}
+	
+	public String getVerify(){
+		return verify;
+	}
 	
 	public void setOldpassword(String oldpassword){
 		this.oldpassword=oldpassword;
@@ -358,7 +367,12 @@ public class MemberCenterAction extends BaseAction{
 		user.setArea(area);
 		user.setRealName(realName);
 		user.setTown(town);
-		user.setEmail(email);
+		String temp = (String) request().getSession().getAttribute("verification");
+		if(temp.equals(verify)) {
+			user.setEmail(email);
+			
+		}
+		
 		appService.updateUser(user);
 		return "success";
 	}
