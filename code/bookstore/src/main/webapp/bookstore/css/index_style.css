@@ -11,9 +11,8 @@ div.background
  background-image: url(../images/index1_bookbg.png);
  background-repeat: no-repeat;
  background-position: top center;
- background-size:75%;
 
- font-size:20px;
+
  
  box-sizing:!border-box;
  -moz-box-sizing:!border-box; /* Firefox */
@@ -22,12 +21,77 @@ div.background
  -moz-box-pack:center; 
  -webkit-box-align:center; 
  -moz-box-align:center; 
- padding:28px 8px 3px 8px;
- width:228px;
- height:250px;
+ /*width:228px;
+ height:250px;*/
  float:left;
  text-align:center;
 }
+@media (min-width: 0px) {
+  div.background {
+    width: 145px;
+    height:160px;
+    font-size:14px;
+ padding:15px 8px 3px 8px;
+ background-size:75%;
+  }
+  img.listbook{
+	/*width:40%;*/
+	height:55%;
+  }
+}
+@media (min-width: 320px) {
+  div.background {
+    width: 45%;
+    height:160px;
+    font-size:14px;
+ padding:15px 8px 3px 8px;
+ background-size:108px;
+  }
+  img.listbook{
+	/*width:40%;*/
+	height:55%;
+  } 
+}
+@media (min-width: 465px) {
+  div.background {
+    width: 32%;
+    height:160px;
+    font-size:14px;
+ padding:15px 8px 3px 8px;
+ background-size:108px;
+  }
+  img.listbook{
+	/*width:40%;*/
+	height:55%;
+  } 
+}
+@media (min-width: 520px) {
+  div.background {
+    width: 32%;
+    height:210px;
+    font-size:17px;
+ padding:17px 8px 3px 8px;
+ background-size:140px;
+  }
+  img.listbook{
+	/*width:40%;*/
+	height:55%;
+  } 
+}
+@media (min-width: 768px) {
+  div.background {
+    width: 228px;
+    height:250px;
+    font-size:20px;
+ padding:28px 8px 3px 8px;
+ background-size:75%;
+  }
+  img.listbook{
+	/*width:40%;*/
+	height:55%;
+  }   
+}
+
  div.test
 {
 display: -webkit-box;
@@ -59,10 +123,6 @@ padding:15px 8px 3px 8px;
 	width:40%;
 }
 
-img.listbook{
-	/*width:40%;*/
-	height:55%;
-}
 
 .caret2 {
   display: inline-block;
