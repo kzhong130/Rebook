@@ -20,6 +20,7 @@
 @media (min-width: 0px) {
 .menu_list li{
 	padding-left:20px;
+	cursor: pointer;
 	}
 .menu_list{
 	font-size: 14px;
@@ -36,6 +37,7 @@
 @media (min-width: 768px) {
 .menu_list li{
 	padding-left:30px;
+	cursor: pointer;
 	}
 .menu_list{
 	font-size: 16px;
@@ -50,7 +52,6 @@
 	}
 }
 
-
 	
 .col-lg-3-hxy{
   position: relative;
@@ -60,8 +61,8 @@
   float: left;
   margin-right:-100%;
 }
-.col-lg-9-hxy{
-    position: relative;
+.col-lg-9-hxy{/*
+    position: relative;*/
     min-height: 1px;
     padding-right: 15px;
     padding-left: 15px;
@@ -113,13 +114,8 @@
   .suitable{
 	margin-left:292px;
 }
-}
-/*
-@media (min-width: 1200px) {
-  .col-lg-9-hxy{
-    width:75%;
-  }
-}*/
+}	
+
 .dead_pic{
 	width:100%;
 	height:auto;
