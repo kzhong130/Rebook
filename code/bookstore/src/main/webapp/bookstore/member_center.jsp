@@ -19,7 +19,7 @@
 
 
 <!-- CSS公共部分 开始 -->
-<link href="css/bootstrap.min.css" rel="stylesheet">
+<link href="css/bootstrap.css" rel="stylesheet">
 <!--[if lt IE 9]>
       <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
@@ -103,13 +103,13 @@
 	<!-- 核心 开始 -->
 	<div class="container border1 nopadding margin10">
 		<div id="vertical_navigation"
-			class="col-lg-3 background831312 nopadding">
+			class="col-lg-3-hxy background831312 nopadding">
 			<div class="dead_pic">
 				<span class="hello">你好，</span>
 				<br> <span class="username"><%=session.getAttribute("loginUserName") %></span>
 			</div>
 			<div class="usertype">
-				书币余额：<%=user.getBookCoin() %><br> 信用：
+				书币余额：<%=user.getBookCoin() %><br> 信用
 				<%
         	if (user.getCredit() > 80 && user.getCredit() <= 100){ 
         %>
@@ -217,12 +217,13 @@
 		</div>
 	</div>
 	</div>
-	<div class="col-lg-9">
+	<div class="col-lg-9-hxy">
+	<div class="suitable">
 		<iframe name="left" id="crowdfunding_iframe"
 			src="crowdfunding.center/my_info.jsp" frameborder="false"
 			scrolling="no" style="border: none;" width="100%" height="1045"
 			allowtransparency="true"></iframe>
-	</div>
+	</div></div>
 	</div>
 	<!-- 核心 结束 -->
 

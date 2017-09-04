@@ -2,7 +2,6 @@
 /* CSS Document */
 
 .menu_list li{
-	padding-left:30px;
 	cursor: pointer;
 	}
 .menu_list_on{
@@ -11,25 +10,126 @@
 .menu_list{
 	line-height:30px;
 	color: #FFF;
-	font-size: 16px;
 	}
 .menu_title{
 	height:30px;
 	line-height:30px;
-	padding-left:20px;
 	color: #efbb24;
+	}
+
+@media (min-width: 0px) {
+.menu_list li{
+	padding-left:20px;
+	}
+.menu_list{
+	font-size: 14px;
+	}
+.menu_title{
+	padding-left:20px;
+	font-size: 14px;
+	font-weight:500;
+	}
+.menu{
+	margin-top:15px;
+	}
+}
+@media (min-width: 768px) {
+.menu_list li{
+	padding-left:30px;
+	}
+.menu_list{
+	font-size: 16px;
+	}
+.menu_title{
+	padding-left:20px;
 	font-size: 16px;
 	font-weight:600;
 	}
 .menu{
 	margin-top:30px;
 	}
+}
+
+
+	
+.col-lg-3-hxy{
+  position: relative;
+  min-height: 1px;
+  padding-right: 15px;
+  padding-left: 15px;
+  float: left;
+  margin-right:-100%;
+}
+.col-lg-9-hxy{
+    position: relative;
+    min-height: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    float: left;
+    width:100%;
+}
+.suitable{
+}
+@media (min-width: 0px) {
+  .col-lg-3-hxy {
+    width: 130px;
+  }
+  /*.col-lg-9-hxy{
+    width:356px;
+  }*/
+  .suitable{
+	margin-left:130px;
+}
+}
+@media (min-width: 510px) {
+  .col-lg-3-hxy {
+    width: 130px;
+  }
+  /*.col-lg-9-hxy{
+    width:70%;
+  }*/
+  .suitable{
+	margin-left:130px;
+}
+}
+@media (min-width: 550px) {
+  .col-lg-3-hxy {
+    width: 170px;
+  }
+  /*.col-lg-9-hxy{
+    width:65%;
+  }*/
+  .suitable{
+	margin-left:170px;
+}
+}
+@media (min-width: 768px) {
+  .col-lg-3-hxy {
+    width: 292px;
+  }
+  /*.col-lg-9-hxy{
+    width:60%;
+  }*/
+  .suitable{
+	margin-left:292px;
+}
+}
+/*
+@media (min-width: 1200px) {
+  .col-lg-9-hxy{
+    width:75%;
+  }
+}*/
+.dead_pic{
+	width:100%;
+	height:auto;
+	text-align:center;
+	}
 .usertype{
 	color: #FFF;
 	font-size: 16px;
-	margin-left:30px;
 	line-height:30px;
-	}
+}
 .hello{
 	color: #FFF;
 	font-size: 20px;
@@ -42,12 +142,45 @@
 	display: inline-block;
 	text-align:center;
 	}
-.dead_pic{
-	width:100%;
-	height:auto;
-	text-align:center;
-	padding:5px 80px 5px 30px;
+@media (min-width: 0px) {
+  .dead_pic{
+	padding:5px 5px 5px 5px;
+  }
+  .usertype{
+	margin-left:3px;
+  }
+  .hello{
+	font-size: 16px;
+	float:left;
 	}
+  .username{
+	font-size: 22px;
+	text-align:center;
+	}
+}
+@media (min-width: 550px) {
+  .username{
+	font-size: 22px;
+	text-align:center;
+	margin-left:-50px;
+	}
+}
+@media (min-width: 768px) {
+  .dead_pic{
+	padding:5px 80px 5px 30px;
+  }
+  .usertype{
+	margin-left:30px;
+  }
+  .hello{
+	font-size: 20px;
+	float:left;
+	}
+  .username{
+	font-size: 28px;
+	text-align:center;
+	}
+}	
 .dead_pic img{
 	width: 125px;
 	height: 125px;
