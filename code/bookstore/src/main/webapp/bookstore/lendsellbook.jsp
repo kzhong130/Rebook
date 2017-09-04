@@ -109,62 +109,64 @@ session.setAttribute("prePage", url);
 
 <div class="container">
     <hr>
-    <div class="col-xs-12 col-md-5 form-group" style="padding-left:0;padding-right:0;">
-    <h3 class="col-xs-12 col-md-12" style="float:left;padding:0 0 0 15px;">书主信息</h3>
-      	<div class="form-group">
-      	<label for="firstname" class="col-xs-3 col-md-3 control-label">书主姓名</label>
-      	<div class="col-xs-9 col-md-9">
-      	<input type="text" name="" value="" placeholder="书主姓名" class="form-control">
-      	<br>
+	<div class="col-xs-12 col-md-6">
+    <h3 style="float:left;padding:0 0 0 15px;">书主信息</h3>
+    <ul class="reg_ul">
+      <li>
+      	<label for="firstname" class="col-md-2 control-label">书主姓名</label>
+      	<div class="col-md-10">
+      	<input type="text" name="" value="" placeholder="书主姓名" class="reg_ownername">
       	</div>
-      	</div>
-      	<div class="form-group">
-      	<label for="firstname" class="col-xs-3 col-md-3 control-label">书主手机</label>
-        <div class="col-xs-9 col-md-9">
-        <input type="text" name="" value="" placeholder="书主手机" class="form-control">
+      </li>
+      <li>
+      	<label for="firstname" class="col-md-2 control-label">书主手机</label>
+        <div class="col-md-10">
+        <input type="text" name="" value="" placeholder="书主手机" class="reg_ownerphone">
         <span class="tip ownerphone_hint"></span>
-        <br>
         </div>
-        </div>
-          <label for="firstname" class="col-xs-3 col-md-3 control-label">所在城市</label>
+      </li>
+      <li>
+          <label for="firstname" class="col-md-2 control-label">所在城市</label>
           
-            <div id="demo3" class="form-group citys" style="margin-left:-20px;margin-right:15px;">
+            <div id="demo3" class="citys">
                 <p>
-                    <select name="province" class="form-control"></select>
-                    <select name="city" class="form-control"></select>
-                    <select name="area" class="form-control"></select>
+                    <select name="province"></select>
+                    <select name="city"></select>
+                    <select name="area"></select>
                 </p>
             </div>
-
+      </li>
+      </ul>
       
-      <h3 class="col-xs-12 col-md-12" style="float:left;padding:0 0 0 15px;">书籍信息</h3>
-      <div class="col-xs-12 col-md-12 form-group" style="padding-left:0;padding-right:0;">
-      
-          <label for="firstname" class="col-xs-3 col-md-3 control-label">新旧程度</label>
-          <div class="form-group col-xs-9 col-md-9">
-          <select name="recency" class="form-control">
+      <h3 style="float:left;padding:0 0 0 15px;">书籍信息</h3>
+      <ul class="reg_ul">
+      <li>
+          <label for="firstname" class="col-md-2 control-label">新旧程度</label>
+          <div class="citys"><p>
+          <select name="recency" class="reg_recency">
             <option value ="20%">两成新</option>
             <option value ="50%">五成新</option>
             <option value ="80%">八成新</option>
             <option value ="100%">全新</option>
-          </select></div>          
+          </select></p></div>
       
-      
-          <label for="firstname" class="col-xs-3 col-md-3 control-label">送书方式</label>
-          <div class="form-group col-xs-9 col-md-9"><p>
-          <select name="sendway" class="form-control">
+      <li>
+          <label for="firstname" class="col-md-2 control-label">送书方式</label>
+          <div class="citys"><p>
+          <select name="sendway" class="reg_sendway">
             <option value ="face">当面</option>
             <option value ="mail">邮寄</option>
           </select></p></div>          
+      </li>
+      </ul>
+	  </div>
+
       
-      </div>
-      </div>
-      <div class="col-md-2"></div>
-      <div class="col-xs-12 col-md-5">
+	  <div class="col-xs-12 col-md-6">
       <ul class="reg_ul">
       <li>
-          <button type="button" id="lend" class="btn btn-success" style="padding:5px 20px;float:left;margin:0 0 0 8px;">我要出借</button>
-          <button type="button" id="sell" class="btn btn-success" style="padding:5px 20px;float:left;margin:0 0 0 8px;">我要卖书</button>
+          <button type="button" id="lend" style="padding:5px 20px;float:left;margin:0 0 0 8px;">我要出借</button>
+          <button type="button" id="sell" style="padding:5px 20px;float:left;margin:0 0 0 8px;">我要卖书</button>
       </li>
       <li id="checksell1">
           <span>书币要求：</span>
@@ -177,7 +179,7 @@ session.setAttribute("prePage", url);
           <span class="tip sellnote_hint"></span>
       </li>
       <li id="checksell3" style="margin:0 20px 0 0;">
-          <button type="button" onclick="sell()" class="btn btn-success" name="button" class="red_sellbutton" >确认卖书</button>
+          <button type="button" onclick="sell()" name="button" class="red_sellbutton" >确认卖书</button>
       </li>
       <li id="checklend4">          
           <span>书主详细地址：</span>
@@ -200,7 +202,7 @@ session.setAttribute("prePage", url);
           <span class="tip lendnote_hint"></span>
       </li>
       <li id="checklend5" style="margin:0 20px 0 0;">
-          <button type="button" onclick="borrow()" class="btn btn-success" name="button" class="red_lendbutton" >确认出借</button>
+          <button type="button" onclick="borrow()" name="button" class="red_lendbutton" >确认出借</button>
       </li>
       </ul>
       </div>
