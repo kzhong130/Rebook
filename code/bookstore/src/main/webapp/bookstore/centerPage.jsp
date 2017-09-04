@@ -234,14 +234,14 @@ session.setAttribute("prePage",url);
   </nav>
 </div>-->
   <br>
- 
+<div class="container" style="text-align:center;">
 <div class="zzsc"> 
 <!--currentpage="1" numbercount="100"-->
 <ul class="page" maxshowpageitem="100" pagelistcount="10" id="page"></ul>
 
 
 </div>
-
+</div>
 
 <hr>
 
