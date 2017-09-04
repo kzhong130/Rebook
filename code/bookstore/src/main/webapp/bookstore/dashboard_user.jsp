@@ -59,13 +59,10 @@
                 </li>
                 <!-- /.dropdown-user -->
                 <li class="dropdown dropdown-myuser">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" aria-expanded="false">
-                        <i class="fa fa-user fa-fw" style="color:#efbb24"></i> <i class="fa fa-caret-down" style="color:#efbb24"></i>
+                    <a href="AccountAction!logout" aria-expanded="false">
+                    <i class="fa fa-sign-out fa-fw" style="color:#efbb24"></i><span style="color:#efbb24">注销</span>
                     </a>
-                    <ul class="dropdown-menu dropdown-user">
-                        <li><a href="AccountAction!logout"><i class="fa fa-sign-out fa-fw"></i> 注销</a>
-                        </li>
-                    </ul>
+                    
                 </li>
                           <form class="navbar-form navbar-right" role="search" style="margin:13px 20px 0 0">
         <div class="form-group">
@@ -211,8 +208,19 @@
                 <!-- /. ROW  -->
 			
 		
-				<footer><p>Copyright &copy; 2017.Company name All rights reserved.</p>
-				</footer>
+<footer class="text-left">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        Rebook, Inc. | SJTU SE Link | ZCX, China, 15021085292 | <abbr title="Phone">Phone:</abbr> 15021085292
+        <br>
+        Full Name:<a href="mailto:#">zhichenxi@sjtu.edu.cn</a>
+        <br>
+        Copyright © Rebook. All rights reserved.
+      </div>
+    </div>
+  </div>
+</footer>
             </div>
             <!-- /. PAGE INNER  -->
         </div>
