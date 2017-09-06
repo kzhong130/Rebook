@@ -104,6 +104,43 @@
         <span class="tip address_hint"></span></td>
      
       </tr>
+       <tr>
+        <td align="right" class="color555">&nbsp;</td>
+        <td class="color555  td2">
+        <input class="reg_verify" name="verify" type="text"  %>   
+        <span class="tip verify_hint"></span></td>
+     
+      </tr>
+      <input type="button" id="btn" value="免费获取验证码" onclick="settime(this)" /> 
+<script type="text/javascript"> 
+	var wait=60; 
+	var flag = 1;
+	function settime(btn) { 
+		
+		 if (wait == 0) {
+			 
+             btn.removeAttribute("disabled");
+             btn.value = "免费获取验证码";
+             wait = 60;
+         } else {
+        	 if(wait == 60){
+        		 $.ajax({  
+ 		        	type:"POST",  
+ 		        	url:"sendTextMail!verify",  
+ 		        	async:false,
+ 		        	data:{to:$(".reg_email").val()},
+ 		     	});
+        	 }
+             btn.setAttribute("disabled", true);
+             btn.value = wait + "秒后重新获取验证码";
+             wait--;
+             setTimeout(function () {
+                 settime(btn);
+             },
+             1000)
+         }
+	} 
+</script> 
       <%
       	String date=user.getRegisterDate().toString().substring(0,19);
       %>
@@ -160,8 +197,19 @@
                 var address_Boolean=true;
                 var Mobile_Boolean=true;
                 var realname_Boolean=true;
-                
+                var verify_Boolean=false;
 
+                
+                $('.reg_verify').blur(function(){
+                	  if ($(".reg_verify").val()!=""){
+                	    $('.verify_hint').html("✔").css("color","green");
+                	    verify_Boolean = true;
+                	  }else {
+                	    $('.verify_hint').html("×").css("color","red");
+                	    verify_Boolean = false;
+                	  }
+                	});
+                
               //address
               $('.reg_address').blur(function(){
                 if ($(".reg_address").val()!=""){
@@ -208,7 +256,7 @@
     
       	function save(){
       		
-      		if(email_Boolean&&realname_Boolean&&Mobile_Boolean&&address_Boolean){
+      		if(email_Boolean&&realname_Boolean&&Mobile_Boolean&&address_Boolean && verify_Boolean){
       		  var select = document.getElementsByName("province")[0];
       		  var province=select.options[select.selectedIndex].text;
       		  //alert(document.getElementsByName("city")[0].value);
@@ -240,7 +288,7 @@
       		        type:"POST",  
       		        url:"MemberCenterAction!update",  
       		        async:false,
-      		        data:{province:province,city:city,area:area,town:town,realName:$(".reg_realname").val(),phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:detail} ,
+      		        data:{verify:$(".reg_verify").val() , province:province,city:city,area:area,town:town,realName:$(".reg_realname").val(),phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:detail} ,
       		        
       		    });
       			

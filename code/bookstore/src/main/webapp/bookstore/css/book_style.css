@@ -4,3 +4,63 @@
 .h3-1{
 	margin-top:0;
 }
+
+.thick{
+	font-weight: bold;
+}
+
+.dbScore-font-size{
+	font-size:90%;
+}
+
+.dbScoreNumber-font-size{
+	font-size:80%;
+}
+
+.thumbnail-margin{
+	margin-bottom:10px;
+}
+
+.logo{
+	height:20px;
+}
+
+/* 手机端显示样式 */
+@media screen and (max-width:768px){
+.dbScore-score{
+}
+
+.mobile-hide{
+	display:none;
+}
+
+.commentContent{
+	height: 120px;
+	width:330px;
+	resize:none;
+	margin: 10px;
+}
+
+.navbar-brand{
+	width:180px;	
+}
+}
+
+/* pc端显示样式 */
+@media screen and (min-width:769px){
+.dbScore-score{
+	color:#efbb24;
+	font-size:350%;
+}
+
+.pc-hide{
+	display:none;
+}
+
+.commentContent{
+	height: 120px;
+	width:580px;
+	resize:none;
+	margin: 10px;
+}
+}

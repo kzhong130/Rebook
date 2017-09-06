@@ -187,7 +187,7 @@
 								<% %>
 								<br><br>&nbsp;&nbsp;&nbsp;				
                           <input type="button" class="btn btn-success" value="确认修改" id="<% %>" onclick="updateBookComment()">&nbsp;&nbsp;
-                           <a href="dashboard_lendFeedback.jsp" class="btn btn-default">返回</a>
+                           <a href="dashboard_buyFeedback.jsp" class="btn btn-default">返回</a>
                            </form>
                             </div>
                         </div>

@@ -9,14 +9,15 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bootstrap Product Page Template</title>
+<title>Rebook</title>
 
 <!-- Bootstrap -->
 
 <link rel="stylesheet" href="css/login.css">
 <link rel="stylesheet" href="css/register2.css">
 <link rel="sytlesheet" href="css/lendsellbook.css">
-<link rel="stylesheet" href="css/bootstrap.css">
+<link rel="stylesheet" href="css/bootstrap_book.css">
+<link rel="stylesheet" href="css/book_style.css">
 
 <script type="text/javascript" src="js/jquery.min.js"></script>
 <script type="text/javascript" src="js/jquery.citys.js"></script>
@@ -78,56 +79,54 @@ session.setAttribute("prePage", url);
 <br>
 <!-- 书籍封面&基本信息 -->
 <div class="container">
-  <div class="row">
-    <div class="col-sm-2">
-      <div class="thumbnail"> <img src=<%=book.getImage() %> alt="Thumbnail Image 1" class="img-responsive">
-        
+    <div class="col-xs-4 col-sm-2">
+      <div class="thumbnail thumbnail-margin"> <img src=<%=book.getImage() %> alt="Thumbnail Image 1" class="img-responsive">
+      </div>
+	    <div class="pc-hide">
+	    <span class="thick dbScore-font-size">豆瓣评分：</span><span class="dbScore-score dbScore-font-size"><%=book.getDoubanRate() %></span><br>
+        <span class="dbScoreNumber-font-size">（<%=book.getRaterNumber() %>人评）</span>
+        </div>
+	</div>
+	<div class="col-xs-8 col-sm-4">
+	  <div class="caption">
+        <h3 class="h3-1"><%=book.getBookName() %></h3>
+        	<span class="thick">作者：</span><%=book.getAuthor() %><br>
+       	 	<span class="thick">出版社：</span><%=book.getPublisher() %><br>
+       		<span class="thick">出版日期：</span><%=book.getPubdate() %><br>
+        	<span class="thick">页数：</span><%=book.getPageNumber() %></br>
+        	<span class="thick">定价：</span><%=book.getPrice()%><br>
+   			<span class="thick">ISBN：</span><%=book.getISBN() %>
+      </div>
+	</div> 
+	<div class="col-sm-3 mobile-hide">
+	  <div class="caption">
+	    <span class="thick">豆瓣评分：</span><span class="dbScore-score"><%=book.getDoubanRate() %></span><br>
+        <span class="dbScoreNumber-font-size">（<%=book.getRaterNumber() %>人&nbsp;参与评价）</span>
       </div>
 	</div>
-	<div class="col-sm-4">
-	  <div class="caption">
-        <h3><%=book.getBookName() %></h3>
-        <p>作者：<%=book.getAuthor() %></p>
-        <p>出版社：<%=book.getPublisher() %></p>
-        <p>出版日期：<%=book.getPubdate() %></p>
-        <p>页数：<%=book.getPageNumber() %></p>
-        <p>定价：<%=book.getPrice()%></p>
-        <p>ISBN：<%=book.getISBN() %></p>
-
-      </div>
-	</div> 
-	<div class="col-sm-3">
-	  <div class="caption">
-        <br><br><br><p>豆瓣评分：<%=book.getDoubanRate() %></p>
-        <p>参评人数：<%=book.getRaterNumber() %></p>
-      </div>
-	</div> 
-  </div>
 </div>
 
 
 <div class="container">
-    <hr>    
-    <div class="reg_div">
-    <table>
-    <tr style="position: top center;">
-    <td width="570px" height="300px" >
-    
-
-    <h2 style="float:left;padding:0 0 0 75px;">书主信息</h2>
+    <hr>
+	<div class="col-xs-12 col-md-6">
+    <h3 style="float:left;padding:0 0 0 15px;">书主信息</h3>
     <ul class="reg_ul">
       <li>
-          <span>书主姓名：</span>
-          <input type="text" name="" value="" placeholder="书主姓名" class="reg_ownername">
-          <span class="tip ownername_hint"></span>
+      	<label for="firstname" class="col-md-2 control-label">书主姓名</label>
+      	<div class="col-md-10">
+      	<input type="text" name="" value="" placeholder="书主姓名" class="reg_ownername">
+      	</div>
       </li>
       <li>
-          <span>书主手机：</span>
-          <input type="text" name="" value="" placeholder="书主手机" class="reg_ownerphone">
-          <span class="tip ownerphone_hint"></span>
+      	<label for="firstname" class="col-md-2 control-label">书主手机</label>
+        <div class="col-md-10">
+        <input type="text" name="" value="" placeholder="书主手机" class="reg_ownerphone">
+        <span class="tip ownerphone_hint"></span>
+        </div>
       </li>
       <li>
-          <span>所在城市：</span>
+          <label for="firstname" class="col-md-2 control-label">所在城市</label>
           
             <div id="demo3" class="citys">
                 <p>
@@ -136,24 +135,23 @@ session.setAttribute("prePage", url);
                     <select name="area"></select>
                 </p>
             </div>
-
       </li>
       </ul>
       
-      <h2 style="float:left;padding:0 0 0 75px;">书籍信息</h2>
+      <h3 style="float:left;padding:0 0 0 15px;">书籍信息</h3>
       <ul class="reg_ul">
       <li>
-          <span>新旧程度：</span>
+          <label for="firstname" class="col-md-2 control-label">新旧程度</label>
           <div class="citys"><p>
           <select name="recency" class="reg_recency">
             <option value ="20%">两成新</option>
             <option value ="50%">五成新</option>
             <option value ="80%">八成新</option>
             <option value ="100%">全新</option>
-          </select></p></div>          
-      </li>
+          </select></p></div>
+      
       <li>
-          <span>送书方式：</span>
+          <label for="firstname" class="col-md-2 control-label">送书方式</label>
           <div class="citys"><p>
           <select name="sendway" class="reg_sendway">
             <option value ="face">当面</option>
@@ -161,11 +159,12 @@ session.setAttribute("prePage", url);
           </select></p></div>          
       </li>
       </ul>
-      </td>
-      <td  width="570px" height="350px">
+	  </div>
+
+      
+	  <div class="col-xs-12 col-md-6">
       <ul class="reg_ul">
       <li>
-          <span>出借/卖书：</span>
           <button type="button" id="lend" style="padding:5px 20px;float:left;margin:0 0 0 8px;">我要出借</button>
           <button type="button" id="sell" style="padding:5px 20px;float:left;margin:0 0 0 8px;">我要卖书</button>
       </li>
@@ -206,9 +205,7 @@ session.setAttribute("prePage", url);
           <button type="button" onclick="borrow()" name="button" class="red_lendbutton" >确认出借</button>
       </li>
       </ul>
-      </td></tr>
-    </table>
-    </div>
+      </div>
 </div>
 <hr>
 

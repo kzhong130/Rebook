@@ -4,7 +4,6 @@ input[placeholder], [placeholder], *[placeholder] {
 
 .reg_div{
   margin:auto;
-  width: 100%;
   height:390px;
   border:0px solid #333;
   text-align: center;
@@ -75,6 +74,9 @@ input[placeholder], [placeholder], *[placeholder] {
     background: #d19826;
 }
 
+.reg_ul{
+	padding-left:5px;
+}
 
 
 .citys{
@@ -89,14 +91,6 @@ input[placeholder], [placeholder], *[placeholder] {
     text-align:left;
     float:!left;
 }
-
-
-
-
-
-
-
-
 
 
 
