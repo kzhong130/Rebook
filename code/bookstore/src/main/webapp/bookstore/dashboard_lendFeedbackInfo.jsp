@@ -234,11 +234,12 @@
    	function updateBookComment(ob){
    		
    		var aName="<%=session.getAttribute("loginUserName")%>";
+   		var to = "<%=user.getEmail() %>";
    		$.ajax({
    			type:"POST",
    			url:"LendOrderFeedbackAction!handle",
    			async:false,
-   			data:{ID:<%=lendOrderFeedback.getID()%>,handleResult:document.getElementById("buyFeedbackResult").value,adminName:aName},
+   			data:{email:to,ID:<%=lendOrderFeedback.getID()%>,handleResult:document.getElementById("buyFeedbackResult").value,adminName:aName},
    			
    			
    		})
