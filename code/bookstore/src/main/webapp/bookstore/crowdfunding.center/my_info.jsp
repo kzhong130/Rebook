@@ -98,20 +98,17 @@
             </div></td>
       </tr>
       <tr>
-        <td align="right" class="color555">&nbsp;</td>
+        <td align="right" class="color555">邮箱：</td>
         <td class="color555  td2">
         <input class="reg_address" name="address" type="text" value=<%=user.getAddress() %>>   <!-- 从数据库取 -->
-        <span class="tip address_hint"></span></td>
+        <span class="tip address_hint"></span>
+        </td>
      
       </tr>
-       <tr>
-        <td align="right" class="color555">&nbsp;</td>
-        <td class="color555  td2">
-        <input class="reg_verify" name="verify" type="text"  %>   
-        <span class="tip verify_hint"></span></td>
-     
-      </tr>
-      <input type="button" id="btn" value="免费获取验证码" onclick="settime(this)" /> 
+      <tr>
+        <td align="right" class="color555" style="height:24px;padding:0;line-height:0;">&nbsp;</td>
+        <td class="color555  td2" style="height:24px;padding:0;line-height:0;">
+         <input type="button" id="btn" value="免费获取验证码" onclick="settime(this)" /> 
 <script type="text/javascript"> 
 	var wait=60; 
 	var flag = 1;
@@ -140,7 +137,18 @@
              1000)
          }
 	} 
-</script> 
+</script>  
+        </td>
+     
+      </tr>
+       <tr>
+        <td align="right" class="color555">验证码：</td>
+        <td class="color555  td2">
+        <input class="reg_verify" name="verify" type="text"  %>   
+        <span class="tip verify_hint"></span></td>
+     
+      </tr>
+     
       <%
       	String date=user.getRegisterDate().toString().substring(0,19);
       %>

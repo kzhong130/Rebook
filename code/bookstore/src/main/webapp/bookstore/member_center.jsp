@@ -101,7 +101,7 @@
 
 	<!-- top + banner 结束 -->
 	<!-- 核心 开始 -->
-	<div class="container border1 nopadding margin10">
+	<div class="container border1 nopadding margin10 checkwidth">
 		<div id="vertical_navigation"
 			class="col-lg-3-hxy background831312 nopadding">
 			<div class="dead_pic">
