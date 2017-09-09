@@ -360,6 +360,7 @@ public class MemberCenterAction extends BaseAction{
 	
 	public String update() throws Exception{
 		User user=(User) request().getSession().getAttribute("user");
+		String old_email = user.getEmail();
 		user.setAddress(address);
 		user.setPhone(phone);
 		user.setProvince(province);
@@ -368,11 +369,12 @@ public class MemberCenterAction extends BaseAction{
 		user.setRealName(realName);
 		user.setTown(town);
 		String temp = (String) request().getSession().getAttribute("verification");
-		if(temp.equals(verify)) {
-			user.setEmail(email);
+		if(!old_email.equals(email)){
+			if(temp.equals(verify)) {
+				user.setEmail(email);
 			
+			}
 		}
-		
 		appService.updateUser(user);
 		return "success";
 	}
