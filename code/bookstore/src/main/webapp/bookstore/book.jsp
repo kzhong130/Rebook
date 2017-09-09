@@ -27,6 +27,10 @@
     <![endif]-->
 </head>
 <body>
+<input id="longitude" style="display:none">
+<input id="latitude" style="display:none">
+
+
 <div id='MicrosoftTranslatorWidget' class='Dark' style='color:white;background-color:#555555'></div>
 <script type='text/javascript'>setTimeout(function(){{var s=document.createElement('script');s.type='text/javascript';s.charset='UTF-8';s.src=((location && location.href && location.href.indexOf('https') == 0)?'https://ssl.microsofttranslator.com':'http://www.microsofttranslator.com')+'/ajax/v3/WidgetV3.ashx?siteData=ueOIGRSKkd965FeEGM5JtQ**&ctf=False&ui=true&settings=Manual&from=';var p=document.getElementsByTagName('head')[0]||document.documentElement;p.insertBefore(s,p.firstChild); }},0);</script>
 
@@ -251,10 +255,11 @@ session.setAttribute("prePage", url);
 	<!-- 借书信息 -->
     <div class="tab-pane fade" id="bookBorrowInfo">
     <hr>
+    <div>请输入您能接受的卖家据您的距离（不输入默认为无穷大）：<input id="lendDistance">千米&nbsp;&nbsp;<input type="button" value="查询" onclick="selectLend()"></div>
     <div class="row">
     <div class="table-responsive">
     <!-- class="table table-hover" -->
-    <table class="table" background="images/index1_yellowbg.png">
+    <table class="table" background="images/index1_yellowbg.png" id="lendTable">
     	<thead>
     		<tr bgcolor="#efbb24">
     			<th style="text-align: center">书主</th>
@@ -335,6 +340,7 @@ session.setAttribute("prePage", url);
 	<!-- 买书信息 -->
     <div class="tab-pane fade" id="bookBuyInfo" >
     <hr>
+    <div>请输入您能接受的卖家据您的距离（不输入默认为无穷大）：<input id="buyDistance">千米&nbsp;&nbsp;<input type="button" value="查询" onclick="selectBuy()"></div>
     <div class="row">
     <div class="table-responsive">
     <!-- class="table table-hover" -->
@@ -487,29 +493,80 @@ $(window).resize(function(){
 
 
 
-function haha(keyword){
+var geolocation = new BMap.Geolocation();
+geolocation.getCurrentPosition(function(r){
+	if(this.getStatus() == BMAP_STATUS_SUCCESS){
+		document.getElementById("latitude").value = r.point.lat;
+		document.getElementById("longitude").value = r.point.lng;
+	}
+},{enableHighAccuracy: true})
+
+
+
+function selectLend(){
+	var lendTable = document.getElementById("lendTable");
+	var requiredDistance = document.getElementById("lendDistance").value;
+	if (lendTable.rows.length > 1){	//表格内有内容
+		for (var i=1; i<lendTable.rows.length; i++){
+			if (document.getElementById("longitude").value == "" || document.getElementById("latitude").value == ""){
+				alert("您尚未开启定位或正在定位中，请稍后重试");
+				break;
+			}
+			var keyword = lendTable.rows[i].cells[4].innerText;
+			haha(keyword,requiredDistance,1,i);
+		}
+	}
+}
+
+
+
+function selectBuy(){
+	var buyTable = document.getElementById("buyTable");
+	var requiredDistance = document.getElementById("buyDistance").value;
+	if (buyTable.rows.length > 1){	//表格内有内容
+		for (var i=1; i<buyTable.rows.length; i++){
+			if (document.getElementById("longitude").value == "" || document.getElementById("latitude").value == ""){
+				alert("您尚未开启定位或正在定位中，请稍后重试");
+				break;
+			}
+			var keyword = buyTable.rows[i].cells[4].innerText;
+			haha(keyword,requiredDistance,0,i);
+		}
+	}
+}
+
+//keyword:关键词
+//requiredDistance:用户需求的距离
+//symbol:标志量（0是买表，1是借表）
+//col:该表的第col行（第一行从1开始）
+function haha(keyword,requiredDistance,symbol,col){
 	var map = new BMap.Map();
 	var local = new BMap.LocalSearch(map,{onSearchComplete:myFun});
     local.search(keyword);
 
 	function myFun(results){
 	    var cityPoint = results.getPoi(0).point;
-	    var geolocation = new BMap.Geolocation();
-	    var distance;
-		  geolocation.getCurrentPosition(function(r){
-			if(this.getStatus() == BMAP_STATUS_SUCCESS){
-				distance = (map.getDistance(r.point,cityPoint)/1000).toFixed(2);
-				if (distance > 500){
-					alert("您与"+keyword+"相距"+distance+"千米。距离较远运输成本较高，请慎重下单！")
-				}
-				if (distance <= 500){
-					alert("您与"+keyword+"相距"+distance+"千米");
-				}
-			}
-			else {
-				alert("定位功能出错，请检查定位功能");
-			}        
-		},{enableHighAccuracy: true})
+	    var nowPoint = new BMap.Point(document.getElementById("longitude").value, document.getElementById("latitude").value);
+	    if (symbol == 0){ //是买表
+	    	var buyTable = document.getElementById("buyTable");
+	    	var distance = map.getDistance(cityPoint,nowPoint)/1000;
+	    	if (distance > requiredDistance){
+	    		buyTable.rows[col].style.display="none";
+	    	}
+	    	else{
+	    		buyTable.rows[col].style.display="";
+	    	}
+	    }
+	    if (symbol == 1){	//是借表
+	    	var lendTable = document.getElementById("lendTable");
+	    	var distance = map.getDistance(cityPoint,nowPoint)/1000;
+	    	if (distance > requiredDistance){
+	    		lendTable.rows[col].style.display="none";
+	    	}
+	    	else{
+	    		lendTable.rows[col].style.display="";
+	    	}
+	    }
 	}
 }
 
