@@ -207,7 +207,7 @@
 								
 								<br><br>&nbsp;&nbsp;&nbsp;				
                           <input type="button" class="btn btn-success" value="确认修改" id="<% %>" onclick="updateBookComment()">&nbsp;&nbsp;
-                           <a href="dashboard_lendFeedback.jsp" class="btn btn-default">返回</a>
+                           <a href="LendOrderFeedbackAction!initialize" class="btn btn-default">返回</a>
                            </form>
                             </div>
                         </div>
@@ -232,11 +232,14 @@
     <script src="assets/js/custom-scripts.js"></script>
    <script type="text/javascript">
    	function updateBookComment(ob){
+   		
+   		var aName="<%=session.getAttribute("loginUserName")%>";
+   		var to = "<%=user.getEmail() %>";
    		$.ajax({
    			type:"POST",
    			url:"LendOrderFeedbackAction!handle",
    			async:false,
-   			data:{ID:<%=lendOrderFeedback.getID()%>,handleResult:document.getElementById("buyFeedbackResult").value,adminName:<%=session.getAttribute("loginUserName")%>},
+   			data:{email:to,ID:<%=lendOrderFeedback.getID()%>,handleResult:document.getElementById("buyFeedbackResult").value,adminName:aName},
    			
    			
    		})

@@ -10,10 +10,14 @@ import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
 
+import Mail.MailSenderInfo;
+import Mail.SimpleMailSender;
 import model.BuyOrderFeedback;
 import model.LendOrderFeedback;
 import model.User;
 import net.sf.json.JSONObject;
+
+
 
 public class LendOrderFeedbackAction extends BaseAction{
 	private int ID;
@@ -25,6 +29,16 @@ public class LendOrderFeedbackAction extends BaseAction{
 	private Integer adminID;
 	private int userID;
 	private String adminName;
+	
+	private String email;
+	
+	public void setEmail(String email){
+		this.email = email;
+	}
+	
+	public String getEmail(){
+		return email;
+	}
 	
 	public void setAdminName(String adminName){
 		this.adminName=adminName;
@@ -158,7 +172,22 @@ public class LendOrderFeedbackAction extends BaseAction{
 		bf.setHandleResult(handleResult);
 		bf.setAdminID(appService.getAdminByAdminName(adminName).getAdminID());
 		appService.updateLendOrderFeedback(bf);
-		
+	
+        MailSenderInfo mailInfo = new MailSenderInfo();
+        mailInfo.setMailServerHost("smtp.163.com");
+        mailInfo.setMailServerPort("465");
+        mailInfo.setValidate(true);
+        mailInfo.setFromAddress("se_rebook@163.com");//自己邮箱
+        mailInfo.setToAddress(email);//目标邮箱
+        mailInfo.setUserName("se_rebook@163.com");//自己邮箱
+        //需要开启此邮箱的POP3/SMTP/IMAP服务，具体设置进入邮箱以后在“设置”里进行开启
+        mailInfo.setPassword("rebook123");//自己邮箱密码
+        //System.out.println("password="+password);
+        mailInfo.setSubject("Rebook：用户反馈处理通知");
+       
+        mailInfo.setContent("您好！\n您的反馈已由管理员"+adminName+"处理，处理结果为：\n"+handleResult+"\n如有任何疑问请联系管理员，非常感谢！\n祝好！\nRebook");
+        
+        boolean isSend = SimpleMailSender.sendTextMail(mailInfo);
 		return "handle";
 	}
 }
