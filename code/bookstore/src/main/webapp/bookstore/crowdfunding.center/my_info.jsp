@@ -192,6 +192,7 @@
         			city:'<%=user.getCity()%>',
         			area:'<%=user.getArea()%>',
         			town:'<%=user.getTown()%>',
+        			
             /*这四个值应从数据库取*/
         			onChange:function(info){
         				townFormat(info);
@@ -205,9 +206,9 @@
                 var address_Boolean=true;
                 var Mobile_Boolean=true;
                 var realname_Boolean=true;
-                var verify_Boolean=false;
+                //var verify_Boolean=false;
 
-                
+                /*
                 $('.reg_verify').blur(function(){
                 	  if ($(".reg_verify").val()!=""){
                 	    $('.verify_hint').html("✔").css("color","green");
@@ -217,7 +218,7 @@
                 	    verify_Boolean = false;
                 	  }
                 	});
-                
+                */
               //address
               $('.reg_address').blur(function(){
                 if ($(".reg_address").val()!=""){
@@ -264,7 +265,7 @@
     
       	function save(){
       		
-      		if(email_Boolean&&realname_Boolean&&Mobile_Boolean&&address_Boolean && verify_Boolean){
+      		if(email_Boolean&&realname_Boolean&&Mobile_Boolean&&address_Boolean){
       		  var select = document.getElementsByName("province")[0];
       		  var province=select.options[select.selectedIndex].text;
       		  //alert(document.getElementsByName("city")[0].value);
