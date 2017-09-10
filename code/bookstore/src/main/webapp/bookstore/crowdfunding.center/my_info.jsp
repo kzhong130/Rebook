@@ -181,6 +181,9 @@
         					success:function(town){
         						$town.show();
         						for(i in town){
+        								if (town[i] == '<%=user.getTown()%>'){
+        									$town.append('<option value="'+i+'" selected="selected">'+town[i]+'</option>');
+        								}
         								$town.append('<option value="'+i+'">'+town[i]+'</option>');
         						}
         					}
