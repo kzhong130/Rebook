@@ -56,7 +56,7 @@ session.setAttribute("prePage", url);
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="centerPage.jsp"><img src="images/index1_logo.png" class="logo"/></a>
+		<a class="navbar-brand" href="test.jsp"><img src="images/index1_logo.png" class="logo"/></a>
 	</div>
 	<div class="collapse navbar-collapse" id="example-navbar-collapse">
 		<ul class="nav navbar-nav navbar-right" id="personalInfo">
@@ -169,7 +169,7 @@ session.setAttribute("prePage", url);
 	 <hr style="margin:10px 0">
 	 <div class="pc-hide" style="text-align:center">
 	<!-- 如果没登录，跳出信息显示请先登录 -->
-        <button class="btn btn-success" role="button" id="lend_sell">出借/卖书</button>
+        <button class="btn btn-success" role="button" id="lend_sell2">出借/卖书</button>
 	 </div>
 	</div>
 </div>
@@ -669,6 +669,15 @@ var userName = '<%=session.getAttribute("loginUserName")%>'
 }
 
 $("#lend_sell").click(function(){
+		if (userName=="null"){
+			alert("请先登录！");
+		}
+		else{
+		    window.location.href="LendSellAction!searchBook?ISBN="+"<%=book.getISBN() %>";
+		}
+	})
+	
+$("#lend_sell2").click(function(){
 		if (userName=="null"){
 			alert("请先登录！");
 		}
