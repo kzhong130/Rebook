@@ -36,12 +36,36 @@ div.bookinfobox
 	 border:0px solid #D3D3D3;
 }
 
+div.bookinfobox2
+{
+	 background-image: url(../images/orderBorrow_bg.png);
+	 background-repeat: no-repeat;
+	 background-position: center;
+	 background-size:100%;
+	 
+	 font-size:20px;
+	 box-sizing:!border-box;
+	 -moz-box-sizing:!border-box; /* Firefox */
+	 -webkit-box-sizing:!border-box; /* Safari */
+	 width:100%;
+	 height:180px;
+	 text-align:center;
+	 padding:0px 8px 10px 3px;
+	 border:0px solid #D3D3D3;
+}
+
 .bookimage{
 	width:10%;
 	padding:15px 0 0 0;
 }
 
 div.bookinfobox img
+{
+   width:55%;
+   height:auto;
+   margin:10px 5px 0 5px;
+}
+div.bookinfobox2 img
 {
    width:55%;
    height:auto;
