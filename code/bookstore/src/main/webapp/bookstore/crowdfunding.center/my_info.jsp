@@ -98,7 +98,7 @@
             </div></td>
       </tr>
       <tr>
-        <td align="right" class="color555">邮箱：</td>
+        <td align="right" class="color555">详细地址：</td>
         <td class="color555  td2">
         <input class="reg_address" name="address" type="text" value=<%=user.getAddress() %>>   <!-- 从数据库取 -->
         <span class="tip address_hint"></span>
