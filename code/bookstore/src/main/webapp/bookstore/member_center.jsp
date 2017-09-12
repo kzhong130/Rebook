@@ -329,7 +329,7 @@ $(document).ready(function(){
 </script>
 	<script type="text/javascript">
 	$("#crowdfunding_iframe").load(function () {
-	    var mainheight = $(this).contents().find("body").height() + 30;
+	    var mainheight = $(this).contents().find("body").height() + 300;
 	    if (mainheight < 1045){
 	    	mainheight = 1045;
 	    }
