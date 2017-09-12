@@ -46,7 +46,9 @@ else{
 session.setAttribute("prePage", url);
 
 %>
-<nav class="navbar navbar-default" role="navigation">
+<div class="container"> 
+<nav class="navbar navbar-default" role="navigation" style="border-color: #fff;background-color: #fff;margin-bottom:5px;">
+
 	<div class="container-fluid"> 
 	<div class="navbar-header">
 		<button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -56,7 +58,8 @@ session.setAttribute("prePage", url);
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-		<a class="navbar-brand" href="test.jsp"><img src="images/index1_logo.png" class="logo"/></a>
+		<!--<a class="navbar-brand" href="test.jsp"><img src="images/index1_logo.png" class="logo"/></a>-->
+		<a class="navbar-brand" href="test.jsp"><img src="images/index1_logo.png"/></a> 
 	</div>
 	<div class="collapse navbar-collapse" id="example-navbar-collapse">
 		<ul class="nav navbar-nav navbar-right" id="personalInfo">
@@ -66,7 +69,9 @@ session.setAttribute("prePage", url);
 	</div>
 	</div>
 </nav>
+</div>
 
+<div id="gray"></div>
 <div class="popup" id="popup">
 
 	<div class="top_nav" id='top_nav'>

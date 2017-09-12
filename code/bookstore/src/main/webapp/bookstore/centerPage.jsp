@@ -37,17 +37,23 @@ else{
 session.setAttribute("prePage",url);
 
 %>
-<nav>
-  <div class="container"> 
-    
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-      <a class="navbar-brand" href="test.jsp"><img src="images/index1_logo.png"/></a> </div>
-    
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="navbar-collapse">
-      <form class="navbar-form navbar-right" role="search" action="bookAction!frontPageSearch" method="post">
+<div class="container"> 
+<nav class="navbar navbar-default" role="navigation" style="border-color: #fff;background-color: #fff;margin-bottom:5px;">
+
+	<div class="container-fluid"> 
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-toggle="collapse"
+				data-target="#example-navbar-collapse">
+			<span class="sr-only">切换导航</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+		<!--<a class="navbar-brand" href="test.jsp"><img src="images/index1_logo.png" class="logo"/></a>-->
+		<a class="navbar-brand" href="test.jsp"><img src="images/index1_logo.png"/></a> 
+	</div>
+	<div class="collapse navbar-collapse" id="example-navbar-collapse">
+		<form class="navbar-form navbar-right" role="search" action="bookAction!frontPageSearch" method="post">
         <div class="form-group">
           <input type="text" name="bookName" class="form-control" placeholder="Search">
         </div>
@@ -60,11 +66,12 @@ session.setAttribute("prePage",url);
        <ul class="nav navbar-nav navbar-right">
           <li><a href="#" class="td">出借/卖书</a> </li>
        </ul>
-    </div>
-    <!-- /.navbar-collapse --> 
-  </div>
-  <!-- /.container-fluid --> 
+	</div>
+	</div>
 </nav>
+</div>
+
+
 
 <div id="gray"></div>
 <div class="popup" id="popup">
