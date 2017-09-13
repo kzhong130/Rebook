@@ -91,7 +91,7 @@
         <dd><input type="text" id="email" name=""/></dd>                  <!-- 用户输入邮箱 -->
         <div class="clears"></div>
        </dl>
-<input type="button" id="btn" value="免费获取验证码" onclick="settime(this)" /> 
+<input class="getyzm" type="button" id="btn" value="免费获取验证码" onclick="settime(this)" /> 
 <script type="text/javascript"> 
 	var wait=60; 
 	var flag = 1;
