@@ -102,6 +102,8 @@ public class SendTestAction extends BaseAction {
         mailInfo.setContent("您的验证码为\n"+randNum);
         
         boolean isSend = SimpleMailSender.sendTextMail(mailInfo);
+		request().getSession().setAttribute("verifyEmail", to);
+
         
         /*HttpServletResponse response;
         PrintWriter out = response.getWriter();*/

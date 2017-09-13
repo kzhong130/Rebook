@@ -202,11 +202,11 @@ $('.red_button').click(function(){
 				window.location.replace("test.jsp");	
         	}
         	catch(err){
-        		alert("验证码不正确");
+        		alert("请检查获取验证码邮箱与输入邮箱一致及验证码是否正确");
         	}
         },
         error:function(){
-        	alert("验证码不正确");
+        	alert("请检查获取验证码邮箱与输入邮箱一致及验证码是否正确");
         }
     });
 		/*$.post("AccountAction!register",{userName:$(".reg_user").val(),password:$(".reg_password").val(),realName:$(".reg_realname").val(),sex:$(".reg_sex").val(),phone:$(".reg_mobile").val(),email:$(".reg_email").val(),address:maddress,validationProblem:$(".reg_validationProblem").val(),validationAnswer:$(".reg_validationAnswer").val()},function(result){
