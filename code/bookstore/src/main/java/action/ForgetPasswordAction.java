@@ -1,6 +1,11 @@
 package action;
 
+import java.io.PrintWriter;
+
+import org.apache.struts2.ServletActionContext;
+
 import model.User;
+import net.sf.json.JSONObject;
 import service.AppService;
 
 public class ForgetPasswordAction extends BaseAction{
@@ -9,6 +14,15 @@ public class ForgetPasswordAction extends BaseAction{
 	private String validationAnswer;
 	private String userName;
 	private String password;
+	private String verify;
+	
+	public String getVerify(){
+		return verify;
+	}
+	
+	public void setVerify(String verify){
+		this.verify = verify;
+	}
 	
 	public String getPassword(){
 		return password;
@@ -85,4 +99,30 @@ public class ForgetPasswordAction extends BaseAction{
 		appService.updateUser(user);
 		return "change";
 	}
+	
+	public String verifyEmail() throws Exception{
+		String temp = (String) request().getSession().getAttribute("verification");
+		System.out.println(temp);
+		System.out.println(verify);
+		if(!temp.equals(verify)){
+			JSONObject obj = new JSONObject(); 
+			obj.put("success",false);
+			PrintWriter out = ServletActionContext.getResponse().getWriter();
+			String str = obj.toString(); 
+			out.write(str);
+			out.close();
+			return "success";
+		}
+		PrintWriter out = ServletActionContext.getResponse().getWriter();
+
+		//request().getSession().setAttribute("userName", userName);
+		JSONObject obj = new JSONObject(); 
+		obj.put("success",true);
+		String str = obj.toString();  
+        
+		out.write(str);
+		out.close();
+		return "success";
+	}
+	
 }

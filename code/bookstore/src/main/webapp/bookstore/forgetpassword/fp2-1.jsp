@@ -9,6 +9,10 @@
 <link type="text/css" href="../css/forgetpassword.css" rel="stylesheet" />
 <link href="../css/bootstrap.css" rel="stylesheet" />
 <script type="text/javascript" src="../js/jquery-1.8.3-min.js"></script>
+<%
+	String path=request.getContextPath();
+%>
+ <script type="text/javascript" src="<%=path %>/bookstore/js/jquery.min.js"></script>
 <script type="text/javascript">
  //导航定位
  $(function(){
@@ -88,21 +92,91 @@
       </div>
      </div><!--for-liucheng/-->
      <form action="" method="post" class="forget-pwd">
+     
        <dl>
-        <dt>邮箱：</dt>
-        <dd><input type="text" id="" name=""/></dd>                  <!-- 用户输入邮箱 -->
+        <dt>用户名：</dt>
+        <dd><input type="text" id="email" name=""/></dd>                  <!-- 用户输入邮箱 -->
         <div class="clears"></div>
        </dl>
+<input type="button" id="btn" value="免费获取验证码" onclick="settime(this)" /> 
+<script type="text/javascript"> 
+	var wait=60; 
+	var flag = 1;
+	function settime(btn) { 
+		var a = document.getElementById("email");
+		//alert(a.value);
+		 if (wait == 0) {
+			 
+             btn.removeAttribute("disabled");
+             btn.value = "免费获取验证码";
+             wait = 60;
+         } else {
+        	 if(wait == 60){
+        		 //var a = document.getElementById(id);
+        		 $.ajax({  
+ 		        	type:"POST",  
+ 		        	url:"sendTextMail!find",  
+ 		        	async:false,
+ 		        	data:{name:a.value},
+ 		     	});
+        	 }
+             btn.setAttribute("disabled", true);
+             btn.value = wait + "秒后重新获取验证码";
+             wait--;
+             setTimeout(function () {
+                 settime(btn);
+             },
+             1000)
+         }
+		
+	} 
+</script>  
+       
        <dl class="sel-yzsj">
         <dt>验证码：</dt>
-        <dd><input type="text" id="" name=""/></dd>                   <!-- 邮箱收到的验证码 -->
+        <dd><input type="text" id="verify" name=""/></dd>                   <!-- 邮箱收到的验证码 -->
          <div class="clears"></div>
        </dl>
-       <div class="subtijiao"><input type="submit" value="提交" /></div>      <!-- 提交需判断（a）答案是否正确 -->
+       <div class="subtijiao"><input type="onclick" value="提交" onclick="forget()"/></div>      <!-- 提交需判断（a）答案是否正确 -->
       </form><!--forget-pwd/-->
    </div><!--web-width/-->
   </div><!--content/-->
-   <script type="text/javascript">
+<script type="text/javascript">
+function forget(){
+	
+	var a = document.getElementById("verify");
+	var b = document.getElementById("email");
+	//alert(a.value);
+		$.ajax({  
+	        type:"POST",  
+	        url:"fpAction!verifyEmail",  
+	        async:false,
+	        data:{verify:a.value,userName:b.value},
+	        success:function(result){
+	        	
+	        	try{
+	        		result=eval('('+result+')');
+	        		//alert(result.success);
+	        		if(result.success){
+	        			alert("验证成功");
+						window.location.replace("fp3.jsp");	
+	        		}
+	        		else{
+	        			alert("验证失败");
+	        		}
+	        	}
+	        	catch(err){
+	        		alert("验证失败");
+	        	}
+	        },
+	        error:function(){
+	        	alert("验证失败");
+	        }
+	    });
+		
+	
+	
+}
 
 </script>
 </body>
