@@ -55,37 +55,20 @@
   </div>
   
   <div class="content">
-   <div class="web-width">
-     <div class="for-liucheng">
-      <div class="liulist for-cur"></div>
-      <div class="liulist"></div>
-      <div class="liulist"></div>
-      <div class="liulist"></div>
-      <div class="liutextbox">
-       <div class="liutext for-cur"><em>1</em><br /><strong>填写账户名</strong></div>
-       <div class="liutext"><em>2</em><br /><strong>验证身份</strong></div>
-       <div class="liutext"><em>3</em><br /><strong>设置新密码</strong></div>
-       <div class="liutext"><em>4</em><br /><strong>完成</strong></div>
+   <div class="successs">
+       <h3>请先选择身份验证方式：</h3>
       </div>
-     </div><!--for-liucheng/-->
-     <form action="fpAction!checkName" method="post" class="forget-pwd">
-       <dl>
-        <dt>用户名：</dt>
-        <dd><input type="text" id="user" name="userName"/></dd>                                <!-- 账户名所在的input -->
-        <div class="clears"></div>
-       </dl> 
-       <dl>
-        <dt>验证码：</dt>
-        <dd>
-         <input type="text" id="checkword" />                                        <!-- 验证码所在的input -->
-         <div class="yanzma">
-          <img src="../images/yzm.gif" />
-         </div>
-        </dd>
-        <div class="clears"></div>
-       </dl>
-       <div class="subtijiao"><input type="submit" value="提交" /></div> <!-- 提交需判断（a）用户名是否存在（b）验证码是否正确 -->
-      </form><!--forget-pwd/-->
+   <div class="web-width">
+   
+      <form action="fp2-1.jsp" method="get" class="forget-pwd" style="min-height:50px;margin-top:0px;margin-bottom:0px;">
+         <div class="subtijiao"><input type="submit"  value="邮箱验证"/></div> 
+      </form>
+      <form action="fp1-1.jsp" method="get" class="forget-pwd" style="min-height:50px;margin-top:0px;margin-bottom:0px;">
+         <div class="subtijiao"><input type="submit"  value="密保问题"/></div> 
+      </form>
+      <form action="../test.jsp" method="get" class="forget-pwd" style="min-height:50px;margin-top:0px;margin-bottom:0px;">
+         <div class="subtijiao"><input type="submit"  value="返回主页面"/></div> 
+      </form>
    </div><!--web-width/-->
   </div><!--content/-->
   <script type="text/javascript">
