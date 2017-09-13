@@ -3,7 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="X-UA-Compatible" content="ie=edge; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>忘记密码</title>
 <link rel="shortcut icon" href="images/favicon.ico" />
 <link type="text/css" href="../css/forgetpassword.css" rel="stylesheet" />
@@ -17,25 +18,18 @@
  <script type="text/javascript" src="<%=path %>/bookstore/js/jquery.min.js"></script>
  <script type="text/javascript" src="<%=path %>/bookstore/js/jquery.citys.js"></script>   
 <body>
-<nav>
-  <div class="container"> 
-    
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-      <a class="navbar-brand" href="../test.jsp"><img src="../images/index1_logo.png"/></a> 
-      </div>
-    
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse">
-      <ul class="nav navbar-nav navbar-right hidden-sm">
-        <li><a href="../test.jsp">回首页登录</a> </li>
-      </ul>
-    </div>
-    <!-- /.navbar-collapse --> 
-  </div>
-  <!-- /.container-fluid --> 
+<div class="container"> 
+<nav class="navbar navbar-default" role="navigation" style="border-color: #fff;background-color: #fff;margin-bottom:5px;">
+
+	<div class="container-fluid"> 
+	<div class="navbar-header">
+		
+		<!--<a class="navbar-brand" href="test.jsp"><img src="images/index1_logo.png" class="logo"/></a>-->
+		<a class="navbar-brand" href="../test.jsp"><img src="../images/index1_logo.png"/></a> 
+	</div>
+	</div>
 </nav>
+</div>
 
 <div class="container">
     <div class="row">
@@ -59,8 +53,7 @@
      </div>
     <hr>
   </div>
-  <div class="content">
-   <div class="web-width">
+  <div class="container">
      <div class="for-liucheng">
       <div class="liulist for-cur"></div>
       <div class="liulist for-cur"></div>
@@ -73,21 +66,15 @@
        <div class="liutext"><em>4</em><br /><strong>完成</strong></div>
       </div>
      </div><!--for-liucheng/-->
-    <div style="margin:0 500px;">
+    <div class="changepw">
        <dl>
-        <dt>新密码：</dt>                                                
-        <dd>        
-        <input type="password" id="newpassword"  name="password" class="password"  placeholder="6-16位密码" /></dd>          <!-- 新密码所在的input -->
-        <div class="clears"></div>
+        <dd><b>&emsp;新密码：&emsp;</b><input type="password" id="newpassword"  name="password" class="password"  placeholder="6-16位密码" /></dd>          <!-- 新密码所在的input -->
        </dl> 
        <dl>
-        <dt>确认密码：</dt>
-        <dd><input type="password" id="checkpassword"  placeholder="确认密码" class="checkpassword" name="checkpassword"/></dd>                        <!-- 确认密码所在的input -->
-        <div class="clears"></div>
+        <dd><b>确认密码：&emsp;</b><input type="password" id="checkpassword"  placeholder="确认密码" class="checkpassword" name="checkpassword"/></dd>                        <!-- 确认密码所在的input -->
        </dl> 
-        <button class="my_info_content_care_table_submit" name="" type="onclick" onclick="change()" >修改密码</button></td>
+        <button class="changepwbotton" name="" type="onclick" onclick="change()" >修改密码</button></td>
     </div>
-   </div><!--web-width/-->
   </div><!--content/-->
 
 <script type="text/javascript">
