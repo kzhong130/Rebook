@@ -692,7 +692,7 @@ $(document).ready(function(){
         		  var select = document.getElementsByName("province")[1];
           		  var province=select.options[select.selectedIndex].text;
           		  //alert(document.getElementsByName("city")[0].value);
-          		  alert(province);
+          		  //alert(province);
           		  if(document.getElementsByName("city")[1].value!=""){
           			  select=document.getElementsByName("city")[1];
           			  var city=select.options[select.selectedIndex].text;
@@ -702,14 +702,14 @@ $(document).ready(function(){
           			  //alert(2);
           		  }
           		  //alert(2333);
-          		  alert(city);
+          		  //alert(city);
           		  if(document.getElementsByName("area")[1].value!=""){
           			  select=document.getElementsByName("area")[1];
           			  var area=select.options[select.selectedIndex].text;
           		  }
           		  else var area="";
-          		  alert(area);
-          		alert(document.getElementById("sell_address").value);  
+          		 // alert(area);
+          		//alert(document.getElementById("sell_address").value);  
       			$.ajax({  
       		        type:"POST",  
       		        url:"RequestAction!changeInfo",  

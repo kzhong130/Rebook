@@ -81,12 +81,7 @@
         %>
         <%=sex %>
       </tr>
-      <tr>
-        <td align="right" class="color555">Email：</td>
-        <td class="color555 td2" >
-        <input class="reg_email" name="email" type="text" value=<%=user.getEmail() %>>    <!-- 从数据库取 -->
-        <span class="tip email_hint"></span></td>
-      </tr>
+     
       <tr>
         <td align="right" class="color555">地址：<br>&nbsp;</td>
         <td class="color555 td2"><div id="demo3">
@@ -104,6 +99,12 @@
         <span class="tip address_hint"></span>
         </td>
      
+      </tr>
+       <tr>
+        <td align="right" class="color555">Email：</td>
+        <td class="color555 td2" >
+        <input class="reg_email" name="email" type="text" value=<%=user.getEmail() %>>    <!-- 从数据库取 -->
+        <span class="tip email_hint"></span></td>
       </tr>
       <tr>
         <td align="right" class="color555" style="height:24px;padding:0;line-height:0;">&nbsp;</td>
