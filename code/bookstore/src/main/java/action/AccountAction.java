@@ -211,6 +211,13 @@ public class AccountAction extends BaseAction{
 		String temp = (String) request().getSession().getAttribute("verification");
 		System.out.println(temp);
 		//System.out.println(verification);
+		String old_email = (String) request().getSession().getAttribute("verifyEmail");
+		if(!old_email.equals(email)){
+			JSONObject obj = new JSONObject(); 
+			obj.put("success",false);
+			return "success";
+		}
+		
 		if(temp == null || !temp.equals(verification)) {
 			JSONObject obj = new JSONObject(); 
 			obj.put("success",false);

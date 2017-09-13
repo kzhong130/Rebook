@@ -369,8 +369,9 @@ public class MemberCenterAction extends BaseAction{
 		user.setRealName(realName);
 		user.setTown(town);
 		String temp = (String) request().getSession().getAttribute("verification");
+		String o_email = (String) request().getSession().getAttribute("verifyEmail");
 		if(!old_email.equals(email)){
-			if(temp.equals(verify)) {
+			if(temp.equals(verify) && o_email.equals(email)) {
 				user.setEmail(email);
 			
 			}
