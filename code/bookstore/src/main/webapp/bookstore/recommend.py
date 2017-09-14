@@ -39,9 +39,9 @@ for ii in booktb:
     if len(recommendDict) != 0:
         if len(recommendDict) == 1:
             cur.execute("update book set recommend1='" + sorted(recommendDict.items(),key = lambda x:x[1], reverse = True)[0][0] + "',recommend2=null,recommend3=null where ISBN=" + ISBN)
-        elif len(recommendDict) == 2:
+        if len(recommendDict) == 2:
             cur.execute("update book set recommend1='" + sorted(recommendDict.items(),key = lambda x:x[1], reverse = True)[0][0] + "',recommend2='" + sorted(recommendDict.items(), key = lambda x:x[1], reverse = True)[1][0] + "',recommend3=null where ISBN="+ISBN)
-        else:
+        if len(recommendDict) > 2:
             cur.execute("update book set recommend1='" + sorted(recommendDict.items(),key = lambda x:x[1], reverse = True)[0][0] + "',recommend2='" + sorted(recommendDict.items(), key = lambda x:x[1], reverse = True)[1][0] + "',recommend3='" + sorted(recommendDict.items(), key = lambda x:x[1], reverse = True)[2][0] + "' where ISBN=" + ISBN)
     print "Book " + ISBN + " has been updated. "+str(len(recommendDict))+" book(s) has(have) been recommended."
 cur.close()
