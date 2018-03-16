@@ -1,4 +1,4 @@
-# SE_summer_proj_A1: Rebook
+# Rebook
 
 Product by: Ke Zhong, Chenxi Zhi, Xiaoya Hong, Beibei Shen
 
