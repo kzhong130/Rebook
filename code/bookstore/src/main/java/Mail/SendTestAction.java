@@ -111,7 +111,7 @@ public class SendTestAction extends BaseAction {
         mailInfo.setToAddress(to);//目标邮箱
         mailInfo.setUserName("se_rebook@163.com");//自己邮箱
         //需要开启此邮箱的POP3/SMTP/IMAP服务，具体设置进入邮箱以后在“设置”里进行开启
-        mailInfo.setPassword("rebook123");//自己邮箱密码
+        mailInfo.setPassword("123456");//自己邮箱密码
         //System.out.println("password="+password);
         mailInfo.setSubject("欢迎注册Rebook爱书网");
         int min=0;
